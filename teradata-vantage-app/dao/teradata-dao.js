@@ -1,17 +1,17 @@
 var QUERY = require("./query");
 
 exports.findDatabases = (connection, cb) => {
-  let databases = [];
+  let data = [];
   if (connection) {
     try {
-      var cursor = connection.cursor();
+      let cursor = connection.cursor();
       cursor.execute(QUERY.findDatabases);
-      var fetchedRows = cursor.fetchall();
+      let fetchedRows = cursor.fetchall();
       console.log(fetchedRows);
-      for (var i = 0; i < fetchedRows.length; i++) {
-        databases.push(fetchedRows[i][0]);
-      }     
-      cb(null, databases);
+      for (let i = 0; i < fetchedRows.length; i++) {
+        data.push(fetchedRows[i][0]);
+      }
+      cb(null, data);
     } catch (error) {
       cb(error, null);
     }
@@ -21,20 +21,46 @@ exports.findDatabases = (connection, cb) => {
 };
 
 exports.findTables = (connection, databaseName, cb) => {
+  let data = [];
   if (connection) {
     try {
-      var cursor = connection.cursor();
-      cursor.execute(QUERY.findTables);
-      var fetchedRows = cursor.fetchall();
+      let cursor = connection.cursor();
+      let parameterizedQuery = QUERY.findTables.replace(":X", `'${databaseName}'`);
+      console.log(parameterizedQuery);
+      cursor.execute(parameterizedQuery);
+      let fetchedRows = cursor.fetchall();
       console.log(fetchedRows);
-      for (var i = 0; i < fetchedRows.length; i++) {
-        databases.push(fetchedRows[i][0]);
-      }     
-      cb(null, databases);
+      for (let i = 0; i < fetchedRows.length; i++) {
+        data.push(fetchedRows[i][0]);
+      }
+      cb(null, data);
     } catch (error) {
       cb(error, null);
     }
   } else {
     cb(new Error("No Database Connection"), null);
   }
-}
+};
+
+exports.findColumns = (connection, databaseName, tableName, cb) => {
+  let data = [];
+  if (connection) {
+    try {
+      let cursor = connection.cursor();
+      let parameterizedQuery = QUERY.findColumns.replace(":X", `'${databaseName}'`);
+      parameterizedQuery = parameterizedQuery.replace(":Y", `'${tableName}'`);
+      
+      cursor.execute(parameterizedQuery);
+      let fetchedRows = cursor.fetchall();
+      console.log(fetchedRows);
+      for (let i = 0; i < fetchedRows.length; i++) {
+        data.push(fetchedRows[i][0]);
+      }
+      cb(null, data);
+    } catch (error) {
+      cb(error, null);
+    }
+  } else {
+    cb(new Error("No Database Connection"), null);
+  }
+};

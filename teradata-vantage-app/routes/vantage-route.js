@@ -5,4 +5,6 @@ module.exports = (app) => {
   app.get("/api/databases", vantageController.getDatabases);
   app.get("/api/databases/:database/tables", vantageController.getTables);
   app.get("/api/databases/:database/tables/:table/columns", vantageController.getColumns);
+
+  app.post("/api/vantage/init", vantageController.init);
 };
