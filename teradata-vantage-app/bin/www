@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('teradata-vantage-app:server');
 var http = require('http');
+var winston = require('./../config/winston');
 
 /**
  * Get port from environment and store in Express.
@@ -25,7 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, ()=> {
+  console.log("Server started on port "+ app.get('port'));
+  winston.info("Server listening on port " + app.get('port'));
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

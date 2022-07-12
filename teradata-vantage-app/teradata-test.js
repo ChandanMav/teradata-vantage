@@ -1,50 +1,44 @@
-var TeradataConnection = require("teradata-nodejs-driver/teradata-connection");
+var { getConnection, closeConnection } = require("./teradata-connection");
+var { anIgnoreError } = require("./common/util");
 var TeradataExceptions = require("teradata-nodejs-driver/teradata-exceptions");
-var connParams = {
-    host: '153.64.73.11',
-    log: '0',
-    password: 'Migrate1234#',
-    user: 'CDMTDF3'
-};
 
-/*
-* Fetches all data from tables
-*/
 function doFetchAll(cursor) {
-    const sQuery = 'SELECT distinct databasename from dbc.tablesv order by databasename';
-  
-    try {
-      cursor.execute(sQuery);
-      var fetchedRows = cursor.fetchall();
-      for(var i = 0; i<fetchedRows.length; i++){
-        console.log("Fetched Rows Count: " + fetchedRows[i]);
-      }
+  const sQuery =
+    " SELECT trim(COLUMNNAME) from DBC.COLUMNSV where tablename='cellphone' and databasename = 'CDMTDFMGR'";
 
-      
-    } catch (error) {
-      if (!anIgnoreError(error)) {
-        throw error;
-      }
+  try {
+    cursor.execute(sQuery);
+    var fetchedRows = cursor.fetchall();
+    for (var i = 0; i < fetchedRows.length; i++) {
+      console.log("Fetched Rows Count: " + fetchedRows[i]);
+    }
+  } catch (error) {
+    if (!anIgnoreError(error)) {
+      throw error;
     }
   }
+}
 
 function setupAndRun() {
-    try {
-        var teradataConnection = new TeradataConnection.TeradataConnection();
-        var cursor = teradataConnection.cursor();
-        teradataConnection.connect(connParams);
-        doFetchAll(cursor);
-        teradataConnection.close();
-        console.log("Close Success");
+  try {
+    var teradataConnection = getConnection();
+    var cursor = teradataConnection.cursor();
+    doFetchAll(cursor);
+    closeConnection(teradataConnection);
+  } catch (error) {
+    if (error instanceof TeradataExceptions.OperationalError) {
+      console.log(error.message);
+    } else {
+      console.log(error);
     }
-    catch (error) {
-        if (error instanceof TeradataExceptions.OperationalError) {
-            /* A database operational error */
-            console.log(error.message);
-        }
-        else {
-            console.log(error);
-        }
-    }
+  }
 }
 setupAndRun();
+
+/*
+
+DB : CDMTDFMGR
+TABLE : cellphone
+DepCol : Churn
+
+*/
