@@ -1,0 +1,21 @@
+.app-pill-nav {
+  font-size: 12px !important;
+  padding: 4px !important;
+}
+
+.app-hr {
+  margin-top: 12px;
+}
+
+.inactive-stage {
+  background-color: #7500c0 !important;
+}
+
+.active-stage {
+  background-color: #00b0f0 !important;
+}
+
+
+.container{
+  padding: 60px 15px 0;
+}
