@@ -48,9 +48,13 @@ if (process.env.CORS_ENABLE === "true") {
   app.use(cors(corsConfig));
 }
 
-//Log File Creation
+//Log File location
 fs.existsSync(process.env.LOG_FILE_LOCATION) ||
   fs.mkdirSync(process.env.LOG_FILE_LOCATION);
+
+//Setting file location
+fs.existsSync(process.env.SETTING_FILE_LOCATION) ||
+  fs.mkdirSync(process.env.SETTING_FILE_LOCATION);  
 
 //Request size is set to 11mb as default is 1mb and express rejects the request.
 app.use(bodyParser.json({ limit: "11mb" }));
@@ -84,6 +88,7 @@ app.use("/", indexRouter);
 
 //Various other Routes
 require("./routes/vantage-route")(app);
+require("./routes/question-route")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

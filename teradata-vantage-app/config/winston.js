@@ -5,7 +5,7 @@ const { timestamp, combine, json } = winston.format;
 var options = {
   file: {
     level: 'info',
-    filename: `${appRoot}/../log/app.log`,
+    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/app.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB

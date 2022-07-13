@@ -6,4 +6,7 @@ module.exports = {
     CORS_ERROR_MSG: "Request from given origin is not allowed by CORS",   
     RATE_LIMIT_REACHED_ERR_MSG: "Maximun allowed authentication attempts are used.",
     ERR_NO_AUTH: 'No authorization found. First connect to Teradata server!',
+    NO_SESSION: "No session is active. Please restart the process!",
+    CONFIG_FILE_MISSING: "Application configuration file is missing. Please upload First!",
+    CONFIG_FILE_FORMAT_ERROR: "Application configuration file has wrong format. Please contact system administrator! ",
 }
