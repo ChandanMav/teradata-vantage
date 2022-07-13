@@ -324,3 +324,4 @@
 {"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Wed, 13 Jul 2022 02:21:02"}
 {"level":"info","message":"::1 - - [12/Jul/2022:20:51:03 +0000] \"GET /api/databases/CDMTDFMGR/tables/ORDERTBL/columns HTTP/1.1\" 200 139 \"-\" \"PostmanRuntime/7.28.2\"\n","timestamp":"Wed, 13 Jul 2022 02:21:03"}
 {"level":"info","message":"Server listening on port 3000","timestamp":"Wed, 13 Jul 2022 02:23:22"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Wed, 13 Jul 2022 02:23:54"}
