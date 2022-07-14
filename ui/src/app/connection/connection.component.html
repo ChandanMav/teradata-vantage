@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid conn-page">
   <div class="row">
 
-    <div class="col-7 align-self-center">
+    <div class="col-8 align-self-center" >
       <!-- <table>
         <tbody>
           <tr>
@@ -18,19 +18,20 @@
           </tr>
         </tbody>
       </table> -->
-      <img src="../../assets/img/bg1.jpg" class="img-fluid img-css" alt="Responsive image">
+      <!-- <img src="../../assets/img/bg3.jpg" class="img-fluid img-css" alt="Responsive image"> -->
     </div>
 
-    <div class="col-4 mt-4">
+    <div class="col-3 mt-5 connection-form-pane">
       <div class="container">
-        <p class="text-center font-weight-bold">Connect To Server</p>
-        <p *ngIf="message != ''" class="d-flex justify-content-center" [ngClass]="conn_status ? 'text-success' : 'text-danger'">{{message}}</p>
+        <p class="text-center font-weight-bold connection-form-title">Connect To Server</p>
+        <p *ngIf="message != ''" class="d-flex status-msg justify-content-center" [ngClass]="conn_status ? 'text-success' : 'text-danger'">{{message}}</p>
+        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center"> Lets move to Data Preperation Stage </p>
       </div>
       <form class="row g-1" [formGroup]="frmRegister" (ngSubmit)="testServerConnection(frmRegister.value)">
         <div class="form-group col-12 gx-5">
           <label for="host" class="form-label">Database Server</label>
           <input type="text" class="form-control" id="host" placeholder="Host IP Address" name="host" formControlName="host"
-            required [ngClass]="{ 'is-invalid': f['host'].touched && f['host'].errors }" />
+            required [ngClass]="{ 'is-invalid': f['host'].touched && f['host'].errors }" autofocus/>
 
           <div *ngIf="(frmRegister.controls['host'].invalid &&
             (frmRegister.controls['host'].dirty ||
@@ -67,8 +68,8 @@
           </div>
         </div>
 
-        <div class="d-grid gap-2 col-12 gx-5" *ngIf="!submitted">
-          <button class="btn btn-primary" type="submit" [disabled]="frmRegister.invalid">Connect</button>
+        <div class="d-grid gap-2 col-12 gx-5 cont-btn" *ngIf="!submitted">
+          <button class="btn btn-primary app-btn" type="submit" [disabled]="frmRegister.invalid">Connect</button>
 
         </div>
       </form>

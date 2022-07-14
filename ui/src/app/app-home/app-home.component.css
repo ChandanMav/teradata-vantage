@@ -5,6 +5,14 @@
 
 .jumbotron {
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  background-color: #dcafff;
   border-radius: 0.3rem;
 }
+
+
+
+.home-title, .usecase-title{
+  font-family: "Graphik Web", Arial, sans-serif;
+}
+
+

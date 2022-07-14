@@ -49,6 +49,7 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
   testServerConnection(value: Connection) {
     this.message = '';
     this.submitted = true;
+    this.conn_status = false;
     this.serverConnectionService
       .testServerConnection(value)
       .subscribe({
@@ -56,6 +57,7 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
           this.conn_status = true;
           this.submitted = false;
           this.message = response.message;
+
         },
         error: (e) => {
           this.conn_status = false;
