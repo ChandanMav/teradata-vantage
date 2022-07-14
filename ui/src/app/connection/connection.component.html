@@ -1,27 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 align-self-center offset-1">
-      <form onsubmit="" class="p-5">
-        <div class="form-group">
-          <input type="text" class="form-control" id="databaseServer" placeholder="Database Server" />
-        </div>
-        <br />
-        <div class="form-group">
-          <input type="text" class="form-control" id="login" placeholder="Login" />
-        </div>
-        <br />
-        <div class="form-group">
-          <input type="password" class="form-control" id="password" placeholder="Password" />
-        </div>
-        <br />
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button">Login</button>
-        </div>
-      </form>
-    </div>
 
-    <div class="col-3 align-self-center">
-      <table>
+    <div class="col-7 align-self-center">
+      <!-- <table>
         <tbody>
           <tr>
             <td>
@@ -36,7 +17,74 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <img src="../../assets/img/bg1.jpg" class="img-fluid img-css" alt="Responsive image">
     </div>
+
+    <div class="col-4 mt-4">
+      <div class="container">
+        <p class="text-center font-weight-bold">Connect To Server</p>
+        <p *ngIf="message != ''" class="d-flex justify-content-center" [ngClass]="conn_status ? 'text-success' : 'text-danger'">{{message}}</p>
+      </div>
+      <form class="row g-1" [formGroup]="frmRegister" (ngSubmit)="testServerConnection(frmRegister.value)">
+        <div class="form-group col-12 gx-5">
+          <label for="host" class="form-label">Database Server</label>
+          <input type="text" class="form-control" id="host" placeholder="Host IP Address" name="host" formControlName="host"
+            required [ngClass]="{ 'is-invalid': f['host'].touched && f['host'].errors }" />
+
+          <div *ngIf="(frmRegister.controls['host'].invalid &&
+            (frmRegister.controls['host'].dirty ||
+              frmRegister.controls['host'].touched)) && frmRegister.controls['host'].errors"
+            class="alert alert-danger mt-1 form-field-error">
+            Please enter server ip address
+          </div>
+
+        </div>
+
+        <div class="form-group col-12 gx-5">
+          <label for="user" class="form-label">Username</label>
+          <input type="text" class="form-control" id="user" placeholder="Username" name="user"
+            formControlName="user" required [ngClass]="{ 'is-invalid': f['user'].touched && f['user'].errors }" />
+
+          <div *ngIf="(frmRegister.controls['user'].invalid &&
+            (frmRegister.controls['user'].dirty ||
+              frmRegister.controls['user'].touched)) && frmRegister.controls['user'].errors"
+            class="alert alert-danger mt-1 form-field-error" >
+            Please enter username
+          </div>
+        </div>
+
+        <div class="form-group col-12 gx-5">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+            formControlName="password" required [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }" />
+
+          <div *ngIf="(frmRegister.controls['password'].invalid &&
+            (frmRegister.controls['password'].dirty ||
+              frmRegister.controls['password'].touched)) && frmRegister.controls['password'].errors"
+            class="alert alert-danger mt-1 form-field-error">
+            Please enter password
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 col-12 gx-5" *ngIf="!submitted">
+          <button class="btn btn-primary" type="submit" [disabled]="frmRegister.invalid">Connect</button>
+
+        </div>
+      </form>
+
+      <div *ngIf="submitted" class="d-flex justify-content-center text-center" >
+        <div class="row">
+          <div class="col-12">
+            <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;" role="status"></div>
+          </div>
+          <div class="col-12">
+            <span>Connecting..Please wait!!!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
@@ -11,6 +11,8 @@ import { ConnectionComponent } from './connection/connection.component';
 import { DataPreperationComponent } from './data-preperation/data-preperation.component';
 import { VantageHomeComponent } from './vantage-home/vantage-home.component';
 import { AppHomeComponent } from './app-home/app-home.component';
+import { ServerConnectionService } from './service/server-connection-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,12 @@ import { AppHomeComponent } from './app-home/app-home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [AppService],
+  providers: [AppService, ServerConnectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
