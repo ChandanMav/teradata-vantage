@@ -1,48 +1,27 @@
 <div class="container">
   <div class="row">
     <div class="col-3 offset-1">
-      <form onsubmit="" class="p-5">
+      <form class="p-5" (ngSubmit)="init()">
         <div class="form-group">
-          <select class="form-control" id="databaseName" name="databaseName">
-            <option>Select Database</option>
-            <option>Test</option>
-            <option>Sample</option>
-            <option>Customer</option>
+          <select class="form-control" id="db" name="db" (change)="changeDropdown($event.target, 'database')">
+            <option *ngFor="let database of databases">{{database}}</option>
           </select>
         </div>
         <br />
         <div class="form-group">
-          <select class="form-control" id="baseTable" name="baseTable">
-            <option>Select Base Table</option>
-            <option>Table1</option>
-            <option>Table2</option>
-            <option>Table3</option>
+          <select class="form-control" id="basetable" name="basetable" (change)="changeDropdown($event.target, 'table')">
+            <option *ngFor="let table of tables">{{table}}</option>
           </select>
         </div>
         <br />
         <div class="form-group">
-          <select class="form-control" id="baseTable" name="baseTable" >
-            <option>Select Dependent Column(s) </option>
-            <option>Col1</option>
-            <option>Col2</option>
-            <option>Col3</option>
-            <option>Col4</option>
-            <option>Col5</option>
-            <option>Col6</option>
-            <option>Col7</option>
-            <option>Col8</option>
-            <option>Col9</option>
-            <option>Col10</option>
-            <option>Col11</option>
-            <option>Col12</option>
-            <option>Col13</option>
-            <option>Col14</option>
-            <option>Col15</option>
+          <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')">
+            <option *ngFor="let column of columns">{{column}}</option>
           </select>
         </div>
         <br />
         <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button">Select</button>
+          <button class="btn btn-primary" type="submit">Run</button>
         </div>
       </form>
     </div>
@@ -56,37 +35,37 @@
             </td>
             <td class="align-self-start">
               <div class="d-grid gap-2 p-5 m-2">
-              <div class="form-group">
-                <label for="q1">Does table contain primay Key?</label>
-                <select id="q1" class="form-control" name="q1">
-                  <option>Select Answer</option>
-                  <option>Yes</option>
-                  <option>No</option>
-                </select>
-              </div>
-              <hr/>
-              <div class="form-group">
-                <label for="q2">Is column contains null values?</label>
-                <select id="q2" class="form-control" name="q2">
-                  <option>Select Answer</option>
-                  <option>Yes</option>
-                  <option>No</option>
-                </select>
-              </div>
+                <div class="form-group">
+                  <label for="q1">Does table contain primay Key?</label>
+                  <select id="q1" class="form-control" name="q1">
+                    <option>Select Answer</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <label for="q2">Is column contains null values?</label>
+                  <select id="q2" class="form-control" name="q2">
+                    <option>Select Answer</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
 
-              <hr/>
-              <div class="form-group">
-                <label for="q2">Is column contains blank values?</label>
-                <select id="q2" class="form-control" name="q2">
-                  <option>Select Answer</option>
-                  <option>Yes</option>
-                  <option>No</option>
-                </select>
+                <hr />
+                <div class="form-group">
+                  <label for="q2">Is column contains blank values?</label>
+                  <select id="q2" class="form-control" name="q2">
+                    <option>Select Answer</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
               </div>
-            </div>
             </td>
           </tr>
-          <tr >
+          <tr>
 
           </tr>
         </tbody>

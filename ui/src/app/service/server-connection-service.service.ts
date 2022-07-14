@@ -9,7 +9,7 @@ import { Connection } from '../shared/connection';
 import { Constants } from '../config/constants';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -21,8 +21,6 @@ export class ServerConnectionService {
 
   public testServerConnection(connection: Connection): Observable<any> {
     let body = JSON.stringify(connection);
-    console.log(body);
-
     return this.http
       .post(this.rootURL+ '/api/connection', body, httpOptions)
       .pipe(

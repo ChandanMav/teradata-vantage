@@ -13,6 +13,7 @@ import { VantageHomeComponent } from './vantage-home/vantage-home.component';
 import { AppHomeComponent } from './app-home/app-home.component';
 import { ServerConnectionService } from './service/server-connection-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { VantageService } from './service/vantage.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AppService, ServerConnectionService],
+  providers: [AppService, ServerConnectionService, VantageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -57,6 +57,13 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
           this.conn_status = true;
           this.submitted = false;
           this.message = response.message;
+          setTimeout(() => {
+            this.router.navigate(['/dataprep'], {
+              relativeTo: this.activatedRoute,
+              state : value
+            });
+          }, 4000);
+
 
         },
         error: (e) => {

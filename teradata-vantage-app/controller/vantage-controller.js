@@ -11,54 +11,54 @@ var fs = require("fs");
 var appRoot = require('app-root-path');
 var Errorcode = require("../common/error-code");
 
+getConfig = (req) => {
+  var serverInfo = sanitize(req.body);
+  if (!serverInfo || _.isEmpty(serverInfo)) {
+    return null;
+  }
+  let host = serverInfo.host;
+  let password = serverInfo.password;
+  let user = serverInfo.user;
+
+  let config = {
+    host,
+    log: "0",
+    password,
+    user,
+  };
+
+  return config;
+}
+
 //Test Teradata database
 exports.testConnection = (req, res, next) => {
   winston.info("***********Checking Teradata Connection");
-
-  var connectionInfo = sanitize(req.body);
-  if (!connectionInfo || _.isEmpty(connectionInfo)) {
-    return next({ status: 400, message: Error.MISSING_REQUIRED_INPUT });
-  } else {
-    let host = connectionInfo.host;
-    let password = connectionInfo.password;
-    let user = connectionInfo.user;
-
-    let config = {
-      host,
-      log: "0",
-      password,
-      user,
-    };
-
-    let connection = getConnection(config);
-
-    if (connection) {
-      let session = req.session;
-      //Saving Server Info into session
-      session.config = config;
-      //Should Perform session cleanup - TODO
-
-      res
-        .status(200)
-        .send({ Success: true, message: `Teradata Connnection Successful!` });
-    } else {
-      res
-        .status(500)
-        .send({ Success: false, message: `Teradata Connnection failed!` });
-    }
-
-    closeConnection(connection);
+  let config = getConfig(req);
+  if (!config) {
+    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    return;
   }
+
+  let connection = getConnection(config);
+  if (connection) {
+    res
+      .status(200)
+      .send({ Success: true, message: `Teradata Connnection Successful!` });
+  } else {
+    res
+      .status(500)
+      .send({ Success: false, message: `Teradata Connnection failed!` });
+  }
+  closeConnection(connection);
 };
 
 //Get Databases from DB Server
 exports.getDatabases = (req, res, next) => {
-  let session = req.session;
-  config = session.config;
 
-
+  winston.info("***********Retrieving Databases");
+  let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -81,20 +81,18 @@ exports.getDatabases = (req, res, next) => {
 
 //Get Tables from Database
 exports.getTables = (req, res, next) => {
-  let database = req.params.database;
+  winston.info("***********Retrieving tables");
 
+  let database = req.params.database;
   if (!database) {
     res
       .status(500)
       .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
     return;
   }
-
-  let session = req.session;
-  config = session.config;
-
+  let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -127,11 +125,9 @@ exports.getColumns = (req, res, next) => {
     return;
   }
 
-  let session = req.session;
-  config = session.config;
-
+  let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -139,8 +135,7 @@ exports.getColumns = (req, res, next) => {
   if (connection) {
     DAO.findColumns(connection, database, table, (err, data) => {
       closeConnection(connection);
-      if (data) {
-        session.list_of_all_columns = data;
+      if (data) {        
         res.status(200).send({ colums: data });
       } else {
         res.status(500).send({ message: err });
@@ -206,14 +201,6 @@ exports.init = (req, res, next) => {
     return;
   }
 
-  let session = req.session;
-  let config = session.config;
-
-  if (!config) {
-    res.status(503).send({ Success: false, message: Error.ERR_NO_AUTH });
-    return;
-  }
-
   let columnQuery = `SELECT trim(COLUMNNAME) from DBC.COLUMNSV where tablename='${basetable}' and databasename = '${db}'`;
   let columnTypeQuery = `SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) from DBC.COLUMNSV where tablename='${basetable}' and databasename = '${db}' and COLUMNNAME <> '${col}'`;
   let rowCountQuery = `SELECT trim(count(*)) from ${db}.${basetable}`;
@@ -229,6 +216,13 @@ exports.init = (req, res, next) => {
   let test_size = 0;
 
   winston.info("***********Process Started");
+  let config = getConfig(req);
+
+  console.log(config);
+  if (!config) {
+    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    return;
+  }
   let connection = getConnection(config);
   async.parallel(
     [
@@ -240,6 +234,7 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(columnQuery);
           columnNames = cursor.fetchall();
+          console.log( "columnNames ", columnNames);
           for (let i = 0; i < columnNames.length; i++) {
             columns.push(columnNames[i][0]);
           }
@@ -262,6 +257,7 @@ exports.init = (req, res, next) => {
               try {
                 cursor.execute(columnTypeQuery);
                 columnTypes = cursor.fetchall();
+                console.log( "columnTypes ", columnTypes);
                 for (i = 0; i < columnTypes.length; i++) {
                   columnNameTypes.push(columnTypes[i][0]);
                 }
@@ -287,6 +283,9 @@ exports.init = (req, res, next) => {
                   categCols.push(colName);
                 }
               }
+
+              console.log("numericCols ", numericCols)
+              console.log("categCols ", categCols)
               waterfallCb(null, null);
             },
           ],
@@ -309,12 +308,17 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(rowCountQuery);
           records = cursor.fetchall();
+          console.log("records ", records)
           for (i = 0; i < records.length; i++) {
             rowCount = records[i][0];
           }
 
           train_size = Math.ceil(rowCount * splitpct);
           test_size = rowCount - train_size;
+
+          console.log("rowCount ", rowCount)
+          console.log("train_size ", train_size)
+          console.log("test_size ", test_size)
 
           callback();
         } catch (error) {
@@ -332,6 +336,7 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(top5Query);
           top5Data = cursor.fetchall();
+          console.log("top5Data ", top5Data);
           for (i = 0; i < top5Data.length; i++) {
             let data = top5Data[i];
             top5Row.push(data);

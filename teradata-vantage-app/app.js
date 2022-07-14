@@ -54,7 +54,7 @@ fs.existsSync(process.env.LOG_FILE_LOCATION) ||
 
 //Setting file location
 fs.existsSync(process.env.SETTING_FILE_LOCATION) ||
-  fs.mkdirSync(process.env.SETTING_FILE_LOCATION);  
+  fs.mkdirSync(process.env.SETTING_FILE_LOCATION);
 
 //Request size is set to 11mb as default is 1mb and express rejects the request.
 app.use(bodyParser.json({ limit: "11mb" }));
@@ -64,11 +64,12 @@ app.use(helmet());
 app.use(xssClean());
 
 //middleware for express session
+const expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(
   session({
     secret: process.env.SECRETE,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 
@@ -103,8 +104,7 @@ app.use(function (err, req, res, next) {
 
   //this line to include winston logging
   winston.error(
-    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
-      req.method
+    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method
     } - ${req.ip}`
   );
 
