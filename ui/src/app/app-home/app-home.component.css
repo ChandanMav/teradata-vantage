@@ -1,18 +1,19 @@
 
-.jumbotron {
-  padding: 4rem 2rem;
-}
 
 .jumbotron {
   margin-bottom: 2rem;
   background-color: #dcafff;
   border-radius: 0.3rem;
+  padding: 2rem 2rem;
 }
-
-
-
-.home-title, .usecase-title{
+.home-title,
+.usecase-title {
   font-family: "Graphik Web", Arial, sans-serif;
+  font-size: 19px;
+  color: #7500c0 !important;
+  line-height: 3rem;
 }
 
-
+.usecase-title {
+  font-size: 16px !important;
+}

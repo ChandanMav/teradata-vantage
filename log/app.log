@@ -1104,3 +1104,111 @@
 {"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:25:52"}
 {"level":"error","message":"500 - getErrorCode is not defined - /api/vantage/init - POST - ::1","timestamp":"Fri, 15 Jul 2022 01:25:53"}
 {"level":"info","message":"::1 - - [14/Jul/2022:19:55:53 +0000] \"POST /api/vantage/init HTTP/1.1\" 500 99 \"-\" \"PostmanRuntime/7.28.2\"\n","timestamp":"Fri, 15 Jul 2022 01:25:53"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Fri, 15 Jul 2022 01:27:14"}
+{"level":"info","message":"***********Process Started","timestamp":"Fri, 15 Jul 2022 01:27:24"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:27:29"}
+{"level":"error","message":"500 - getErrorCode is not defined - /api/vantage/init - POST - ::1","timestamp":"Fri, 15 Jul 2022 01:27:30"}
+{"level":"info","message":"::1 - - [14/Jul/2022:19:57:30 +0000] \"POST /api/vantage/init HTTP/1.1\" 500 99 \"-\" \"PostmanRuntime/7.28.2\"\n","timestamp":"Fri, 15 Jul 2022 01:27:30"}
+{"level":"info","message":"***********Retrieving Databases","timestamp":"Fri, 15 Jul 2022 01:38:17"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:17 +0000] \"POST /api/databases HTTP/1.1\" 503 122 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:17"}
+{"level":"info","message":"***********Retrieving Databases","timestamp":"Fri, 15 Jul 2022 01:38:17"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:17 +0000] \"POST /api/databases HTTP/1.1\" 503 122 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:17"}
+{"level":"info","message":"***********Checking Teradata Connection","timestamp":"Fri, 15 Jul 2022 01:38:26"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:38:29"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:38:29"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:29 +0000] \"POST /api/connection HTTP/1.1\" 200 61 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:29"}
+{"level":"info","message":"***********Retrieving Databases","timestamp":"Fri, 15 Jul 2022 01:38:33"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:38:36"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:38:40"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:40 +0000] \"POST /api/databases HTTP/1.1\" 200 3206 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:40"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:38:42"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:38:45"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:38:46"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:46 +0000] \"POST /api/databases/ADW100G/tables HTTP/1.1\" 200 689 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:46"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:38:50"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:38:51"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:51 +0000] \"POST /api/databases/ADW100G/tables/bi_mkt_basket_dtl_ppi_tbl/columns HTTP/1.1\" 200 276 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:51"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:38:51"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:38:54"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:38:55"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:08:55 +0000] \"POST /api/databases/ADFDB/tables HTTP/1.1\" 200 104 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:38:55"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:00"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:01"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:01 +0000] \"POST /api/databases/ADFDB/tables/testrfc3/columns HTTP/1.1\" 200 23 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:01"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:39:14"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:17"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:18"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:18 +0000] \"POST /api/databases/abhisdeshpande/tables HTTP/1.1\" 200 51 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:18"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:28"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:29"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:29 +0000] \"POST /api/databases/abhisdeshpande/tables/databaseTemperatureData/columns HTTP/1.1\" 200 99 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:29"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:39:30"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:33"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:34"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:34 +0000] \"POST /api/databases/adfcss/tables HTTP/1.1\" 200 47 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:34"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:38"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:39"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:39 +0000] \"POST /api/databases/adfcss/tables/test_sink/columns HTTP/1.1\" 200 20 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:39"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:48"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:49"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:49 +0000] \"POST /api/databases/adfcss/tables/test_trg/columns HTTP/1.1\" 200 20 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:49"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:39:54"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:39:55"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:09:55 +0000] \"POST /api/databases/adfcss/tables/testMaria/columns HTTP/1.1\" 200 359 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:39:55"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:40:00"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:03"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:04"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:04 +0000] \"POST /api/databases/AdventureWorksDW2012/tables HTTP/1.1\" 200 783 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:04"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:27"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:28"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:28 +0000] \"POST /api/databases/AdventureWorksDW2012/tables/DatabaseLog/columns HTTP/1.1\" 200 98 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:28"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:31"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:32"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:32 +0000] \"POST /api/databases/AdventureWorksDW2012/tables/AdventureWorksDWBuildVersion/columns HTTP/1.1\" 200 38 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:32"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:40:32"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:35"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:36"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:36 +0000] \"POST /api/databases/abhisdeshpande/tables HTTP/1.1\" 200 51 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:36"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:40:48"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:51"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:51"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:51 +0000] \"POST /api/databases/accenture500/tables HTTP/1.1\" 200 47 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:51"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:40:56"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:40:57"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:10:57 +0000] \"POST /api/databases/accenture500/tables/fd5_3_8_Log/columns HTTP/1.1\" 200 129 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:40:57"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:41:22"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:41:22"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:11:22 +0000] \"POST /api/databases/accenture500/tables/ac_test_volvo_auth/columns HTTP/1.1\" 200 13 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:41:22"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:41:22"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:41:25"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:41:26"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:11:26 +0000] \"POST /api/databases/adfcss/tables HTTP/1.1\" 200 47 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:41:26"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:41:29"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:41:33"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:41:33"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:11:33 +0000] \"POST /api/databases/abhisdeshpande/tables HTTP/1.1\" 200 51 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:41:33"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:41:40"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:41:40"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:11:40 +0000] \"POST /api/databases/abhisdeshpande/tables/databaseTemperatureData/columns HTTP/1.1\" 200 99 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:41:40"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:41:40"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:41:44"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:41:45"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:11:45 +0000] \"POST /api/databases/ADFDB/tables HTTP/1.1\" 200 104 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:41:45"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:42:03"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:42:05"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:12:05 +0000] \"POST /api/databases/ADFDB/tables/testrfc1/columns HTTP/1.1\" 200 23 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:42:05"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:42:10"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:42:13"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:42:13"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:12:13 +0000] \"POST /api/databases/alteryx/tables HTTP/1.1\" 200 23 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:42:13"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:42:18"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:42:21"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:42:22"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:12:22 +0000] \"POST /api/databases/as186145_tst/tables HTTP/1.1\" 200 109 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:42:22"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:42:26"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:42:26"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:12:26 +0000] \"POST /api/databases/as186145_tst/tables/ich_models/columns HTTP/1.1\" 200 31 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:42:26"}
+{"level":"info","message":"***********Retrieving tables","timestamp":"Fri, 15 Jul 2022 01:42:26"}
+{"level":"info","message":"************Teradata Connection Successful!","timestamp":"Fri, 15 Jul 2022 01:42:32"}
+{"level":"info","message":"************Teradata Connection closed successfully!","timestamp":"Fri, 15 Jul 2022 01:42:33"}
+{"level":"info","message":"::1 - - [14/Jul/2022:20:12:33 +0000] \"POST /api/databases/accenture500/tables HTTP/1.1\" 200 47 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Fri, 15 Jul 2022 01:42:33"}

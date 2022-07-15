@@ -48,6 +48,10 @@ export class DataPreperationComponent implements OnInit {
     switch (type) {
       case "database":
         this.selectedDb = x.value;
+        this.tables = ["--Please Select Tables--"];
+        this.columns = ["--Please Select Columns--"];
+        this.selectedtable = "";
+        this.selectedColumn= "";
         this.vantageService.getTables(this.config, this.selectedDb).subscribe({
           next: response => {
             // console.log(response);
@@ -65,6 +69,9 @@ export class DataPreperationComponent implements OnInit {
         break;
       case "table":
         this.selectedtable = x.value;
+        this.columns = ["--Please Select Columns--"];
+        this.selectedColumn= "";
+
         this.vantageService.getColumns(this.config, this.selectedDb, this.selectedtable).subscribe({
           next: response => {
             //console.log(response);
