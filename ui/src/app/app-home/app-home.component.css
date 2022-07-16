@@ -1,19 +1,41 @@
 
 
 .jumbotron {
-  margin-bottom: 2rem;
-  background-color: #dcafff;
-  border-radius: 0.3rem;
+  background-color: #a100ff;
+  border-radius: 0px;
   padding: 2rem 2rem;
+  color: white !important;
 }
 .home-title,
 .usecase-title {
   font-family: "Graphik Web", Arial, sans-serif;
   font-size: 19px;
-  color: #7500c0 !important;
+  color: white !important;
   line-height: 3rem;
 }
 
 .usecase-title {
   font-size: 16px !important;
+}
+
+.vantage-text{
+  margin-top: -76px !important;
+  color: #a100ff !important;
+  font-family: "Graphik Web", Arial, sans-serif;
+  font-weight: bold;
+  margin-left: 58px;
+  position: absolute;
+}
+
+.part-1{
+  font-size: 6px;
+  letter-spacing: 2px;
+  margin-left: -28px;
+}
+
+.part-2{
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-left: -45px;
+
 }

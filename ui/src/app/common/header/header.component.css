@@ -10,3 +10,46 @@
   border-left: 6px solid green;
   height: 500px;
 }
+
+.nav-link-h{
+    font-size: 13px;
+    color: white;
+    margin-left: 140vh;
+    position: absolute;
+    margin-top: 8px;
+}
+
+.nav-link-h a{
+  color: white;
+}
+
+.breadcrumb-item::before {
+  color: white !important;
+}
+
+.app-header-logo{
+  width: 4vh;
+  height: 4vh;
+
+}
+
+.header-bar{
+  height: 6vh;
+  margin-left: 26px;
+
+}
+
+.navbar-style{
+  background-color: #7500c0
+}
+
+.nav-link{
+  font-size: 13px !important;
+  color: white;
+}
+
+.three-bar{
+     margin-top: 17px;
+    margin-right: 28px;
+    color: white;
+}

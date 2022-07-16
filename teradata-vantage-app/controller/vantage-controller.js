@@ -186,7 +186,7 @@ exports.init = (req, res, next) => {
     return;
   }
 
-  console.log(splitpct);
+  //console.log(splitpct);
   var initParams = sanitize(req.body);
 
 
@@ -218,7 +218,7 @@ exports.init = (req, res, next) => {
   winston.info("***********Process Started");
   let config = getConfig(req);
 
-  console.log(config);
+  //console.log(config);
   if (!config) {
     res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
     return;
@@ -234,7 +234,7 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(columnQuery);
           columnNames = cursor.fetchall();
-          console.log( "columnNames ", columnNames);
+          //console.log( "columnNames ", columnNames);
           for (let i = 0; i < columnNames.length; i++) {
             columns.push(columnNames[i][0]);
           }
@@ -257,7 +257,7 @@ exports.init = (req, res, next) => {
               try {
                 cursor.execute(columnTypeQuery);
                 columnTypes = cursor.fetchall();
-                console.log( "columnTypes ", columnTypes);
+                //console.log( "columnTypes ", columnTypes);
                 for (i = 0; i < columnTypes.length; i++) {
                   columnNameTypes.push(columnTypes[i][0]);
                 }
@@ -284,8 +284,8 @@ exports.init = (req, res, next) => {
                 }
               }
 
-              console.log("numericCols ", numericCols)
-              console.log("categCols ", categCols)
+              //console.log("numericCols ", numericCols)
+              //console.log("categCols ", categCols)
               waterfallCb(null, null);
             },
           ],
@@ -308,7 +308,7 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(rowCountQuery);
           records = cursor.fetchall();
-          console.log("records ", records)
+          //console.log("records ", records)
           for (i = 0; i < records.length; i++) {
             rowCount = records[i][0];
           }
@@ -316,9 +316,9 @@ exports.init = (req, res, next) => {
           train_size = Math.ceil(rowCount * splitpct);
           test_size = rowCount - train_size;
 
-          console.log("rowCount ", rowCount)
-          console.log("train_size ", train_size)
-          console.log("test_size ", test_size)
+          //console.log("rowCount ", rowCount)
+          //console.log("train_size ", train_size)
+          //console.log("test_size ", test_size)
 
           callback();
         } catch (error) {
@@ -336,7 +336,7 @@ exports.init = (req, res, next) => {
         try {
           cursor.execute(top5Query);
           top5Data = cursor.fetchall();
-          console.log("top5Data ", top5Data);
+          //console.log("top5Data ", top5Data);
           for (i = 0; i < top5Data.length; i++) {
             let data = top5Data[i];
             top5Row.push(data);
@@ -387,7 +387,8 @@ exports.uploadConfig = (req, res, next) => {
     if (err) {
       // ERROR occurred (here it can be occurred due
       // to uploading file of size greater than
-      // 1MB or uploading different file type)        
+      // 1MB or uploading different file type)      
+      winston.error(err);  
       res.status(500).send({ message: Error.ERR_500 });
     }
     else {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { GlobalConstants } from '../../global-constants';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -15,4 +16,15 @@ export class AppService {
       }, 10);
     });
   }
+
+  connectionPage = new BehaviorSubject<boolean>(false);
+  dataprepPage = new BehaviorSubject<boolean>(false);
+
+  rootURL = 'http://localhost:3000';
+
+  handleError(erroResp: HttpErrorResponse): Observable<any> {
+    return throwError(() => erroResp.error);
+  }
+
+
 }

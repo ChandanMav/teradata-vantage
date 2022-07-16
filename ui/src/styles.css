@@ -15,3 +15,33 @@
 background-color: #a055f5 !important;
 border-color: #a055f5 !important;
 }
+
+/* Overriding styles */
+
+::-webkit-input-placeholder {
+  font-size: 13px!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+     font-size: 13px!important;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+     font-size: 13px!important;
+}
+
+option {
+  font-size: 13px;
+}
+
+select{
+    font-size: 10px !important;
+    /* line-height: 19px; */
+    letter-spacing: 1px !important;
+    color: #7500c0 !important;
+    font-weight: bold !important;
+}
+
+.fa-style{
+  /* color: #7500c0; */
+  font-size: 16px;
+}

@@ -29,14 +29,14 @@
   font-weight: bold;
 }
 
-.connection-form-pane{
+.form-pane{
   background-color: #e6dcff;
   height: 406px;
 }
 
 .conn-page{
   background-image: url("../../assets/img/bg4.jpg");
-  height: 85vh !important;
+  height: 84vh !important;
 }
 
 .cont-btn{
@@ -46,4 +46,19 @@
 .connection-form-title{
   font-family: "Graphik Web", Arial, sans-serif;
   color: #7500c0 !important;
+}
+
+.wait{
+  color: #b455aa;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.success-status-msg{
+  margin-top: -12px !important;
+}
+
+.form-disabled{
+  pointer-events: none;
+  opacity: .6;
 }

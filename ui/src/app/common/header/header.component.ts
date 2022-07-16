@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/service/common/app.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isConnectionPage:boolean = false;
+  isDataPrepPage:boolean = false;
+  constructor(private appService:AppService) { }
 
   ngOnInit(): void {
+    this.appService.connectionPage.subscribe({
+      next: (isConnectionPage) => (this.isConnectionPage = isConnectionPage)
+    });
+    this.appService.dataprepPage.subscribe({
+      next: (isDataPrepPage) => (this.isDataPrepPage = isDataPrepPage)
+    })
+
   }
 
 }

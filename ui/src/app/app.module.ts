@@ -14,6 +14,7 @@ import { AppHomeComponent } from './app-home/app-home.component';
 import { ServerConnectionService } from './service/server-connection-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { VantageService } from './service/vantage.service';
+import { FileUploadService } from './service/file-upload.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { VantageService } from './service/vantage.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AppService, ServerConnectionService, VantageService],
+  providers: [AppService, ServerConnectionService, VantageService, FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

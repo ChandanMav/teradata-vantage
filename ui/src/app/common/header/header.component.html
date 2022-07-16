@@ -1,15 +1,39 @@
 <div class="row fixed-top">
   <div class="col-12">
-    <nav class="navbar navbar-expand-lg" style="background-color: white">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-style">
+      <div class="container-fluid header-bar">
         <a class="navbar-brand" href="#">
-          <img src="../../../assets/img/app-logo.png" alt="" width="300" height="68"
-            class="d-inline-block align-text-bottom" style="margin-top: 0px" />
+          <img src="../../../assets/img/acclogo-white.png" alt=""
+            class="d-inline-block align-text-bottom app-header-logo" style="margin-top: 0px" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active"><a class="nav-link" routerLink="/"><span class="fa fa-home fa-lg fa-style"></span> Home</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/"><span class="fa fa-info fa-lg fa-style"></span> About</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/"><span class="fa fa-blind fa-lg fa-style"></span> Help</a></li>
+            <span class="nav-link-h">
+              <ol class="breadcrumb" *ngIf="isConnectionPage">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item">Connection</li>
+              </ol>
+              <ol class="breadcrumb" *ngIf="isDataPrepPage">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item"><a routerLink="/connection">Connection</a></li>
+                <li class="breadcrumb-item">Data Preperation</li>
+              </ol>
+            </span>
+          </ul>
           <div class="d-flex">
-            <i class="fa fa-bars" style="font-size: 30px; color: #7500c0; margin-top: 0px"></i>
+            <!-- <div class="row">
+              <div class="col-12 text-end">
+
+              </div>
+              <div class="col-12 align-items-end align-self-end nav-link">
+
+              </div>
+            </div> -->
+              <p class="text-end three-bar" style="margin-top: 17px;"><i class="fa fa-bars fa-style"></i></p>
+
           </div>
         </div>
       </div>

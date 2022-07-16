@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../service/common/app.service';
 
 @Component({
   selector: 'app-app-home',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService:AppService) { }
 
   ngOnInit(): void {
+    this.appService.connectionPage.next(false);
+    this.appService.dataprepPage.next(false);
   }
 
 }

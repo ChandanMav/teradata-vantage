@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from '../service/common/app.service';
 import { ServerConnectionService } from '../service/server-connection-service.service';
 import { Connection } from '../shared/connection';
 
@@ -20,13 +21,16 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
   isFormError: boolean;
   formInitialValues: any;
   message: string = "";
-  conn_status:boolean = false;
+  conn_status: boolean = false;
+  countdown: number = 3;
+  interval: any;
 
   constructor(
     private serverConnectionService: ServerConnectionService,
     private _fb: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private appService: AppService
   ) { }
 
   ngOnInit(): void {
@@ -37,13 +41,19 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.formInitialValues = this.frmRegister.value;
+    this.appService.dataprepPage.next(false);
   }
 
   ngOnDestroy(): void {
-    console.log('Method not implemented.');
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
+    this.appService.connectionPage.next(false);
   }
   ngAfterViewInit(): void {
-    console.log('Method not implemented.');
+    this.appService.connectionPage.next(true);
+
   }
 
   testServerConnection(value: Connection) {
@@ -57,14 +67,15 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
           this.conn_status = true;
           this.submitted = false;
           this.message = response.message;
-          setTimeout(() => {
-            this.router.navigate(['/dataprep'], {
-              relativeTo: this.activatedRoute,
-              state : value
-            });
-          }, 4000);
-
-
+          this.interval = setInterval(() => {
+            if (this.countdown === 0) {
+              this.router.navigate(['/dataprep'], {
+                relativeTo: this.activatedRoute,
+                state: value
+              });
+            }
+            this.countdown = this.countdown - 1;
+          }, 1000);
         },
         error: (e) => {
           this.conn_status = false;
