@@ -49,16 +49,23 @@
 }
 
 .wait{
-  color: #b455aa;
+  color: #7500c0;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 
 .success-status-msg{
   margin-top: -12px !important;
+  color: #7500c0 !important;
+  font-weight: bold;
 }
 
 .form-disabled{
   pointer-events: none;
   opacity: .6;
+}
+
+.form-text{
+  font-size: 11px !important;
+  font-weight: 500 !important;
 }

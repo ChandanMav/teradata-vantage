@@ -8,13 +8,13 @@
       <div class="container">
         <p class="text-center font-weight-bold connection-form-title">Connect To Teradata</p>
         <p *ngIf="message != ''" class="d-flex status-msg justify-content-center" [ngClass]="conn_status ? 'text-success' : 'text-danger'">{{message}}</p>
-        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center success-status-msg"> Let me take you to the Data Preperation Stage.</p>
-        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center success-status-msg"> On the count of {{countdown}} </p>
+        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center success-status-msg"> Proceed with data preperation</p>
+
       </div>
       <form class="row g-1" [formGroup]="frmRegister" (ngSubmit)="testServerConnection(frmRegister.value)" [ngClass]="conn_status ? 'form-disabled' : ''">
         <div class="form-group col-12 gx-5">
-          <label for="host" class="form-label">Database Server</label>
-          <input type="text" class="form-control" id="host" placeholder="Host IP Address" name="host" formControlName="host"
+          <label for="host" class="form-label">Database Server<span style="color: red;">*</span></label>
+          <input type="text" class="form-control form-text" id="host" placeholder="Host IP Address" name="host" formControlName="host"
             required [ngClass]="{ 'is-invalid': f['host'].touched && f['host'].errors }" autofocus/>
 
           <div *ngIf="(frmRegister.controls['host'].invalid &&
@@ -27,8 +27,8 @@
         </div>
 
         <div class="form-group col-12 gx-5">
-          <label for="user" class="form-label">Username</label>
-          <input type="text" class="form-control" id="user" placeholder="Username" name="user"
+          <label for="user" class="form-label">Username<span style="color: red;">*</span></label>
+          <input type="text" class="form-control form-text" id="user" placeholder="Username" name="user"
             formControlName="user" required [ngClass]="{ 'is-invalid': f['user'].touched && f['user'].errors }" />
 
           <div *ngIf="(frmRegister.controls['user'].invalid &&
@@ -40,8 +40,8 @@
         </div>
 
         <div class="form-group col-12 gx-5">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+          <label for="password" class="form-label">Password<span style="color: red;">*</span></label>
+          <input type="password" class="form-control form-text" id="password" placeholder="Password" name="password"
             formControlName="password" required [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }" />
 
           <div *ngIf="(frmRegister.controls['password'].invalid &&

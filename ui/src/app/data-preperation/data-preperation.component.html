@@ -1,18 +1,16 @@
 <div class="container-fluid data-page">
   <div class="form-pane">
     <div class="row">
-
-
       <div class="col-12 card" class="config-form">
-        <p class="text-center mt-1 upload-form-title card-header">Upload Configuration File</p>
-        <p class="upload-msg" *ngIf="fileuploadErrorMsg !== ''" [ngClass]="fileuploadErrorMsg !== '' ? 'text-danger' : ''">{{fileuploadErrorMsg}}</p>
-        <p class="upload-msg" *ngIf="message !== ''" [ngClass]="message !== '' ? 'text-success' : ''">{{message}}</p>
-
-        <div class="input-group card-body" style="padding-left: 29px;">
+        <p class="mt-1 upload-form-title">Upload Configuration File</p>
+        <p class="upload-msg" *ngIf="message !== ''" [ngClass]="!isFileUploadFailed ? 'text-success' : 'text-danger'">
+          {{message}}</p>
+        <div class="input-group card-body" style="padding-top: 19px;"
+          [ngClass]="initRunMessage != '' ? 'form-disabled' :''">
           <div class="input-group-prepend">
             <span class="input-group-text">
-              <button (click)="upload()" class="btn btn-success app-btn input-group-text" style="font-size: 13px; width: 57px; margin-left: -12px;"
-                [disabled]="filename === 'Choose file'">
+              <button (click)="upload()" class="btn btn-success app-btn input-group-text"
+                style="font-size: 13px; width: 57px; margin-left: -12px;" [disabled]="filename === 'Choose file'">
                 <span class="fa fa-cloud-upload"></span>
               </button>
             </span>
@@ -20,41 +18,58 @@
           <div class="custom-file" style="left: -11px;">
             <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onChange($event)" accept=".txt"
               required>
-            <label class="custom-file-label text-start text-truncate" style="max-width: 188px;" for="inputGroupFile01">{{filename}}</label>
+            <label class="custom-file-label text-start text-truncate" style="max-width: 188px;"
+              for="inputGroupFile01">{{filename}}</label>
           </div>
         </div>
       </div>
-
-
-
-      <div class="col-12">
+      <div class="col-12 dropdown-form">
         <form class="row g-1 align-middle vertical-center" (ngSubmit)="init()"
           [ngClass]="inprogress ? 'form-disabled' : ''">
-          <div class="form-group col-12 gx-5">
-            <label for="db" class="form-label">Select Database</label>
+          <div class="form-group col-12 gx-4">
+            <label for="db" class="form-label">Select Database <span style="color: red;">*</span></label>
             <select class="form-control" id="db" name="db" (change)="changeDropdown($event.target, 'database')"
-              autofocus>
+              autofocus [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
               <option *ngFor="let database of databases">{{database}}</option>
             </select>
           </div>
 
-          <div class="form-group col-12 gx-5">
-            <label for="basetable" class="form-label">Select Table</label>
+          <div class="form-group col-12 gx-4">
+            <label for="basetable" class="form-label">Select Table <span style="color: red;">*</span></label>
             <select class="form-control" id="basetable" name="basetable"
-              (change)="changeDropdown($event.target, 'table')">
+              (change)="changeDropdown($event.target, 'table')"
+              [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
               <option *ngFor="let table of tables">{{table}}</option>
             </select>
           </div>
 
-          <div class="form-group col-12 gx-5">
-            <label for="col" class="form-label">Select Column</label>
-            <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')">
+          <div class="form-group col-12 gx-4">
+            <label for="col" class="form-label">Select Column<span style="color: red;">*</span></label>
+            <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
+              [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
               <option *ngFor="let column of columns">{{column}}</option>
             </select>
           </div>
+          <div class="d-grid gap-2 col-12 gx-4 cont-btn" *ngIf="initRunMessage === ''">
+            <button class="btn btn-primary app-btn cont-btn-css" type="submit"
+              [disabled]="selectedColumn===''">Build</button>
+          </div>
 
-          <div class="d-grid gap-2 col-12 gx-5 cont-btn" *ngIf="true">
-            <button class="btn btn-primary app-btn" type="submit" [disabled]="selectedColumn===''">Build</button>
+          <div class="d-grid gap-2 col-12 gx-4 cont-btn" *ngIf="initRunMessage != ''">
+            <button class="btn btn-primary app-btn cont-btn-css" type="button"
+              (click)="restartProcess()">Re-Start</button>
+          </div>
+
+          <div *ngIf="inprogress" class="d-flex justify-content-center text-center">
+            <div class="row">
+              <div class="col-12">
+                <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
+                  role="status"></div>
+              </div>
+              <div class="col-12">
+                <span class="wait">Please wait!!!</span>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -62,13 +77,46 @@
   </div>
 </div>
 <div class="align-self-center q-section">
-  <div class="change-copy" *ngIf="!inprogress">
-    <div class="the" aria-hidden="true"><span style="transform: translate(11px, 3px);">The</span> </div>
-    <div class="logo" aria-hidden="true"><img style="transform: translate(650px, -20px);"
-        src="../../assets/img/acclogo.png" width="100" height="100" /> </div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(175px, 7px);">change</span></div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(420px, 196px);">you</span></div>
-    <div class="see" aria-hidden="true"><span style="transform: translate(550px, 97px);">see</span></div>
+  <div class="container">
+
+    <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger">{{errorMsg}} <span
+        *ngIf="!isTeradataConnectionAlive">&nbsp; Go to <a routerLink="/connection"
+          style="color: white;">Connection</a></span></p>
+
+    <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
+      {{initRunMessage}}</p>
+
+    <div *ngIf="initRunMessage != ''" class="pt-2">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9"></div>
+      </div>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9"></div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <table>
+            <tr></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="change-copy" *ngIf="initRunMessage === ''">
+    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 35px);">The</span> </div>
+    <div class="logo" aria-hidden="true"><img style="transform: translate(779px, 13px);"
+        src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
+    <div class="you" aria-hidden="true"><span style="transform: translate(223px, 17px);">change</span></div>
+    <div class="you" aria-hidden="true"><span style="transform: translate(477px, 234px);">you</span></div>
+    <div class="see" aria-hidden="true"><span style="transform: translate(612px, 116px);">see</span></div>
     <p style="transform: translate(20px, 140px);">We celebrate progress, the change we bring, the value we create, the
       success we share and we refresh the familiar.</p>
   </div>

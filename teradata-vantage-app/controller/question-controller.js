@@ -237,23 +237,22 @@ exports.questionAnswer = (req, res, next) => {
                     ExcludeColumns('${dep_col}')
                     ) AS dt `;
 
-                    //console.log(query);
+                  //console.log(query);
 
-                    DAO.executeQuery(connection, query, (err, data) => {
-                      if (data) {
-                        innerCB(null, true);
-                      } else {
-                        winston.error(err);
-                        innerCB(null, false);
-                      }
-                    });                   
+                  DAO.executeQuery(connection, query, (err, data) => {
+                    if (data) {
+                      innerCB(null, true);
+                    } else {
+                      winston.error(err);
+                      innerCB(null, false);
+                    }
+                  });
                 }
                 //Perform univariate_unpivot
 
                 //Partitioning univariate_unpivot
               ], (err, result) => {
-                console.log(err);
-                console.log(result)
+                winston.error(err);
                 callback(null, data);
               })
 

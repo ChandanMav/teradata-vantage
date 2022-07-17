@@ -3,6 +3,7 @@ import { catchError, Observable, retry, Subject, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Connection } from '../shared/connection';
 import { Constants } from '../config/constants';
+import { AppService } from './common/app.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -15,16 +16,16 @@ const httpOptions = {
 export class VantageService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private appService: AppService) { }
 
-  rootURL = 'http://localhost:3000';
+  rootURL = this.appService.rootURL;
 
   public getDatabases(connection: Connection): Observable<any> {
     let body = JSON.stringify(connection);
     return this.http.post(this.rootURL + '/api/databases', body, httpOptions)
       .pipe(
         retry(1),
-        catchError((error) => this.handleError(error))
+        catchError((error) => this.appService.handleError(error))
       );;
   }
 
@@ -33,7 +34,7 @@ export class VantageService {
     return this.http.post(this.rootURL + '/api/databases/' + dbName + '/tables', body, httpOptions)
       .pipe(
         retry(1),
-        catchError((error) => this.handleError(error))
+        catchError((error) => this.appService.handleError(error))
       );;
   }
 
@@ -42,7 +43,7 @@ export class VantageService {
     return this.http.post(this.rootURL + '/api/databases/' + dbName + '/tables/' + tableName + '/columns', body, httpOptions)
       .pipe(
         retry(1),
-        catchError((error) => this.handleError(error))
+        catchError((error) => this.appService.handleError(error))
       );;
   }
 
@@ -53,12 +54,9 @@ export class VantageService {
     return this.http.post(this.rootURL + '/api/vantage/init', body, httpOptions)
       .pipe(
         retry(1),
-        catchError((error) => this.handleError(error))
+        catchError((error) => this.appService.handleError(error))
       );;
 
   }
 
-  handleError(erroResp: HttpErrorResponse): Observable<any> {
-    return throwError(() => erroResp.error);
-  }
 }

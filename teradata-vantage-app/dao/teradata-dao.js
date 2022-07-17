@@ -15,6 +15,7 @@ exports.findDatabases = (connection, cb) => {
       }
       cb(null, data);
     } catch (error) {
+      winston.error(error);
       cb(error, null);
     }
   } else {
@@ -40,6 +41,7 @@ exports.findTables = (connection, databaseName, cb) => {
       }
       cb(null, data);
     } catch (error) {
+      winston.error(error);
       cb(error, null);
     }
   } else {
@@ -66,6 +68,7 @@ exports.findColumns = (connection, databaseName, tableName, cb) => {
       }
       cb(null, data);
     } catch (error) {
+      winston.error(error);
       cb(error, null);
     }
   } else {
@@ -85,6 +88,7 @@ exports.dropTable = (connection, query, cb) => {
     winston.info("******************Table deleted successfully");
     cb(null, "Table Deleted");
   } catch (error) {
+    winston.error(error);
     winston.error("**************Table deletion failed but this can be ignored!");
     cb(null, "Table Deleted Succssfully");
   }
@@ -123,6 +127,7 @@ exports.executeQuery = (connection, query, cb) => {
     cb(null, "Query Execution is completed");
 
   } catch (error) {
+    winston.error(error);
     winston.error("******************Query Execution Failed");
     winston.error(error);
     cb(error, null);

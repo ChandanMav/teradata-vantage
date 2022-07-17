@@ -58,7 +58,7 @@ exports.getDatabases = (req, res, next) => {
   winston.info("***********Retrieving Databases");
   let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -92,7 +92,7 @@ exports.getTables = (req, res, next) => {
   }
   let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -127,7 +127,7 @@ exports.getColumns = (req, res, next) => {
 
   let config = getConfig(req);
   if (!config) {
-    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
     return;
   }
 
@@ -135,7 +135,7 @@ exports.getColumns = (req, res, next) => {
   if (connection) {
     DAO.findColumns(connection, database, table, (err, data) => {
       closeConnection(connection);
-      if (data) {        
+      if (data) {
         res.status(200).send({ colums: data });
       } else {
         res.status(500).send({ message: err });
@@ -197,7 +197,7 @@ exports.init = (req, res, next) => {
   if (!db || !basetable || !col) {
     res
       .status(500)
-      .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
+      .send({ Success: false, error_code: Errorcode.Missing_Required_Input, message: Error.MISSING_REQUIRED_INPUT });
     return;
   }
 
@@ -220,7 +220,7 @@ exports.init = (req, res, next) => {
 
   //console.log(config);
   if (!config) {
-    res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
+    res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
     return;
   }
   let connection = getConnection(config);
@@ -240,6 +240,7 @@ exports.init = (req, res, next) => {
           }
           callback();
         } catch (error) {
+          winston.error(error);
           if (!anIgnoreError(error)) {
             callback(error);
           }
@@ -264,6 +265,7 @@ exports.init = (req, res, next) => {
 
                 waterfallCb(null, columnNameTypes);
               } catch (error) {
+                winston.error(error);
                 if (!anIgnoreError(error)) {
                   waterfallCb(true, error);
                 }
@@ -322,6 +324,7 @@ exports.init = (req, res, next) => {
 
           callback();
         } catch (error) {
+          winston.error(error);
           if (!anIgnoreError(error)) {
             callback(error);
           }
@@ -343,6 +346,7 @@ exports.init = (req, res, next) => {
           }
           callback();
         } catch (error) {
+          winston.error(error);
           if (!anIgnoreError(error)) {
             callback(error);
           }
@@ -353,7 +357,7 @@ exports.init = (req, res, next) => {
       closeConnection(connection);
       if (err) {
         winston.error(err);
-        return next({ message: Error.ERR_500 });
+        return next({ message: Error.ERR_500, error_code: Errorcode.Error_500 });
       } else {
         let top5RowJson = [];
         for (let i = 0; i < top5Row.length; i++) {
@@ -388,8 +392,8 @@ exports.uploadConfig = (req, res, next) => {
       // ERROR occurred (here it can be occurred due
       // to uploading file of size greater than
       // 1MB or uploading different file type)      
-      winston.error(err);  
-      res.status(500).send({ message: Error.ERR_500 });
+      winston.error(err);
+      res.status(500).send({ message: Error.ERR_500, error_code:Errorcode.Error_500 });
     }
     else {
       // SUCCESS, image successfully uploaded

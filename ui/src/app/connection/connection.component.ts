@@ -22,7 +22,7 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
   formInitialValues: any;
   message: string = "";
   conn_status: boolean = false;
-  countdown: number = 3;
+  countdown: number = 1;
   interval: any;
 
   constructor(
