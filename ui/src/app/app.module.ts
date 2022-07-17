@@ -15,6 +15,8 @@ import { ServerConnectionService } from './service/server-connection-service.ser
 import { HttpClientModule } from '@angular/common/http';
 import { VantageService } from './service/vantage.service';
 import { FileUploadService } from './service/file-upload.service';
+import { CommaSeperatedPipe } from './pipes/comma-seperated.pipe';
+import { JsonReaderPipe } from './pipes/json-reader.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { FileUploadService } from './service/file-upload.service';
     ConnectionComponent,
     DataPreperationComponent,
     VantageHomeComponent,
-    AppHomeComponent
+    AppHomeComponent,
+    CommaSeperatedPipe,
+    JsonReaderPipe
   ],
   imports: [
     BrowserModule,

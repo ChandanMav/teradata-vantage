@@ -15,7 +15,7 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
   config: Connection;
   databases: String[] = ["Select Database"];
   tables: String[] = ["Select Table"];
-  columns: String[] = ["Select Column"];
+  columns: string[] = ["Select Column"];
 
   selectedDb: String = "";
   selectedtable: String = "";
@@ -33,7 +33,8 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
 
   rowCount:number = 0;
   testsetsize:number = 0;
-  top5data:any = [];
+  trainsetsize:number = 0;
+  top5data:any[] = [];
   ncols:String[] = [];
   ccols:String[] = [];
 
@@ -150,14 +151,17 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
         this.inprogress = false;
         this.errorMsg = "";
         this.initRunMessage = "Below are basic finding.."
-        console.log(response);
+        //console.log(response);
 
-        let {rowCount, testsetsize, top5data, ncols, ccols} = response.message;
+        let {rowCount, testsetsize, trainsetsize, top5data, ncols, ccols} = response.message;
         this.rowCount = rowCount;
         this.testsetsize = testsetsize;
         this.top5data = top5data;
         this.ncols = ncols;
         this.ccols = ccols;
+        this.trainsetsize = trainsetsize;
+
+        console.log(this.top5data);
       },
       error: error => {
         //console.log(error);

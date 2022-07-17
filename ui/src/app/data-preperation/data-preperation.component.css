@@ -226,3 +226,13 @@
   pointer-events: none;
   opacity: .6;
 }
+
+.result-header {
+  font-size: 13px;
+  color: black;
+}
+
+.result-data{
+  font-size: 11px;
+  color: white;
+}
