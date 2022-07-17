@@ -10,6 +10,7 @@ var { upload } = require("../config/multer-config");
 var fs = require("fs");
 var appRoot = require('app-root-path');
 var Errorcode = require("../common/error-code");
+var QB = require("./question-bank");
 
 getConfig = (req) => {
   var serverInfo = sanitize(req.body);
@@ -375,6 +376,10 @@ exports.init = (req, res, next) => {
           trainsetsize: train_size,
           testsetsize: test_size,
           top5data: top5RowJson,
+          question: {
+            name: QB.removeAnyColumn,
+            options: ["Y", "N"]
+          }
         };
 
         //Setting up in the session object        
@@ -393,7 +398,7 @@ exports.uploadConfig = (req, res, next) => {
       // to uploading file of size greater than
       // 1MB or uploading different file type)      
       winston.error(err);
-      res.status(500).send({ message: Error.ERR_500, error_code:Errorcode.Error_500 });
+      res.status(500).send({ message: Error.ERR_500, error_code: Errorcode.Error_500 });
     }
     else {
       // SUCCESS, image successfully uploaded

@@ -6,6 +6,7 @@ import { FileUploadService } from '../service/file-upload.service';
 import { VantageService } from '../service/vantage.service';
 import { Connection } from '../shared/connection';
 
+
 @Component({
   selector: 'app-data-preperation',
   templateUrl: './data-preperation.component.html',
@@ -27,16 +28,18 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
   filename: String = "Choose file";
   message: string = "";
   errorMsg: string = "";
-  isTeradataConnectionAlive:boolean = false;
-  initRunMessage:string = "";
-  isFileUploadFailed:boolean = false;
+  isTeradataConnectionAlive: boolean = false;
+  initRunMessage: string = "";
+  isFileUploadFailed: boolean = false;
 
-  rowCount:number = 0;
-  testsetsize:number = 0;
-  trainsetsize:number = 0;
-  top5data:any[] = [];
-  ncols:String[] = [];
-  ccols:String[] = [];
+  rowCount: number = 0;
+  testsetsize: number = 0;
+  trainsetsize: number = 0;
+  top5data: any[] = [];
+  ncols: String[] = [];
+  ccols: String[] = [];
+  question: any;
+  options: any;
 
 
 
@@ -153,15 +156,17 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
         this.initRunMessage = "Below are basic finding.."
         //console.log(response);
 
-        let {rowCount, testsetsize, trainsetsize, top5data, ncols, ccols} = response.message;
+        let { rowCount, testsetsize, trainsetsize, top5data, ncols, ccols, question } = response.message;
         this.rowCount = rowCount;
         this.testsetsize = testsetsize;
         this.top5data = top5data;
         this.ncols = ncols;
         this.ccols = ccols;
         this.trainsetsize = trainsetsize;
+        this.question = question.name;
+        this.options = question.options
 
-        console.log(this.top5data);
+        //console.log(this.top5data);
       },
       error: error => {
         //console.log(error);
@@ -253,4 +258,19 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
     this.initRunMessage = "";
     //this.databases = this.database_bkp;
   }
+
+  deleteColumn = (val: String) => {
+    switch (val) {
+      case "Y":
+        console.log("Yes Clicked")
+        break;
+
+      case "N":
+        console.log("No Clicked")
+        break;
+    }
+
+  }
 }
+
+

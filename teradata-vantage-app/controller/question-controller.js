@@ -22,25 +22,13 @@ exports.getQuestion = (req, res, next) => {
     return;
   }
 
-  let session = req.session;
-  let columns = session.list_of_all_columns;
-
-  if (!columns) {
-    res.status(503).send({
-      Success: false,
-      error_code: Errorcode.No_columns_Session,
-      message: Error.NO_SESSION,
-    });
-    return;
-  }
-
   switch (parseInt(questionID)) {
     case 1:
       question = QB.removeAnyColumn;
       availableOptions = ["Y", "N"];
       res.status(200).send({
         Success: true,
-        message: { question, option: availableOptions, columns },
+        message: { question, option: availableOptions },
       });
       break;
 

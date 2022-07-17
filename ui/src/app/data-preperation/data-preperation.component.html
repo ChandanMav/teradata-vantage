@@ -79,54 +79,111 @@
 <div class="align-self-center q-section">
   <div class="container">
 
+    <!--Download Report-->
+
+
     <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger">{{errorMsg}} <span
         *ngIf="!isTeradataConnectionAlive">&nbsp; Go to <a routerLink="/connection"
           style="color: white;">Connection</a></span></p>
 
-    <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
-      {{initRunMessage}}</p>
+    <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
+      {{initRunMessage}}</p> -->
 
     <div *ngIf="initRunMessage != ''" class="pt-4">
-      <div class="row align-items-start p-1">
-        <div class="col-2  result-header">Row Count</div>
-        <div class="col-9 result-data">{{rowCount}}</div>
-      </div>
-      <div class="row align-items-start p-1">
-        <div class="col-2  result-header">Train Set Size</div>
-        <div class="col-9 result-data">{{trainsetsize}}</div>
-      </div>
+      <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                Basic Info
+              </button>
+            </h5>
+          </div>
 
-      <div class="row align-items-start p-1">
-        <div class="col-2  result-header">Test Set Size</div>
-        <div class="col-9 result-data">{{testsetsize}}</div>
-      </div>
+          <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row align-items-start p-1">
+                <div class="col-2  result-header">Row Count</div>
+                <div class="col-9 result-data">{{rowCount}}</div>
+              </div>
+              <div class="row align-items-start p-1">
+                <div class="col-2  result-header">Train Set Size</div>
+                <div class="col-9 result-data">{{trainsetsize}}</div>
+              </div>
 
-      <div class="row align-items-start  p-1">
-        <div class="col-2 result-header">Numerical Columns</div>
-        <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
-      </div>
-      <div class="row align-items-start  p-1">
-        <div class="col-2 result-header">Categorical Columns</div>
-        <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
-      </div>
-      <div class="row align-items-start  p-1">
-        <div class="col-10">
-          <table class="table  table-sm table-bordered">
-            <caption style="font-size: 13px; caption-side: top;">Sample Data</caption>
-            <thead class="thead-dark">
-              <tr class="result-header">
-                <td *ngFor="let column of columns">{{column}}</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let d of top5data" class="result-data">
-                <!-- <td *ngFor="let column of d|jsonReader">{{d.DayCalls}</td> -->
-                <td *ngFor="let d1 of d | jsonReader: columns"> {{d1}}</td>
-              </tr>
-            </tbody>
-          </table>
+              <div class="row align-items-start p-1">
+                <div class="col-2  result-header">Test Set Size</div>
+                <div class="col-9 result-data">{{testsetsize}}</div>
+              </div>
+
+              <div class="row align-items-start  p-1">
+                <div class="col-2 result-header">Numerical Columns</div>
+                <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
+              </div>
+              <div class="row align-items-start  p-1">
+                <div class="col-2 result-header">Categorical Columns</div>
+                <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
+              </div>
+              <div class="row align-items-start  p-1">
+                <div class="col-10">
+                  <table class="table  table-sm table-bordered">
+                    <caption style="font-size: 13px; caption-side: top;">Sample Data</caption>
+                    <thead class="thead-dark">
+                      <tr class="result-header">
+                        <td *ngFor="let column of columns">{{column}}</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let d of top5data" class="result-data">
+                        <!-- <td *ngFor="let column of d|jsonReader">{{d.DayCalls}</td> -->
+                        <td *ngFor="let d1 of d | jsonReader: columns"> {{d1}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Column
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row align-items-start  p-1">
+                <div class="col-6">
+                  {{question}}
+                </div>
+                <div class="col-2">
+                  <div class="switch-field">
+                    <input type="radio" id="radio-one" name="yes" value="yes" checked (click)="deleteColumn('Y')" />
+                    <label for="radio-one">Yes</label>
+                    <input type="radio" id="radio-two" name="no" value="no" (click)="deleteColumn('N')" />
+                    <label for="radio-two">No</label>
+                  </div>
+                </div>
+
+                <div class="col-4">
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
     </div>
 
   </div>
