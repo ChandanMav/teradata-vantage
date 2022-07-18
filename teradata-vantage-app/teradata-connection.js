@@ -31,7 +31,9 @@ getConnection = (config) => {
 
 closeConnection = (conn) => {
   try {
-    conn.close();
+    if (conn) {
+      conn.close();
+    }
     winston.info("************Teradata Connection closed successfully!")
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {

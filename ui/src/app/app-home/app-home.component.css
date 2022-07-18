@@ -15,7 +15,9 @@
 }
 
 .usecase-title {
-  font-size: 16px !important;
+    font-size: 12px !important;
+    color: #7500c0 !important;
+    font-weight: 600;
 }
 
 .vantage-text{
@@ -38,4 +40,16 @@
     font-size: 14px;
     margin-left: -45px;
 
+}
+
+.card-img-top{
+  /* width: 355px !important; */
+  height: 212px !important;
+}
+
+.usecase-desc{
+  font-size: 11px;
+  color: #7500c0;
+  font-family: "Graphik Web", Arial, sans-serif;
+  letter-spacing: 1px;
 }

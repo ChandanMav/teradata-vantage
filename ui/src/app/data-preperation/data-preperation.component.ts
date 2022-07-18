@@ -41,6 +41,9 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
   question: any;
   options: any;
 
+  isColumnSelectToDrop:boolean = false;
+  dropCols:String[] = [];
+
 
 
 
@@ -74,11 +77,11 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
           this.clear();
           this.isTeradataConnectionAlive = false;
           this.errorMsg = "Please connect to Teradata Server First!";
-          setTimeout(() => {
-            this.router.navigate(['/connection'], {
-              relativeTo: this.activatedRoute,
-            });
-          }, 4000);
+          // setTimeout(() => {
+          //   this.router.navigate(['/connection'], {
+          //     relativeTo: this.activatedRoute,
+          //   });
+          // }, 4000);
         }
       }
     })
@@ -263,14 +266,45 @@ export class DataPreperationComponent implements OnInit, AfterViewInit, OnDestro
     switch (val) {
       case "Y":
         console.log("Yes Clicked")
+        this.isColumnSelectToDrop = true;
         break;
 
       case "N":
         console.log("No Clicked")
+        this.isColumnSelectToDrop = false;
+        this.dropCols = [];
         break;
     }
 
   }
+
+  selectColumnToDrop = (x: any) => {
+
+    let isMatchFound = false;
+    for( let i = 0; i<this.dropCols.length ; i++){
+      if(x.value === this.dropCols[i]){
+        isMatchFound= true;
+        break;
+      }
+    }
+
+    if(!isMatchFound){
+      this.dropCols.push(x.value)
+    }
+    console.log(this.dropCols);
+  }
+
+  removeItem = (item:any) => {
+    for( let i = 0; i<this.dropCols.length ; i++){
+      if(item === this.dropCols[i]){
+        this.dropCols.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+
 }
+
 
 

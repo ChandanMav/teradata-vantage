@@ -80,7 +80,14 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
         error: (e) => {
           this.conn_status = false;
           this.submitted = false;
-          this.message = e;
+          console.log(e);
+          if(e.type === "error"){
+            this.message ="Couldn't able to establish connection with server. Please Retry!"
+          }else{
+            this.message = e.message;
+          }
+
+
           this.clear();
         }
       });

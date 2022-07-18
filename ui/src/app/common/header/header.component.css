@@ -14,7 +14,7 @@
 .nav-link-h{
     font-size: 13px;
     color: white;
-    margin-left: 140vh;
+    margin-left: 160vh;
     position: absolute;
     margin-top: 8px;
 }
@@ -25,6 +25,10 @@
 
 .breadcrumb-item::before {
   color: white !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before{
+  content: var(--bs-breadcrumb-divider, ">>") !important;
 }
 
 .app-header-logo{

@@ -44,11 +44,11 @@ exports.testConnection = (req, res, next) => {
   if (connection) {
     res
       .status(200)
-      .send({ Success: true, message: `Teradata Connnection Successful!` });
+      .send({ Success: true, message: `Connnection Successful!` });
   } else {
     res
       .status(500)
-      .send({ Success: false, message: `Teradata Connnection failed!` });
+      .send({ Success: false, message: `Connnection failed!` });
   }
   closeConnection(connection);
 };

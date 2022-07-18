@@ -10,7 +10,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">
               <button (click)="upload()" class="btn btn-success app-btn input-group-text"
-                style="font-size: 13px; width: 57px; margin-left: -12px;" [disabled]="filename === 'Choose file'">
+                style="font-size: 14px; width: 57px; margin-left: -12px;" [disabled]="filename === 'Choose file'">
                 <span class="fa fa-cloud-upload"></span>
               </button>
             </span>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group col-12 gx-4">
-            <label for="basetable" class="form-label">Select Table <span style="color: red;">*</span></label>
+            <label for="basetable" class="form-label">Select Dataset <span style="color: red;">*</span></label>
             <select class="form-control" id="basetable" name="basetable"
               (change)="changeDropdown($event.target, 'table')"
               [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
@@ -44,7 +44,7 @@
           </div>
 
           <div class="form-group col-12 gx-4">
-            <label for="col" class="form-label">Select Column<span style="color: red;">*</span></label>
+            <label for="col" class="form-label">Select Dependent Column<span style="color: red;">*</span></label>
             <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
               [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
               <option *ngFor="let column of columns">{{column}}</option>
@@ -67,7 +67,7 @@
                   role="status"></div>
               </div>
               <div class="col-12">
-                <span class="wait">Please wait!!!</span>
+                <span class="wait">Please wait!</span>
               </div>
             </div>
           </div>
@@ -83,50 +83,51 @@
 
 
     <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger">{{errorMsg}} <span
-        *ngIf="!isTeradataConnectionAlive">&nbsp; Go to <a routerLink="/connection"
-          style="color: white;">Connection</a></span></p>
+        *ngIf="!isTeradataConnectionAlive">&nbsp; Connect To  <a routerLink="/connection"
+          style="color: white;">Server</a></span></p>
 
     <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
       {{initRunMessage}}</p> -->
 
     <div *ngIf="initRunMessage != ''" class="pt-4">
       <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span>
-      <div id="accordion">
-        <div class="card">
-          <div class="card-header" id="headingOne">
+      <div class="accordion accordion-flush" id="accordionAccordian">
+
+        <div class="accordion-item card">
+          <div class="accordion-header card-header" id="flush-headingOne">
             <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                aria-controls="collapseOne">
-                Basic Info
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Basic Findings
               </button>
             </h5>
           </div>
-
-          <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              <div class="row align-items-start p-1">
+          <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body">
+              <div class="row align-items-start">
                 <div class="col-2  result-header">Row Count</div>
                 <div class="col-9 result-data">{{rowCount}}</div>
               </div>
-              <div class="row align-items-start p-1">
+              <div class="row align-items-start">
                 <div class="col-2  result-header">Train Set Size</div>
                 <div class="col-9 result-data">{{trainsetsize}}</div>
               </div>
 
-              <div class="row align-items-start p-1">
+              <div class="row align-items-start">
                 <div class="col-2  result-header">Test Set Size</div>
                 <div class="col-9 result-data">{{testsetsize}}</div>
               </div>
 
-              <div class="row align-items-start  p-1">
+              <div class="row align-items-start">
                 <div class="col-2 result-header">Numerical Columns</div>
                 <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
               </div>
-              <div class="row align-items-start  p-1">
+              <div class="row align-items-start">
                 <div class="col-2 result-header">Categorical Columns</div>
                 <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
               </div>
-              <div class="row align-items-start  p-1">
+              <div class="row align-items-start">
                 <div class="col-10">
                   <table class="table  table-sm table-bordered">
                     <caption style="font-size: 13px; caption-side: top;">Sample Data</caption>
@@ -148,32 +149,57 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Column
-              </button>
-            </h5>
-          </div>
-
-          <div id="collapseOne" class="collapse collapse" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              <div class="row align-items-start  p-1">
-                <div class="col-6">
+        <div class="accordion-item card">
+          <h2 class="accordion-header card-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Feature Selection
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body  card-body">
+              <div class="row align-items-start">
+                <div class="col-8 question-title">
                   {{question}}
                 </div>
-                <div class="col-2">
-                  <div class="switch-field">
-                    <input type="radio" id="radio-one" name="yes" value="yes" checked (click)="deleteColumn('Y')" />
-                    <label for="radio-one">Yes</label>
-                    <input type="radio" id="radio-two" name="no" value="no" (click)="deleteColumn('N')" />
-                    <label for="radio-two">No</label>
+                <div class="col-4" style="font-size: 11px;">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Y"
+                      (click)="deleteColumn('Y')">
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  </div> &nbsp;&nbsp;
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="N"
+                      (click)="deleteColumn('N')">
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row align-items-start" *ngIf="isColumnSelectToDrop">
+                <div class="col-6">
+                  <label for="form-floating" style="font-size: 13px;">Select Column</label>
+                  <div class="">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                      (change)="selectColumnToDrop($event.target)" multiple size="3">
+                      <option *ngFor="let column of columns ">{{column}}</option>
+                    </select>
                   </div>
                 </div>
-
                 <div class="col-4">
-
+                  <label style="font-size: 12px;">Selected Column(s)</label>
+                  <ul class="list-group" style="font-size: 10px;">
+                    <li class="list-group-item" style="color: #7500c0 !important;" *ngFor="let item of dropCols">
+                      {{item}} &nbsp; <span class="fa fa-close" style="color: red;" (click)="removeItem(item)"></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="col-3" style="margin-top: 10px;">
+                  <button class="btn btn-primary app-btn cont-btn-css" type="button">Continue</button>
                 </div>
               </div>
             </div>
