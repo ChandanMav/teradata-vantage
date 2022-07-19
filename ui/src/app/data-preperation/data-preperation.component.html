@@ -60,18 +60,20 @@
               (click)="restartProcess()">Re-Start</button>
           </div>
 
-          <div *ngIf="inprogress" class="d-flex justify-content-center text-center">
-            <div class="row">
-              <div class="col-12">
-                <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
-                  role="status"></div>
-              </div>
-              <div class="col-12">
-                <span class="wait">Please wait!</span>
-              </div>
+
+        </form>
+
+        <div *ngIf="inprogress" class="d-flex justify-content-center text-center">
+          <div class="row">
+            <div class="col-12">
+              <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
+                role="status"></div>
+            </div>
+            <div class="col-12">
+              <span class="wait">Please wait!</span>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -82,9 +84,8 @@
     <!--Download Report-->
 
 
-    <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger">{{errorMsg}} <span
-        *ngIf="!isTeradataConnectionAlive">&nbsp; Connect To  <a routerLink="/connection"
-          style="color: white;">Server</a></span></p>
+    <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger"><a routerLink="/connection"
+        style="color: darkred;">{{errorMsg}}</a></p>
 
     <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
       {{initRunMessage}}</p> -->
@@ -92,7 +93,6 @@
     <div *ngIf="initRunMessage != ''" class="pt-4">
       <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span>
       <div class="accordion accordion-flush" id="accordionAccordian">
-
         <div class="accordion-item card">
           <div class="accordion-header card-header" id="flush-headingOne">
             <h5 class="mb-0">
@@ -104,7 +104,7 @@
           </div>
           <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
             data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body">
+            <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start">
                 <div class="col-2  result-header">Row Count</div>
                 <div class="col-9 result-data">{{rowCount}}</div>
@@ -121,14 +121,23 @@
 
               <div class="row align-items-start">
                 <div class="col-2 result-header">Numerical Columns</div>
-                <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
+                <div *ngIf="ncols.length == 0; else ncolshowtemplate" class="col-9 result-data no-data">No Numerical
+                  Column found in the dataset</div>
+                <ng-template #ncolshowtemplate>
+                  <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
+                </ng-template>
+
               </div>
               <div class="row align-items-start">
                 <div class="col-2 result-header">Categorical Columns</div>
-                <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
+                <div *ngIf="ccols.length == 0; else ccolshowtemplate" class="col-9 result-data no-data">No Categorical
+                  Column found in the dataset</div>
+                <ng-template #ccolshowtemplate>
+                  <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
+                </ng-template>
               </div>
               <div class="row align-items-start">
-                <div class="col-10">
+                <div class="col-12 table-responsive">
                   <table class="table  table-sm table-bordered">
                     <caption style="font-size: 13px; caption-side: top;">Sample Data</caption>
                     <thead class="thead-dark">
@@ -147,7 +156,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> <!-- End of Basic Info -->
 
         <div class="accordion-item card">
           <h2 class="accordion-header card-header" id="flush-headingTwo">
@@ -158,13 +167,12 @@
           </h2>
           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
             data-bs-parent="#accordionAccordian">
-            <div class="accordion-body  card-body">
+            <div class="accordion-body  card-body accordion-body-c">
               <div class="row align-items-start">
                 <div class="col-8 question-title">
                   {{question}}
                 </div>
-                <div class="col-4" style="font-size: 11px;">
-
+                <div class="col-4" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Y"
                       (click)="deleteColumn('Y')">
@@ -175,52 +183,107 @@
                       (click)="deleteColumn('N')">
                     <label class="form-check-label" for="inlineRadio2">No</label>
                   </div>
-
                 </div>
               </div>
               <div class="row align-items-start" *ngIf="isColumnSelectToDrop">
-                <div class="col-6">
-                  <label for="form-floating" style="font-size: 13px;">Select Column</label>
-                  <div class="">
+                <hr />
+                <div class="col-4">
+                  <label for="form-floating" class="text-muted p-1 label-c">Select Column To Drop</label>
+                  <div class="scrollbar-primary select-column">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                      (change)="selectColumnToDrop($event.target)" multiple size="3">
-                      <option *ngFor="let column of columns ">{{column}}</option>
+                      (change)="selectColumnToDrop($event.target)" size="8" style="color: black !important;">
+                      <option *ngFor="let column of columns " style="font-size: 12px !important;">{{column}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-4">
-                  <label style="font-size: 12px;">Selected Column(s)</label>
-                  <ul class="list-group" style="font-size: 10px;">
-                    <li class="list-group-item" style="color: #7500c0 !important;" *ngFor="let item of dropCols">
-                      {{item}} &nbsp; <span class="fa fa-close" style="color: red;" (click)="removeItem(item)"></span>
-                    </li>
-                  </ul>
+
+
+                  <label for="form-floating" class="text-muted p-1 label-c">Drop Columns List</label>
+                  <div class="table-responsive deleted-column scrollbar-primary">
+
+                    <table class="table caption-top table-borderless table-sm table-c1" *ngIf="dropCols.length != 0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Column</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of dropCols">
+                          <td>{{item}}</td>
+                          <span class="fa fa-close" style="color: red;" (click)="removeItem(item)"></span>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="form-floating" class="text-muted p-1 label-c">Remaining Columns</label>
+                  <div class="rlist scrollbar-primary">
+                    <ul class="list-group list-group-flush" *ngFor="let remItem of remainingCols">
+                      <li class="list-group-item rem-item">{{remItem}}</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div class="row align-items-start">
-                <div class="col-3" style="margin-top: 10px;">
-                  <button class="btn btn-primary app-btn cont-btn-css" type="button">Continue</button>
+                <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
+                  <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                    (click)="performUnivariateStatistics()" [disabled]="!isFeatureContinue">Continue</button>
+                </div>
+                <div class="col-9" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
+                  <label class="info label-c"> Exploratory Data Analysis started using Vantage MLE functions
+                    'UnivariateStatistics' and 'Unpivoting' ... </label>
                 </div>
               </div>
+              <div class="row d-flex justify-content-center text-center" *ngIf="isUnivariateStatisticsRunning">
+                <div class="col-12">
+                  <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
+                    role="status"></div>
+                </div>
+                <div class="col-12">
+                  <span class="wait">Please wait!</span>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="isUnivariateStatisticsResultAvailable">
+                <div class="col-12">
+                  <span class="">Exploratory Data Analysis completed. Please see below</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- End of Feature Selection-->
+
+        <div class="accordion-item card" *ngIf="isUnivariateStatisticsResultAvailable">
+          <h2 class="accordion-header card-header" id="flush-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              Exploratory Data Analysis
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+              Hello
             </div>
           </div>
         </div>
+
       </div>
-
-
-
-
     </div>
-
   </div>
   <div class="change-copy" *ngIf="initRunMessage === ''">
-    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 35px);">The</span> </div>
-    <div class="logo" aria-hidden="true"><img style="transform: translate(779px, 13px);"
+    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
+    <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
         src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(223px, 17px);">change</span></div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(477px, 234px);">you</span></div>
-    <div class="see" aria-hidden="true"><span style="transform: translate(612px, 116px);">see</span></div>
-    <p style="transform: translate(20px, 140px);">We celebrate progress, the change we bring, the value we create, the
+    <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
+    <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
+    <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
+    <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
       success we share and we refresh the familiar.</p>
   </div>
 </div>

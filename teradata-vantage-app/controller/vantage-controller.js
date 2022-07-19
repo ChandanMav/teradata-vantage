@@ -1,35 +1,18 @@
+var sanitize = require("mongo-sanitize");
 var _ = require("lodash");
 var async = require("async");
 var winston = require("./../config/winston");
-var sanitize = require("mongo-sanitize");
 var Error = require("../common/app.err.messages");
 var { getConnection, closeConnection } = require("../teradata-connection");
 var DAO = require("../dao/teradata-dao");
-var { anIgnoreError } = require("../common/util");
+var { anIgnoreError, getConfig } = require("../common/util");
 var { upload } = require("../config/multer-config");
 var fs = require("fs");
 var appRoot = require('app-root-path');
 var Errorcode = require("../common/error-code");
 var QB = require("./question-bank");
 
-getConfig = (req) => {
-  var serverInfo = sanitize(req.body);
-  if (!serverInfo || _.isEmpty(serverInfo)) {
-    return null;
-  }
-  let host = serverInfo.host;
-  let password = serverInfo.password;
-  let user = serverInfo.user;
 
-  let config = {
-    host,
-    log: "0",
-    password,
-    user,
-  };
-
-  return config;
-}
 
 //Test Teradata database
 exports.testConnection = (req, res, next) => {

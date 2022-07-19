@@ -1,16 +1,15 @@
 .q-section {
   background: linear-gradient(90deg, #a055f5 0%, #be82ff 50%, #dcafff 80%, #b455aa 100%);
-  height: 472px;
-  margin-left: 24%;
-  /* margin-bottom: -7px; */
-  width: 932px;
+    height: 533px;
+    margin-left: 24%;
+    width: 1037px;
 }
 
 .status-msg {
-  color: white !important;
-  font-size: 14px;
-  padding-top: 2px;
-  left: 45%;
+  color: ghostwhite !important;
+  font-size: 15px;
+  padding-top: 4px;
+  /* left: 45%; */
   position: absolute;
 }
 
@@ -27,15 +26,15 @@
 .form-pane {
   /* background-color: #e6dcff; */
   position: fixed;
-  margin-left: 3px;
-  width: 21vw;
+    margin-left: 3px;
+    width: 298px;
 }
 
 .data-page {
   /* background-image: url("../../assets/img/databg.jpg");
   background-repeat: no-repeat;
   height: 100vh; */
-  margin-top: 53px;
+  margin-top: 56px;
 }
 
 .form-label {
@@ -217,8 +216,8 @@
 
 .dropdown-form {
   background-color: aliceblue;
-  margin-top: 4px;
-  height: 63vh;
+    margin-top: 1px;
+    height: 421px;
 }
 
 
@@ -258,6 +257,41 @@
 }
 
 .question-title{
-    font-size: 11px !important;
-    color: #7500c0 !important;
+    font-size: 13px !important;
+    color: black !important;
+}
+
+.wait{
+  color: #7500c0;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+.no-data{
+  color: darkred !important;
+}
+
+.table-responsive{
+  max-height: 223px;
+}
+
+.rem-item{
+  padding: 4px !important;
+  font-size: 12px !important;
+}
+
+.accordion-body-c{
+  padding: 0.2rem 1.25rem !important;
+}
+.table-c1{
+  font-size: 12px !important;
+}
+
+.label-c{
+  font-size: 12px !important;
+  text-decoration: underline;
+}
+
+.select-column, .rlist, .deleted-column{
+  max-height: 154px !important;
+  overflow-y: auto;
 }

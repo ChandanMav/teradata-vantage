@@ -1,11 +1,10 @@
-
-
 .jumbotron {
   background-color: #a100ff;
   border-radius: 0px;
-  padding: 2rem 2rem;
+  padding: 3rem 8rem;
   color: white !important;
 }
+
 .home-title,
 .usecase-title {
   font-family: "Graphik Web", Arial, sans-serif;
@@ -15,13 +14,13 @@
 }
 
 .usecase-title {
-    font-size: 12px !important;
+  font-size: 13px !important;
     color: #7500c0 !important;
     font-weight: 600;
 }
 
-.vantage-text{
-  margin-top: -76px !important;
+.vantage-text {
+  margin-top: -73px !important;
   color: #a100ff !important;
   font-family: "Graphik Web", Arial, sans-serif;
   font-weight: bold;
@@ -29,27 +28,27 @@
   position: absolute;
 }
 
-.part-1{
-  font-size: 6px;
+.part-1 {
+  font-size: 7px;
   letter-spacing: 2px;
   margin-left: -28px;
 }
 
-.part-2{
-    letter-spacing: 1px;
-    font-size: 14px;
-    margin-left: -45px;
+.part-2 {
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin-left: -45px;
 
 }
 
-.card-img-top{
+.card-img-top {
   /* width: 355px !important; */
   height: 212px !important;
 }
 
-.usecase-desc{
-  font-size: 11px;
-  color: #7500c0;
-  font-family: "Graphik Web", Arial, sans-serif;
-  letter-spacing: 1px;
+.usecase-desc {
+  font-size: 12px;
+    color: #7500c0;
+    font-family: "Graphik Web", Arial, sans-serif;
+    letter-spacing: 1px;
 }

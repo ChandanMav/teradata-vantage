@@ -52,3 +52,126 @@
 {"level":"error","message":"************Teradata Connection failed! TypeError: Cannot read properties of null (reading 'close')","timestamp":"Mon, 18 Jul 2022 13:32:50"}
 {"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 19291775] [Teradata Database] [Error 8017] The UserId, Password or Account is invalid.\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).formatDatabaseError ErrorUtil.go:216\n at gosqldriver/teradatasql.(*teradataConnection).makeChainedDatabaseError ErrorUtil.go:232\n at gosqldriver/teradatasql.(*teradataConnection).makeDatabaseError ErrorUtil.go:244\n at gosqldriver/teradatasql.(*teradataConnection).processMessageSuccessOrError TeradataConnection.go:928\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:543\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571","timestamp":"Mon, 18 Jul 2022 13:32:53"}
 {"level":"error","message":"************Teradata Connection failed! TypeError: Cannot read properties of null (reading 'close')","timestamp":"Mon, 18 Jul 2022 13:32:53"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 19291788] [Teradata Database] [Error 8017] The UserId, Password or Account is invalid.\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).formatDatabaseError ErrorUtil.go:216\n at gosqldriver/teradatasql.(*teradataConnection).makeChainedDatabaseError ErrorUtil.go:232\n at gosqldriver/teradatasql.(*teradataConnection).makeDatabaseError ErrorUtil.go:244\n at gosqldriver/teradatasql.(*teradataConnection).processMessageSuccessOrError TeradataConnection.go:928\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:543\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571","timestamp":"Mon, 18 Jul 2022 13:34:25"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 19291789] [Teradata Database] [Error 8017] The UserId, Password or Account is invalid.\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).formatDatabaseError ErrorUtil.go:216\n at gosqldriver/teradatasql.(*teradataConnection).makeChainedDatabaseError ErrorUtil.go:232\n at gosqldriver/teradatasql.(*teradataConnection).makeDatabaseError ErrorUtil.go:244\n at gosqldriver/teradatasql.(*teradataConnection).processMessageSuccessOrError TeradataConnection.go:928\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:543\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571","timestamp":"Mon, 18 Jul 2022 13:34:29"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 19291797] [Teradata Database] [Error 8017] The UserId, Password or Account is invalid.\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).formatDatabaseError ErrorUtil.go:216\n at gosqldriver/teradatasql.(*teradataConnection).makeChainedDatabaseError ErrorUtil.go:232\n at gosqldriver/teradatasql.(*teradataConnection).makeDatabaseError ErrorUtil.go:244\n at gosqldriver/teradatasql.(*teradataConnection).processMessageSuccessOrError TeradataConnection.go:928\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:543\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571","timestamp":"Mon, 18 Jul 2022 13:35:17"}
+{"level":"error","message":"500 - sanitize is not defined - /api/databases - POST - ::1","timestamp":"Tue, 19 Jul 2022 16:25:55"}
+{"level":"error","message":"500 - sanitize is not defined - /api/databases - POST - ::1","timestamp":"Tue, 19 Jul 2022 16:25:55"}
+{"level":"error","message":"500 - _ is not defined - /api/databases - POST - ::1","timestamp":"Tue, 19 Jul 2022 16:26:32"}
+{"level":"error","message":"500 - _ is not defined - /api/databases - POST - ::1","timestamp":"Tue, 19 Jul 2022 16:26:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:49:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:49:33"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:34"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 16:49:34"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:34"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:49:34"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 16:49:34"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:31"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:58:31"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 16:58:32"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Tue, 19 Jul 2022 18:15:26"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Tue, 19 Jul 2022 18:15:28"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Tue, 19 Jul 2022 18:22:59"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Tue, 19 Jul 2022 18:23:00"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:56"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:25:56"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 18:25:57"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:34"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:34:34"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:34"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:34:34"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 18:34:35"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 19:04:07"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:28:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:54"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 19:28:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:28:54"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 19:28:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 19:39:42"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:43"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 19:39:43"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:43"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 19:39:43"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 19:39:43"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 20:02:17"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:18"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 20:02:18"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:18"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 20:02:18"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 20:02:18"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 21:59:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:55"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 21:59:55"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:55"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 21:59:55"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 21:59:55"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Tue, 19 Jul 2022 22:22:53"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:54"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Tue, 19 Jul 2022 22:22:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:54"}
+{"level":"error","timestamp":"Tue, 19 Jul 2022 22:22:54"}
+{"level":"error","message":null,"timestamp":"Tue, 19 Jul 2022 22:22:54"}

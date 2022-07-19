@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Connection } from '../shared/connection';
 import { Constants } from '../config/constants';
 import { AppService } from './common/app.service';
+import { CommaSeperatedPipe } from '../pipes/comma-seperated.pipe';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -50,8 +51,20 @@ export class VantageService {
 
   public init(connection: Connection, db: String, basetable: String, col: String): Observable<any> {
     let body = { ...connection, db, basetable, col }
-    console.log(body);
+    //console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/init', body, httpOptions)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );;
+
+  }
+
+  public performUnivariateStatistics(connection: Connection, db: String, basetable: String, col: String, remainingCols: string[], allCols: string[]): Observable<any> {
+    let commaSeperatedPipe = new CommaSeperatedPipe();
+    let body = { ...connection, db, basetable, dep_col: col, allCols: commaSeperatedPipe.transform(allCols), remainingCols: commaSeperatedPipe.transform(remainingCols) }
+    //console.log(body);
+    return this.http.post(this.rootURL + '/api/vantage/question/1', body, httpOptions)
       .pipe(
         retry(1),
         catchError((error) => this.appService.handleError(error))

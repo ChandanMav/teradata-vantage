@@ -1,4 +1,6 @@
 var TeradataExceptions = require("teradata-nodejs-driver/teradata-exceptions");
+var sanitize = require("mongo-sanitize");
+var _ = require("lodash");
 
 exports.getTimeStamp = () => {
   const dateObject = new Date();
@@ -78,3 +80,24 @@ exports.anIgnoreError = (error) => {
     return false;
   }
 };
+
+
+
+exports.getConfig = (req) => {
+  var serverInfo = sanitize(req.body);
+  if (!serverInfo || _.isEmpty(serverInfo)) {
+    return null;
+  }
+  let host = serverInfo.host;
+  let password = serverInfo.password;
+  let user = serverInfo.user;
+
+  let config = {
+    host,
+    log: "0",
+    password,
+    user,
+  };
+
+  return config;
+}

@@ -8,7 +8,7 @@
       <div class="container">
         <p class="text-center font-weight-bold connection-form-title">Connection Details</p>
         <p *ngIf="message != ''" class="d-flex status-msg justify-content-center" [ngClass]="conn_status ? 'text-success' : 'text-danger'">{{message}}</p>
-        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center success-status-msg"> Proceed to Model Build</p>
+        <p  *ngIf="conn_status" class="d-flex status-msg justify-content-center success-status-msg"> Proceed to Model Building</p>
 
       </div>
       <form class="row g-1" [formGroup]="frmRegister" (ngSubmit)="testServerConnection(frmRegister.value)" [ngClass]="conn_status ? 'form-disabled' : ''">

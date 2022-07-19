@@ -32,11 +32,16 @@
 .form-pane{
   background-color: #e6dcff;
   height: 406px;
+  margin-top: 98px !important;
+  margin-left: 34px;
 }
 
 .conn-page{
   background-image: url("../../assets/img/bg4.jpg");
-  height: 86vh !important;
+
+    background-repeat: no-repeat;
+    height: 585px !important;
+    width: 1237px;
 }
 
 .cont-btn{
@@ -44,8 +49,11 @@
 }
 
 .connection-form-title{
-  font-family: "Graphik Web", Arial, sans-serif;
-  color: #7500c0 !important;
+    font-family: "Graphik Web", Arial, sans-serif;
+    color: #7500c0 !important;
+    font-weight: 700;
+    /* line-height: 18px; */
+    letter-spacing: 1px;
 }
 
 .wait{

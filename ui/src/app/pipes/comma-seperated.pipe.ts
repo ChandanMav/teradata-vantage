@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CommaSeperatedPipe implements PipeTransform {
 
-  transform(value: String[], seperator: String = ","): String {
+  transform(value: string[], seperator: String = ","): String {
     let s = "";
     if (!value) {
       return s;
@@ -13,10 +13,10 @@ export class CommaSeperatedPipe implements PipeTransform {
 
     for (let i = 0; i < value.length; i++) {
       if (i === value.length - 1) {
-        s = s + value[i];
+        s = s.trim() + value[i].trim();
         break;
       }
-      s = s + value[i] + ", "
+      s = s + value[i].trim() + ","
     }
 
     return s;
