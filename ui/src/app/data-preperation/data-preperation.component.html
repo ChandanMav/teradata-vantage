@@ -316,6 +316,7 @@
           </div>
         </div> <!-- End of Exploratory Analysis-->
 
+        <!-- Start Of Automated Data Transfer -->
         <!--Start of Numerical to Categorical Column-->
         <div class="accordion-item card container" *ngIf="isAutomatedDT">
           <h2 class="accordion-header card-header" id="flush-headingFour">
@@ -344,10 +345,12 @@
                   </div>
                 </div>
               </div>
+              <hr *ngIf="isNumericToCategorical" />
               <div class="row" *ngIf="isNumericToCategorical">
                 <div class="col-7">
-                  <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column For Categorical Conversion</label>
-                  <div class="scrollbar-primary select-column">
+                  <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column For Categorical
+                    Conversion</label>
+                  <div class="">
                     <div class="table-responsive fixTableHead ">
                       <table class="table  table-sm table-bordered">
                         <thead class="thead-dark">
@@ -358,10 +361,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let column of remainingNcols" class="result-data">
-                            <td> {{column}}</td>
-                            <td> {{top5data | extactData : column | commaSeperated}} </td>
-                            <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" (change)="onNumericalCheckBoxSelect(column, $event.target)"></td>
+                          <tr *ngFor="let temp of tempRemainingNcols" class="result-data">
+                            <td> {{temp.name}}</td>
+                            <td> {{top5data | extactData : temp.name }} </td>
+                            <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+                                (change)="onNumericalCheckBoxSelect(temp.name, $event.target)" [checked]="temp.checked">
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -372,7 +377,8 @@
                 <div class="col-5">
                   <label for="form-floating" class="text-muted p-1 label-c">Selected Numerical Columns</label>
                   <div class="table-responsive deleted-column scrollbar-primary">
-                    <table class="table caption-top table-borderless table-sm table-c1" *ngIf="selectedNColumnsForConversionList.length != 0">
+                    <table class="table caption-top table-borderless table-sm table-c1"
+                      *ngIf="selectedNColumnsForConversionList.length != 0">
                       <thead>
                         <tr>
                           <th scope="col">Column</th>
@@ -388,25 +394,74 @@
                     </table>
                   </div>
                 </div>
+                <hr />
+                <div class="row align-items-start" style="padding-top: 3px;">
+                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                      (click)="performNumericalToCategorical()"
+                      [disabled]="selectedNColumnsForConversionList.length === 0">Continue</button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
+        <!--End of Numerical to Categorical Column-->
 
 
-         <!--End of Numerical to Categorical Column-->
+        <!-- End of Automated Data Transfer -->
 
+        <!-- Start of Manual Data Transform-->
+        <div class="accordion-item card container" *ngIf="isManualDT">
+          <h2 class="accordion-header card-header" id="flush-collapseFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+              Manual Data Transformation
+            </button>
+          </h2>
+          <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-collapseFive"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+
+              <div class="row align-items-start question-section">
+                <div class="col-8 question-title">
+                  {{questions.q4.qname}}
+                </div>
+                <div class="col-4" style="font-size: 13px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="Y"
+                      (click)="performManualDT('Y')">
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                  </div> &nbsp;&nbsp;
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="N"
+                      (click)="performManualDT('N')">
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-12">
+                  <div for="form-floating" class="fs-4 fw-semibold fw-primary p-4 text-center" style="color: #7500c0;">
+                    {{manualDataTransformationMessage}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
+    <div class="change-copy" *ngIf="initRunMessage === ''">
+      <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
+      <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
+          src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
+      <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
+      <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
+      <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
+      <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
+        success we share and we refresh the familiar.</p>
+    </div>
   </div>
-  <div class="change-copy" *ngIf="initRunMessage === ''">
-    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
-    <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
-        src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
-    <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
-    <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
-      success we share and we refresh the familiar.</p>
-  </div>
-</div>

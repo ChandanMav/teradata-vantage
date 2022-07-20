@@ -48,6 +48,7 @@ export class DataPreperationComponent
   isUnivariateStatisticsRunning: boolean = false;
   isUnivariateStatisticsResultAvailable: boolean = false;
   isAutomatedDT: boolean = false;
+  isManualDT: boolean = false;
   univariateStatisticsResult = [];
   univariateStatisticsResultAttr: string[] = [];
   baseTable: string = "";
@@ -56,6 +57,9 @@ export class DataPreperationComponent
   remainingCCols: string[] = [];
   isNumericToCategorical: boolean = false;
   selectedNColumnsForConversionList: string[] = [];
+  tempRemainingNcols: any[] = [];
+  manualDataTransformationMessage = "";
+  manualDataTransformDecision:boolean = false;
 
   constructor(
     private router: Router,
@@ -82,17 +86,14 @@ export class DataPreperationComponent
     delete state['navigationId'];
     this.config = state;
 
-    //console.log(this.config);
     this.vantageService.getDatabases(this.config).subscribe({
       next: (response) => {
-        //console.log(response);
         this.errorMsg = '';
         this.isTeradataConnectionAlive = true;
         this.databases = response.databases;
         //this.database_bkp = response.database
       },
       error: (error) => {
-        //console.log(error);
         if (error.error_code === GlobalConstants.No_db_Session) {
           this.clear();
           this.isTeradataConnectionAlive = false;
@@ -118,7 +119,6 @@ export class DataPreperationComponent
         this.selectedColumn = '';
         this.vantageService.getTables(this.config, this.selectedDb).subscribe({
           next: (response) => {
-            // console.log(response);
             this.errorMsg = '';
             this.isTeradataConnectionAlive = true;
             this.tables = response.tables;
@@ -147,7 +147,6 @@ export class DataPreperationComponent
           .getColumns(this.config, this.selectedDb, this.selectedtable)
           .subscribe({
             next: (response) => {
-              //console.log(response);
               this.errorMsg = '';
               this.isTeradataConnectionAlive = true;
               this.columns = response.colums;
@@ -230,12 +229,10 @@ export class DataPreperationComponent
     switch (val) {
       case 'Y':
         this.addRemainingItem();
-        ///console.log('Yes Clicked');
         this.isColumnSelectToDrop = true;
         break;
 
       case 'N':
-        //console.log('No Clicked');
         this.isColumnSelectToDrop = false;
         this.dropCols = [];
         this.remainingCols = this.columns;
@@ -344,9 +341,8 @@ export class DataPreperationComponent
   performAutomatedDT = (val: String) => {
     switch (val) {
       case 'Y':
-        console.log('Yes Clicked');
         this.isAutomatedDT = true;
-
+        this.isManualDT = false;
         this.vantageService.getQuestion(2).subscribe({
           next: response => {
             let { question, option } = response.message;
@@ -359,25 +355,40 @@ export class DataPreperationComponent
             this.handleError(error);
           }
         });
-
         break;
-
       case 'N':
-        console.log('No Clicked');
         this.isAutomatedDT = false;
+        this.isManualDT = true;
+        this.vantageService.getQuestion(4).subscribe({
+          next: response => {
+            let { question, option } = response.message;
+            this.questions.q4 = {
+              qname: question,
+              options: option
+            }
+          },
+          error: error => {
+            this.handleError(error);
+          }
+        });
         break;
     }
-  };
+  }
 
   //Perform Numeric to Categorical
   performNumericToColumn = (val: string) => {
     switch (val) {
       case 'Y':
-        console.log('Yes Clicked');
         this.isNumericToCategorical = true;
+        //Prepare for checkbox two data modeling
+        let d = [];
+        for (let n = 0; n < this.remainingNcols.length; n++) {
+          let obj = { name: this.remainingNcols[n], checked: false }
+          d.push(obj);
+        }
+        this.tempRemainingNcols = d;
         break;
       case 'N':
-        console.log('No Clicked');
         this.isNumericToCategorical = false;
         break;
     }
@@ -403,6 +414,8 @@ export class DataPreperationComponent
         break;
       }
     }
+    this.toggleCheckedStatus(item, false);
+
   }
   onNumericalCheckBoxSelect = (val: string, target: any) => {
     let isChecked: boolean = target.checked;
@@ -411,7 +424,43 @@ export class DataPreperationComponent
     } else {
       this.removeNSelectedItem(val);
     }
+    this.toggleCheckedStatus(val, isChecked);
   }
+
+  toggleCheckedStatus = (val: any, isChecked: boolean) => {
+    for (let i = 0; i < this.tempRemainingNcols.length; i++) {
+      let { name, checked } = this.tempRemainingNcols[i]
+      if (name === val) {
+        this.tempRemainingNcols[i].checked = isChecked;
+        break;
+      }
+    }
+  }
+
+  performNumericalToCategorical = () => {
+    console.log("Performing");
+  }
+
+
+  //Perform Manual Data Transform
+  performManualDT = (val: String) => {
+    switch (val) {
+      case 'Y':
+        this.manualDataTransformDecision = true;
+        this.manualDataTransformationMessage = "Please re-run after manual Data Transformation, Thank You!"
+        break;
+      case 'N':
+        this.manualDataTransformDecision = false;
+        this.manualDataTransformationMessage = "Thank You!"
+        break;
+    }
+    setTimeout(() => {
+      this.router.navigate(['/'], {
+        relativeTo: this.activatedRoute,
+      });
+    }, 400000);
+  }
+
 
   //Get Remaining Numerical and Categorical Colums
   getRemainingCols = (type: string) => {
@@ -499,6 +548,10 @@ export class DataPreperationComponent
     this.remainingCCols = [];
     this.isNumericToCategorical = false;
     this.selectedNColumnsForConversionList = [];
+    this.tempRemainingNcols = [];
+    this.manualDataTransformationMessage = "";
+    this.manualDataTransformDecision = false;
+    this.isManualDT = false;
   };
 
   //Restart of Model Build

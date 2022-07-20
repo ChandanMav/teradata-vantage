@@ -4,3 +4,4 @@ exports.convertNumericalToCategorical = "Do you want to convert any Numeric Colu
 exports.basicNull = "Do you want to perform basic null value imputing using Median for Numeric columns and Mode for Categorical Columns?";
 exports.performAutomaticClustered = "Do you want to perform Automatic clustered null value imputing?"
 exports.performOutlier = "Do you want to perform Outlier Handling? "
+exports.performManualDataTransformation = "Do you want to perform manual Data Transformation"

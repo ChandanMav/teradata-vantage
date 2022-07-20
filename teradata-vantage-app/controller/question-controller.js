@@ -34,8 +34,17 @@ exports.getQuestion = (req, res, next) => {
       });
       break;
 
-      case 2:
+    case 2:
       question = QB.convertNumericalToCategorical;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
+    case 4:
+      question = QB.performManualDataTransformation;
       availableOptions = ["Y", "N"];
       res.status(200).send({
         Success: true,
@@ -314,7 +323,7 @@ exports.questionAnswer = (req, res, next) => {
                   name: QB.performAutomatedDataTransformation,
                   options: ["Y", "N"]
                 },
-                basetable : basetable
+                basetable: basetable
               };
 
               res.status(200).send({ success: true, message: result });
