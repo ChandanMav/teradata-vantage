@@ -76,15 +76,17 @@ export class DataPreperationComponent
     this.appService.dataprepPage.next(true);
   }
 
-
   //Get List of Database
   ngOnInit(): void {
-
-
-
     let state = history.state;
+
     delete state['navigationId'];
-    this.config = state;
+    //this.config = state;
+    this.config = {
+      host : "153.64.73.11",
+      user : "CDMTDF3",
+      password: "Migrate1234#"
+    };
 
     this.vantageService.getDatabases(this.config).subscribe({
       next: (response) => {

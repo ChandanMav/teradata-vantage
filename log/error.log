@@ -700,3 +700,86 @@
 {"level":"error","timestamp":"Thu, 21 Jul 2022 00:38:02"}
 {"level":"error","timestamp":"Thu, 21 Jul 2022 00:38:02"}
 {"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 00:38:02"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:31"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:12:31"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:12:32"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:16:44"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:45"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:16:45"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:45"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:16:45"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:16:45"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:20:18"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:20:18"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:20:19"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:27:25"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:26"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:27:26"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:26"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:27:26"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:27:26"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:49"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:30:49"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:49"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:30:49"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:30:50"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:26"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:38:26"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:38:27"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:28"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:38:28"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:28"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:38:28"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:38:28"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Thu, 21 Jul 2022 01:46:55"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Thu, 21 Jul 2022 01:46:56"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Thu, 21 Jul 2022 01:47:35"}
+{"level":"error","message":"************Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Hostname lookup failed for \n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*nameLookup).getAddresses CopDiscovery.go:95\n at gosqldriver/teradatasql.discoverCops CopDiscovery.go:177\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:154\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by lookup : no such host","timestamp":"Thu, 21 Jul 2022 01:47:36"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:33"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:52:33"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 01:52:34"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 01:52:34"}

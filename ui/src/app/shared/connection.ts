@@ -1,5 +1,5 @@
 export class Connection {
-  ip: string;
-  username: string;
+  host: string;
+  user: string;
   password: string;
 }
