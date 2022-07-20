@@ -17,6 +17,7 @@ import { VantageService } from './service/vantage.service';
 import { FileUploadService } from './service/file-upload.service';
 import { CommaSeperatedPipe } from './pipes/comma-seperated.pipe';
 import { JsonReaderPipe } from './pipes/json-reader.pipe';
+import { ExtactDataPipe } from './pipes/extact-data.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { JsonReaderPipe } from './pipes/json-reader.pipe';
     VantageHomeComponent,
     AppHomeComponent,
     CommaSeperatedPipe,
-    JsonReaderPipe
+    JsonReaderPipe,
+    ExtactDataPipe
   ],
   imports: [
     BrowserModule,

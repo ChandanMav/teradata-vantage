@@ -10,12 +10,7 @@ export class JsonReaderPipe implements PipeTransform {
       return [''];
     }
 
-    //console.log(value);
-    //console.log(keys);
-
     for (let key in keys) {
-      //console.log(key);
-      //console.log(value[keys[key]]);
       d.push(value[keys[key]]);
     }
 

@@ -5,6 +5,7 @@ import { AppService } from '../service/common/app.service';
 import { FileUploadService } from '../service/file-upload.service';
 import { VantageService } from '../service/vantage.service';
 import { Connection } from '../shared/connection';
+import { questions } from '../shared/question'
 
 @Component({
   selector: 'app-data-preperation',
@@ -38,15 +39,23 @@ export class DataPreperationComponent
   top5data: any[] = [];
   ncols: string[] = [];
   ccols: string[] = [];
-  question: any;
-  options: any;
 
+  questions: any = questions;
   isColumnSelectToDrop: boolean = false;
   dropCols: string[] = [];
   remainingCols: string[] = [];
   isFeatureContinue: boolean = false;
-  isUnivariateStatisticsRunning:boolean = false;
-  isUnivariateStatisticsResultAvailable:boolean = false;
+  isUnivariateStatisticsRunning: boolean = false;
+  isUnivariateStatisticsResultAvailable: boolean = false;
+  isAutomatedDT: boolean = false;
+  univariateStatisticsResult = [];
+  univariateStatisticsResultAttr: string[] = [];
+  baseTable: string = "";
+  dependentCol: string = "";
+  remainingNcols: string[] = [];
+  remainingCCols: string[] = [];
+  isNumericToCategorical: boolean = false;
+  selectedNColumnsForConversionList: string[] = [];
 
   constructor(
     private router: Router,
@@ -63,7 +72,12 @@ export class DataPreperationComponent
     this.appService.dataprepPage.next(true);
   }
 
+
+  //Get List of Database
   ngOnInit(): void {
+
+
+
     let state = history.state;
     delete state['navigationId'];
     this.config = state;
@@ -93,6 +107,7 @@ export class DataPreperationComponent
     });
   }
 
+  //Get List of Table and Columns
   changeDropdown(x: any, type: String) {
     switch (type) {
       case 'database':
@@ -124,6 +139,7 @@ export class DataPreperationComponent
         break;
       case 'table':
         this.selectedtable = x.value;
+        this.baseTable = this.selectedtable;
         this.columns = ['Select Column'];
         this.selectedColumn = '';
 
@@ -152,10 +168,12 @@ export class DataPreperationComponent
         break;
       case 'column':
         this.selectedColumn = x.value;
+        this.dependentCol = this.selectedColumn;
         break;
     }
   }
 
+  //Get Basic Info
   init = () => {
     this.inprogress = true;
     this.isTeradataConnectionAlive = true;
@@ -187,8 +205,14 @@ export class DataPreperationComponent
           this.ncols = ncols;
           this.ccols = ccols;
           this.trainsetsize = trainsetsize;
-          this.question = question.name;
-          this.options = question.options;
+
+          this.remainingNcols = this.ncols;
+          this.remainingCCols = this.ccols;
+
+          this.questions.q1 = {
+            qname: question.name,
+            options: question.options
+          }
         },
         error: (error) => {
           this.clear();
@@ -197,48 +221,10 @@ export class DataPreperationComponent
       });
   };
 
-  // On file Select
-  onChange(event: any) {
-    this.file = event.target.files[0];
-    this.filename = event.target.files[0].name;
-  }
 
-  upload = () => {
-    this.loading = !this.loading;
-    this.fileUploadService.upload(this.file).subscribe({
-      next: (data) => {
-        this.isFileUploadFailed = false;
-        this.loading = false;
-        this.message = data.message;
-        this.filename = 'Choose file';
-      },
-      error: (error) => {
-        this.isFileUploadFailed = true;
-        this.message = 'Not uploaded. Pls. retry with correct file!';
-        this.loading = false;
-        this.filename = 'Choose file';
-      },
-    });
-  };
 
-  clear = () => {
-    this.selectedDb = '';
-    this.selectedtable = '';
-    this.selectedColumn = '';
 
-    this.tables = ['Select Table'];
-    this.columns = ['Select Column'];
-
-    this.inprogress = false;
-    this.loading = false;
-    this.isFileUploadFailed = false;
-  };
-
-  restartProcess = () => {
-    this.clear();
-    this.initRunMessage = '';
-  };
-
+  //Delete Column
   deleteColumn = (val: String) => {
     this.isFeatureContinue = true;
     switch (val) {
@@ -253,6 +239,8 @@ export class DataPreperationComponent
         this.isColumnSelectToDrop = false;
         this.dropCols = [];
         this.remainingCols = this.columns;
+        this.remainingNcols = this.ncols;
+        this.remainingCCols = this.ccols;
         break;
     }
   };
@@ -283,41 +271,65 @@ export class DataPreperationComponent
   };
 
   addRemainingItem = () => {
-    let temp: string[] = [];
-    for (let i = 0; i < this.columns.length; i++) {
-      let matchFound = false;
-
-      for (let j = 0; j < this.dropCols.length; j++) {
-        if (this.columns[i] === this.dropCols[j]) {
-          matchFound = true;
-          break;
-        }
-      }
-
-      if (!matchFound) {
-        temp.push(this.columns[i]);
-      }
-
-      this.remainingCols = temp;
-    }
+    this.remainingCols = this.getRemainingCols("All");
+    this.remainingNcols = this.getRemainingCols("Num");
+    this.remainingCCols = this.getRemainingCols("Cat");
   };
 
+  /*
+   1. Delete the Column
+   2. Create Work Table
+   3. Change the base table
+   4. Perform Univariate Statistics
+  */
   performUnivariateStatistics = () => {
     this.isUnivariateStatisticsRunning = true;
+    //Get Key
+    let key: string = this.dropCols.length === 0 ? "N" : "Y";
+
+    // console.log("All Column List", this.columns)
+    // console.log("Drop Column List", this.dropCols);
+    // console.log("All remaining Column List", this.remainingCols);
+    // console.log("Remaining Numerical Column List", this.remainingNcols);
+    // console.log("Remaining Categorical Column List", this.remainingCCols);
+
     this.vantageService
       .performUnivariateStatistics(
         this.config,
         this.selectedDb,
-        this.selectedtable,
-        this.selectedColumn,
+        this.baseTable,
+        this.dependentCol,
         this.remainingCols,
-        this.columns
+        this.columns,
+        this.remainingNcols,
+        key
       )
       .subscribe({
-        next: (data) => {
+        next: (response) => {
           this.isUnivariateStatisticsRunning = false;
           this.isUnivariateStatisticsResultAvailable = true;
-          console.log(data);
+
+          let {
+            output,
+            question,
+            basetable
+          } = response.message;
+
+          this.baseTable = basetable;
+          this.univariateStatisticsResult = output;
+
+          //Get First Record to find out the attribute of json
+          let firstRecord = {};
+          if (output && output.length != 0) {
+            firstRecord = output[0];
+          }
+
+          this.univariateStatisticsResultAttr = Object.keys(firstRecord);
+
+          this.questions.q2 = {
+            qname: question.name,
+            options: question.options
+          }
         },
         error: (error) => {
           this.isUnivariateStatisticsRunning = false;
@@ -325,6 +337,174 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
+  };
+
+
+  //performAutomatedDT
+  performAutomatedDT = (val: String) => {
+    switch (val) {
+      case 'Y':
+        console.log('Yes Clicked');
+        this.isAutomatedDT = true;
+
+        this.vantageService.getQuestion(2).subscribe({
+          next: response => {
+            let { question, option } = response.message;
+            this.questions.q3 = {
+              qname: question,
+              options: option
+            }
+          },
+          error: error => {
+            this.handleError(error);
+          }
+        });
+
+        break;
+
+      case 'N':
+        console.log('No Clicked');
+        this.isAutomatedDT = false;
+        break;
+    }
+  };
+
+  //Perform Numeric to Categorical
+  performNumericToColumn = (val: string) => {
+    switch (val) {
+      case 'Y':
+        console.log('Yes Clicked');
+        this.isNumericToCategorical = true;
+        break;
+      case 'N':
+        console.log('No Clicked');
+        this.isNumericToCategorical = false;
+        break;
+    }
+  }
+
+  //Select Numerical Column that you would like to convert into Categorical
+  selectNColumnToCConversion = (x: any) => {
+    let isMatchFound = false;
+    for (let i = 0; i < this.selectedNColumnsForConversionList.length; i++) {
+      if (x === this.selectedNColumnsForConversionList[i]) {
+        isMatchFound = true;
+        break;
+      }
+    }
+    if (!isMatchFound) {
+      this.selectedNColumnsForConversionList.push(x);
+    }
+  };
+  removeNSelectedItem = (item: any) => {
+    for (let i = 0; i < this.selectedNColumnsForConversionList.length; i++) {
+      if (item === this.selectedNColumnsForConversionList[i]) {
+        this.selectedNColumnsForConversionList.splice(i, 1);
+        break;
+      }
+    }
+  }
+  onNumericalCheckBoxSelect = (val: string, target: any) => {
+    let isChecked: boolean = target.checked;
+    if (isChecked) {
+      this.selectNColumnToCConversion(val);
+    } else {
+      this.removeNSelectedItem(val);
+    }
+  }
+
+  //Get Remaining Numerical and Categorical Colums
+  getRemainingCols = (type: string) => {
+    let fullList = [];
+    let remainingItemInList = [];
+    switch (type) {
+      case "Num": {
+        fullList = this.ncols;
+        break;
+      }
+      case "Cat": {
+        fullList = this.ccols;
+        break;
+      }
+      default:
+        fullList = this.columns
+    }
+
+    for (let n = 0; n < fullList.length; n++) {
+      let matchFound = false;
+      for (let d = 0; d < this.dropCols.length; d++) {
+        if (fullList[n] === this.dropCols[d]) {
+          matchFound = true;
+          break;
+        }
+      }
+      if (!matchFound) {
+        remainingItemInList.push(fullList[n])
+      }
+    }
+
+    return remainingItemInList;
+  }
+
+  // Configuration File upload
+  onChange(event: any) {
+    this.file = event.target.files[0];
+    this.filename = event.target.files[0].name;
+  }
+
+  //Upload the config.txt file
+  upload = () => {
+    this.loading = !this.loading;
+    this.fileUploadService.upload(this.file).subscribe({
+      next: (data) => {
+        this.isFileUploadFailed = false;
+        this.loading = false;
+        this.message = data.message;
+        this.filename = 'Choose file';
+      },
+      error: (error) => {
+        this.isFileUploadFailed = true;
+        this.message = 'Not uploaded. Pls. retry with correct file!';
+        this.loading = false;
+        this.filename = 'Choose file';
+      },
+    });
+  };
+
+  //Clear the State
+  clear = () => {
+    this.selectedDb = '';
+    this.selectedtable = '';
+    this.selectedColumn = '';
+
+    this.tables = ['Select Table'];
+    this.columns = ['Select Column'];
+
+    this.inprogress = false;
+    this.loading = false;
+    this.isFileUploadFailed = false;
+    this.questions = questions;
+    this.isColumnSelectToDrop = false;
+    this.dropCols = [];
+    this.remainingCols = [];
+    this.isFeatureContinue = false;
+    this.isUnivariateStatisticsRunning = false;
+    this.isUnivariateStatisticsResultAvailable = false;
+    this.isAutomatedDT = false;
+    this.univariateStatisticsResult = [];
+    this.univariateStatisticsResultAttr = [];
+    this.baseTable = "";
+    this.dependentCol = "";
+    this.remainingNcols = [];
+    this.remainingCCols = [];
+    this.isNumericToCategorical = false;
+    this.selectedNColumnsForConversionList = [];
+  };
+
+  //Restart of Model Build
+  restartProcess = () => {
+    this.clear();
+    this.initRunMessage = '';
   };
 
   //Error Handling

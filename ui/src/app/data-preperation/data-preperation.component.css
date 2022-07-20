@@ -5,6 +5,12 @@
     width: 1037px;
 }
 
+hr{
+  padding: 0px !important;
+    margin: 3px !important;
+    color: #7500c0 !important;
+}
+
 .status-msg {
   color: ghostwhite !important;
   font-size: 15px;
@@ -203,6 +209,8 @@
   font-family: "Graphik Web", Arial, sans-serif;
   color: #7500c0 !important;
   padding-left: 20px;
+  padding-top: 10px !important;
+
 }
 
 .upload-msg {
@@ -238,10 +246,11 @@
 
 .fa-style {
   position: absolute;
-  right: 26px;
-  margin-top: -16px;
-  color: white;
-  font-size: 13px;
+  right: 17px;
+  margin-top: 0px;
+  color: #7500c0;
+  font-size: 21px;
+  z-index: 9999;
 }
 
 .accordion-button{
@@ -271,7 +280,7 @@
 }
 
 .table-responsive{
-  max-height: 223px;
+  max-height: 273px;
 }
 
 .rem-item{
@@ -294,4 +303,44 @@
 .select-column, .rlist, .deleted-column{
   max-height: 154px !important;
   overflow-y: auto;
+}
+
+.label-l{
+  color: #7500c0 !important;
+    font-weight: bold;
+    font-size: 11px !important;
+}
+
+.next-action{
+  margin-top: 18px;
+    margin-bottom: 10px;
+
+}
+
+.question-section{
+  font-weight: 700 !important;
+}
+
+.data-header{
+  font-size: 11px !important;
+}
+
+
+.fixTableHead {
+  overflow-y: auto;
+}
+.fixTableHead thead th {
+  position: sticky;
+  top: 0;
+}
+.fixTableHead table {
+  border-collapse: collapse;
+}
+.fixTableHead table th,td {
+}
+.fixTableHead table th {
+  background: #7500c0;
+  color: white;
+  font-size: 10px;
+  border: 2px solid #7500c0;
 }

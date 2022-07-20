@@ -9,6 +9,7 @@ var { anIgnoreError, getConfig } = require("../common/util");
 var QB = require("./question-bank");
 var Errorcode = require("../common/error-code");
 var createError = require("http-errors");
+var sample = require("../common/sample")
 
 exports.getQuestion = (req, res, next) => {
   let questionID = req.params.id;
@@ -26,6 +27,15 @@ exports.getQuestion = (req, res, next) => {
   switch (parseInt(questionID)) {
     case 1:
       question = QB.removeAnyColumn;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
+      case 2:
+      question = QB.convertNumericalToCategorical;
       availableOptions = ["Y", "N"];
       res.status(200).send({
         Success: true,
@@ -110,6 +120,29 @@ exports.questionAnswer = (req, res, next) => {
 
     allCols = allCols.split(",");
 
+    let nCols = requestBody.nCols;
+    if (!nCols) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.NO_SESSION,
+      });
+      return;
+    }
+    nCols = nCols.split(",");
+
+    // let cCols = requestBody.cCols;
+    // console.log(requestBody.cCols);
+    // if (!cCols) {
+    //   res.status(503).send({
+    //     Success: false,
+    //     error_code: Errorcode.Missing_Required_Input,
+    //     message: Error.NO_SESSION,
+    //   });
+    //   return;
+    // }
+    // cCols = cCols.split(",");
+
     switch (parseInt(questionID)) {
       case 1:
         let remainingCols = requestBody.remainingCols;
@@ -121,7 +154,7 @@ exports.questionAnswer = (req, res, next) => {
           });
           return;
         }
-        remainingCols = remainingCols.split(",");       
+        remainingCols = remainingCols.split(",");
 
         let connection = getConnection(config);
         if (!connection) {
@@ -131,10 +164,21 @@ exports.questionAnswer = (req, res, next) => {
           return;
         }
 
+        let key = requestBody.key;
+
+        if (!key) {
+          res.status(503).send({
+            Success: false,
+            error_code: Errorcode.Missing_Required_Input,
+            message: Error.NO_SESSION,
+          });
+          return;
+        }
+
         async.waterfall(
           [
             (callback) => {
-              //Drop the table
+              //Drop the existing base table (_work suffix)              
               let query = `DROP TABLE ${db}.${basetable}_work`;
               DAO.dropTable(connection, query, (err, data) => {
                 if (data) {
@@ -145,16 +189,22 @@ exports.questionAnswer = (req, res, next) => {
               });
             }, //End of droping work table
 
-            //Create Work Table
+            //Create new Work Table
             (data, callback) => {
-              let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
-              DAO.createTable(connection, query, (err, data) => {
-                if (data) {
-                  callback(null, data);
-                } else {
-                  callback(true, err);
-                }
-              });
+              if (key === 'Y') {
+                let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
+                DAO.createTable(connection, query, (err, data) => {
+                  if (data) {
+                    basetable = `${basetable}_work`;
+                    callback(null, data);
+                  } else {
+                    callback(true, err);
+                  }
+                });
+              } else {
+                basetable = `${basetable}`;
+                callback(null, data);
+              }
             }, //End of droping work table
 
             //Run Univariate Result
@@ -193,8 +243,6 @@ exports.questionAnswer = (req, res, next) => {
                     }
                   });
                 }, //End of droping basic_ table
-
-                
                 //DROP quantiles_ table if any
                 (result, innerCB) => {
                   if (!result) {
@@ -248,16 +296,28 @@ exports.questionAnswer = (req, res, next) => {
 
               ], (err, result) => {
                 winston.error(err);
-                callback(null, data);
+                callback(null, null);
               })
             }
           ],
           (error, result) => {
             if (error) {
               winston.error(error);
-              res.status(500).send({ message: error });
+              res
+                .status(500)
+                .send({ Success: false, error_code: Errorcode.Error_500, message: error });
             } else {
-              res.status(200).send({ message: result });
+
+              let result = {
+                output: sample.data,
+                question: {
+                  name: QB.performAutomatedDataTransformation,
+                  options: ["Y", "N"]
+                },
+                basetable : basetable
+              };
+
+              res.status(200).send({ success: true, message: result });
             }
           }
         );
