@@ -16,7 +16,6 @@ const httpOptions = {
 })
 export class VantageService {
 
-
   constructor(private http: HttpClient, private appService: AppService) { }
 
   rootURL = this.appService.rootURL;
@@ -67,21 +66,87 @@ export class VantageService {
       nCols: commaSeperatedPipe.transform(nCols),
       key
     }
-    console.log(body);
+    //console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/question/1', body, httpOptions)
       .pipe(
         retry(1),
         catchError((error) => this.appService.handleError(error))
-      );;
+      );
 
   }
 
-  public getQuestion(qid:number): Observable<any> {
-    return this.http.get(this.rootURL + '/api/vantage/question/'+qid)
+  convertNumericalToCategorical(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+    let body = {
+      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+    }
+
+    console.log(body);
+    return this.http.post(this.rootURL + '/api/vantage/numuric/conversion', body, httpOptions)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );
+  }
+
+
+  performOutlierHandlingSrvc(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+    let body = {
+      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+    }
+
+    console.log(body);
+    return this.http.post(this.rootURL + '/api/vantage/outlier', body, httpOptions)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );
+  }
+
+  performClusterNullValueImputingSrvc(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+    let body = {
+      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+    }
+
+    console.log(body);
+    return this.http.post(this.rootURL + '/api/vantage/clusternullvalue', body, httpOptions)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );
+  }
+
+  performBasicNullImputingServc(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+    let body = {
+      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+    }
+
+    console.log(body);
+    return this.http.post(this.rootURL + '/api/vantage/basicnullvalue', body, httpOptions)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );
+  }
+
+  getAllAutomatedDTSteps(): Observable<any> {
+    return this.http.get(this.rootURL + '/api/vantage/automateddt/steps')
       .pipe(
         retry(1),
         catchError((error) => this.appService.handleError(error))
       );;
   }
+
+
+
+
+  public getQuestion(qid: number): Observable<any> {
+    return this.http.get(this.rootURL + '/api/vantage/question/' + qid)
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );;
+  }
+
+
 
 }

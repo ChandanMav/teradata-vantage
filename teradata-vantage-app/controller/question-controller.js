@@ -13,17 +13,14 @@ var sample = require("../common/sample")
 
 exports.getQuestion = (req, res, next) => {
   let questionID = req.params.id;
-
   let question;
   let availableOptions;
-
   if (!questionID) {
     res
       .status(500)
       .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
     return;
   }
-
   switch (parseInt(questionID)) {
     case 1:
       question = QB.removeAnyColumn;
@@ -341,3 +338,68 @@ exports.questionAnswer = (req, res, next) => {
     return next(createError(500));
   }
 };
+
+
+exports.numericToCategoricalConversion = (req, res, next) => {
+  availableOptions = ["Y", "N"];
+  let question = {
+    name: QB.basicNull,
+    options: availableOptions
+  }
+  res.status(200).send({
+    Success: true,
+    message: { question }
+  });
+}
+
+
+exports.basicNullValueImputing = (req, res, next) => {
+  availableOptions = ["Y", "N"];
+  let question = {
+    name: QB.clusterNullValueImputing,
+    options: availableOptions
+  }
+  res.status(200).send({
+    Success: true,
+    message: { question }
+  });
+}
+
+exports.clusterNullValueImputing = (req, res, next) => {
+  availableOptions = ["Y", "N"];
+  let question = {
+    name: QB.outlierHandling,
+    options: availableOptions
+  }
+  res.status(200).send({
+    Success: true,
+    message: { question }
+  });
+}
+
+exports.outlierHandling = (req, res, next) => {
+  availableOptions = ["Y", "N"];
+  let question = {
+    name: null,
+    options: availableOptions
+  }
+  res.status(200).send({
+    Success: true,
+    message: { question }
+  });
+}
+
+exports.getAllAutomatedDTSteps = (req, res, next) => {
+
+  let questions = [
+    { name: "Conversion any Numeric Column to Categorical", fn: "ConvertToCategorical" },
+    { name: "Basic null value imputing using Median for Numeric columns and Mode for Categorical Columns", fn: "MedianMode" },
+    { name: "Automated clustered null value imputing", fn: "Grouping" },
+    { name: "Outlier Handling", fn: "OutlierFilter" }
+  ]
+
+  res.status(200).send({
+    Success: true,
+    message: { questions }
+  });
+}

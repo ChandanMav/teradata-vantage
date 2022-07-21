@@ -22,5 +22,25 @@ export const questions = {
     "q6" : {
       "qname" : "",
       "options" : ""
+    },
+    "q7" : {
+      "qname" : "",
+      "options" : ""
+    },
+    "q8" : {
+      "qname" : "",
+      "options" : ""
+    },
+    "q9" : {
+      "qname" : "",
+      "options" : ""
+    },
+    "q10" : {
+      "qname" : "",
+      "options" : ""
+    },
+    "q11" : {
+      "qname" : "",
+      "options" : ""
     }
   };

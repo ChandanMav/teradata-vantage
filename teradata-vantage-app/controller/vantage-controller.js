@@ -137,6 +137,7 @@ exports.init = (req, res, next) => {
 
   let path = `${appRoot}/${process.env.SETTING_FILE_LOCATION}/config.txt`;
   if (!fs.existsSync(path)) {
+    winston.error(Error.CONFIG_FILE_MISSING);
     res
       .status(500)
       .send({ Success: false, error_code: Errorcode.No_Config_File, message: Error.CONFIG_FILE_MISSING });
@@ -179,6 +180,7 @@ exports.init = (req, res, next) => {
   let col = initParams.col;
 
   if (!db || !basetable || !col) {
+    winston.error(Error.MISSING_REQUIRED_INPUT);
     res
       .status(500)
       .send({ Success: false, error_code: Errorcode.Missing_Required_Input, message: Error.MISSING_REQUIRED_INPUT });
@@ -204,6 +206,7 @@ exports.init = (req, res, next) => {
 
   //console.log(config);
   if (!config) {
+    winston.error(Error.ERR_NO_AUTH);
     res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
     return;
   }
@@ -269,9 +272,6 @@ exports.init = (req, res, next) => {
                   categCols.push(colName);
                 }
               }
-
-              //console.log("numericCols ", numericCols)
-              //console.log("categCols ", categCols)
               waterfallCb(null, null);
             },
           ],

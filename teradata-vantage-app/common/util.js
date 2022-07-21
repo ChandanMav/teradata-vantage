@@ -71,7 +71,7 @@ exports.anIgnoreError = (error) => {
   ];
 
   if (error instanceof TeradataExceptions.OperationalError) {
-    if (ignoreErrorCodes.includes(getErrorCode(error.message))) {
+    if (ignoreErrorCodes.includes(this.getErrorCode(error.message))) {
       return true;
     } else {
       return false;

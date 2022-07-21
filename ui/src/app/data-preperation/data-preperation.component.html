@@ -122,7 +122,7 @@
               <div class="row align-items-start">
                 <div class="col-2 result-header">Numerical Columns</div>
                 <div *ngIf="ncols.length == 0; else ncolshowtemplate" class="col-9 result-data no-data">No Numerical
-                  Column found in the dataset</div>
+                  Column in the initial dataset</div>
                 <ng-template #ncolshowtemplate>
                   <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
                 </ng-template>
@@ -131,7 +131,7 @@
               <div class="row align-items-start">
                 <div class="col-2 result-header">Categorical Columns</div>
                 <div *ngIf="ccols.length == 0; else ccolshowtemplate" class="col-9 result-data no-data">No Categorical
-                  Column found in the dataset</div>
+                  Column in the initail dataset</div>
                 <ng-template #ccolshowtemplate>
                   <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
                 </ng-template>
@@ -175,12 +175,12 @@
                 </div>
                 <div class="col-4" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Y"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="Y"
                       (click)="deleteColumn('Y')">
                     <label class="form-check-label" for="inlineRadio1">Yes</label>
                   </div> &nbsp;&nbsp;
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="N"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="N"
                       (click)="deleteColumn('N')">
                     <label class="form-check-label" for="inlineRadio2">No</label>
                   </div>
@@ -253,7 +253,6 @@
                     </div>
                     <div class="wait" style="padding-top: 8px;">Please wait!</div>
                   </div>
-
                 </div>
                 <div class="col-10" style="margin-top: 7px;" *ngIf="isUnivariateStatisticsResultAvailable">
                   <label class="info label-l "> Below are the results of the Univariate Statistics on the numeric
@@ -299,14 +298,14 @@
                     </div>
                     <div class="col-4" style="font-size: 13px;">
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3"
                           value="Y" (click)="performAutomatedDT('Y')">
-                        <label class="form-check-label" for="inlineRadio1">Yes</label>
+                        <label class="form-check-label" for="inlineRadio3">Yes</label>
                       </div> &nbsp;&nbsp;
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
                           value="N" (click)="performAutomatedDT('N')">
-                        <label class="form-check-label" for="inlineRadio2">No</label>
+                        <label class="form-check-label" for="inlineRadio4">No</label>
                       </div>
                     </div>
                   </div>
@@ -317,7 +316,6 @@
         </div> <!-- End of Exploratory Analysis-->
 
         <!-- Start Of Automated Data Transfer -->
-        <!--Start of Numerical to Categorical Column-->
         <div class="accordion-item card container" *ngIf="isAutomatedDT">
           <h2 class="accordion-header card-header" id="flush-headingFour">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -328,20 +326,65 @@
           <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
             data-bs-parent="#accordionAccordian">
             <div class="accordion-body card-body accordion-body-c">
+              <div class="row align-items-start">
+                <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
+                  class="text-muted p-1 label-c">Below is the Automated Data Transformation using Vantage MLE Funtion
+                  would Perform</label>
+                <div class="col-12 table-responsive fixTableHead ">
+                  <table class="table table-sm table-bordered">
+                    <thead class="thead-dark">
+                      <tr class="result-header">
+                        <th>Tranformation Title</th>
+                        <th>Vantage Function</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let step of allAutomatedDTSteps" class="result-data">
+                        <td>{{step.name || "Unknown"}}</td>
+                        <td>{{step.fn || "Unknown"}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12">
+                  <div class="row align-items-start" style="padding-top: 3px;">
+                    <div class="col-12 text-center" style="margin-top: 6px; margin-bottom: 6px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                        (click)="automatedDTProceed()">Proceed</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Of Automated Data Transfer -->
+
+        <!--Start of Numerical to Categorical Column-->
+        <div class="accordion-item card container" *ngIf="isNumericToCategorical">
+          <h2 class="accordion-header card-header" id="flush-heading6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-heading6" aria-expanded="false" aria-controls="flush-heading6">
+              Numerical to Categorical Conversion
+            </button>
+          </h2>
+          <div id="flush-heading6" class="accordion-collapse collapse" aria-labelledby="flush-heading6"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start question-section">
                 <div class="col-8 question-title">
-                  {{questions.q3.qname}}
+                  {{questions.q6.qname}}
                 </div>
                 <div class="col-4" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="Y"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio5" value="Y"
                       (click)="performNumericToColumn('Y')">
-                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                    <label class="form-check-label" for="inlineRadio5">Yes</label>
                   </div> &nbsp;&nbsp;
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="N"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio6" value="N"
                       (click)="performNumericToColumn('N')">
-                    <label class="form-check-label" for="inlineRadio2">No</label>
+                    <label class="form-check-label" for="inlineRadio6">No</label>
                   </div>
                 </div>
               </div>
@@ -371,7 +414,6 @@
                         </tbody>
                       </table>
                     </div>
-
                   </div>
                 </div>
                 <div class="col-5">
@@ -401,26 +443,224 @@
                       (click)="performNumericalToCategorical()"
                       [disabled]="selectedNColumnsForConversionList.length === 0">Continue</button>
                   </div>
-                </div>
 
+                  <div class="col-8" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                    <label class="info label-l" style="font-size: 9px;"> Conversion of continous/numerical column to
+                      categorical started using Vantage MLE function 'ConvertToCategorical' </label>
+                  </div>
+                  <div class="col-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="spinner-border text-primary spinner-border-sm float-left"
+                          style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                        </div>
+                        <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-10" style="margin-top: 7px;" *ngIf="isNumricalToCategoricalConversionDone">
+                    <label class="info label-l ">Conversion of continous/numerical column to categorical done! Please proceed for the next step as below.</label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <!--End of Numerical to Categorical Column-->
 
+        <!--Start of Null Value Imputing-->
+        <div class="accordion-item card container" *ngIf="isNumricalToCategoricalConversionDone">
+          <h2 class="accordion-header card-header" id="flush-heading7">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-heading7" aria-expanded="false" aria-controls="flush-heading7">
+              Basic Null Value Imputing
+            </button>
+          </h2>
+          <div id="flush-heading7" class="accordion-collapse collapse" aria-labelledby="flush-heading7"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+              <div class="row align-items-start question-section">
+                <div class="col-8 question-title">
+                  {{questions.q7.qname}} <!-- Question comes in the Previous step-->
+                </div>
+                <div class="col-4" style="font-size: 13px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio7" value="Y"
+                      (click)="performBasicNullDecision('Y')">
+                    <label class="form-check-label" for="inlineRadio7">Yes</label>
+                  </div> &nbsp;&nbsp;
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio8" value="N"
+                      (click)="performBasicNullDecision('N')">
+                    <label class="form-check-label" for="inlineRadio8">No</label>
+                  </div>
+                </div>
+              </div>
+              <hr *ngIf="isBasicNullPerform" />
+              <div class="row" *ngIf="isBasicNullPerform">
+                <div class="col-7"></div>
+                <div class="col-5"></div>
+                <hr />
+                <div class="row align-items-start" style="padding-top: 3px;">
+                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                      (click)="performBasicNullImputing()"
+                      [disabled]="">Continue</button>
+                  </div>
 
-        <!-- End of Automated Data Transfer -->
+                  <div class="col-8" style="margin-top: 6px;" *ngIf="isBasicNullImputingStarted">
+                    <label class="info label-l" style="font-size: 9px;"> Basic Null value imputing using Median and Mode started </label>
+                  </div>
+                  <div class="col-2" style="margin-top: 6px;" *ngIf="isBasicNullImputingStarted">
+                    <div class="col-12">
+                      <div class="spinner-border text-primary spinner-border-sm float-left"
+                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                      </div>
+                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                    </div>
+                  </div>
+                  <div class="col-10" style="margin-top: 7px;" *ngIf="isBasicNullImputingDone">
+                    <label class="info label-l ">Basic null value imputing done</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End of Null Value Imputing-->
+
+
+        <!--Start of Automated clustered null value imputing-->
+        <div class="accordion-item card container" *ngIf="isBasicNullImputingDone">
+          <h2 class="accordion-header card-header" id="flush-heading8">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-heading8" aria-expanded="false" aria-controls="flush-heading8">
+              Clustered Null Value Imputing
+            </button>
+          </h2>
+          <div id="flush-heading8" class="accordion-collapse collapse" aria-labelledby="flush-heading8"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+              <div class="row align-items-start question-section">
+                <div class="col-8 question-title">
+                  {{questions.q8.qname}}
+                </div>
+                <div class="col-4" style="font-size: 13px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio9" value="Y"
+                      (click)="performClusterNullValueImputingDecision('Y')">
+                    <label class="form-check-label" for="inlineRadio9">Yes</label>
+                  </div> &nbsp;&nbsp;
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio10" value="N"
+                      (click)="performClusterNullValueImputingDecision('N')">
+                    <label class="form-check-label" for="inlineRadio10">No</label>
+                  </div>
+                </div>
+              </div>
+              <hr *ngIf="isAutomatedClusterPerform" />
+              <div class="row" *ngIf="isAutomatedClusterPerform">
+                <div class="col-7"></div>
+                <div class="col-5"></div>
+                <hr />
+                <div class="row align-items-start" style="padding-top: 3px;">
+                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                      (click)="performClusterNullValueImputing()"
+                      [disabled]="">Continue</button>
+                  </div>
+
+                  <div class="col-8" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
+                    <label class="info label-l" style="font-size: 9px;"> Clustered null value imputing started </label>
+                  </div>
+                  <div class="col-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
+                    <div class="col-12">
+                      <div class="spinner-border text-primary spinner-border-sm float-left"
+                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                      </div>
+                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                    </div>
+                  </div>
+                  <div class="col-10" style="margin-top: 7px;" *ngIf="isAutomatedClusterDone">
+                    <label class="info label-l ">Clustered null value imputing done</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End of Null Value Imputing-->
+
+        <!--Start of Outlier Handling-->
+        <div class="accordion-item card container" *ngIf="isNumricalToCategoricalConversionDone">
+          <h2 class="accordion-header card-header" id="flush-heading9">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-heading9" aria-expanded="false" aria-controls="flush-heading9">
+              Null Value Imputing
+            </button>
+          </h2>
+          <div id="flush-heading9" class="accordion-collapse collapse" aria-labelledby="flush-heading9"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+              <div class="row align-items-start question-section">
+                <div class="col-8 question-title">
+                  {{questions.q9.qname}}
+                </div>
+                <div class="col-4" style="font-size: 13px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio12" value="Y"
+                      (click)="performOutlierHandlingDecision('Y')">
+                    <label class="form-check-label" for="inlineRadio12">Yes</label>
+                  </div> &nbsp;&nbsp;
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio13" value="N"
+                      (click)="performOutlierHandlingDecision('N')">
+                    <label class="form-check-label" for="inlineRadio13">No</label>
+                  </div>
+                </div>
+              </div>
+              <hr *ngIf="isOutlierHandingPerform" />
+              <div class="row" *ngIf="isOutlierHandingPerform">
+                <div class="col-7"></div>
+                <div class="col-5"></div>
+                <hr />
+                <div class="row align-items-start" style="padding-top: 3px;">
+                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                      (click)="performOutlierHandling()"
+                      [disabled]="">Continue</button>
+                  </div>
+
+                  <div class="col-8" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
+                    <label class="info label-l" style="font-size: 9px;"> Basic Null value imputing using Median and Mode started </label>
+                  </div>
+                  <div class="col-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
+                    <div class="col-12">
+                      <div class="spinner-border text-primary spinner-border-sm float-left"
+                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                      </div>
+                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                    </div>
+                  </div>
+                  <div class="col-10" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
+                    <label class="info label-l ">Basic null value imputing done</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End of Null Value Imputing-->
 
         <!-- Start of Manual Data Transform-->
         <div class="accordion-item card container" *ngIf="isManualDT">
-          <h2 class="accordion-header card-header" id="flush-collapseFive">
+          <h2 class="accordion-header card-header" id="flush-collapse5">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+              data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
               Manual Data Transformation
             </button>
           </h2>
-          <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-collapseFive"
+          <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-collapse5"
             data-bs-parent="#accordionAccordian">
             <div class="accordion-body card-body accordion-body-c">
 
@@ -430,14 +670,14 @@
                 </div>
                 <div class="col-4" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="Y"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio7" value="Y"
                       (click)="performManualDT('Y')">
-                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                    <label class="form-check-label" for="inlineRadio7">Yes</label>
                   </div> &nbsp;&nbsp;
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="N"
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio8" value="N"
                       (click)="performManualDT('N')">
-                    <label class="form-check-label" for="inlineRadio2">No</label>
+                    <label class="form-check-label" for="inlineRadio8">No</label>
                   </div>
                 </div>
               </div>
