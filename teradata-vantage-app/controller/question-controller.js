@@ -356,7 +356,7 @@ exports.numericToCategoricalConversion = (req, res, next) => {
 exports.basicNullValueImputing = (req, res, next) => {
   availableOptions = ["Y", "N"];
   let question = {
-    name: QB.clusterNullValueImputing,
+    name: QB.performAutomaticClustered,
     options: availableOptions
   }
   res.status(200).send({
@@ -368,7 +368,7 @@ exports.basicNullValueImputing = (req, res, next) => {
 exports.clusterNullValueImputing = (req, res, next) => {
   availableOptions = ["Y", "N"];
   let question = {
-    name: QB.outlierHandling,
+    name: QB.performOutlier,
     options: availableOptions
   }
   res.status(200).send({
@@ -379,13 +379,18 @@ exports.clusterNullValueImputing = (req, res, next) => {
 
 exports.outlierHandling = (req, res, next) => {
   availableOptions = ["Y", "N"];
-  let question = {
-    name: null,
-    options: availableOptions
-  }
+  let flows = [
+    "Final Model Creation Started using below flow..",
+    "1) Train-Test split using Vantage MLE function 'RandomSample'",
+    "2) Classification ML model created using Vantage MLE function 'DecisionForest'",
+    "3) Prediction on unknown test dataset usinng the Classification ML model using Vantage MLE function 'DecisionForestPredict_MLE'",
+    "4) Work table created for model scoring by placing the original values adjacent to the predicted values",
+    "5) Final scoring metrics generated on the DecisionForest model using Vantage MLE function 'ConfusionMatrix'",
+    "Please wait for the model scores...."
+  ]
   res.status(200).send({
     Success: true,
-    message: { question }
+    message: { flows }
   });
 }
 

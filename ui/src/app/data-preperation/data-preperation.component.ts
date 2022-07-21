@@ -55,20 +55,26 @@ export class DataPreperationComponent
   dependentCol: string = "";
   remainingNcols: string[] = [];
   remainingCCols: string[] = [];
-  isNumericToCategorical: boolean = false;
-  selectedNColumnsForConversionList: string[] = [];
-  tempRemainingNcols: any[] = [];
+
+  //Automated DT Control
+  allAutomatedDTSteps: any[] = [];
+  isAutomatedProceed:boolean = false;
+
+  //Manual DT
   manualDataTransformationMessage = "";
   manualDataTransformDecision: boolean = false;
+
+  //Numerical To Categorical Controls
+  selectedNColumnsForConversionList: string[] = [];
+  tempRemainingNcols: any[] = [];
+  isNumericToCategoricalPerform: boolean = false;
   isNumricalToCategoricalStarted: boolean = false;
   isNumricalToCategoricalConversionDone: boolean = false;
-  allAutomatedDTSteps: any[] = [];
 
   //Null Basic Imputing Controls
   isBasicNullPerform: boolean = false;
   isBasicNullImputingStarted: boolean = false;
   isBasicNullImputingDone: boolean = false;
-
 
   //Automated Cluster Controls
   isAutomatedClusterPerform: boolean = false;
@@ -79,7 +85,7 @@ export class DataPreperationComponent
   isOutlierHandingPerform: boolean = false;
   isOutlierHandingStarted: boolean = false;
   isOutlierHandingDone: boolean = false;
-
+  flows: any = [];
 
   constructor(
     private router: Router,
@@ -359,63 +365,70 @@ export class DataPreperationComponent
   };
 
 
-//perform Automate DT
-performAutomatedDT = (val: String) => {
-  switch (val) {
-    case 'Y':
-      this.isAutomatedDT = true;
-      this.isManualDT = false;
-      this.vantageService.getAllAutomatedDTSteps().subscribe({
-        next: response => {
-          console.log(response);
-          this.allAutomatedDTSteps = response.message.questions;
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
-      break;
-    case 'N':
-      this.isAutomatedDT = false;
-      this.isManualDT = true;
-      this.vantageService.getQuestion(4).subscribe({
-        next: response => {
-          let { question, option } = response.message;
-          this.questions.q4 = {
-            qname: question,
-            options: option
+  //perform Automate DT
+  performAutomatedDT = (val: String) => {
+    switch (val) {
+      case 'Y':
+        this.vantageService.getAllAutomatedDTSteps().subscribe({
+          next: response => {
+            console.log(response);
+            this.allAutomatedDTSteps = response.message.questions;
+            this.isAutomatedDT = true;
+            this.isManualDT = false;
+          },
+          error: error => {
+            this.handleError(error);
+            this.isAutomatedDT = true;
+            this.isManualDT = false;
           }
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
-      break;
-  }
-}
+        });
+        break;
+      case 'N':
+        this.vantageService.getQuestion(4).subscribe({
+          next: response => {
+            let { question, option } = response.message;
+            this.questions.q4 = {
+              qname: question,
+              options: option
+            }
+            this.isAutomatedDT = false;
+            this.clearADT();
+            this.isManualDT = true;
 
-//automatedDTProceed
-automatedDTProceed = () => {
-  this.isNumericToCategorical = true;
-  this.vantageService.getQuestion(2).subscribe({
-    next: response => {
-      let { question, option } = response.message;
-      this.questions.q6 = {
-        qname: question,
-        options: option
-      }
-    },
-    error: error => {
-      this.handleError(error);
+          },
+          error: error => {
+            this.handleError(error);
+            this.isAutomatedDT = false;
+            this.clearADT();
+            this.isManualDT = true;
+          }
+        });
+        break;
     }
-  });
-}
+  }
 
-  //Perform Numeric to Categorical - 6
+  automatedDTProceed = () => {
+    this.vantageService.getQuestion(2).subscribe({
+      next: response => {
+        let { question, option } = response.message;
+        this.questions.q6 = {
+          qname: question,
+          options: option
+        }
+        this.isAutomatedProceed = true;
+      },
+      error: error => {
+        this.handleError(error);
+        this.isAutomatedProceed = true;
+      }
+    });
+  }
+
+  //Perform Numeric to Categorical - 6 //Decision
   performNumericToColumn = (val: string) => {
     switch (val) {
       case 'Y':
-        this.isNumericToCategorical = true;
+        this.isNumericToCategoricalPerform = true;
         //Prepare for checkbox two data modeling
         let d = [];
         for (let n = 0; n < this.remainingNcols.length; n++) {
@@ -425,7 +438,7 @@ automatedDTProceed = () => {
         this.tempRemainingNcols = d;
         break;
       case 'N':
-        this.isNumericToCategorical = false;
+        this.isNumericToCategoricalPerform = false;
         break;
     }
   }
@@ -636,15 +649,9 @@ automatedDTProceed = () => {
             this.isOutlierHandingStarted = false;
             this.isOutlierHandingDone = true;
 
-            let {
-              output,
-              question
-            } = response.message;
+            this.flows = response.message.flows;
 
-            this.questions.q10 = {
-              qname: question.name,
-              options: question.options
-            }
+
           }, 5000)
         },
         error: (error) => {
@@ -734,6 +741,38 @@ automatedDTProceed = () => {
     });
   };
 
+  //Clear Automatic DT State upon Manual Selection
+clearADT = () => {
+    this.isAutomatedProceed = false;
+
+    //Numeric to Categorical Controls
+    this.selectedNColumnsForConversionList = [];
+    this.tempRemainingNcols = [];
+
+    this.isNumericToCategoricalPerform = false;
+    this.isNumricalToCategoricalStarted = false;
+    this.isNumricalToCategoricalConversionDone = false;
+
+
+    //Null Basic Imputing Controls
+    this.isBasicNullPerform = false;
+    this.isBasicNullImputingStarted = false;
+    this.isBasicNullImputingDone = false;
+
+    //Null Basic Imputing Controls
+    this.isAutomatedClusterPerform = false;
+    this.isAutomatedClusterStarted = false;
+    this.isAutomatedClusterDone = false;
+
+    //Null Basic Imputing Controls
+    this.isOutlierHandingPerform = false;
+    this.isOutlierHandingStarted = false;
+    this.isOutlierHandingDone = false;
+
+    //final
+    this.flows = [];
+}
+
   //Clear the State
   clear = () => {
     this.selectedDb = '';
@@ -753,37 +792,24 @@ automatedDTProceed = () => {
     this.isFeatureContinue = false;
     this.isUnivariateStatisticsRunning = false;
     this.isUnivariateStatisticsResultAvailable = false;
-    this.isAutomatedDT = false;
+
     this.univariateStatisticsResult = [];
     this.univariateStatisticsResultAttr = [];
     this.baseTable = "";
     this.dependentCol = "";
     this.remainingNcols = [];
     this.remainingCCols = [];
-    this.isNumericToCategorical = false;
-    this.selectedNColumnsForConversionList = [];
-    this.tempRemainingNcols = [];
+
+    //Manual DT
     this.manualDataTransformationMessage = "";
     this.manualDataTransformDecision = false;
     this.isManualDT = false;
-    this.isNumricalToCategoricalStarted = false;
-    this.isNumricalToCategoricalConversionDone = false;
 
-    //Null Basic Imputing Controls
-    this.isBasicNullPerform = false;
-    this.isBasicNullImputingStarted = false;
-    this.isBasicNullImputingDone = false;
+    //Automated DT
+    this.isAutomatedDT = false;
+    this.allAutomatedDTSteps = [];
 
-    //Null Basic Imputing Controls
-    this.isAutomatedClusterPerform = false;
-    this.isAutomatedClusterStarted = false;
-    this.isAutomatedClusterDone = false;
-
-    //Null Basic Imputing Controls
-    this.isOutlierHandingPerform = false;
-    this.isOutlierHandingStarted = false;
-    this.isOutlierHandingDone = false;
-
+    this.clearADT();
 
   };
 

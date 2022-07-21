@@ -1,8 +1,8 @@
 .q-section {
   background: linear-gradient(90deg, #a055f5 0%, #be82ff 50%, #dcafff 80%, #b455aa 100%);
-    height: 533px;
+    height: 150vh;
     margin-left: 24%;
-    width: 1037px;
+
 }
 
 hr{
@@ -225,7 +225,7 @@ hr{
 .dropdown-form {
   background-color: aliceblue;
     margin-top: 1px;
-    height: 421px;
+    height: 426px;
 }
 
 
@@ -235,13 +235,13 @@ hr{
 }
 
 .result-header {
-  font-size: 13px;
+  font-size: 14px;
   color: black;
 }
 
 .result-data {
-  font-size: 11px;
-  color: #7500c0 !important;
+  font-size: 14px !important;
+  /*color: #7500c0 !important;*/
 }
 
 .fa-style {
@@ -280,7 +280,11 @@ hr{
 }
 
 .table-responsive{
-  max-height: 200px;
+  max-height: 171px;
+}
+
+.table-responsive-lg{
+  max-height: 268px;
 }
 
 .rem-item{
@@ -306,9 +310,8 @@ hr{
 }
 
 .label-l{
-  color: #7500c0 !important;
     font-weight: bold;
-    font-size: 11px !important;
+    font-size: 13px !important;
 }
 
 .next-action{
@@ -340,7 +343,37 @@ hr{
 }
 .fixTableHead table th {
   background: #7500c0;
-  color: white;
-  font-size: 10px;
-  border: 2px solid #7500c0;
+    color: white;
+    font-size: 14px;
+    border: 2px solid #7500c0;
 }
+
+.fixTableHead-v1 table th {
+   background: #7500c0;
+    color: white;
+    font-size: 14px;
+    border: 2px solid #7500c0;
+}
+
+.result-data-v1{
+  font-size: 14px !important;
+}
+
+.label-i{
+  font-size: 14px !important;
+}
+
+.accordion-item {
+  /* padding: 3px !important; */
+    margin: 3px !important;
+}
+
+/* .card-header{
+  border-bottom: none !important;
+  background-color: #be82ff !important;
+} */
+
+/* .accordion-flush .accordion-item .accordion-button{
+  border-radius: 0;
+  background-color: #be82ff !important;
+} */
