@@ -20,24 +20,24 @@
 }
 
 .vantage-text {
-  margin-top: -73px !important;
-  color: #a100ff !important;
-  font-family: "Graphik Web", Arial, sans-serif;
-  font-weight: bold;
-  margin-left: 58px;
-  position: absolute;
+  margin-top: -98px !important;
+    color: white !important;
+    font-family: Georgia;
+    font-weight: bold;
+    margin-left: 61px;
+    /* position: absolute; */
 }
 
 .part-1 {
-  font-size: 7px;
-  letter-spacing: 2px;
-  margin-left: -28px;
+  font-size: 8px;
+    letter-spacing: 1px;
+    margin-left: -9px;
 }
 
 .part-2 {
   letter-spacing: 1px;
   font-size: 14px;
-  margin-left: -45px;
+  margin-left: -26px;
 
 }
 

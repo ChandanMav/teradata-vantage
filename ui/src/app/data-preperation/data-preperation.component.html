@@ -139,7 +139,7 @@
               <div class="row align-items-start">
                 <div class="col-12 table-responsive table-responsive-lg">
                   <table class="table table-sm table-bordered">
-                    <caption style="font-size: 13px; caption-side: top;">Sample Data</caption>
+                    <caption style="font-size: 13px; caption-side: top;">Sample Dataset</caption>
                     <thead class="thead-dark">
                       <tr class="result-header">
                         <td *ngFor="let column of columns">{{column}}</td>
@@ -162,7 +162,7 @@
           <h2 class="accordion-header card-header" id="flush-headingTwo-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-headingTwo" aria-expanded="false" aria-controls="flush-headingTwo">
-              Feature Selection
+              Date Attribute Selection
             </button>
           </h2>
           <div id="flush-headingTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo-h"
@@ -185,14 +185,15 @@
                   </div>
                 </div>
               </div>
-              <hr *ngIf="isFeatureContinue" />
+              <hr *ngIf="isColumnSelectToDrop" />
               <div class="row align-items-start" *ngIf="isColumnSelectToDrop">
                 <div class="col-3">
                   <label for="form-floating" class="text-muted p-1 label-c">Select Column To Drop</label>
                   <div class="scrollbar-primary select-column">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example"
                       (change)="selectColumnToDrop($event.target)" size="8" style="color: black !important;">
-                      <option *ngFor="let column of columns " style="font-size: 12px !important;">{{column}}</option>
+                      <option *ngFor="let column of columnsWTDependentCol " style="font-size: 12px !important;">
+                        {{column}}</option>
                     </select>
                   </div>
                 </div>
@@ -233,15 +234,15 @@
                   </div>
                 </div>
               </div>
-              <hr *ngIf="isFeatureContinue" />
-              <div class="row align-items-start" style="padding-top: 3px;">
-                <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+              <hr *ngIf="isColumnSelectToDrop" />
+              <div class="row align-items-start" style="padding-top: 18px;">
+                <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
                   <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                    (click)="performUnivariateStatistics()"
-                    [disabled]="!isFeatureContinue || isUnivariateStatisticsResultAvailable">Continue</button>
+                    (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
                 </div>
-                <div class="col-8" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
-                  <label class="info label-l" style="font-size: 9px;"> Exploratory Data Analysis of Numeric column
+                <div class="col-7" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
+                  <label class="info label-l" style="font-size: 10px !important; "> Exploratory Data Analysis of Numeric
+                    column
                     started using Vantage MLE functions
                     'UnivariateStatistics' and 'Unpivoting'</label>
                 </div>
@@ -253,8 +254,8 @@
                     <div class="wait" style="padding-top: 8px;">Please wait!</div>
                   </div>
                 </div>
-                <div class="col-10" style="margin-top: 7px;" *ngIf="isUnivariateStatisticsResultAvailable">
-                  <label class="info label-l "> Below are the results of the Univariate Statistics on the numeric
+                <div class="col-9 text-center" style="margin-top: 7px;" *ngIf="isUnivariateStatisticsResultAvailable">
+                  <label class="info label-l"> Below are the results of the Univariate Statistics on the numeric
                     columns &nbsp;&nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                 </div>
               </div>
@@ -267,7 +268,7 @@
           <h2 class="accordion-header card-header" id="flush-headingThree-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-headingThree" aria-expanded="false" aria-controls="flush-headingThree">
-              Exploratory Data Analysis
+              Univariate Statistics
             </button>
           </h2>
           <div id="flush-headingThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree-h"
@@ -305,7 +306,8 @@
                         <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
                           value="N" (click)="performAutomatedDT('N')">
                         <label class="form-check-label" for="inlineRadio4">No</label>
-                        &nbsp; <span *ngIf="isAutomatedDT" class="fa f-lg fa-level-down" style="font-size: 20px;"></span>
+                        &nbsp; <span *ngIf="isAutomatedDT" class="fa f-lg fa-level-down"
+                          style="font-size: 20px;"></span>
                       </div>
                     </div>
                   </div>
@@ -328,12 +330,13 @@
             <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start">
                 <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
-                  class="text-muted p-1 label-i">Below is the Automated Data Transformation would happen using Vantage MLE Funtion &nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  class="text-muted p-1 label-i">These are the automated data transformation would apply &nbsp; <span
+                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                 <div class="col-12 table-responsive fixTableHead fixTableHead-v1">
                   <table class="table table-sm table-bordered">
                     <thead class="thead-dark">
                       <tr class="result-header">
-                        <th>Tranformation Name</th>
+                        <th>DT Name</th>
                         <th>Vantage Function</th>
                       </tr>
                     </thead>
@@ -406,8 +409,9 @@
                           <tr *ngFor="let temp of tempRemainingNcols" class="result-data">
                             <td> {{temp.name}}</td>
                             <td> {{top5data | extactData : temp.name }} </td>
-                            <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
-                                (change)="onNumericalCheckBoxSelect(temp.name, $event.target)" [checked]="temp.checked">
+                            <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
+                                id="checkboxNoLabel" (change)="onNumericalCheckBoxSelect(temp.name, $event.target)"
+                                [checked]="temp.checked">
                             </td>
                           </tr>
                         </tbody>
@@ -439,12 +443,12 @@
                 <div class="row align-items-start" style="padding-top: 3px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performNumericalToCategorical()"
-                      >Continue</button>
+                      (click)="performNumericalToCategorical()">Continue</button>
                   </div>
 
                   <div class="col-8" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
-                    <label class="info label-l" style="font-size: 6px;"> Conversion of continous/numerical column to
+                    <label class="info label-l" style="font-size: 10px !important;"> Conversion of continous/numerical
+                      column to
                       categorical started using Vantage MLE function 'ConvertToCategorical' </label>
                   </div>
                   <div class="col-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
@@ -457,8 +461,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-10" style="margin-top: 7px;" *ngIf="isNumricalToCategoricalConversionDone">
-                    <label class="info label-l ">Conversion of continous/numerical column to categorical done. &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isNumricalToCategoricalConversionDone">
+                    <label class="info label-l ">Conversion of continous/numerical column to categorical done.
+                      &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down"
+                        style="font-size: 20px;"></span></label>
                   </div>
                 </div>
               </div>
@@ -467,7 +473,7 @@
         </div>
         <!--End of Numerical to Categorical Column-->
 
-        <!--Start of Null Value Imputing-->
+        <!--Start of Basic Null Value Imputing-->
         <div class="accordion-item card container" *ngIf="isNumricalToCategoricalConversionDone">
           <h2 class="accordion-header card-header" id="flush-heading7-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -496,10 +502,54 @@
                   </div>
                 </div>
               </div>
-
+              <hr *ngIf="isBasicNullPerform" />
               <div class="row" *ngIf="isBasicNullPerform">
-                <div class="col-7"></div>
-                <div class="col-5"></div>
+                <div class="col-8">
+                  <label for="form-floating" class="text-muted p-1 label-c">Select column for basic null value imputing</label>
+                  <div class="">
+                    <div class="table-responsive fixTableHead ">
+                      <table class="table  table-sm table-bordered">
+                        <thead class="thead-dark">
+                          <tr class="result-header">
+                            <th>Column</th>
+                            <th style="width: 10vh;"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let temp of allColumnWithCheckedStatusFromBasicNullOps" class="result-data">
+                            <td> {{temp.name}}</td>
+                            <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
+                                id="checkboxNoLabel" (change)="onBasicNullCheckBoxSelect(temp.name, $event.target)"
+                                [checked]="temp.checked">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="form-floating" class="text-muted p-1 label-c">Selected Columns</label>
+                  <div class="table-responsive deleted-column scrollbar-primary">
+                    <table class="table caption-top table-borderless table-sm table-c1"
+                      *ngIf="basicNullValueImputingList.length != 0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Column</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of basicNullValueImputingList">
+                          <td>{{item}}</td>
+                          <span class="fa fa-close" style="color: red;" (click)="removeToBasicNullValueImputingList(item)"></span>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <hr />
 
                 <div class="row align-items-start" style="padding-top: 18px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
@@ -519,18 +569,19 @@
                       <div class="wait" style="padding-top: 8px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10" style="margin-top: 7px;" *ngIf="isBasicNullImputingDone">
-                    <label class="info label-l ">Basic null value imputing done! &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isBasicNullImputingDone">
+                    <label class="info label-l ">Basic null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
+                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--End of Null Value Imputing-->
+        <!--End of Basic Null Value Imputing-->
 
 
-        <!--Start of Automated clustered null value imputing-->
+        <!--Start of Cluster null value imputing-->
         <div class="accordion-item card container" *ngIf="isBasicNullImputingDone">
           <h2 class="accordion-header card-header" id="flush-heading8-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -560,8 +611,70 @@
               </div>
 
               <div class="row" *ngIf="isAutomatedClusterPerform">
-                <div class="col-7"></div>
-                <div class="col-5"></div>
+                <!-- <div class="col-7"></div>
+                <div class="col-5"></div> -->
+
+                <!-- Start -->
+
+                <div class="dual-select">
+                  <div class="dual-select__left">
+
+                    <ul class="dual-select__items">
+                      <li
+                        *ngFor="let col of unselectedColsForClusterImputing"
+                        (click)="togglePendingSelection( col )"
+                        (dblclick)="addToSelectedCols( col )"
+                        class="dual-select__item"
+                        [class.dual-select__item__selected]="pendingSelection[ col ]"
+                      >
+
+                        <div class="contact">
+                          <div class="contact__name">
+                            {{ col }}
+                          </div>
+
+                        </div>
+
+                      </li>
+                    </ul>
+
+                  </div>
+                  <div class="dual-select__controls">
+                    <button
+                      (click)="addToSelectedCols()"
+                      class="dual-select__control">
+                      &#10503;
+                    </button>
+                    <button
+                      (click)="removeFromSelectedCols()"
+                      class="dual-select__control">
+                      &#10502;
+                    </button>
+                  </div>
+                  <div class="dual-select__right">
+
+                    <ul class="dual-select__items">
+                      <li
+                        *ngFor="let col of selectedColsForClusterImputing"
+                        (click)="togglePendingSelection( col )"
+                        (dblclick)="removeFromSelectedCols( col )"
+                        class="dual-select__item dual-select__item_new"
+                        [class.dual-select__item__selected]="pendingSelection[ col ]"
+                      >
+
+                        <div class="contact">
+                          <div class="contact__name">
+                            {{ col }}
+                          </div>
+                        </div>
+
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+
+                <!-- End -->
 
                 <div class="row align-items-start" style="padding-top: 18px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
@@ -580,15 +693,16 @@
                       <div class="wait" style="padding-top: 8px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10" style="margin-top: 7px;" *ngIf="isAutomatedClusterDone">
-                    <label class="info label-l ">Clustered null value imputing done! &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isAutomatedClusterDone">
+                    <label class="info label-l ">Clustered null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
+                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--End of Null Value Imputing-->
+        <!--End of Cluster Null Value Imputing-->
 
         <!--Start of Outlier Handling-->
         <div class="accordion-item card container" *ngIf="isAutomatedClusterDone">
@@ -630,7 +744,8 @@
                   </div>
 
                   <div class="col-8" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
-                    <label class="info label-l" style="font-size: 9px;"> Outlier Handling started using Vantage MLE function 'OutlierFilter'</label>
+                    <label class="info label-l" style="font-size: 9px;"> Outlier Handling started using Vantage MLE
+                      function 'OutlierFilter'</label>
                   </div>
                   <div class="col-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
                     <div class="col-12">
@@ -640,8 +755,9 @@
                       <div class="wait" style="padding-top: 8px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
-                    <label class="info label-l ">Outlier handling done!&nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
+                    <label class="info label-l ">Outlier handling done!&nbsp;&nbsp; Next &nbsp; <span
+                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
                 </div>
               </div>
@@ -649,39 +765,6 @@
           </div>
         </div>
         <!--End of Null Value Imputing-->
-
-        <!-- Start of Model Creation -->
-        <div class="accordion-item card container" *ngIf="isOutlierHandingDone">
-          <h2 class="accordion-header card-header" id="flush-heading10-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading10" aria-expanded="false" aria-controls="flush-heading10">
-              Final Model
-            </button>
-          </h2>
-          <div id="flush-heading10" class="accordion-collapse collapse" aria-labelledby="flush-heading10-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-
-
-              <div class="row container" *ngIf="isOutlierHandingDone">
-                <div class="col-12" *ngFor="let step of flows">
-                  <label class="info label-l" style="font-size: 9px;"> {{step}}</label>
-                </div>
-                <label class="info label-l" style="font-size: 9px;"> Model Scores are as below &nbsp; &nbsp;<span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
-
-                <div class="row align-items-start" style="padding-top: 18px;">
-                  <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="restartProcess()" [disabled]="">Try Another Model Build</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- End of Model Creation Started-->
-
 
         <!-- Start of Manual Data Transform-->
         <div class="accordion-item card container" *ngIf="isManualDT">
@@ -715,14 +798,45 @@
               <hr />
               <div class="row">
                 <div class="col-12">
-                  <div for="form-floating" class="fs-4 fw-semibold fw-primary p-4 text-center" style="color: #7500c0;">
-                    {{manualDataTransformationMessage}}</div>
+                  <div for="form-floating" class="p-4 text-center" style="color: #7500c0;">
+                    {{manualDataTransformationMessage}}  &nbsp;&nbsp;<span *ngIf="manualDataTransformDecisionInString === 'N'"
+                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+        <!-- End of Manual DT -->
+
+        <!-- Start of Model Creation -->
+        <div class="accordion-item card container" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
+          <h2 class="accordion-header card-header" id="flush-heading10-h">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#flush-heading10" aria-expanded="false" aria-controls="flush-heading10">
+              Final Model
+            </button>
+          </h2>
+          <div id="flush-heading10" class="accordion-collapse collapse" aria-labelledby="flush-heading10-h"
+            data-bs-parent="#accordionAccordian">
+            <div class="accordion-body card-body accordion-body-c">
+              <div class="row container" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
+                <div class="col-12" *ngFor="let step of flows">
+                  <label class="info label-l" style="font-size: 9px;"> {{step}}</label>
+                </div>
+                <label class="info label-l" style="font-size: 9px;"> Model Scores are as below &nbsp; &nbsp;<span
+                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+
+                <div class="row align-items-start" style="padding-top: 18px;">
+                  <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="restartProcess()"
+                      [disabled]="">Try Another Model Build</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Model Creation Started-->
       </div>
     </div>
     <div class="change-copy" *ngIf="initRunMessage === ''">

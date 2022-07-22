@@ -1156,3 +1156,731 @@
 {"level":"error","timestamp":"Thu, 21 Jul 2022 19:32:59"}
 {"level":"error","timestamp":"Thu, 21 Jul 2022 19:32:59"}
 {"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 19:32:59"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:00"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 19:50:00"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Thu, 21 Jul 2022 19:50:01"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:02"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Thu, 21 Jul 2022 19:50:02"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:02"}
+{"level":"error","timestamp":"Thu, 21 Jul 2022 19:50:02"}
+{"level":"error","message":null,"timestamp":"Thu, 21 Jul 2022 19:50:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:17:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:17:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:17:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:22:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:22:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:22:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:38"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:24:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:38"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:24:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:24:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:25:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:59"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:25:59"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:59"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:25:59"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:25:59"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:26:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:26:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:27:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:21"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:27:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:27:21"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:27:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:00"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:01"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:28:01"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:01"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:01"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:28:01"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:41"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:41"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:28:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:30:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:30:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:41"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:37:41"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:41"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:37:41"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:37:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:38"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:45:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:45:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:05"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:52:05"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:52:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:01"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:55:01"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:01"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:55:01"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 11:55:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 13:11:08"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 13:11:08"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 13:11:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:37"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:10:37"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:37"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:10:37"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:10:38"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:49"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:16:49"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:16:50"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:19"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:20"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:28:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:20"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:28:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:32"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:28:32"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:32"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:28:32"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:35"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:28:35"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:28:35"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:28:35"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:28:35"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:36:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:57"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:36:58"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:37:35"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:37:35"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:37:36"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:37:36"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:37:36"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:37:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:37:39"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:37:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:37:40"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:37:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:38:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:23"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:38:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:24"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:38:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:27"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:38:27"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:27"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:38:27"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:45"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:45"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:38:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:39:16"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:39:16"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:39:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:39:17"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:39:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:39:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:39:20"}
+{"level":"error","message":"******************Table creation failed","timestamp":"Fri, 22 Jul 2022 14:39:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:39:20"}
+{"level":"error","message":true,"timestamp":"Fri, 22 Jul 2022 14:39:20"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:39"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:40"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:42:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:40"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:42:40"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:56"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:56"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:42:57"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:11"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:43:11"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:12"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:43:12"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:12"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:43:12"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 14:43:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:31:27"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 15:31:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:34:52"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 15:34:53"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:37:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:29"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 15:37:29"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:29"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:37:29"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 15:37:29"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:40:32"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:32"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:40:32"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 15:40:33"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:41:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 15:41:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 16:49:21"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:12:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:12:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:12:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:27"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:14:27"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:14:28"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:02"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:23:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:02"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:23:02"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:23:03"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:28:13"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:14"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:28:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:28:14"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:28:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:32:22"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:37:08"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:37:09"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:10"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:37:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:37:10"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:37:10"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:40:23"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 18:40:24"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:41"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:42:41"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:41"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:42:41"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 21:42:42"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 21:47:14"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:15"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 21:47:15"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:15"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 21:47:15"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 21:47:15"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 22:12:16"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:17"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 22:12:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 22:12:17"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 22:12:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:15:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:46"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:15:46"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 23:15:47"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:19:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:17"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:19:17"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 23:19:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 23:31:18"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:34:36"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:37"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 23:34:37"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:37"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:34:37"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 23:34:37"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:45:05"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","message":null,"timestamp":"Fri, 22 Jul 2022 23:45:06"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:03:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:03:37"}
+{"level":"error","message":"500 - this.getFlow is not a function - /api/vantage/flows - GET - ::1","timestamp":"Sat, 23 Jul 2022 00:04:08"}
+{"level":"error","message":"500 - this.getFlow is not a function - /api/vantage/flows - GET - ::1","timestamp":"Sat, 23 Jul 2022 00:04:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:13:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:13:21"}
+{"level":"error","message":"500 - this.getFlow is not a function - /api/vantage/flows - GET - ::1","timestamp":"Sat, 23 Jul 2022 00:13:46"}
+{"level":"error","message":"500 - this.getFlow is not a function - /api/vantage/flows - GET - ::1","timestamp":"Sat, 23 Jul 2022 00:13:46"}
+{"level":"error","message":"404 - Not Found - /api/vantage/flows%0A - GET - ::1","timestamp":"Sat, 23 Jul 2022 00:18:28"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:33:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:33:09"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:38:22"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:38:23"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:51"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:41:51"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:41:52"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:41:52"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:41:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:35"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:43:35"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:43:36"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:49:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:10"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:51:10"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:10"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:51:10"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:51:11"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:42"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:53:42"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:53:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:56:43"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:56:44"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:59:52"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 00:59:53"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:07"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:06:07"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 01:06:08"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:18"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:07:18"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Sat, 23 Jul 2022 01:07:19"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:20"}
+{"level":"error","message":"******************Query Execution Failed","timestamp":"Sat, 23 Jul 2022 01:07:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:20"}
+{"level":"error","timestamp":"Sat, 23 Jul 2022 01:07:20"}
+{"level":"error","message":null,"timestamp":"Sat, 23 Jul 2022 01:07:20"}

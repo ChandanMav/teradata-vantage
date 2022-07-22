@@ -16,6 +16,7 @@ const httpOptions = {
 })
 export class VantageService {
 
+
   constructor(private http: HttpClient, private appService: AppService) { }
 
   rootURL = this.appService.rootURL;
@@ -59,15 +60,16 @@ export class VantageService {
 
   }
 
-  public performUnivariateStatistics(connection: Connection, db: String, basetable: String, col: String, remainingCols: string[], allCols: string[], nCols: string[], key: string): Observable<any> {
+  public performUnivariateStatistics(connection: Connection, db: String, basetable: String, col: String, temp: string[], allCols: string[], nCols: string[], key: string): Observable<any> {
     let commaSeperatedPipe = new CommaSeperatedPipe();
     let body = {
-      ...connection, db, basetable, dep_col: col, allCols: commaSeperatedPipe.transform(allCols), remainingCols: commaSeperatedPipe.transform(remainingCols),
+      ...connection, db, basetable, dep_col: col, allCols: commaSeperatedPipe.transform(allCols), remainingCols: commaSeperatedPipe.transform(temp),
       nCols: commaSeperatedPipe.transform(nCols),
       key
-    }
+    } //Here the remainingCols will contain dependent column as well
+
     //console.log(body);
-    return this.http.post(this.rootURL + '/api/vantage/question/1', body, httpOptions)
+    return this.http.post(this.rootURL + '/api/vantage/univariate', body, httpOptions)
       .pipe(
         retry(1),
         catchError((error) => this.appService.handleError(error))
@@ -136,8 +138,13 @@ export class VantageService {
       );;
   }
 
-
-
+  getModelBuildFlow(): Observable<any> {
+    return this.http.get(this.rootURL + '/api/vantage/flows')
+      .pipe(
+        retry(1),
+        catchError((error) => this.appService.handleError(error))
+      );;
+  }
 
   public getQuestion(qid: number): Observable<any> {
     return this.http.get(this.rootURL + '/api/vantage/question/' + qid)

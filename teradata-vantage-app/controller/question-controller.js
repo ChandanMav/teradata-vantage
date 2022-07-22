@@ -49,6 +49,33 @@ exports.getQuestion = (req, res, next) => {
       });
       break;
 
+    case 7:
+      question = QB.basicNull;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
+    case 8:
+      question = QB.performAutomaticClustered;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
+    case 9:
+      question = QB.performOutlier;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
     default:
       res
         .status(500)
@@ -57,21 +84,18 @@ exports.getQuestion = (req, res, next) => {
   }
 };
 
-exports.questionAnswer = (req, res, next) => {
+exports.univariate = (req, res, next) => {
   try {
-    let questionID = req.params.id;
     let requestBody = sanitize(req.body);
-    //console.log(requestBody);
-
-    if (!questionID) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.Missing_Required_Input, message: Error.MISSING_REQUIRED_INPUT });
-      return;
-    }
-
-
+    //console.log(requestBody);  
+    let key = requestBody.key;
     let config = getConfig(req);
+    let db = requestBody.db;
+    let basetable = requestBody.basetable;
+    let dep_col = requestBody.dep_col;
+    let allCols = requestBody.allCols; //Contains all the columns from the original dataset
+    let nCols = requestBody.nCols;
+    let remainingCols = requestBody.remainingCols; //contains remianing column including the dependent one
 
     if (!config) {
       res.status(503).send({
@@ -81,11 +105,6 @@ exports.questionAnswer = (req, res, next) => {
       });
       return;
     }
-
-    let db = requestBody.db;
-    let basetable = requestBody.basetable;
-    let dep_col = requestBody.dep_col;
-
 
     if (!db) {
       res.status(503).send({
@@ -114,7 +133,7 @@ exports.questionAnswer = (req, res, next) => {
       return;
     }
 
-    let allCols = requestBody.allCols;
+
     if (!allCols) {
       res.status(503).send({
         Success: false,
@@ -123,10 +142,9 @@ exports.questionAnswer = (req, res, next) => {
       });
       return;
     }
-
     allCols = allCols.split(",");
 
-    let nCols = requestBody.nCols;
+
     if (!nCols) {
       res.status(503).send({
         Success: false,
@@ -137,144 +155,131 @@ exports.questionAnswer = (req, res, next) => {
     }
     nCols = nCols.split(",");
 
-    // let cCols = requestBody.cCols;
-    // console.log(requestBody.cCols);
-    // if (!cCols) {
-    //   res.status(503).send({
-    //     Success: false,
-    //     error_code: Errorcode.Missing_Required_Input,
-    //     message: Error.NO_SESSION,
-    //   });
-    //   return;
-    // }
-    // cCols = cCols.split(",");
 
-    switch (parseInt(questionID)) {
-      case 1:
-        let remainingCols = requestBody.remainingCols;
-        if (!remainingCols) {
-          res.status(503).send({
-            Success: false,
-            error_code: Errorcode.Missing_Required_Input,
-            message: Error.NO_SESSION,
+
+    if (!remainingCols) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.NO_SESSION,
+      });
+      return;
+    }
+    remainingCols = remainingCols.split(",");
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+
+
+
+    if (!key) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.NO_SESSION,
+      });
+      return;
+    }
+
+    async.waterfall(
+      [
+        (callback) => {
+          //Drop the existing base table (_work suffix)              
+          let query = `DROP TABLE ${db}.${basetable}_work`;
+          DAO.dropTable(connection, query, (err, data) => {
+            if (data) {
+              callback(null, data);
+            } else {
+              callback(true, err);
+            }
           });
-          return;
-        }
-        remainingCols = remainingCols.split(",");
+        }, //End of droping work table
 
-        let connection = getConnection(config);
-        if (!connection) {
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-          return;
-        }
+        //Create new Work Table
+        (data, callback) => {
+          if (key === 'Y') {
+            let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
+            DAO.createTable(connection, query, (err, data) => {
+              if (data) {
+                basetable = `${basetable}_work`;
+                callback(null, data);
+              } else {
+                callback(true, err);
+              }
+            });
+          } else {
+            basetable = `${basetable}`;
+            callback(null, data);
+          }
+        }, //End of droping work table
 
-        let key = requestBody.key;
-
-        if (!key) {
-          res.status(503).send({
-            Success: false,
-            error_code: Errorcode.Missing_Required_Input,
-            message: Error.NO_SESSION,
-          });
-          return;
-        }
-
-        async.waterfall(
-          [
-            (callback) => {
-              //Drop the existing base table (_work suffix)              
-              let query = `DROP TABLE ${db}.${basetable}_work`;
+        //Run Univariate Result
+        (data, callback) => {
+          winston.info("Exploratory Data Analysis started using Vantage MLE functions 'UnivariateStatistics' and 'Unpivoting' ...");
+          async.waterfall([
+            //DROP moments_ table if any
+            innerCB => {
+              winston.info("Droping moments_ table if any")
+              let query = `DROP TABLE ${db}.moments_${basetable}`;
               DAO.dropTable(connection, query, (err, data) => {
                 if (data) {
-                  callback(null, data);
+                  innerCB(null, true);
                 } else {
-                  callback(true, err);
+                  winston.error(err);
+                  innerCB(null, false);
                 }
               });
-            }, //End of droping work table
+            }, //End of droping moments_ table
 
-            //Create new Work Table
-            (data, callback) => {
-              if (key === 'Y') {
-                let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
-                DAO.createTable(connection, query, (err, data) => {
-                  if (data) {
-                    basetable = `${basetable}_work`;
-                    callback(null, data);
-                  } else {
-                    callback(true, err);
-                  }
-                });
-              } else {
-                basetable = `${basetable}`;
-                callback(null, data);
+            //DROP basic_ table if any
+            (result, innerCB) => {
+              if (!result) {
+                innerCB(null, false);
+                return;
               }
-            }, //End of droping work table
 
-            //Run Univariate Result
-            (data, callback) => {
-              winston.info("Exploratory Data Analysis started using Vantage MLE functions 'UnivariateStatistics' and 'Unpivoting' ...");
-              async.waterfall([
-                //DROP moments_ table if any
-                innerCB => {
-                  winston.info("Droping moments_ table if any")
-                  let query = `DROP TABLE ${db}.moments_${basetable}`;
-                  DAO.dropTable(connection, query, (err, data) => {
-                    if (data) {
-                      innerCB(null, true);
-                    } else {
-                      winston.error(err);
-                      innerCB(null, false);
-                    }
-                  });
-                }, //End of droping moments_ table
+              winston.info("Droping basic_ table if any")
+              let query = `DROP TABLE ${db}.basic_${basetable}`;
+              DAO.dropTable(connection, query, (err, data) => {
+                if (data) {
+                  innerCB(null, true);
+                } else {
+                  winston.error(err);
+                  innerCB(null, false);
+                }
+              });
+            }, //End of droping basic_ table
+            //DROP quantiles_ table if any
+            (result, innerCB) => {
+              if (!result) {
+                innerCB(null, false);
+                return;
+              }
 
-                //DROP basic_ table if any
-                (result, innerCB) => {
-                  if (!result) {
-                    innerCB(null, false);
-                    return;
-                  }
+              winston.info("Droping quantiles_ table if any")
+              let query = `DROP TABLE ${db}.quantiles_${basetable}`;
+              DAO.dropTable(connection, query, (err, data) => {
+                if (data) {
+                  innerCB(null, true);
+                } else {
+                  winston.error(err);
+                  innerCB(null, false);
+                }
+              });
+            }, //End of droping quantiles_ table
 
-                  winston.info("Droping basic_ table if any")
-                  let query = `DROP TABLE ${db}.basic_${basetable}`;
-                  DAO.dropTable(connection, query, (err, data) => {
-                    if (data) {
-                      innerCB(null, true);
-                    } else {
-                      winston.error(err);
-                      innerCB(null, false);
-                    }
-                  });
-                }, //End of droping basic_ table
-                //DROP quantiles_ table if any
-                (result, innerCB) => {
-                  if (!result) {
-                    innerCB(null, false);
-                    return;
-                  }
-
-                  winston.info("Droping quantiles_ table if any")
-                  let query = `DROP TABLE ${db}.quantiles_${basetable}`;
-                  DAO.dropTable(connection, query, (err, data) => {
-                    if (data) {
-                      innerCB(null, true);
-                    } else {
-                      winston.error(err);
-                      innerCB(null, false);
-                    }
-                  });
-                }, //End of droping quantiles_ table
-
-                //Perform UnivariateStatistics
-                (result, innerCB) => {
-                  if (!result) {
-                    innerCB(null, false);
-                    return;
-                  }
-                  let query = `SELECT * FROM UnivariateStatistics (
+            //Perform UnivariateStatistics
+            (result, innerCB) => {
+              if (!result) {
+                innerCB(null, false);
+                return;
+              }
+              let query = `SELECT * FROM UnivariateStatistics (
                     ON ${basetable} AS InputTable
                     OUT TABLE MomentsTableName(${db}.moments_${basetable})
                     OUT TABLE BasicTableName(${db}.basic_${basetable})
@@ -283,62 +288,54 @@ exports.questionAnswer = (req, res, next) => {
                     ExcludeColumns('${dep_col}')
                     ) AS dt `;
 
-                  //console.log(query);
+              //console.log(query);
 
-                  DAO.executeQuery(connection, query, (err, data) => {
-                    if (data) {
-                      innerCB(null, true);
-                    } else {
-                      winston.error(err);
-                      innerCB(null, false);
-                    }
-                  });
-                }// End of Performing UnivariateStatistics
+              DAO.executeQuery(connection, query, (err, data) => {
+                if (data) {
+                  innerCB(null, true);
+                } else {
+                  winston.error(err);
+                  innerCB(null, false);
+                }
+              });
+            }// End of Performing UnivariateStatistics
 
-                //Perform univariate_unpivot
+            //Perform univariate_unpivot
 
-                //Partitioning univariate_unpivot
-                //Need to write code
+            //Partitioning univariate_unpivot
+            //Need to write code
 
-              ], (err, result) => {
-                winston.error(err);
-                callback(null, null);
-              })
-            }
-          ],
-          (error, result) => {
-            if (error) {
-              winston.error(error);
-              res
-                .status(500)
-                .send({ Success: false, error_code: Errorcode.Error_500, message: error });
-            } else {
+          ], (err, result) => {
+            winston.error(err);
+            callback(null, null);
+          })
+        }
+      ],
+      (error, result) => {
+        if (error) {
+          winston.error(error);
+          res
+            .status(500)
+            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        } else {
 
-              let result = {
-                output: sample.data,
-                question: {
-                  name: QB.performAutomatedDataTransformation,
-                  options: ["Y", "N"]
-                },
-                basetable: basetable
-              };
+          let result = {
+            output: sample.data,
+            question: {
+              name: QB.performAutomatedDataTransformation,
+              options: ["Y", "N"]
+            },
+            basetable: basetable
+          };
 
-              res.status(200).send({ success: true, message: result });
-            }
-          }
-        );
-        break;
-      default:
-        res
-          .status(500)
-          .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
-        return;
-    }
+          res.status(200).send({ success: true, message: result });
+        }
+      }
+    )
   } catch (error) {
     return next(createError(500));
   }
 };
-
 
 exports.numericToCategoricalConversion = (req, res, next) => {
   availableOptions = ["Y", "N"];
@@ -379,15 +376,7 @@ exports.clusterNullValueImputing = (req, res, next) => {
 
 exports.outlierHandling = (req, res, next) => {
   availableOptions = ["Y", "N"];
-  let flows = [
-    "Final Model Creation Started using below flow..",
-    "1) Train-Test split using Vantage MLE function 'RandomSample'",
-    "2) Classification ML model created using Vantage MLE function 'DecisionForest'",
-    "3) Prediction on unknown test dataset usinng the Classification ML model using Vantage MLE function 'DecisionForestPredict_MLE'",
-    "4) Work table created for model scoring by placing the original values adjacent to the predicted values",
-    "5) Final scoring metrics generated on the DecisionForest model using Vantage MLE function 'ConfusionMatrix'",
-    "Please wait for the model scores...."
-  ]
+  let flows = this.getFlow();
   res.status(200).send({
     Success: true,
     message: { flows }
@@ -407,4 +396,24 @@ exports.getAllAutomatedDTSteps = (req, res, next) => {
     Success: true,
     message: { questions }
   });
+}
+
+exports.getModelBuildFlow = (req, res, next) => {
+  let flows = this.getFlow();
+  res.status(200).send({
+    Success: true,
+    message: { flows }
+  });
+}
+
+exports.getFlow = () => {
+  return [
+    "Final Model Creation Started using below flow..",
+    "1) Train-Test split using Vantage MLE function 'RandomSample'",
+    "2) Classification ML model created using Vantage MLE function 'DecisionForest'",
+    "3) Prediction on unknown test dataset usinng the Classification ML model using Vantage MLE function 'DecisionForestPredict_MLE'",
+    "4) Work table created for model scoring by placing the original values adjacent to the predicted values",
+    "5) Final scoring metrics generated on the DecisionForest model using Vantage MLE function 'ConfusionMatrix'",
+    "Please wait for the model scores...."
+  ]
 }
