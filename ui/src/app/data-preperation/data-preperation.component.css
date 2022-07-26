@@ -392,17 +392,18 @@ td {}
 
 .dual-select {
   display: flex;
-  height: 230px;
+  height: 208px;
 }
 
 .dual-select__left{
   flex: 0 0 auto;
-  width: 232px;
+    width: 295px;
 }
 
 .dual-select__right {
   flex: 0 0 auto;
-  width: 232px;
+    width: 229px;
+    margin-left: 14px
 }
 
 .dual-select__controls {
@@ -410,17 +411,16 @@ td {}
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  padding: 0px 10px 0px 10px;
 }
 
 .dual-select__control {
-  font-size: 20px;
-  height: 40px;
-  margin: 10px 0px 10px 0px;
-  background-color: #0d6efd !important;
-  color: white;
-  border: none;
-  vertical-align: middle;
+  height: 32px;
+    margin: 2px 0px 11px 0px;
+    background-color: #0d6efd !important;
+    color: white;
+    border: none;
+    vertical-align: middle;
+    width: 40px;
 }
 
 .dual-select__items {
@@ -430,14 +430,15 @@ td {}
   margin: 0px 0px 0px 0px;
   overflow: auto;
   overscroll-behavior: contain;
-  padding: 3px 0px 0px 8px;
+  /* margin: 5px; */
+  padding: 8px;
 }
 
 .dual-select__item {
-  border-bottom: 1px solid darkslateblue;
-  cursor: pointer;
-  margin: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
+  border: 1px solid blue;
+    cursor: pointer;
+    margin: 3px;
+    padding: 4px;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -459,25 +460,28 @@ td {}
 }
 
 .dual-select__item .column {
-  font-size: 13px !important;
+  font-size: 11px !important;
 }
 
 .left-list{
-  max-height: 185px !important;
-  overflow-y: auto;
-  height: 232px!important;
+  max-height: 162px !important;
+  overflow: auto !important;
+  height: 165px !important;
 }
 
 .right-list{
-  max-height: 185px !important;
-  overflow-y: auto;
-  height: 232px!important;
+  max-height: 162px !important;
+    overflow: auto !important;
+    height: 165px !important;
 }
 
+.toast-container{
+  padding-right: 4px !important;
+}
 .toast-section{
-    max-height: 226px !important;
-    overflow: auto !important;
-    height: 250px !important;
+  max-height: 162px !important;
+  overflow: auto !important;
+  height: 165px !important;
 }
 
 @keyframes dual-select-item-new-fade-in {

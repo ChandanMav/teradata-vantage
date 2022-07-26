@@ -6,7 +6,7 @@ import { FileUploadService } from '../service/file-upload.service';
 import { VantageService } from '../service/vantage.service';
 import { Connection } from '../shared/connection';
 import { questions } from '../shared/question'
-declare var $:any;
+declare var $: any;
 
 
 interface PendingSelection {
@@ -104,7 +104,7 @@ export class DataPreperationComponent
   pendingSelection: PendingSelection = Object.create(null);
   selectedColsForClusterImputing: string[] = [];
   unselectedColsForClusterImputing: string[] = []
-  pairs:any = []
+  pairs: any = []
 
   //Outlier Controls
   isOutlierHandingPerform: boolean = false;
@@ -279,7 +279,7 @@ export class DataPreperationComponent
           }
 
           //TBD
-      this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
+          this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.clear();
@@ -877,7 +877,7 @@ export class DataPreperationComponent
       });
   }
 
-  addToSelectedCols = (column?: string): void  => {
+  addToSelectedCols = (column?: string): void => {
 
     let changeColumns = (column)
       ? [column]
@@ -935,22 +935,32 @@ export class DataPreperationComponent
     return collectionWithoutColumns;
   }
 
-
-  makePair = () => {
-        //add to pair list
-        console.log("this.selectedColsForClusterImputing) ", this.selectedColsForClusterImputing);
-        for(let i = 0; i<this.selectedColsForClusterImputing.length ; i++){
-          this.togglePendingSelection(this.selectedColsForClusterImputing[i]);
-        }
-        this.pairs.push(this.selectedColsForClusterImputing);
-        console.log(this.pairs);
-        //empty selected pair from list
-        this.removeFromSelectedCols();
+  onItemDrop = (e: any) => {
+    let temp = [];
+    for (let k = 0; k < this.selectedColsForClusterImputing.length; k++) {
+      if (this.selectedColsForClusterImputing[k] !== e.dragData) {
+        temp.push(this.selectedColsForClusterImputing[k]);
+      }
+    }
+    temp.splice(0, 0, e.dragData);
+    this.selectedColsForClusterImputing = temp;
   }
 
-  updatePair = (ele1:any, ele2:any) => {
+  makePair = () => {
+    //add to pair list
+    console.log("this.selectedColsForClusterImputing) ", this.selectedColsForClusterImputing);
+    for (let i = 0; i < this.selectedColsForClusterImputing.length; i++) {
+      this.togglePendingSelection(this.selectedColsForClusterImputing[i]);
+    }
+    this.pairs.push(this.selectedColsForClusterImputing);
+    console.log(this.pairs);
+    //empty selected pair from list
+    this.removeFromSelectedCols();
+  }
+
+  updatePair = (ele1: any, ele2: any) => {
     let filteredPair = this.pairs.filter((pair: any[]) => {
-      if(pair[0] === ele1 && pair[1] === ele2){
+      if (pair[0] === ele1 && pair[1] === ele2) {
         return false;
       }
       return true;
@@ -1112,24 +1122,24 @@ export class DataPreperationComponent
   };
 
   clearAfterBasicNullImputing = () => {
-     this.isBasicNullImputingDone = false;
+    this.isBasicNullImputingDone = false;
 
-     //Null Clustered Imputing Controls
-     this.pendingSelection = Object.create(null);
-     this.selectedColsForClusterImputing = [];
-     this.unselectedColsForClusterImputing = [];
-     this.pairs = [];
-     this.isAutomatedClusterPerform = false;
-     this.isAutomatedClusterStarted = false;
-     this.isAutomatedClusterDone = false;
+    //Null Clustered Imputing Controls
+    this.pendingSelection = Object.create(null);
+    this.selectedColsForClusterImputing = [];
+    this.unselectedColsForClusterImputing = [];
+    this.pairs = [];
+    this.isAutomatedClusterPerform = false;
+    this.isAutomatedClusterStarted = false;
+    this.isAutomatedClusterDone = false;
 
-     //Null Outlier Imputing Controls
-     this.isOutlierHandingPerform = false;
-     this.isOutlierHandingStarted = false;
-     this.isOutlierHandingDone = false;
+    //Null Outlier Imputing Controls
+    this.isOutlierHandingPerform = false;
+    this.isOutlierHandingStarted = false;
+    this.isOutlierHandingDone = false;
 
-     //final
-     this.flows = [];
+    //final
+    this.flows = [];
   }
 
   clearAfterNumericalToCat = () => {

@@ -18,6 +18,7 @@ import { FileUploadService } from './service/file-upload.service';
 import { CommaSeperatedPipe } from './pipes/comma-seperated.pipe';
 import { JsonReaderPipe } from './pipes/json-reader.pipe';
 import { ExtactDataPipe } from './pipes/extact-data.pipe';
+import { NgDragDropModule } from 'ng-drag-drop';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ExtactDataPipe } from './pipes/extact-data.pipe';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgDragDropModule.forRoot()
   ],
   providers: [AppService, ServerConnectionService, VantageService, FileUploadService],
   bootstrap: [AppComponent]
