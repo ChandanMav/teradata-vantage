@@ -25,7 +25,7 @@ export class VantageService {
     let body = JSON.stringify(connection);
     return this.http.post(this.rootURL + '/api/databases', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }
@@ -34,7 +34,7 @@ export class VantageService {
     let body = JSON.stringify(connection);
     return this.http.post(this.rootURL + '/api/databases/' + dbName + '/tables', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }
@@ -43,7 +43,7 @@ export class VantageService {
     let body = JSON.stringify(connection);
     return this.http.post(this.rootURL + '/api/databases/' + dbName + '/tables/' + tableName + '/columns', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }
@@ -54,7 +54,7 @@ export class VantageService {
     //console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/init', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
 
@@ -71,7 +71,7 @@ export class VantageService {
     //console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/univariate', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );
 
@@ -85,7 +85,7 @@ export class VantageService {
     console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/numuric/conversion', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );
   }
@@ -99,7 +99,7 @@ export class VantageService {
     console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/outlier', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );
   }
@@ -112,7 +112,7 @@ export class VantageService {
     console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/clusternullvalue', body, httpOptions)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );
   }
@@ -125,7 +125,6 @@ export class VantageService {
     console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/basicnullvalue', body, httpOptions)
       .pipe(
-        retry(1),
         catchError((error) => this.appService.handleError(error))
       );
   }
@@ -133,7 +132,7 @@ export class VantageService {
   getAllAutomatedDTSteps(): Observable<any> {
     return this.http.get(this.rootURL + '/api/vantage/automateddt/steps')
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }
@@ -141,7 +140,7 @@ export class VantageService {
   getModelBuildFlow(): Observable<any> {
     return this.http.get(this.rootURL + '/api/vantage/flows')
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }
@@ -149,7 +148,7 @@ export class VantageService {
   public getQuestion(qid: number): Observable<any> {
     return this.http.get(this.rootURL + '/api/vantage/question/' + qid)
       .pipe(
-        retry(1),
+
         catchError((error) => this.appService.handleError(error))
       );;
   }

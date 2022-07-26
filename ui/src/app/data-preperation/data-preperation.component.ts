@@ -125,12 +125,12 @@ export class DataPreperationComponent
     let state = history.state;
 
     delete state['navigationId'];
-    //this.config = state;
-    this.config = {
-      host: "153.64.73.11",
-      user: "CDMTDF3",
-      password: "Migrate1234#"
-    };
+    this.config = state;
+    // this.config = {
+    //   host: "153.64.73.11",
+    //   user: "CDMTDF3",
+    //   password: "Migrate1234#"
+    // };
 
     this.vantageService.getDatabases(this.config).subscribe({
       next: (response) => {
@@ -144,11 +144,11 @@ export class DataPreperationComponent
           this.clear();
           this.isTeradataConnectionAlive = false;
           this.errorMsg = 'Please connect to Server!';
-          // setTimeout(() => {
-          //   this.router.navigate(['/connection'], {
-          //     relativeTo: this.activatedRoute,
-          //   });
-          // }, 4000);
+          setTimeout(() => {
+            this.router.navigate(['/connection'], {
+              relativeTo: this.activatedRoute,
+            });
+          }, 4000);
         }
       },
     });
@@ -349,7 +349,7 @@ export class DataPreperationComponent
       .performUnivariateStatistics(
         this.config,
         this.selectedDb,
-        this.baseTable,
+        this.selectedtable,
         this.dependentCol,
         temp,
         this.columns,
@@ -385,7 +385,7 @@ export class DataPreperationComponent
         },
         error: (error) => {
           this.isUnivariateStatisticsRunning = false;
-          this.isUnivariateStatisticsResultAvailable = true;
+          this.isUnivariateStatisticsResultAvailable = false;
           this.handleError(error);
         },
       });

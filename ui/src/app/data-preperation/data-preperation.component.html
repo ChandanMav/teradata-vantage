@@ -90,7 +90,7 @@
     <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
       {{initRunMessage}}</p> -->
 
-    <div *ngIf="initRunMessage != ''" class="pt-2">
+    <div *ngIf="initRunMessage != ''" class="pt-2" [ngClass]="errorMsg === '' ? 'pt-2' : 'pt-4'">
       <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span>
       <div class="accordion accordion-flush" id="accordionAccordian">
         <div class="accordion-item card container">

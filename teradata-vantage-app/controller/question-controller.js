@@ -94,7 +94,7 @@ exports.univariate = (req, res, next) => {
     let basetable = requestBody.basetable;
     let dep_col = requestBody.dep_col;
     let allCols = requestBody.allCols; //Contains all the columns from the original dataset
-    let nCols = requestBody.nCols;
+    let nCols = requestBody.nCols; //Numeric columns
     let remainingCols = requestBody.remainingCols; //contains remianing column including the dependent one
 
     if (!config) {
@@ -154,6 +154,8 @@ exports.univariate = (req, res, next) => {
       return;
     }
     nCols = nCols.split(",");
+    let nColsSingleQuoted = nCols.map(col => `'${col}'`);
+    console.log(nColsSingleQuoted);
 
 
 
@@ -191,11 +193,14 @@ exports.univariate = (req, res, next) => {
         (callback) => {
           //Drop the existing base table (_work suffix)              
           let query = `DROP TABLE ${db}.${basetable}_work`;
-          DAO.dropTable(connection, query, (err, data) => {
-            if (data) {
-              callback(null, data);
-            } else {
-              callback(true, err);
+          winston.info(query);
+          DAO.dropTable(connection, query, (err, isDeleted) => {
+            if (isDeleted) {
+              winston.info(`Table ${db}.${basetable}_work dropped`)
+              callback(null, null);
+            } else {              
+              //Just ignore the error if occured during table deletion
+              callback(null, null);
             }
           });
         }, //End of droping work table
@@ -204,83 +209,76 @@ exports.univariate = (req, res, next) => {
         (data, callback) => {
           if (key === 'Y') {
             let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
-            DAO.createTable(connection, query, (err, data) => {
-              if (data) {
+            winston.info(query)
+            DAO.createTable(connection, query, (err, isCreated) => {
+              if (isCreated) {
                 basetable = `${basetable}_work`;
-                callback(null, data);
-              } else {
-                callback(true, err);
+                winston.info(`Table created successfuly ${db}.${basetable}`)
+                callback(null, null);
+              } else {      
+                winston.info(`Working Table is not created. Hence Exiting!`)      
+                callback(true, null);
               }
             });
           } else {
             basetable = `${basetable}`;
-            callback(null, data);
+            callback(null, null);
           }
         }, //End of droping work table
 
         //Run Univariate Result
-        (data, callback) => {
+        (isWorkingTableCreated, callback) => {         
           winston.info("Exploratory Data Analysis started using Vantage MLE functions 'UnivariateStatistics' and 'Unpivoting' ...");
           async.waterfall([
             //DROP moments_ table if any
             innerCB => {
-              winston.info("Droping moments_ table if any")
               let query = `DROP TABLE ${db}.moments_${basetable}`;
-              DAO.dropTable(connection, query, (err, data) => {
-                if (data) {
-                  innerCB(null, true);
-                } else {
-                  winston.error(err);
-                  innerCB(null, false);
+              winston.info(query);
+              DAO.dropTable(connection, query, (err, isDropped) => {
+                if (isDropped) {
+                  winston.info(`Table dropped successfuly ${db}.moments_${basetable}`)
+                  innerCB(null, null);
+                } else {                
+                  //Just ignore the error if occured during table deletion
+                  innerCB(null, null);
                 }
               });
             }, //End of droping moments_ table
 
             //DROP basic_ table if any
             (result, innerCB) => {
-              if (!result) {
-                innerCB(null, false);
-                return;
-              }
-
-              winston.info("Droping basic_ table if any")
               let query = `DROP TABLE ${db}.basic_${basetable}`;
-              DAO.dropTable(connection, query, (err, data) => {
-                if (data) {
-                  innerCB(null, true);
-                } else {
-                  winston.error(err);
-                  innerCB(null, false);
+              winston.info(query);
+              DAO.dropTable(connection, query, (err, isDropped) => {
+                if (isDropped) {
+                  winston.info(`Table dropped successfuly ${db}.basic_${basetable}`)
+                  innerCB(null, null);
+                } else {                 
+                  //Just ignore the error if occured during table deletion
+                  innerCB(null, null);
                 }
               });
             }, //End of droping basic_ table
             //DROP quantiles_ table if any
-            (result, innerCB) => {
-              if (!result) {
-                innerCB(null, false);
-                return;
-              }
-
-              winston.info("Droping quantiles_ table if any")
+            (result, innerCB) => {            
               let query = `DROP TABLE ${db}.quantiles_${basetable}`;
-              DAO.dropTable(connection, query, (err, data) => {
-                if (data) {
-                  innerCB(null, true);
+              winston.info(query);
+              DAO.dropTable(connection, query, (err, isDropped) => {
+                if (isDropped) {
+                  inston.info(`Table dropped successfuly ${db}.quantiles_${basetable}`)
+                  innerCB(null, null);
                 } else {
                   winston.error(err);
-                  innerCB(null, false);
+                  //Just ignore the error if occured during table deletion
+                  innerCB(null, null);
                 }
               });
             }, //End of droping quantiles_ table
 
-            //Perform UnivariateStatistics
-            (result, innerCB) => {
-              if (!result) {
-                innerCB(null, false);
-                return;
-              }
+            //call UnivariateStatistics MLE
+            (result, innerCB) => {             
               let query = `SELECT * FROM UnivariateStatistics (
-                    ON ${basetable} AS InputTable
+                    ON ${db}.${basetable} AS InputTable
                     OUT TABLE MomentsTableName(${db}.moments_${basetable})
                     OUT TABLE BasicTableName(${db}.basic_${basetable})
                     OUT TABLE QuantilesTableName(${db}.quantiles_${basetable})
@@ -288,30 +286,92 @@ exports.univariate = (req, res, next) => {
                     ExcludeColumns('${dep_col}')
                     ) AS dt `;
 
-              //console.log(query);
-
-              DAO.executeQuery(connection, query, (err, data) => {
-                if (data) {
-                  innerCB(null, true);
-                } else {
-                  winston.error(err);
-                  innerCB(null, false);
+              winston.info(query);
+              DAO.executeQuery(connection, query, (err, isExecutionDone) => {
+                if (isExecutionDone) {
+                  winston.info(`UnivariateStatistics Query Execution is Done`);
+                  innerCB(null, null);
+                } else {                
+                  innerCB(true, null);
                 }
               });
-            }// End of Performing UnivariateStatistics
+            },// End of Performing UnivariateStatistics
 
             //Perform univariate_unpivot
+            (result, innerCB) => {             
+              let query = `create volatile table univariate_unpivot as (
+                SELECT * FROM Unpivoting (
+                ON ${db}.basic_${basetable}
+                USING
+                TargetColumns (${nColsSingleQuoted})
+                AttributeColumn ('attribute')
+                ValueColumn ('value_col')
+                InputTypes ('false')
+                Accumulate ('stats')
+                ) AS dt
+                where stats in ('Median','Mean','Mode','Number of NULL values','Number of negative values','Number of unique values','Range')
+                UNION ALL
+                SELECT * FROM Unpivoting (
+                ON ${db}.quantiles_${basetable}
+                USING
+                TargetColumns (${nColsSingleQuoted})
+                AttributeColumn ('attribute')
+                ValueColumn ('value_col')
+                InputTypes ('false')
+                Accumulate ('stats')
+                ) AS dt
+                where stats in ('Maximum','Minimum')
+                ) with DATA
+                on commit preserve rows;`;
 
-            //Partitioning univariate_unpivot
+              winston.info(query);
+
+              DAO.executeQuery(connection, query, (err, isExecutionDone) => {
+                if (isExecutionDone) {
+                  winston.info(`Univariate Unpivot Query Execution is completed}`);
+                  innerCB(null, null);
+                } else {                 
+                  innerCB(true, null);
+                }
+              });
+            },//End of univariate_unpivot
+
+            //Extract of univariate_unpivot result
+            (result, innerCB) => {              
+              let query = `select trim(attribute), trim(value_col_mean),trim(value_col_median),trim(value_col_mode),trim("value_col_number of null values"),trim("value_col_number of negative values"),trim("value_col_number of unique values"),trim(value_col_range),trim(value_col_minimum),trim(value_col_maximum) from Pivoting (
+                ON univariate_unpivot PARTITION BY attribute
+                USING
+                PartitionColumns ('attribute')
+                PivotKeys ('Median','Mean','Mode','Number of NULL values','Number of negative values','Number of unique values','Range','Maximum','Minimum')
+                PivotColumn ('stats')
+                TargetColumns ('value_col')
+                ) AS dt;`;
+
+              console.log(query);
+
+              DAO.fetchResult(connection, query, (err, data) => {
+                if (data) {                 
+                  innerCB(null, data);
+                } else {                
+                  innerCB(true, null);
+                }
+              });
+            }
+            // End of univariate_unpivot result extraction
             //Need to write code
 
           ], (err, result) => {
-            winston.error(err);
-            callback(null, null);
+            if (err) {              
+              callback(true, null);
+            }
+            else {
+              callback(null, result);
+            }
           })
         }
       ],
-      (error, result) => {
+      (error, result1) => {
+        closeConnection(connection);
         if (error) {
           winston.error(error);
           res
@@ -320,7 +380,7 @@ exports.univariate = (req, res, next) => {
         } else {
 
           let result = {
-            output: sample.data,
+            output: sample,
             question: {
               name: QB.performAutomatedDataTransformation,
               options: ["Y", "N"]
@@ -328,6 +388,7 @@ exports.univariate = (req, res, next) => {
             basetable: basetable
           };
 
+          console.log("Final Result ", result)
           res.status(200).send({ success: true, message: result });
         }
       }

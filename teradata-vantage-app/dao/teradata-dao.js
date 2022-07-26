@@ -77,59 +77,66 @@ exports.findColumns = (connection, databaseName, tableName, cb) => {
 };
 
 exports.dropTable = (connection, query, cb) => {
-  if (!connection) {
-    cb(new Error("No Database Connection"), null);
-    return;
-  }
-
   try {
     let cursor = connection.cursor();
     cursor.execute(query);
-    winston.info("******************Table deleted successfully");
-    cb(null, "Table Deleted");
+    winston.info("Table deleted successfully");
+    cb(null, true);
   } catch (error) {
-    winston.error(error);
-    winston.error("**************Table deletion failed but this can be ignored!");
-    cb(null, "Table Deleted Succssfully");
+    winston.error("Table deletion failed but this can be ignored!");
+    cb(null, false);
   }
 };
 
 exports.createTable = (connection, query, cb) => {
-  if (!connection) {
-    cb(new Error("No Database Connection"), null);
-    return;
-  }
-
   try {
     let cursor = connection.cursor();
     cursor.execute(query);
-    winston.info("******************Table Created successfully");
-    cb(null, "Table Created");
+    winston.info("Table Created successfully");
+    cb(null, true);
 
   } catch (error) {
-    winston.error("******************Table creation failed");
-    winston.error(error);
-    cb(error, null);
+    winston.error("Table creation failed");
+    cb(null, false);
   }
 };
 
 
 exports.executeQuery = (connection, query, cb) => {
-  if (!connection) {
-    cb(new Error("No Database Connection"), null);
-    return;
-  }
-
   try {
     let cursor = connection.cursor();
     cursor.execute(query);
-    winston.info("******************Query Execution Done");
-    cb(null, "Query Execution is completed");
+    winston.info("Query Execution Done");
+    cb(null, true);
 
   } catch (error) {
     winston.error(error);
-    winston.error("******************Query Execution Failed");
-    winston.error(error);
-    cb(error, null);
+    winston.error("Query Execution Failed");
+    cb(null, false);
   }
 };
+
+
+
+
+exports.fetchResult = (connection, query, cb) => {
+  let data = [];
+  try {
+    let cursor = connection.cursor();
+    cursor.execute(query);
+    let fetchedRows = cursor.fetchall();
+    winston.info("Data fetching is completed");
+    console.log(fetchedRows);
+    for (let i = 0; i < fetchedRows.length; i++) {
+      data.push(fetchedRows[i]);
+    }
+
+    cb(null, data);
+
+  } catch (error) {
+    winston.error(error);
+    winston.error("Query Execution Failed");
+    cb(null, false);
+  }
+};
+

@@ -47,6 +47,8 @@ exports.getDatabases = (req, res, next) => {
   }
 
   let connection = getConnection(config);
+
+  console.log(connection);
   if (connection) {
     DAO.findDatabases(connection, (err, data) => {
       closeConnection(connection);
