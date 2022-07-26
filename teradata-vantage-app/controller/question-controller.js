@@ -525,7 +525,7 @@ exports.basicNullValueImputing = (req, res, next) => {
   try {
     let requestBody = sanitize(req.body);
 
-    console.log("requestBody ", requestBody);
+    //console.log("requestBody ", requestBody);
     let config = getConfig(req);
     let db = requestBody.db;
     let basetable = requestBody.basetable;

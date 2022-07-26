@@ -6,6 +6,13 @@ import { FileUploadService } from '../service/file-upload.service';
 import { VantageService } from '../service/vantage.service';
 import { Connection } from '../shared/connection';
 import { questions } from '../shared/question'
+declare var $:any;
+
+
+interface PendingSelection {
+  [key: string]: boolean;
+}
+
 
 @Component({
   selector: 'app-data-preperation',
@@ -94,17 +101,16 @@ export class DataPreperationComponent
   isAutomatedClusterPerform: boolean = false;
   isAutomatedClusterStarted: boolean = false;
   isAutomatedClusterDone: boolean = false;
+  pendingSelection: PendingSelection = Object.create(null);
+  selectedColsForClusterImputing: string[] = [];
+  unselectedColsForClusterImputing: string[] = []
+  pairs:any = []
 
   //Outlier Controls
   isOutlierHandingPerform: boolean = false;
   isOutlierHandingStarted: boolean = false;
   isOutlierHandingDone: boolean = false;
   flows: any = [];
-
-  //Test
-  public pendingSelection: PendingSelection = Object.create(null);
-  public selectedColsForClusterImputing: string[] = [];
-  public unselectedColsForClusterImputing: string[] = []
 
 
   constructor(
@@ -127,12 +133,13 @@ export class DataPreperationComponent
     let state = history.state;
 
     delete state['navigationId'];
-    this.config = state;
-    // this.config = {
-    //   host: "153.64.73.11",
-    //   user: "CDMTDF3",
-    //   password: "Migrate1234#"
-    // };
+    //TBD
+    //this.config = state;
+    this.config = {
+      host: "153.64.73.11",
+      user: "CDMTDF3",
+      password: "Migrate1234#"
+    };
 
     this.vantageService.getDatabases(this.config).subscribe({
       next: (response) => {
@@ -270,12 +277,16 @@ export class DataPreperationComponent
             qname: question.name,
             options: question.options
           }
+
+          //TBD
+      this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.clear();
           this.handleError(error);
         },
       });
+
   };
 
 
@@ -334,7 +345,7 @@ export class DataPreperationComponent
   /*
    1. Delete the Column
    2. Create Work Table
-   3. Change the base table
+   3. Change the base table if yes
    4. Perform Univariate Statistics
   */
   performUnivariateStatistics = () => {
@@ -456,6 +467,10 @@ export class DataPreperationComponent
     });
   }
 
+  /*
+   1. Create _categ Table
+   2. Change the base table to (_categ or _work ) depends on the selection
+  */
   //Perform Numeric to Categorical - 6 //Decision
   performNumericToColumn = (val: string) => {
     //Prepare for checkbox two data modeling
@@ -781,7 +796,7 @@ export class DataPreperationComponent
 
           this.pendingSelection = Object.create(null);
           this.selectedColsForClusterImputing = [];
-          this.unselectedColsForClusterImputing = this.remainingCols.slice().sort(this.sortColumnOperator)
+          this.unselectedColsForClusterImputing = [...this.newCategoricalColumnsList, ...this.newNumericalColumnsList].sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.isBasicNullImputingStarted = false;
@@ -790,7 +805,7 @@ export class DataPreperationComponent
 
           this.pendingSelection = Object.create(null);
           this.selectedColsForClusterImputing = [];
-          this.unselectedColsForClusterImputing = this.remainingCols.slice().sort(this.sortColumnOperator)
+          this.unselectedColsForClusterImputing = [...this.newCategoricalColumnsList, ...this.newNumericalColumnsList].sort(this.sortColumnOperator)
 
         },
       });
@@ -861,6 +876,94 @@ export class DataPreperationComponent
         },
       });
   }
+
+  addToSelectedCols = (column?: string): void  => {
+
+    let changeColumns = (column)
+      ? [column]
+      : this.getPendingSelectionFromCollection(this.unselectedColsForClusterImputing);
+
+    // Now that we know which contacts we want to move, reset the pending-selection.
+    this.pendingSelection = Object.create(null);
+
+    // Remove each pending contact from the unselected list.
+    this.unselectedColsForClusterImputing = this.removeColsFromCollection(this.unselectedColsForClusterImputing, changeColumns);
+
+    // We always want to move the pending contacts onto the front / top of the
+    // selected list so that the change is VISUALLY OBVIOUS to the user.
+    this.selectedColsForClusterImputing = changeColumns.concat(this.selectedColsForClusterImputing);
+
+  }
+
+  // Remove the selected contact or contacts from the selected contacts collection.
+  public removeFromSelectedCols(col?: string): void {
+
+    let changeColumns = (col) ? [col] : this.getPendingSelectionFromCollection(this.selectedColsForClusterImputing);
+    this.pendingSelection = Object.create(null);
+
+    // Remove each pending contact from the selected contacts collection.
+    this.selectedColsForClusterImputing = this.removeColsFromCollection(this.selectedColsForClusterImputing, changeColumns);
+
+    // When moving contacts back to the unselected contacts list, we want to add
+    // them back in SORT ORDER since this will make it easier for the user to
+    // navigate the resulting list.
+    this.unselectedColsForClusterImputing = changeColumns
+      .concat(this.unselectedColsForClusterImputing)
+      .sort(this.sortColumnOperator);
+
+  }
+
+  // Toggle the pending selection for the given column.
+  public togglePendingSelection(col: string): void {
+    this.pendingSelection[col] = !this.pendingSelection[col];
+  }
+
+  // Gather the Columns in the given collection that are part of the current pending selection.
+  private getPendingSelectionFromCollection(collection: string[]): string[] {
+    var selectionFromCollection = collection.filter(col => {
+      return (col in this.pendingSelection);
+    });
+    return selectionFromCollection;
+  }
+
+
+  // Remove the given columnsToRemove from the given collection. Returns a new collection.
+  private removeColsFromCollection(collection: string[], columnsToRemove: string[]): string[] {
+    var collectionWithoutColumns = collection.filter(contact => {
+      return (!columnsToRemove.includes(contact));
+    });
+    return collectionWithoutColumns;
+  }
+
+
+  makePair = () => {
+        //add to pair list
+        console.log("this.selectedColsForClusterImputing) ", this.selectedColsForClusterImputing);
+        for(let i = 0; i<this.selectedColsForClusterImputing.length ; i++){
+          this.togglePendingSelection(this.selectedColsForClusterImputing[i]);
+        }
+        this.pairs.push(this.selectedColsForClusterImputing);
+        console.log(this.pairs);
+        //empty selected pair from list
+        this.removeFromSelectedCols();
+  }
+
+  updatePair = (ele1:any, ele2:any) => {
+    let filteredPair = this.pairs.filter((pair: any[]) => {
+      if(pair[0] === ele1 && pair[1] === ele2){
+        return false;
+      }
+      return true;
+    })
+
+    this.pairs = filteredPair;
+
+  }
+
+  private sortColumnOperator(a: string, b: string): number {
+    return (a.localeCompare(b));
+  }
+
 
   //Perform Outlier Handling - //Question 9 -- Set Question 10
   performOutlierHandlingDecision = (val: string) => {
@@ -1012,6 +1115,10 @@ export class DataPreperationComponent
      this.isBasicNullImputingDone = false;
 
      //Null Clustered Imputing Controls
+     this.pendingSelection = Object.create(null);
+     this.selectedColsForClusterImputing = [];
+     this.unselectedColsForClusterImputing = [];
+     this.pairs = [];
      this.isAutomatedClusterPerform = false;
      this.isAutomatedClusterStarted = false;
      this.isAutomatedClusterDone = false;
@@ -1182,81 +1289,6 @@ export class DataPreperationComponent
     }
   };
 
-  //Test
-
-
-
-  public addToSelectedCols(column?: string): void {
-
-    let changeColumns = (column)
-      // If a given column has been provided (via double-click), that's the single
-      // column that we want to move.
-      ? [column]
-      // Otherwise, default to using the pending-selection index as the source of
-      // columns to move.
-      : this.getPendingSelectionFromCollection(this.unselectedColsForClusterImputing)
-      ;
-
-    // Now that we know which contacts we want to move, reset the pending-selection.
-    this.pendingSelection = Object.create(null);
-
-    // Remove each pending contact from the unselected list.
-    this.unselectedColsForClusterImputing = this.removeColsFromCollection(this.unselectedColsForClusterImputing, changeColumns);
-
-    // We always want to move the pending contacts onto the front / top of the
-    // selected list so that the change is VISUALLY OBVIOUS to the user.
-    this.selectedColsForClusterImputing = changeColumns.concat(this.selectedColsForClusterImputing);
-
-  }
-
-  // I remove the selected contact or contacts from the selected contacts collection.
-  public removeFromSelectedCols(col?: string): void {
-
-    let changeColumns = (col) ? [col] : this.getPendingSelectionFromCollection(this.selectedColsForClusterImputing);
-    this.pendingSelection = Object.create(null);
-
-    // Remove each pending contact from the selected contacts collection.
-    this.selectedColsForClusterImputing = this.removeColsFromCollection(this.selectedColsForClusterImputing, changeColumns);
-
-    // When moving contacts back to the unselected contacts list, we want to add
-    // them back in SORT ORDER since this will make it easier for the user to
-    // navigate the resulting list.
-    this.unselectedColsForClusterImputing = changeColumns
-      .concat(this.unselectedColsForClusterImputing)
-      .sort(this.sortColumnOperator);
-
-  }
-
-
-  // Toggle the pending selection for the given column.
-  public togglePendingSelection(col: string): void {
-    this.pendingSelection[col] = !this.pendingSelection[col];
-  }
-
-  // Gather the Columns in the given collection that are part of the current pending selection.
-  private getPendingSelectionFromCollection(collection: string[]): string[] {
-    var selectionFromCollection = collection.filter(col => {
-      return (col in this.pendingSelection);
-    });
-    return selectionFromCollection;
-  }
-
-
-  // Remove the given columnsToRemove from the given collection. Returns a new collection.
-  private removeColsFromCollection(collection: string[], columnsToRemove: string[]): string[] {
-    var collectionWithoutColumns = collection.filter(contact => {
-      return (!columnsToRemove.includes(contact));
-    });
-    return collectionWithoutColumns;
-
-  }
-
-  private sortColumnOperator(a: string, b: string): number {
-    return (a.localeCompare(b));
-  }
 
 }
 
-interface PendingSelection {
-  [key: string]: boolean;
-}

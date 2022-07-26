@@ -2161,3 +2161,10 @@
 {"level":"error","timestamp":"Tue, 26 Jul 2022 13:53:56"}
 {"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 13:53:56"}
 {"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::ffff:127.0.0.1","timestamp":"Tue, 26 Jul 2022 13:53:56"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 17:02:20"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 17:02:20"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 17:02:21"}
+{"level":"error","message":null,"timestamp":"Tue, 26 Jul 2022 17:02:21"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 17:02:21"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 17:02:21"}
+{"level":"error","message":true,"timestamp":"Tue, 26 Jul 2022 17:02:21"}

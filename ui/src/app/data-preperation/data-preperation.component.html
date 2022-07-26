@@ -461,7 +461,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isNumricalToCategoricalConversionDone">
+                  <div class="col-10 text-center" style="margin-top: 7px;"
+                    *ngIf="isNumricalToCategoricalConversionDone">
                     <label class="info label-l ">Conversion of continous/numerical column to categorical done.
                       &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down"
                         style="font-size: 20px;"></span></label>
@@ -505,7 +506,8 @@
               <hr *ngIf="isBasicNullPerform" />
               <div class="row" *ngIf="isBasicNullPerform">
                 <div class="col-8">
-                  <label for="form-floating" class="text-muted p-1 label-c">Select column for basic null value imputing</label>
+                  <label for="form-floating" class="text-muted p-1 label-c">Select column for basic null value
+                    imputing</label>
                   <div class="">
                     <div class="table-responsive fixTableHead ">
                       <table class="table  table-sm table-bordered">
@@ -543,7 +545,8 @@
                       <tbody>
                         <tr *ngFor="let item of basicNullValueImputingList">
                           <td>{{item}}</td>
-                          <span class="fa fa-close" style="color: red;" (click)="removeToBasicNullValueImputingList(item)"></span>
+                          <span class="fa fa-close" style="color: red;"
+                            (click)="removeToBasicNullValueImputingList(item)"></span>
                         </tr>
                       </tbody>
                     </table>
@@ -582,7 +585,7 @@
 
 
         <!--Start of Cluster null value imputing-->
-        <div class="accordion-item card container" *ngIf="isBasicNullImputingDone">
+        <div class="accordion-item card container" *ngIf="2>1">
           <h2 class="accordion-header card-header" id="flush-heading8-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-heading8" aria-expanded="false" aria-controls="flush-heading8">
@@ -610,72 +613,92 @@
                 </div>
               </div>
 
-              <div class="row" *ngIf="isAutomatedClusterPerform">
-                <!-- <div class="col-7"></div>
-                <div class="col-5"></div> -->
+              <div class="row" *ngIf="2>1">
 
                 <!-- Start -->
-
-                <div class="dual-select">
-                  <div class="dual-select__left">
-
-                    <ul class="dual-select__items">
-                      <li
-                        *ngFor="let col of unselectedColsForClusterImputing"
-                        (click)="togglePendingSelection( col )"
-                        (dblclick)="addToSelectedCols( col )"
-                        class="dual-select__item"
-                        [class.dual-select__item__selected]="pendingSelection[ col ]"
-                      >
-
-                        <div class="contact">
-                          <div class="contact__name">
-                            {{ col }}
-                          </div>
-
-                        </div>
-
-                      </li>
-                    </ul>
-
-                  </div>
-                  <div class="dual-select__controls">
-                    <button
-                      (click)="addToSelectedCols()"
-                      class="dual-select__control">
-                      &#10503;
-                    </button>
-                    <button
-                      (click)="removeFromSelectedCols()"
-                      class="dual-select__control">
-                      &#10502;
-                    </button>
-                  </div>
-                  <div class="dual-select__right">
-
-                    <ul class="dual-select__items">
-                      <li
-                        *ngFor="let col of selectedColsForClusterImputing"
-                        (click)="togglePendingSelection( col )"
-                        (dblclick)="removeFromSelectedCols( col )"
-                        class="dual-select__item dual-select__item_new"
-                        [class.dual-select__item__selected]="pendingSelection[ col ]"
-                      >
-
-                        <div class="contact">
-                          <div class="contact__name">
-                            {{ col }}
+                <div class="dual-select col-7">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="dual-select__left col-5">
+                          <label for="form-floating" class="text-muted p-1 label-c">Select columns(in pair)</label>
+                          <div class="left-list scrollbar-primary">
+                            <ul class="dual-select__items">
+                              <li *ngFor="let col of unselectedColsForClusterImputing"
+                                (click)="togglePendingSelection( col )" (dblclick)="addToSelectedCols( col )"
+                                class="dual-select__item" [class.dual-select__item__selected]="pendingSelection[col]">
+                                <div class="column">
+                                  <div class="column__name">
+                                    {{ col }}
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
                           </div>
                         </div>
-
-                      </li>
-                    </ul>
-
+                        <div class="dual-select__controls col-2">
+                          <button (click)="addToSelectedCols()" class="dual-select__control">
+                            &#10503;
+                          </button>
+                          <button (click)="removeFromSelectedCols()" class="dual-select__control">
+                            &#10502;
+                          </button>
+                        </div>
+                        <div class="dual-select__right col-5">
+                          <label *ngIf="selectedColsForClusterImputing.length > 2; else normalLabel" for="form-floating"
+                            class="text-muted p-1 label-c">Single pair allowed. Remove Extra!</label>
+                          <ng-template #normalLabel>
+                            <label for="form-floating" class="text-muted p-1 label-c">Selected Column</label>
+                          </ng-template>
+                          <div class="right-list scrollbar-primary">
+                            <ul class="dual-select__items">
+                              <li *ngFor="let col of selectedColsForClusterImputing"
+                                (click)="togglePendingSelection( col )" (dblclick)="removeFromSelectedCols( col )"
+                                class="dual-select__item dual-select__item_new"
+                                [class.dual-select__item__selected]="pendingSelection[ col ]">
+                                <div class="column">
+                                  <div class="column__name">
+                                    {{ col }}
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12 justify-content-center text-center">
+                          <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="makePair()"
+                            style="margin-top: 2% !important;"
+                            [disabled]="selectedColsForClusterImputing.length !== 2">Make
+                            Pair</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
+                <div class="col-5">
+                  <!--Test Start-->
+                  <label for="form-floating" class="text-muted p-1 label-c">Selected pair(s)</label>
+                  <div class="toast-section scrollbar-primary">
+                  <div class="toast-container">
+                    <div *ngFor="let pair of pairs">
+                      <div class="toast show align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true"
+                        data-bs-autohide="false">
+                        <div class="d-flex">
+                          <div class="toast-body">
+                            {{pair[0]}}, {{pair[1]}}
+                          </div>
+                          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" (click) = "updatePair(pair[0], pair[1])"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
                 <!-- End -->
-
                 <div class="row align-items-start" style="padding-top: 18px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
@@ -799,8 +822,9 @@
               <div class="row">
                 <div class="col-12">
                   <div for="form-floating" class="p-4 text-center" style="color: #7500c0;">
-                    {{manualDataTransformationMessage}}  &nbsp;&nbsp;<span *ngIf="manualDataTransformDecisionInString === 'N'"
-                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></div>
+                    {{manualDataTransformationMessage}} &nbsp;&nbsp;<span
+                      *ngIf="manualDataTransformDecisionInString === 'N'" class="fa f-lg fa-level-down"
+                      style="font-size: 20px;"></span></div>
                 </div>
               </div>
             </div>
@@ -809,7 +833,8 @@
         <!-- End of Manual DT -->
 
         <!-- Start of Model Creation -->
-        <div class="accordion-item card container" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
+        <div class="accordion-item card container"
+          *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
           <h2 class="accordion-header card-header" id="flush-heading10-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-heading10" aria-expanded="false" aria-controls="flush-heading10">

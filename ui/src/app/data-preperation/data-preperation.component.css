@@ -313,6 +313,8 @@ hr {
   overflow-y: auto;
 }
 
+
+
 .label-l {
   font-weight: bold;
   font-size: 12px !important;
@@ -393,7 +395,11 @@ td {}
   height: 230px;
 }
 
-.dual-select__left,
+.dual-select__left{
+  flex: 0 0 auto;
+  width: 232px;
+}
+
 .dual-select__right {
   flex: 0 0 auto;
   width: 232px;
@@ -411,10 +417,14 @@ td {}
   font-size: 20px;
   height: 40px;
   margin: 10px 0px 10px 0px;
+  background-color: #0d6efd !important;
+  color: white;
+  border: none;
+  vertical-align: middle;
 }
 
 .dual-select__items {
-  border: 1px solid #cccccc;
+  border: 1px solid darkslateblue;
   height: 100%;
   list-style-type: none;
   margin: 0px 0px 0px 0px;
@@ -424,7 +434,7 @@ td {}
 }
 
 .dual-select__item {
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid darkslateblue;
   cursor: pointer;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
@@ -438,7 +448,8 @@ td {}
 }
 
 .dual-select__item__selected {
-  background-color: #bfd5ff;
+  background-color: #0d6efd;
+  color:white;
 }
 
 .dual-select__item_new {
@@ -447,7 +458,27 @@ td {}
   animation-timing-function: ease-out;
 }
 
+.dual-select__item .column {
+  font-size: 13px !important;
+}
 
+.left-list{
+  max-height: 185px !important;
+  overflow-y: auto;
+  height: 232px!important;
+}
+
+.right-list{
+  max-height: 185px !important;
+  overflow-y: auto;
+  height: 232px!important;
+}
+
+.toast-section{
+    max-height: 226px !important;
+    overflow: auto !important;
+    height: 250px !important;
+}
 
 @keyframes dual-select-item-new-fade-in {
   0% {
