@@ -2168,3 +2168,10 @@
 {"level":"error","timestamp":"Tue, 26 Jul 2022 17:02:21"}
 {"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 17:02:21"}
 {"level":"error","message":true,"timestamp":"Tue, 26 Jul 2022 17:02:21"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","message":null,"timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 02:21:18"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 02:21:19"}

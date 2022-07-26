@@ -631,22 +631,79 @@ exports.basicNullValueImputing = (req, res, next) => {
   } catch (error) {
     return next(createError(500));
   }
-
-
-
-
 }
 
 exports.clusterNullValueImputing = (req, res, next) => {
-  availableOptions = ["Y", "N"];
-  let question = {
-    name: QB.performOutlier,
-    options: availableOptions
+
+
+  try {
+    let requestBody = sanitize(req.body);
+
+    console.log("requestBody ", requestBody);
+    let config = getConfig(req);
+    let db = requestBody.db;
+    let basetable = requestBody.basetable;
+    let columnPairs = requestBody.pairs;
+
+
+    if (!config) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+    if (!db) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    if (!basetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+
+    if (!columnPairs) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+
+    availableOptions = ["Y", "N"];
+    let question = {
+      name: QB.performOutlier,
+      options: availableOptions
+    }
+    res.status(200).send({
+      Success: true,
+      message: { question }
+    });
+
+  } catch (error) {
+    return next(createError(500));
   }
-  res.status(200).send({
-    Success: true,
-    message: { question }
-  });
 }
 
 exports.outlierHandling = (req, res, next) => {

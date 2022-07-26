@@ -103,12 +103,13 @@ export class VantageService {
       );
   }
 
-  performClusterNullValueImputingSrvc(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+  performClusterNullValueImputingSrvc(connection: Connection, selectedDb: string, baseTable: string, pairs: any[]): Observable<any> {
     let body = {
-      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+      ...connection, db: selectedDb, basetable: baseTable, pairs
     }
 
     console.log(body);
+
     return this.http.post(this.rootURL + '/api/vantage/clusternullvalue', body, httpOptions)
       .pipe(
 

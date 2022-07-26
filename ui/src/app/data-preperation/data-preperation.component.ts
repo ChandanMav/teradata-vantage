@@ -104,7 +104,7 @@ export class DataPreperationComponent
   pendingSelection: PendingSelection = Object.create(null);
   selectedColsForClusterImputing: string[] = [];
   unselectedColsForClusterImputing: string[] = []
-  pairs: any = []
+  pairs: any[] = []
 
   //Outlier Controls
   isOutlierHandingPerform: boolean = false;
@@ -134,12 +134,12 @@ export class DataPreperationComponent
 
     delete state['navigationId'];
     //TBD
-    //this.config = state;
-    this.config = {
-      host: "153.64.73.11",
-      user: "CDMTDF3",
-      password: "Migrate1234#"
-    };
+    this.config = state;
+    // this.config = {
+    //   host: "153.64.73.11",
+    //   user: "CDMTDF3",
+    //   password: "Migrate1234#"
+    // };
 
     this.vantageService.getDatabases(this.config).subscribe({
       next: (response) => {
@@ -279,7 +279,7 @@ export class DataPreperationComponent
           }
 
           //TBD
-          this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
+          //this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.clear();
@@ -844,30 +844,27 @@ export class DataPreperationComponent
 
   performClusterNullValueImputing = () => {
     this.isAutomatedClusterStarted = true;
+    this.isAutomatedClusterDone = false;
     this.vantageService
       .performClusterNullValueImputingSrvc(
         this.config,
         this.selectedDb,
-        this.baseTable,
-        this.dependentCol
+        this.newBaseTable,
+        this.pairs
       )
       .subscribe({
         next: (response) => {
-          setTimeout(() => {
-            this.isAutomatedClusterStarted = false;
-            this.isAutomatedClusterDone = true;
+          this.isAutomatedClusterStarted = false;
+          this.isAutomatedClusterDone = true;
+          let {
+            output,
+            question
+          } = response.message;
 
-            let {
-              output,
-              question
-            } = response.message;
-
-            this.questions.q9 = {
-              qname: question.name,
-              options: question.options
-            }
-          }, 5000)
-
+          this.questions.q9 = {
+            qname: question.name,
+            options: question.options
+          }
         },
         error: (error) => {
           this.isAutomatedClusterStarted = false;

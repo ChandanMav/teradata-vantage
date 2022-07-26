@@ -585,7 +585,7 @@
 
 
         <!--Start of Cluster null value imputing-->
-        <div class="accordion-item card container" *ngIf="2>1">
+        <div class="accordion-item card container" *ngIf="isBasicNullImputingDone">
           <h2 class="accordion-header card-header" id="flush-heading8-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-heading8" aria-expanded="false" aria-controls="flush-heading8">
@@ -633,7 +633,7 @@
                 </div>
               </div>
 
-              <div class="row container" *ngIf="2>1">
+              <div class="row container" *ngIf="isAutomatedClusterPerform">
 
                 <!-- Start -->
                 <div class="dual-select col-8">
