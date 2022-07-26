@@ -71,21 +71,20 @@ export class VantageService {
     //console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/univariate', body, httpOptions)
       .pipe(
-
         catchError((error) => this.appService.handleError(error))
       );
 
   }
 
-  convertNumericalToCategorical(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+  convertNumericalToCategorical(connection: Connection, selectedDb: string, baseTable: string, newBaseTable: string, selectedNColumnsForConversionList:string[]): Observable<any> {
+    let commaSeperatedPipe = new CommaSeperatedPipe();
     let body = {
-      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+      ...connection, db: selectedDb, basetable: baseTable, new_basetable: newBaseTable,  cCols: commaSeperatedPipe.transform(selectedNColumnsForConversionList)
     }
 
     console.log(body);
     return this.http.post(this.rootURL + '/api/vantage/numuric/conversion', body, httpOptions)
       .pipe(
-
         catchError((error) => this.appService.handleError(error))
       );
   }
@@ -117,9 +116,9 @@ export class VantageService {
       );
   }
 
-  performBasicNullImputingServc(connection: Connection, selectedDb: string, baseTable: string, dependentCol: string): Observable<any> {
+  performBasicNullImputingServc(connection: Connection, selectedDb: string, baseTable: string, basicnullcolval: any): Observable<any> {
     let body = {
-      ...connection, db: selectedDb, basetable: baseTable, dep_col: dependentCol
+      ...connection, db: selectedDb, basetable: baseTable, basicnullcolval: basicnullcolval
     }
 
     console.log(body);

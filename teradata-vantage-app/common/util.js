@@ -101,3 +101,32 @@ exports.getConfig = (req) => {
 
   return config;
 }
+
+
+exports.formatUnivariateStatsData = (data) => {
+  if (!data) {
+    return [];
+  }
+
+  let fdata = [];
+    for(let d = 0; d<data.length; d++){
+
+    let obj = {};
+    let item = data[d];
+
+    obj.Attribute = item[0];
+    obj.Mean = Number(item[1]).toFixed(2);
+    obj.Median = Number(item[2]).toFixed(2);
+    obj.Mode = Number(item[3]).toFixed(2);
+    obj['Null Values Count'] = parseInt(item[4]);
+    obj['Negative Values Count'] = parseInt(item[5]);
+    obj['Unique values Count'] = parseInt(item[6]);
+    obj.Range = Number(item[7]).toFixed(2);
+    obj.Minimum = Number(item[8]).toFixed(2);
+    obj.Maximum = Number(item[9]).toFixed(2);
+
+    fdata.push(obj);
+  
+    }
+  return fdata;
+}

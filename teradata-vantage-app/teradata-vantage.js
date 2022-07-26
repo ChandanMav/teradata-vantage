@@ -1,6 +1,7 @@
 var { getTimeStamp, cleanupTempFile } = require("./common/util");
 var { getConnection, closeConnection } = require("./teradata-connection");
 var TeradataExceptions = require("teradata-nodejs-driver/teradata-exceptions");
+const winston = require("winston/lib/winston/config");
 
 const init = (DB, BASE_TABLE, DEP_COL) => {
   let BASE_TABLE_ORIG = BASE_TABLE;
@@ -87,10 +88,10 @@ const init = (DB, BASE_TABLE, DEP_COL) => {
     //console.log(categCols);
 
     if(numericCols.length === 0){
-      console.log("No Numeric Columns in the dataset")
+      winston.info("No Numeric Columns in the dataset")
     }
     if(categCols.length === 0){
-       console.log("No Categorical Columns in the initial dataset");
+      winston.info("No Categorical Columns in the initial dataset");
     }
 
     
@@ -129,9 +130,9 @@ const init = (DB, BASE_TABLE, DEP_COL) => {
 
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {
-      console.log(error.message);
+      winston.info(error.message);
     } else {
-      console.log(error);
+      winston.info(error);
     }
   }
 };

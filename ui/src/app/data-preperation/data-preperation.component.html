@@ -142,12 +142,12 @@
                     <caption style="font-size: 13px; caption-side: top;">Sample Dataset</caption>
                     <thead class="thead-dark">
                       <tr class="result-header">
-                        <td *ngFor="let column of columns">{{column}}</td>
+                        <td *ngFor="let column of displayCols">{{column}}</td>
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let d of top5data" class="result-data">
-                        <td *ngFor="let d1 of d | jsonReader: columns"> {{d1}}</td>
+                        <td *ngFor="let ele of d | jsonReader: displayCols"> {{ele}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -241,7 +241,7 @@
                     (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
                 </div>
                 <div class="col-7" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
-                  <label class="info label-l" style="font-size: 10px !important; "> Exploratory Data Analysis of Numeric
+                  <label class="info label-l" style="font-size: 9px !important; "> Exploratory Data Analysis of Numeric
                     column
                     started using Vantage MLE functions
                     'UnivariateStatistics' and 'Unpivoting'</label>
@@ -401,7 +401,7 @@
                         <thead class="thead-dark">
                           <tr class="result-header">
                             <th>Numeric Column</th>
-                            <th>Sample Value</th>
+                            <th>Distinct Value</th>
                             <th style="width: 10vh;"></th>
                           </tr>
                         </thead>

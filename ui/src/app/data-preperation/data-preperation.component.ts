@@ -41,6 +41,7 @@ export class DataPreperationComponent
   testsetsize: number = 0;
   trainsetsize: number = 0;
   top5data: any[] = [];
+  displayCols: any = [];
   ncols: string[] = [];
   ccols: string[] = [];
 
@@ -78,6 +79,7 @@ export class DataPreperationComponent
   isNumricalToCategoricalConversionDone: boolean = false;
   newCategoricalColumnsList: string[] = [];
   newNumericalColumnsList: string[] = [];
+  newBaseTable: string = "";
 
 
   //Null Basic Imputing Controls
@@ -254,12 +256,15 @@ export class DataPreperationComponent
           this.rowCount = rowCount;
           this.testsetsize = testsetsize;
           this.top5data = top5data;
+          this.displayCols = Object.keys(top5data[0]);
+
+
           this.ncols = ncols;
           this.ccols = ccols;
           this.trainsetsize = trainsetsize;
 
-          this.remainingNcols = this.ncols;
-          this.remainingCCols = this.ccols;
+          this.remainingNcols = [...this.ncols];
+          this.remainingCCols = [...this.ccols];
 
           this.questions.q1 = {
             qname: question.name,
@@ -288,9 +293,9 @@ export class DataPreperationComponent
       case 'N':
         this.isColumnSelectToDrop = false;
         this.dropCols = [];
-        this.remainingCols = this.columns;
-        this.remainingNcols = this.ncols;
-        this.remainingCCols = this.ccols;
+        this.remainingCols = [...this.columns];
+        this.remainingNcols = [...this.ncols];
+        this.remainingCCols = [...this.ccols];
         break;
     }
   };
@@ -465,9 +470,11 @@ export class DataPreperationComponent
       case 'Y':
         this.isNumericToCategoricalPerform = true;
         this.isNumricalToCategoricalConversionDone = false;
+        //Chnage the base table name
+        this.newBaseTable = this.selectedtable + "_categ";
         break;
       case 'N':
-
+        this.newBaseTable = this.baseTable;
         this.vantageService
           .getQuestion(7)
           .subscribe({
@@ -489,8 +496,8 @@ export class DataPreperationComponent
           });
 
         this.selectedNColumnsForConversionList = [];
-        this.newCategoricalColumnsList = this.remainingCCols;
-        this.newNumericalColumnsList = this.remainingNcols;
+        this.newCategoricalColumnsList = [...this.remainingCCols];
+        this.newNumericalColumnsList = [...this.remainingNcols];
         break;
     }
   }
@@ -549,70 +556,67 @@ export class DataPreperationComponent
         this.config,
         this.selectedDb,
         this.baseTable,
-        this.dependentCol
-        //this.selectedNColumnsForConversionList
+        this.newBaseTable,
+        this.selectedNColumnsForConversionList
       )
       .subscribe({
         next: (response) => {
-          setTimeout(() => {
-            this.isNumricalToCategoricalStarted = false;
-            this.isNumricalToCategoricalConversionDone = true;
+          this.isNumricalToCategoricalStarted = false;
+          this.isNumricalToCategoricalConversionDone = true;
 
-            //Update New Categorical and Numerical Column List
-            let newCategoricalColumnsList = this.remainingCCols;
-            let newNumericalColumnsList = this.remainingNcols;
+          //Update New Categorical and Numerical Column List
+          let newCategoricalColumnsList = [...this.remainingCCols];
+          let newNumericalColumnsList = [...this.remainingNcols];
 
-            //Add to categorical list
-            console.log("this.selectedNColumnsForConversionList ", this.selectedNColumnsForConversionList)
-            console.log("newCategoricalColumnsList ", newCategoricalColumnsList)
-            for (let e = 0; e < this.selectedNColumnsForConversionList.length; e++) {
-              let matchFound = false;
-              for (let t = 0; t < newCategoricalColumnsList.length; t++) {
-                if (newCategoricalColumnsList[t] === this.selectedNColumnsForConversionList[e]) {
-                  matchFound = true;
-                  break;
-                }
-              }
-              if (!matchFound) {
-                console.log("Inside Match Found");
-                newCategoricalColumnsList.push(this.selectedNColumnsForConversionList[e]);
+          //Add to categorical list
+          console.log("this.selectedNColumnsForConversionList ", this.selectedNColumnsForConversionList)
+          console.log("newCategoricalColumnsList ", newCategoricalColumnsList)
+          for (let e = 0; e < this.selectedNColumnsForConversionList.length; e++) {
+            let matchFound = false;
+            for (let t = 0; t < newCategoricalColumnsList.length; t++) {
+              if (newCategoricalColumnsList[t] === this.selectedNColumnsForConversionList[e]) {
+                matchFound = true;
+                break;
               }
             }
-
-            //Remove From Numerical list
-            for (let i = 0; i < this.selectedNColumnsForConversionList.length; i++) {
-              let index = newNumericalColumnsList.indexOf(this.selectedNColumnsForConversionList[i]);
-              if (index !== -1) {
-                newNumericalColumnsList.splice(index, 1);
-              }
+            if (!matchFound) {
+              console.log("Inside Match Found");
+              newCategoricalColumnsList.push(this.selectedNColumnsForConversionList[e]);
             }
+          }
 
-            //Set to instance variable
-            this.newCategoricalColumnsList = newCategoricalColumnsList;
-            this.newNumericalColumnsList = this.remainingNcols;
-
-            console.log(this.newCategoricalColumnsList);
-            console.log(this.newNumericalColumnsList);
-
-            let {
-              output,
-              question
-            } = response.message;
-
-            console.log(question);
-
-            this.questions.q7 = {
-              qname: question.name,
-              options: question.options
+          //Remove From Numerical list
+          for (let i = 0; i < this.selectedNColumnsForConversionList.length; i++) {
+            let index = newNumericalColumnsList.indexOf(this.selectedNColumnsForConversionList[i]);
+            if (index !== -1) {
+              newNumericalColumnsList.splice(index, 1);
             }
-          }, 5000)
+          }
 
+          //Set to instance variable
+          this.newCategoricalColumnsList = newCategoricalColumnsList;
+          this.newNumericalColumnsList = newNumericalColumnsList;
+
+          console.log(this.newCategoricalColumnsList);
+          console.log(this.newNumericalColumnsList);
+
+          let {
+            output,
+            question
+          } = response.message;
+
+          console.log(question);
+
+          this.questions.q7 = {
+            qname: question.name,
+            options: question.options
+          }
         },
         error: (error) => {
           this.isNumricalToCategoricalStarted = false;
           this.isNumricalToCategoricalConversionDone = true;
-          this.newCategoricalColumnsList = this.remainingCCols;
-          this.newNumericalColumnsList = this.remainingNcols;
+          this.newCategoricalColumnsList = [...this.remainingCCols];
+          this.newNumericalColumnsList = [...this.remainingNcols];
           this.handleError(error);
         },
       });
@@ -723,36 +727,61 @@ export class DataPreperationComponent
   }
 
   performBasicNullImputing = () => {
+
+    this.clearAfterBasicNullImputing();
+    this.isBasicNullImputingStarted = true;
+    this.isBasicNullImputingDone = false;
+
+    let d = [];
+    for (let i = 0; i < this.basicNullValueImputingList.length; i++) {
+      let item: any = {};
+      if (this.newNumericalColumnsList.includes(this.basicNullValueImputingList[i])) {
+        for (let u = 0; u < this.univariateStatisticsResult.length; u++) {
+          let obj: any = this.univariateStatisticsResult[u];
+          if ((obj['Attribute']).toUpperCase() === this.basicNullValueImputingList[i].toUpperCase()) {
+            item.name = this.basicNullValueImputingList[i].toLowerCase();
+            item.value = obj['Median'];
+            break;
+          }
+        }
+      } else {
+        for (let u = 0; u < this.univariateStatisticsResult.length; u++) {
+          let obj: any = this.univariateStatisticsResult[u];
+          if ((obj['Attribute']).toUpperCase() === this.basicNullValueImputingList[i].toUpperCase()) {
+            item.name = this.basicNullValueImputingList[i].toLowerCase();
+            item.value = obj['Mode'];
+            break;
+          }
+        }
+      }
+      d.push(item);
+    }
     this.isBasicNullImputingStarted = true;
     this.vantageService
       .performBasicNullImputingServc(
         this.config,
         this.selectedDb,
-        this.baseTable,
-        this.dependentCol
+        this.newBaseTable,
+        d
       )
       .subscribe({
         next: (response) => {
-          setTimeout(() => {
-            this.isBasicNullImputingStarted = false;
-            this.isBasicNullImputingDone = true;
+          this.isBasicNullImputingStarted = false;
+          this.isBasicNullImputingDone = true;
 
-            let {
-              output,
-              question
-            } = response.message;
+          let {
+            output,
+            question
+          } = response.message;
 
-            this.questions.q8 = {
-              qname: question.name,
-              options: question.options
-            }
+          this.questions.q8 = {
+            qname: question.name,
+            options: question.options
+          }
 
-            this.pendingSelection = Object.create(null);
-            this.selectedColsForClusterImputing = [];
-            this.unselectedColsForClusterImputing = this.remainingCols.slice().sort(this.sortColumnOperator)
-
-          }, 5000)
-
+          this.pendingSelection = Object.create(null);
+          this.selectedColsForClusterImputing = [];
+          this.unselectedColsForClusterImputing = this.remainingCols.slice().sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.isBasicNullImputingStarted = false;
@@ -979,6 +1008,23 @@ export class DataPreperationComponent
     });
   };
 
+  clearAfterBasicNullImputing = () => {
+     this.isBasicNullImputingDone = false;
+
+     //Null Clustered Imputing Controls
+     this.isAutomatedClusterPerform = false;
+     this.isAutomatedClusterStarted = false;
+     this.isAutomatedClusterDone = false;
+
+     //Null Outlier Imputing Controls
+     this.isOutlierHandingPerform = false;
+     this.isOutlierHandingStarted = false;
+     this.isOutlierHandingDone = false;
+
+     //final
+     this.flows = [];
+  }
+
   clearAfterNumericalToCat = () => {
 
     //
@@ -991,12 +1037,12 @@ export class DataPreperationComponent
     this.isBasicNullImputingStarted = false;
     this.isBasicNullImputingDone = false;
 
-    //Null Basic Imputing Controls
+    //Null Clustered Imputing Controls
     this.isAutomatedClusterPerform = false;
     this.isAutomatedClusterStarted = false;
     this.isAutomatedClusterDone = false;
 
-    //Null Basic Imputing Controls
+    //Null Outlier Imputing Controls
     this.isOutlierHandingPerform = false;
     this.isOutlierHandingStarted = false;
     this.isOutlierHandingDone = false;

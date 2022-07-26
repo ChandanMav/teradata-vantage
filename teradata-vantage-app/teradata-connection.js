@@ -15,13 +15,13 @@ getConnection = (config) => {
   try {
     teradataConnection = new TeradataConnection.TeradataConnection();
     teradataConnection.connect(config);
-    winston.info("************Teradata Connection Successful!")
+    winston.info("Teradata Connection Successful!")
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {
-      winston.error("************Teradata Connection failed! " + error.message)
+      winston.error("Teradata Connection failed! " + error.message)
       return null;
     } else {
-      winston.error("************Teradata Connection failed! " + error)
+      winston.error("Teradata Connection failed! " + error)
       return null;
     }
   }
@@ -37,9 +37,9 @@ closeConnection = (conn) => {
     winston.info("************Teradata Connection closed successfully!")
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {
-      winston.error("************Teradata Connection failed! " + error.message)
+      winston.error("Teradata Connection failed! " + error.message)
     } else {
-      winston.error("************Teradata Connection failed! " + error)
+      winston.error("Teradata Connection failed! " + error)
     }
   }
 }

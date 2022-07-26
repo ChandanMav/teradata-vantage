@@ -16,7 +16,7 @@ var QB = require("./question-bank");
 
 //Test Teradata database
 exports.testConnection = (req, res, next) => {
-  winston.info("***********Checking Teradata Connection");
+  winston.info("Checking Teradata Connection");
   let config = getConfig(req);
   if (!config) {
     res.status(503).send({ Success: false, error_code: "No_database_Session", message: Error.ERR_NO_AUTH });
@@ -39,7 +39,7 @@ exports.testConnection = (req, res, next) => {
 //Get Databases from DB Server
 exports.getDatabases = (req, res, next) => {
 
-  winston.info("***********Retrieving Databases");
+  winston.info("Fetching list of Database");
   let config = getConfig(req);
   if (!config) {
     res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });
@@ -48,7 +48,7 @@ exports.getDatabases = (req, res, next) => {
 
   let connection = getConnection(config);
 
-  console.log(connection);
+  winston.info(connection);
   if (connection) {
     DAO.findDatabases(connection, (err, data) => {
       closeConnection(connection);
@@ -67,7 +67,7 @@ exports.getDatabases = (req, res, next) => {
 
 //Get Tables from Database
 exports.getTables = (req, res, next) => {
-  winston.info("***********Retrieving tables");
+  winston.info("Retrieving tables");
 
   let database = req.params.database;
   if (!database) {
@@ -203,7 +203,7 @@ exports.init = (req, res, next) => {
   let train_size = 0;
   let test_size = 0;
 
-  winston.info("***********Process Started");
+  winston.info("Fetching Basic info");
   let config = getConfig(req);
 
   //console.log(config);
@@ -323,7 +323,10 @@ exports.init = (req, res, next) => {
         let top5Data = [];
 
         try {
-          cursor.execute(top5Query);
+          //this.columns.map(col => col)
+          let q2 = `SELECT top 5 ${columns} from ${db}.${basetable}`;
+          //console.log(q2);
+          cursor.execute(q2);
           top5Data = cursor.fetchall();
           //console.log("top5Data ", top5Data);
           for (i = 0; i < top5Data.length; i++) {
@@ -368,7 +371,7 @@ exports.init = (req, res, next) => {
         };
 
         //Setting up in the session object        
-        winston.info("Init process completed successfully!");
+        winston.info("Fetching Basic info is completed");
         res.status(200).send({ success: true, message: result });
       }
     }

@@ -5,7 +5,7 @@ var sanitize = require("mongo-sanitize");
 var Error = require("../common/app.err.messages");
 var { getConnection, closeConnection } = require("../teradata-connection");
 var DAO = require("../dao/teradata-dao");
-var { anIgnoreError, getConfig } = require("../common/util");
+var { anIgnoreError, getConfig, formatUnivariateStatsData } = require("../common/util");
 var QB = require("./question-bank");
 var Errorcode = require("../common/error-code");
 var createError = require("http-errors");
@@ -155,9 +155,6 @@ exports.univariate = (req, res, next) => {
     }
     nCols = nCols.split(",");
     let nColsSingleQuoted = nCols.map(col => `'${col}'`);
-    console.log(nColsSingleQuoted);
-
-
 
     if (!remainingCols) {
       res.status(503).send({
@@ -177,8 +174,6 @@ exports.univariate = (req, res, next) => {
       return;
     }
 
-
-
     if (!key) {
       res.status(503).send({
         Success: false,
@@ -196,9 +191,8 @@ exports.univariate = (req, res, next) => {
           winston.info(query);
           DAO.dropTable(connection, query, (err, isDeleted) => {
             if (isDeleted) {
-              winston.info(`Table ${db}.${basetable}_work dropped`)
               callback(null, null);
-            } else {              
+            } else {
               //Just ignore the error if occured during table deletion
               callback(null, null);
             }
@@ -213,10 +207,9 @@ exports.univariate = (req, res, next) => {
             DAO.createTable(connection, query, (err, isCreated) => {
               if (isCreated) {
                 basetable = `${basetable}_work`;
-                winston.info(`Table created successfuly ${db}.${basetable}`)
                 callback(null, null);
-              } else {      
-                winston.info(`Working Table is not created. Hence Exiting!`)      
+              } else {
+                winston.info(`Working Table is not created. Hence Exiting!`)
                 callback(true, null);
               }
             });
@@ -227,8 +220,8 @@ exports.univariate = (req, res, next) => {
         }, //End of droping work table
 
         //Run Univariate Result
-        (isWorkingTableCreated, callback) => {         
-          winston.info("Exploratory Data Analysis started using Vantage MLE functions 'UnivariateStatistics' and 'Unpivoting' ...");
+        (isWorkingTableCreated, callback) => {
+          winston.info("Exploratory Data Analysis started using Vantage MLE functions");
           async.waterfall([
             //DROP moments_ table if any
             innerCB => {
@@ -236,9 +229,8 @@ exports.univariate = (req, res, next) => {
               winston.info(query);
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
-                  winston.info(`Table dropped successfuly ${db}.moments_${basetable}`)
                   innerCB(null, null);
-                } else {                
+                } else {
                   //Just ignore the error if occured during table deletion
                   innerCB(null, null);
                 }
@@ -251,21 +243,19 @@ exports.univariate = (req, res, next) => {
               winston.info(query);
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
-                  winston.info(`Table dropped successfuly ${db}.basic_${basetable}`)
                   innerCB(null, null);
-                } else {                 
+                } else {
                   //Just ignore the error if occured during table deletion
                   innerCB(null, null);
                 }
               });
             }, //End of droping basic_ table
             //DROP quantiles_ table if any
-            (result, innerCB) => {            
+            (result, innerCB) => {
               let query = `DROP TABLE ${db}.quantiles_${basetable}`;
               winston.info(query);
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
-                  inston.info(`Table dropped successfuly ${db}.quantiles_${basetable}`)
                   innerCB(null, null);
                 } else {
                   winston.error(err);
@@ -276,7 +266,7 @@ exports.univariate = (req, res, next) => {
             }, //End of droping quantiles_ table
 
             //call UnivariateStatistics MLE
-            (result, innerCB) => {             
+            (result, innerCB) => {
               let query = `SELECT * FROM UnivariateStatistics (
                     ON ${db}.${basetable} AS InputTable
                     OUT TABLE MomentsTableName(${db}.moments_${basetable})
@@ -286,19 +276,18 @@ exports.univariate = (req, res, next) => {
                     ExcludeColumns('${dep_col}')
                     ) AS dt `;
 
-              winston.info(query);
+              winston.info(query.substring(0, 50));
               DAO.executeQuery(connection, query, (err, isExecutionDone) => {
                 if (isExecutionDone) {
-                  winston.info(`UnivariateStatistics Query Execution is Done`);
                   innerCB(null, null);
-                } else {                
+                } else {
                   innerCB(true, null);
                 }
               });
             },// End of Performing UnivariateStatistics
 
             //Perform univariate_unpivot
-            (result, innerCB) => {             
+            (result, innerCB) => {
               let query = `create volatile table univariate_unpivot as (
                 SELECT * FROM Unpivoting (
                 ON ${db}.basic_${basetable}
@@ -324,20 +313,19 @@ exports.univariate = (req, res, next) => {
                 ) with DATA
                 on commit preserve rows;`;
 
-              winston.info(query);
+              winston.info(query.substring(0, 50));
 
               DAO.executeQuery(connection, query, (err, isExecutionDone) => {
                 if (isExecutionDone) {
-                  winston.info(`Univariate Unpivot Query Execution is completed}`);
                   innerCB(null, null);
-                } else {                 
+                } else {
                   innerCB(true, null);
                 }
               });
             },//End of univariate_unpivot
 
             //Extract of univariate_unpivot result
-            (result, innerCB) => {              
+            (result, innerCB) => {
               let query = `select trim(attribute), trim(value_col_mean),trim(value_col_median),trim(value_col_mode),trim("value_col_number of null values"),trim("value_col_number of negative values"),trim("value_col_number of unique values"),trim(value_col_range),trim(value_col_minimum),trim(value_col_maximum) from Pivoting (
                 ON univariate_unpivot PARTITION BY attribute
                 USING
@@ -347,12 +335,13 @@ exports.univariate = (req, res, next) => {
                 TargetColumns ('value_col')
                 ) AS dt;`;
 
-              console.log(query);
+              winston.info(query.substring(0, 50));
 
               DAO.fetchResult(connection, query, (err, data) => {
-                if (data) {                 
-                  innerCB(null, data);
-                } else {                
+                if (data) {
+                  let formattedData = formatUnivariateStatsData(data)
+                  innerCB(null, formattedData);
+                } else {
                   innerCB(true, null);
                 }
               });
@@ -361,7 +350,7 @@ exports.univariate = (req, res, next) => {
             //Need to write code
 
           ], (err, result) => {
-            if (err) {              
+            if (err) {
               callback(true, null);
             }
             else {
@@ -370,7 +359,7 @@ exports.univariate = (req, res, next) => {
           })
         }
       ],
-      (error, result1) => {
+      (error, data) => {
         closeConnection(connection);
         if (error) {
           winston.error(error);
@@ -380,7 +369,7 @@ exports.univariate = (req, res, next) => {
         } else {
 
           let result = {
-            output: sample,
+            output: data,
             question: {
               name: QB.performAutomatedDataTransformation,
               options: ["Y", "N"]
@@ -399,28 +388,253 @@ exports.univariate = (req, res, next) => {
 };
 
 exports.numericToCategoricalConversion = (req, res, next) => {
-  availableOptions = ["Y", "N"];
-  let question = {
-    name: QB.basicNull,
-    options: availableOptions
+
+
+  try {
+    let requestBody = sanitize(req.body);
+    let config = getConfig(req);
+    let db = requestBody.db;
+    let basetable = requestBody.basetable;
+    let new_basetable = requestBody.new_basetable;
+    let cCols = requestBody.cCols; //New list of categorical columns
+
+    if (!config) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+    if (!db) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    if (!basetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+
+    if (!new_basetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+
+    if (!cCols) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    cCols = cCols.split(",");
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+
+    async.waterfall(
+      [
+        (callback) => {
+          let query = `DROP TABLE ${db}.${new_basetable}`;
+          winston.info(query);
+          DAO.dropTable(connection, query, (err, isDeleted) => {
+            if (isDeleted) {
+              callback(null, null);
+            } else {
+              //Just ignore the error if occured during table deletion
+              callback(null, null);
+            }
+          });
+        }, //End of droping table
+
+        //Create MULTISET TABLE
+        (data, callback) => {
+          let cColsSingleQuoted = cCols.map(col => `'${col}'`);
+
+          let query = `CREATE MULTISET TABLE ${db}.${new_basetable} AS (
+              SELECT * FROM ConvertToCategorical(
+              ON ${db}.${basetable} PARTITION BY ANY
+              USING
+              TargetColumns(${cColsSingleQuoted})
+              ) AS dt
+              ) WITH DATA`;
+
+          winston.info(query)
+          DAO.createTable(connection, query, (err, isCreated) => {
+            if (isCreated) {
+              callback(null, null);
+            } else {
+              winston.info(`MULTISET Table is not created. Hence Exiting!`)
+              callback(true, null);
+            }
+          });
+        } //End of droping work table
+      ],
+      (error, data) => {
+        closeConnection(connection);
+        if (error) {
+          winston.error(error);
+          res
+            .status(500)
+            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        } else {
+          availableOptions = ["Y", "N"];
+          let question = {
+            name: QB.basicNull,
+            options: availableOptions
+          }
+          res.status(200).send({
+            Success: true,
+            message: { question }
+          });
+        }
+      }
+    )
+
+  } catch (error) {
+    return next(createError(500));
   }
-  res.status(200).send({
-    Success: true,
-    message: { question }
-  });
 }
 
 
 exports.basicNullValueImputing = (req, res, next) => {
-  availableOptions = ["Y", "N"];
-  let question = {
-    name: QB.performAutomaticClustered,
-    options: availableOptions
+
+  try {
+    let requestBody = sanitize(req.body);
+
+    console.log("requestBody ", requestBody);
+    let config = getConfig(req);
+    let db = requestBody.db;
+    let basetable = requestBody.basetable;
+    let basicnullcolval = requestBody.basicnullcolval;
+
+
+    if (!config) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+    if (!db) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    if (!basetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+
+    if (!basicnullcolval) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+
+    async.waterfall(
+      [
+        (callback) => {
+          let queryList = [];
+          for (let i = 0; i < basicnullcolval.length; i++) {
+            let query = `UPDATE ${db}.${basetable} SET ${basicnullcolval[i].name}=${Number(basicnullcolval[i].value)} where ${basicnullcolval[i].name} IS NULL`
+            queryList.push(query);
+          }
+          callback(null, queryList);
+        },
+
+        //Update Basic Null
+        (queryList, callback) => {
+          if (queryList.length > 0) {
+            for (let k = 0; k < queryList.length; k++) {
+              let query = queryList[k];
+              winston.info("Query Execution : " + query);
+              DAO.executeQuery(connection, query, (err, isDone) => {
+                if (!isDone) {
+                  callback(true, null)
+                  return;
+                }
+              });
+            }
+            callback(null, null)
+          } else {
+            callback(null, null);
+          }
+        }
+      ],
+      (error, data) => {
+        closeConnection(connection);
+        if (error) {
+          winston.error(error);
+          res
+            .status(500)
+            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        } else {
+          availableOptions = ["Y", "N"];
+          let question = {
+            name: QB.performAutomaticClustered,
+            options: availableOptions
+          }
+          res.status(200).send({
+            Success: true,
+            message: { question }
+          });
+        }
+      }
+    )
+
+  } catch (error) {
+    return next(createError(500));
   }
-  res.status(200).send({
-    Success: true,
-    message: { question }
-  });
+
+
+
+
 }
 
 exports.clusterNullValueImputing = (req, res, next) => {

@@ -2113,3 +2113,51 @@
 {"level":"error","timestamp":"Mon, 25 Jul 2022 23:21:45"}
 {"level":"error","message":"**************Table deletion failed but this can be ignored!","timestamp":"Mon, 25 Jul 2022 23:21:45"}
 {"level":"error","message":"500 - Internal Server Error - /api/vantage/univariate - POST - ::1","timestamp":"Mon, 25 Jul 2022 23:21:45"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 00:13:08"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 00:13:08"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 00:13:09"}
+{"level":"error","message":null,"timestamp":"Tue, 26 Jul 2022 00:13:09"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 06:55:56"}
+{"level":"error","message":null,"timestamp":"Tue, 26 Jul 2022 06:55:56"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 06:57:15"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 06:57:15"}
+{"level":"error","message":true,"timestamp":"Tue, 26 Jul 2022 06:57:16"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 07:02:38"}
+{"level":"error","message":null,"timestamp":"Tue, 26 Jul 2022 07:02:38"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 07:03:56"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 07:03:56"}
+{"level":"error","message":true,"timestamp":"Tue, 26 Jul 2022 07:03:57"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 07:08:16"}
+{"level":"error","message":null,"timestamp":"Tue, 26 Jul 2022 07:08:16"}
+{"level":"error","message":"Table deletion failed but this can be ignored!","timestamp":"Tue, 26 Jul 2022 07:35:40"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/numuric/conversion - POST - ::1","timestamp":"Tue, 26 Jul 2022 08:23:41"}
+{"level":"error","message":"Table creation failed","timestamp":"Tue, 26 Jul 2022 08:53:15"}
+{"level":"error","message":true,"timestamp":"Tue, 26 Jul 2022 08:53:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 09:00:38"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 09:02:21"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 09:07:47"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 09:10:19"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 10:34:09"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 10.25.15.13\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 10.25.15.13:1025: i/o timeout","timestamp":"Tue, 26 Jul 2022 11:23:09"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 11:42:45"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 12:22:02"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 12:47:12"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 26 Jul 2022 13:01:17"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:05:53"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:15:00"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:16:52"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:17:42"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:18:23"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:19:51"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:21:42"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:22:11"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:22:48"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 13:44:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 13:44:16"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:44:16"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 13:49:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 13:49:16"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Tue, 26 Jul 2022 13:49:16"}
+{"level":"error","timestamp":"Tue, 26 Jul 2022 13:53:56"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Tue, 26 Jul 2022 13:53:56"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::ffff:127.0.0.1","timestamp":"Tue, 26 Jul 2022 13:53:56"}
