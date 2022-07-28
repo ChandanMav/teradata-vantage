@@ -2175,3 +2175,216 @@
 {"level":"error","timestamp":"Wed, 27 Jul 2022 02:21:18"}
 {"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 02:21:18"}
 {"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 02:21:19"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:443: i/o timeout","timestamp":"Wed, 27 Jul 2022 11:21:39"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:443: i/o timeout","timestamp":"Wed, 27 Jul 2022 11:22:46"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:1025: i/o timeout","timestamp":"Wed, 27 Jul 2022 11:24:31"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:443: i/o timeout","timestamp":"Wed, 27 Jul 2022 11:44:57"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:1025: i/o timeout","timestamp":"Wed, 27 Jul 2022 11:45:37"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/clusternullvalue - POST - ::1","timestamp":"Wed, 27 Jul 2022 12:23:12"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/clusternullvalue - POST - ::1","timestamp":"Wed, 27 Jul 2022 12:26:44"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/clusternullvalue - POST - ::1","timestamp":"Wed, 27 Jul 2022 12:31:31"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 13:00:42"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 13:00:42"}
+{"level":"error","message":"Error true","timestamp":"Wed, 27 Jul 2022 13:00:42"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 15:23:57"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 15:23:57"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/clusternullvalue - POST - ::1","timestamp":"Wed, 27 Jul 2022 15:23:57"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 17:14:07"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 17:18:52"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 18:10:52"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 18:10:53"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/outlier - POST - ::1","timestamp":"Wed, 27 Jul 2022 18:10:53"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 18:15:49"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 18:15:49"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/outlier - POST - ::1","timestamp":"Wed, 27 Jul 2022 18:15:49"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 18:18:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 18:21:07"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 23:09:35"}
+{"level":"error","message":"Table creation failed","timestamp":"Wed, 27 Jul 2022 23:11:30"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 23:11:30"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/basicnullvalue - POST - ::1","timestamp":"Wed, 27 Jul 2022 23:11:46"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 23:18:47"}
+{"level":"error","message":"Table creation failed","timestamp":"Wed, 27 Jul 2022 23:18:47"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 23:18:47"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 23:25:40"}
+{"level":"error","timestamp":"Wed, 27 Jul 2022 23:26:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Wed, 27 Jul 2022 23:26:35"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 1644] [Teradata SQL Driver] Failure sending Logoff Request message\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.(*teradataConnection).socketSendMessage NetworkIO.go:198\n at gosqldriver/teradatasql.(*teradataConnection).sendMessage NetworkIO.go:37\n at gosqldriver/teradatasql.(*teradataConnection).sendAndReceive NetworkIO.go:27\n at gosqldriver/teradatasql.(*teradataConnection).Close TeradataConnection.go:1104\n at database/sql.(*driverConn).finalClose.func2 sql.go:646\n at database/sql.withLock sql.go:3437\n at database/sql.(*driverConn).finalClose sql.go:644\n at database/sql.(*DB).Close sql.go:905\n at main.goCloseConnection goside.go:432\n at main.jsgoCloseConnection goside.go:332\n at _cgoexp_7cdf4597d74c_jsgoCloseConnection _cgo_gotypes.go:257\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by write tcp 153.65.223.35:65302->10.25.15.13:1025: wsasend: An existing connection was forcibly closed by the remote host.","timestamp":"Wed, 27 Jul 2022 23:26:35"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 23:26:35"}
+{"level":"error","message":"Table creation failed","timestamp":"Wed, 27 Jul 2022 23:31:24"}
+{"level":"error","message":true,"timestamp":"Wed, 27 Jul 2022 23:31:25"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Wed, 27 Jul 2022 23:38:32"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 16:01:13"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 16:01:13"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 17:14:54"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 17:14:54"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 17:25:42"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 17:25:42"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 17:29:52"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 17:29:52"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 18:06:35"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 18:15:32"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Error - Fetching Config Paramaters","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"500 - Internal Server Error - /api/vantage/buildmodel - POST - ::1","timestamp":"Thu, 28 Jul 2022 18:30:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:47:33"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:47:33"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Thu, 28 Jul 2022 18:47:33"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:37:41"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:37:42"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:37:42"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:37:42"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:37:42"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:37:42"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:37:43"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:40:40"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:40:40"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:40:41"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:40:41"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:40:41"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:40:41"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:40:41"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:44:05"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:44:06"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:44:06"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:44:07"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:44:07"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:44:07"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:44:07"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:44:07"}
+{"level":"error","message":"Table creation failed","timestamp":"Fri, 29 Jul 2022 02:45:15"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:45:15"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:46:20"}
+{"level":"error","message":"Table creation failed","timestamp":"Fri, 29 Jul 2022 02:46:21"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:46:21"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:47:35"}
+{"level":"error","message":"Table creation failed","timestamp":"Fri, 29 Jul 2022 02:47:36"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:47:36"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:48:41"}
+{"level":"error","message":"Table creation failed","timestamp":"Fri, 29 Jul 2022 02:48:42"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:48:42"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:50:59"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:50:59"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:50:59"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:51:00"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:51:00"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:51:00"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:51:00"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:51:00"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:52:06"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:52:06"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:52:07"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:52:07"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:52:07"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:52:07"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:52:07"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:52:08"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:53:15"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:53:15"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:53:15"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:53:16"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:53:16"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:53:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:53:16"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:53:16"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:54:21"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:54:22"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:54:23"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:56:11"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:56:12"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:56:12"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:56:12"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:56:12"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:56:13"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:56:13"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:56:13"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:57:00"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:57:01"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:57:01"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Fri, 29 Jul 2022 02:57:02"}
+{"level":"error","message":null,"timestamp":"Fri, 29 Jul 2022 02:57:02"}
+{"level":"error","timestamp":"Fri, 29 Jul 2022 02:57:02"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Fri, 29 Jul 2022 02:57:02"}
+{"level":"error","message":true,"timestamp":"Fri, 29 Jul 2022 02:57:02"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:1025: i/o timeout","timestamp":"Fri, 29 Jul 2022 03:00:53"}
+{"level":"error","message":"Teradata Connection failed! [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.11\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.11:1025: i/o timeout","timestamp":"Fri, 29 Jul 2022 03:01:26"}

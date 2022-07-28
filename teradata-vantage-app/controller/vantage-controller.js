@@ -5,7 +5,7 @@ var winston = require("./../config/winston");
 var Error = require("../common/app.err.messages");
 var { getConnection, closeConnection } = require("../teradata-connection");
 var DAO = require("../dao/teradata-dao");
-var { anIgnoreError, getConfig } = require("../common/util");
+var { anIgnoreError, getConfig, getValueFromConfig } = require("../common/util");
 var { upload } = require("../config/multer-config");
 var fs = require("fs");
 var appRoot = require('app-root-path');
@@ -47,8 +47,7 @@ exports.getDatabases = (req, res, next) => {
   }
 
   let connection = getConnection(config);
-
-  winston.info(connection);
+  //winston.info(connection);
   if (connection) {
     DAO.findDatabases(connection, (err, data) => {
       closeConnection(connection);
@@ -136,31 +135,10 @@ exports.getColumns = (req, res, next) => {
 
 //Init Methods
 exports.init = (req, res, next) => {
-
-  let path = `${appRoot}/${process.env.SETTING_FILE_LOCATION}/config.txt`;
-  if (!fs.existsSync(path)) {
-    winston.error(Error.CONFIG_FILE_MISSING);
-    res
-      .status(500)
-      .send({ Success: false, error_code: Errorcode.No_Config_File, message: Error.CONFIG_FILE_MISSING });
-    return;
-  }
-
-  let splitPctLineData = null;
   let splitpct = 0;
   try {
-    const data = fs.readFileSync(path, "utf8");
-    data.split(/\r?\n/).forEach(line => {
-      if (line.startsWith("splitpct")) {
-        splitPctLineData = line;
-      }
-    });
-
-    if (!splitPctLineData) {
-      throw new Error("Split percentage data is not found in the configuration file. Please check and re-upload")
-    }
-    splitpct = Number(splitPctLineData.split("=")[1]);
-
+    splitpct = getValueFromConfig("splitpct", res);
+    splitpct = Number(splitpct);
     if (!(typeof splitpct === 'number' && !Number.isNaN(splitpct))) {
       throw new Error("Split percentage data is not a number. Please check and re-upload")
     }

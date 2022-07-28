@@ -8,11 +8,13 @@ import { Connection } from '../shared/connection';
 import { questions } from '../shared/question'
 declare var $: any;
 
-
-interface PendingSelection {
+interface PendingCatSelection {
   [key: string]: boolean;
 }
 
+interface PendingNumSelection {
+  [key: string]: boolean;
+}
 
 @Component({
   selector: 'app-data-preperation',
@@ -101,9 +103,9 @@ export class DataPreperationComponent
   isAutomatedClusterPerform: boolean = false;
   isAutomatedClusterStarted: boolean = false;
   isAutomatedClusterDone: boolean = false;
-  pendingSelection: PendingSelection = Object.create(null);
+  numericalPendingSelection: PendingNumSelection = Object.create(null);
+  categoricalPendingSelection: PendingCatSelection = Object.create(null);
   selectedColsForClusterImputing: string[] = [];
-  unselectedColsForClusterImputing: string[] = []
   pairs: any[] = []
 
   //Outlier Controls
@@ -111,6 +113,11 @@ export class DataPreperationComponent
   isOutlierHandingStarted: boolean = false;
   isOutlierHandingDone: boolean = false;
   flows: any = [];
+
+  //Final Model
+  finalBuildModelStart: boolean = false;
+  finalBuildModelDone: boolean = false;
+  modelresult: any[] = [];
 
 
   constructor(
@@ -238,7 +245,7 @@ export class DataPreperationComponent
   init = () => {
     this.inprogress = true;
     this.isTeradataConnectionAlive = true;
-    this.message = '';
+    // this.message = '';
     this.vantageService
       .init(
         this.config,
@@ -279,7 +286,8 @@ export class DataPreperationComponent
           }
 
           //TBD
-          //this.unselectedColsForClusterImputing = [...this.ncols, ...this.ccols].sort(this.sortColumnOperator)
+          // this.newCategoricalColumnsList = ['dataplan', 'ContractRenewal'];
+          // this.newNumericalColumnsList = [...ncols];
         },
         error: (error) => {
           this.clear();
@@ -290,15 +298,14 @@ export class DataPreperationComponent
   };
 
 
-
-
-  //Delete Column
-  deleteColumn = (val: String) => {
+  //Remove Column from Model Decision
+  deleteColumnDecision = (val: String) => {
+    this.clearDataAttributeSelectionState();
     this.isFeatureContinue = true;
     switch (val) {
       case 'Y':
-        this.addRemainingItem();
-        this.isColumnSelectToDrop = true;
+        this.addRemainingItem(); //Setting initail N, C, All columns list. Will not contain Dependent Column
+        this.isColumnSelectToDrop = true; //This is for radio Yes, No on Data Attribute Selection
         break;
 
       case 'N':
@@ -349,9 +356,9 @@ export class DataPreperationComponent
    4. Perform Univariate Statistics
   */
   performUnivariateStatistics = () => {
-    this.clearAfterDataAttributeSelection();
+    this.clearDataAttributeSelectionState();
     this.isUnivariateStatisticsRunning = true;
-    //Get Key
+    this.isUnivariateStatisticsResultAvailable = false;
     let key: string = this.dropCols.length === 0 ? "N" : "Y";
     let temp = this.remainingCols;
     temp.push(this.dependentCol)
@@ -361,7 +368,9 @@ export class DataPreperationComponent
     // console.log("All remaining Column List", this.remainingCols);
     // console.log("Remaining Numerical Column List", this.remainingNcols);
     // console.log("Remaining Categorical Column List", this.remainingCCols);
-    this.vantageService
+
+
+      this.vantageService
       .performUnivariateStatistics(
         this.config,
         this.selectedDb,
@@ -405,16 +414,20 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
-  };
+
+  }; //End Data Attribute Selection
 
 
-  //perform Automate DT
+  //Perform Automated Data Transformation
   performAutomatedDT = (val: String) => {
+    this.clearAutomatedDataTransferState();
+    this.isAutomatedDT = false;
+    this.isManualDT = false;
     switch (val) {
       case 'Y':
         this.vantageService.getAllAutomatedDTSteps().subscribe({
           next: response => {
-            console.log(response);
+            //console.log(response);
             this.allAutomatedDTSteps = response.message.questions;
             this.isAutomatedDT = true;
             this.isManualDT = false;
@@ -435,14 +448,14 @@ export class DataPreperationComponent
               options: option
             }
             this.isAutomatedDT = false;
-            this.clearADT();
+            this.clearAutomatedDataTransferState();
             this.isManualDT = true;
 
           },
           error: error => {
             this.handleError(error);
             this.isAutomatedDT = false;
-            this.clearADT();
+            this.clearAutomatedDataTransferState();
             this.isManualDT = true;
           }
         });
@@ -451,6 +464,8 @@ export class DataPreperationComponent
   }
 
   automatedDTProceed = () => {
+    this.clearAutomatedDataInfoState();
+    this.isAutomatedProceed = false;
     this.vantageService.getQuestion(2).subscribe({
       next: response => {
         let { question, option } = response.message;
@@ -473,6 +488,8 @@ export class DataPreperationComponent
   */
   //Perform Numeric to Categorical - 6 //Decision
   performNumericToColumn = (val: string) => {
+    this.clearNumericalToCategoricalState();
+    this.isNumericToCategoricalPerform = false;
     //Prepare for checkbox two data modeling
     let d = [];
     for (let n = 0; n < this.remainingNcols.length; n++) {
@@ -480,7 +497,7 @@ export class DataPreperationComponent
       d.push(obj);
     }
     this.tempRemainingNcols = d;
-    //this.clearAfterDataAttributeSelection();
+
     switch (val) {
       case 'Y':
         this.isNumericToCategoricalPerform = true;
@@ -563,9 +580,10 @@ export class DataPreperationComponent
   }
 
   performNumericalToCategorical = () => { //Set Question 7
-    this.clearAfterNumericalToCat();
+    this.clearNumericalToCategoricalState();
     this.isNumricalToCategoricalStarted = true;
     this.isNumricalToCategoricalConversionDone = false;
+
     this.vantageService
       .convertNumericalToCategorical(
         this.config,
@@ -584,8 +602,8 @@ export class DataPreperationComponent
           let newNumericalColumnsList = [...this.remainingNcols];
 
           //Add to categorical list
-          console.log("this.selectedNColumnsForConversionList ", this.selectedNColumnsForConversionList)
-          console.log("newCategoricalColumnsList ", newCategoricalColumnsList)
+          //console.log("this.selectedNColumnsForConversionList ", this.selectedNColumnsForConversionList)
+          //console.log("newCategoricalColumnsList ", newCategoricalColumnsList)
           for (let e = 0; e < this.selectedNColumnsForConversionList.length; e++) {
             let matchFound = false;
             for (let t = 0; t < newCategoricalColumnsList.length; t++) {
@@ -595,7 +613,7 @@ export class DataPreperationComponent
               }
             }
             if (!matchFound) {
-              console.log("Inside Match Found");
+              //console.log("Inside Match Found");
               newCategoricalColumnsList.push(this.selectedNColumnsForConversionList[e]);
             }
           }
@@ -612,8 +630,8 @@ export class DataPreperationComponent
           this.newCategoricalColumnsList = newCategoricalColumnsList;
           this.newNumericalColumnsList = newNumericalColumnsList;
 
-          console.log(this.newCategoricalColumnsList);
-          console.log(this.newNumericalColumnsList);
+          //console.log(this.newCategoricalColumnsList);
+          //console.log(this.newNumericalColumnsList);
 
           let {
             output,
@@ -635,6 +653,7 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
+
   }
 
 
@@ -642,6 +661,10 @@ export class DataPreperationComponent
 
   //Perform Basic Null Value Imputing - Html 7
   performBasicNullDecision = (val: string) => {
+    this.clearBasicNullImputingState();
+    this.isBasicNullPerform = false;
+    this.isBasicNullImputingDone = false;
+
     let d = [];
     for (let n = 0; n < this.remainingNcols.length; n++) {
       let obj = { name: this.remainingNcols[n], checked: false }
@@ -680,10 +703,9 @@ export class DataPreperationComponent
             }
           });
         this.basicNullValueImputingList = [];
-        this.pendingSelection = Object.create(null);
+        this.numericalPendingSelection = Object.create(null);
+        this.categoricalPendingSelection = Object.create(null);
         this.selectedColsForClusterImputing = [];
-        this.unselectedColsForClusterImputing = this.remainingCols.slice().sort(this.sortColumnOperator)
-
         break;
     }
   }
@@ -742,8 +764,7 @@ export class DataPreperationComponent
   }
 
   performBasicNullImputing = () => {
-
-    this.clearAfterBasicNullImputing();
+    this.clearBasicNullImputingState();
     this.isBasicNullImputingStarted = true;
     this.isBasicNullImputingDone = false;
 
@@ -771,7 +792,7 @@ export class DataPreperationComponent
       }
       d.push(item);
     }
-    this.isBasicNullImputingStarted = true;
+
     this.vantageService
       .performBasicNullImputingServc(
         this.config,
@@ -794,25 +815,27 @@ export class DataPreperationComponent
             options: question.options
           }
 
-          this.pendingSelection = Object.create(null);
+          this.numericalPendingSelection = Object.create(null);
+          this.categoricalPendingSelection = Object.create(null);
           this.selectedColsForClusterImputing = [];
-          this.unselectedColsForClusterImputing = [...this.newCategoricalColumnsList, ...this.newNumericalColumnsList].sort(this.sortColumnOperator)
         },
         error: (error) => {
           this.isBasicNullImputingStarted = false;
           this.isBasicNullImputingDone = true;
-          this.handleError(error);
-
-          this.pendingSelection = Object.create(null);
+          this.numericalPendingSelection = Object.create(null);
+          this.categoricalPendingSelection = Object.create(null);
           this.selectedColsForClusterImputing = [];
-          this.unselectedColsForClusterImputing = [...this.newCategoricalColumnsList, ...this.newNumericalColumnsList].sort(this.sortColumnOperator)
-
+          this.handleError(error);
         },
       });
   }
 
   //Perform Cluster Null Value Imputing //Question 8 -- Set Question 9
   performClusterNullValueImputingDecision = (val: string) => {
+    this.clearClusteredImputingState();
+    this.isAutomatedClusterPerform = false;
+    this.isAutomatedClusterDone = false;
+    this.pairs = [];
     switch (val) {
       case 'Y':
         this.isAutomatedClusterPerform = true;
@@ -843,8 +866,11 @@ export class DataPreperationComponent
   }
 
   performClusterNullValueImputing = () => {
+    this.clearClusteredImputingState();
     this.isAutomatedClusterStarted = true;
     this.isAutomatedClusterDone = false;
+    //TBD
+    //this.newBaseTable = "cellphone_work";
     this.vantageService
       .performClusterNullValueImputingSrvc(
         this.config,
@@ -874,85 +900,51 @@ export class DataPreperationComponent
       });
   }
 
-  addToSelectedCols = (column?: string): void => {
 
-    let changeColumns = (column)
-      ? [column]
-      : this.getPendingSelectionFromCollection(this.unselectedColsForClusterImputing);
-
-    // Now that we know which contacts we want to move, reset the pending-selection.
-    this.pendingSelection = Object.create(null);
-
-    // Remove each pending contact from the unselected list.
-    this.unselectedColsForClusterImputing = this.removeColsFromCollection(this.unselectedColsForClusterImputing, changeColumns);
-
-    // We always want to move the pending contacts onto the front / top of the
-    // selected list so that the change is VISUALLY OBVIOUS to the user.
-    this.selectedColsForClusterImputing = changeColumns.concat(this.selectedColsForClusterImputing);
-
+  // Toggle the pending selection for the given numerical column.
+  public toggleNumericalPendingSelection(col: string): void {
+    this.numericalPendingSelection[col] = !this.numericalPendingSelection[col];
   }
 
-  // Remove the selected contact or contacts from the selected contacts collection.
-  public removeFromSelectedCols(col?: string): void {
-
-    let changeColumns = (col) ? [col] : this.getPendingSelectionFromCollection(this.selectedColsForClusterImputing);
-    this.pendingSelection = Object.create(null);
-
-    // Remove each pending contact from the selected contacts collection.
-    this.selectedColsForClusterImputing = this.removeColsFromCollection(this.selectedColsForClusterImputing, changeColumns);
-
-    // When moving contacts back to the unselected contacts list, we want to add
-    // them back in SORT ORDER since this will make it easier for the user to
-    // navigate the resulting list.
-    this.unselectedColsForClusterImputing = changeColumns
-      .concat(this.unselectedColsForClusterImputing)
-      .sort(this.sortColumnOperator);
-
+  // Toggle the pending selection for the given categorical column.
+  public toggleCategoricalPendingSelection(col: string): void {
+    this.categoricalPendingSelection[col] = !this.categoricalPendingSelection[col];
   }
 
-  // Toggle the pending selection for the given column.
-  public togglePendingSelection(col: string): void {
-    this.pendingSelection[col] = !this.pendingSelection[col];
-  }
-
-  // Gather the Columns in the given collection that are part of the current pending selection.
-  private getPendingSelectionFromCollection(collection: string[]): string[] {
-    var selectionFromCollection = collection.filter(col => {
-      return (col in this.pendingSelection);
-    });
+  private getSelectionFromCollection(collection: string[], category: string): string[] {
+    let selectionFromCollection: string[] = [];
+    if (category === "N") {
+      selectionFromCollection = collection.filter(col => {
+        if (this.numericalPendingSelection[col]) {
+          return true;
+        }
+        return false;
+      });
+    } else if (category === 'C') {
+      selectionFromCollection = collection.filter(col => {
+        if (this.categoricalPendingSelection[col]) {
+          return true;
+        }
+        return false;
+      });
+    }
     return selectionFromCollection;
   }
 
 
-  // Remove the given columnsToRemove from the given collection. Returns a new collection.
-  private removeColsFromCollection(collection: string[], columnsToRemove: string[]): string[] {
-    var collectionWithoutColumns = collection.filter(contact => {
-      return (!columnsToRemove.includes(contact));
-    });
-    return collectionWithoutColumns;
-  }
-
-  onItemDrop = (e: any) => {
-    let temp = [];
-    for (let k = 0; k < this.selectedColsForClusterImputing.length; k++) {
-      if (this.selectedColsForClusterImputing[k] !== e.dragData) {
-        temp.push(this.selectedColsForClusterImputing[k]);
-      }
-    }
-    temp.splice(0, 0, e.dragData);
-    this.selectedColsForClusterImputing = temp;
-  }
-
   makePair = () => {
-    //add to pair list
-    console.log("this.selectedColsForClusterImputing) ", this.selectedColsForClusterImputing);
-    for (let i = 0; i < this.selectedColsForClusterImputing.length; i++) {
-      this.togglePendingSelection(this.selectedColsForClusterImputing[i]);
+    let numericalList = this.getSelectionFromCollection(this.newNumericalColumnsList, "N");
+    let categoricalList = this.getSelectionFromCollection(this.newCategoricalColumnsList, "C");
+
+    this.numericalPendingSelection = Object.create(null);
+    this.categoricalPendingSelection = Object.create(null);
+
+    let pair = [...categoricalList, ...numericalList];
+
+    if (!this.isPairAvailablePairlist(pair)) {
+      this.pairs.push(pair);
     }
-    this.pairs.push(this.selectedColsForClusterImputing);
-    console.log(this.pairs);
-    //empty selected pair from list
-    this.removeFromSelectedCols();
+
   }
 
   updatePair = (ele1: any, ele2: any) => {
@@ -962,18 +954,38 @@ export class DataPreperationComponent
       }
       return true;
     })
-
     this.pairs = filteredPair;
-
   }
 
-  private sortColumnOperator(a: string, b: string): number {
-    return (a.localeCompare(b));
+  isPairAvailablePairlist = (pair: string[]) => {
+    return this.pairs.some(p => this.arraysEqual(p, pair));
   }
+
+  isPairAvailableToAdd = (): boolean => {
+    let numericalList = this.getSelectionFromCollection(this.newNumericalColumnsList, "N");
+    let categoricalList = this.getSelectionFromCollection(this.newCategoricalColumnsList, "C");
+    return numericalList.length > 0 && categoricalList.length > 0;
+  }
+
+
+  arraysEqual = (a: any[], b: any[]) => {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+
 
 
   //Perform Outlier Handling - //Question 9 -- Set Question 10
   performOutlierHandlingDecision = (val: string) => {
+    this.clearOutlierState();
+    this.isOutlierHandingPerform = false;
+    this.isOutlierHandingDone = false;
     switch (val) {
       case 'Y':
         this.isOutlierHandingPerform = true;
@@ -986,7 +998,7 @@ export class DataPreperationComponent
             next: response => {
               this.isOutlierHandingPerform = false;
               this.isOutlierHandingDone = true;
-              console.log(response.message);
+              //console.log(response.message);
               this.flows = response.message.flows;
             },
             error: error => {
@@ -1000,23 +1012,24 @@ export class DataPreperationComponent
     }
   }
 
-
   performOutlierHandling = () => {
+    this.clearOutlierState();
     this.isOutlierHandingStarted = true;
+    this.isOutlierHandingDone = false;
+
     this.vantageService
       .performOutlierHandlingSrvc(
         this.config,
         this.selectedDb,
-        this.baseTable,
-        this.dependentCol
+        this.selectedtable,
+        this.newBaseTable,
+        this.newNumericalColumnsList
       )
       .subscribe({
         next: (response) => {
-          setTimeout(() => {
-            this.isOutlierHandingStarted = false;
-            this.isOutlierHandingDone = true;
-            this.flows = response.message.flows;
-          }, 5000)
+          this.isOutlierHandingStarted = false;
+          this.isOutlierHandingDone = true;
+          this.flows = response.message.flows;
         },
         error: (error) => {
           this.isOutlierHandingStarted = false;
@@ -1024,11 +1037,15 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
+
   }
 
 
   //Perform Manual Data Transform
   performManualDT = (val: String) => {
+    this.clearManualDataTransformState();
+    this.manualDataTransformDecision = false;
+    this.manualDataTransformDecisionInString = "";
     switch (val) {
       case 'Y':
         this.manualDataTransformDecision = true;
@@ -1056,9 +1073,48 @@ export class DataPreperationComponent
       this.router.navigate(['/'], {
         relativeTo: this.activatedRoute,
       });
-    }, 400000);
+    }, 4000);
   }
 
+  //Model Build
+  buildModel = () => {
+    this.clearBuildModelState();
+    this.finalBuildModelStart = true;
+    this.finalBuildModelDone = false;
+    this.vantageService
+      .buildModel(
+        this.config,
+        this.selectedDb,
+        this.selectedtable,
+        this.trainsetsize,
+        this.testsetsize,
+        this.selectedColumn,
+        this.newNumericalColumnsList,
+        this.newCategoricalColumnsList,
+        this.remainingCols
+      )
+      .subscribe({
+        next: (response) => {
+
+          this.modelresult = response.message;
+          console.log(response.message);
+          this.finalBuildModelStart = false;
+          this.finalBuildModelDone = true;
+        },
+        error: (error) => {
+          this.modelresult = [];
+          this.finalBuildModelStart = false;
+          this.finalBuildModelDone = true;
+          this.handleError(error);
+        },
+      });
+  }
+
+  //Restart of Model Build
+  restartProcess = () => {
+    this.clear();
+    this.initRunMessage = '';
+  };
 
   //Get Remaining Numerical and Categorical Colums
   getRemainingCols = (type: string) => {
@@ -1118,96 +1174,117 @@ export class DataPreperationComponent
     });
   };
 
-  clearAfterBasicNullImputing = () => {
-    this.isBasicNullImputingDone = false;
+  clearDataAttributeSelectionState = () => {
+    this.isUnivariateStatisticsRunning = false;
+    this.isUnivariateStatisticsResultAvailable = false;
+    this.univariateStatisticsResult = [];
+    this.univariateStatisticsResultAttr = [];
+    this.baseTable = this.selectedtable;
+    this.clearAutomatedDataTransferState();
 
-    //Null Clustered Imputing Controls
-    this.pendingSelection = Object.create(null);
-    this.selectedColsForClusterImputing = [];
-    this.unselectedColsForClusterImputing = [];
-    this.pairs = [];
-    this.isAutomatedClusterPerform = false;
-    this.isAutomatedClusterStarted = false;
-    this.isAutomatedClusterDone = false;
+    //Reset decision flag
+    this.isAutomatedDT = false;
+    this.isManualDT = false;
 
-    //Null Outlier Imputing Controls
-    this.isOutlierHandingPerform = false;
-    this.isOutlierHandingStarted = false;
-    this.isOutlierHandingDone = false;
-
-    //final
-    this.flows = [];
   }
 
-  clearAfterNumericalToCat = () => {
+  clearAutomatedDataTransferState = () => {
+    this.allAutomatedDTSteps = [];
+    this.isAutomatedDT = false;
+    this.isManualDT = false;
+    this.clearAutomatedDataInfoState();
 
-    //
+    //Reset decision flag
+    this.isAutomatedProceed = false;
+  }
+
+
+  clearAutomatedDataInfoState = () => {
+    this.isAutomatedProceed = false;
+    this.clearNumericalToCategoricalState();
+
+    //Reset next state flag
+    this.isNumericToCategoricalPerform = false;
+    this.tempRemainingNcols = [];
+    this.isNumricalToCategoricalStarted = false;
     this.isNumricalToCategoricalConversionDone = false;
+    this.selectedNColumnsForConversionList = [];
     this.newCategoricalColumnsList = [];
     this.newNumericalColumnsList = [];
 
-    //Null Basic Imputing Controls
-    this.isBasicNullPerform = false;
-    this.isBasicNullImputingStarted = false;
-    this.isBasicNullImputingDone = false;
-
-    //Null Clustered Imputing Controls
-    this.isAutomatedClusterPerform = false;
-    this.isAutomatedClusterStarted = false;
-    this.isAutomatedClusterDone = false;
-
-    //Null Outlier Imputing Controls
-    this.isOutlierHandingPerform = false;
-    this.isOutlierHandingStarted = false;
-    this.isOutlierHandingDone = false;
-
-    //final
-    this.flows = [];
   }
 
-  clearAfterDataAttributeSelection = () => {
-    this.baseTable = this.selectedtable;
-    this.isUnivariateStatisticsRunning = false;
-    this.isUnivariateStatisticsResultAvailable = false;
-    this.isAutomatedDT = false;
-    this.isManualDT = false;
-    this.univariateStatisticsResult = [];
-    this.univariateStatisticsResultAttr = [];
-    this.allAutomatedDTSteps = [];
-    this.clearADT();
-  }
-  //Clear Automatic DT State upon Manual Selection
-  clearADT = () => {
-    this.isAutomatedProceed = false;
-
-    //Numeric to Categorical Controls
-    this.selectedNColumnsForConversionList = [];
-    this.tempRemainingNcols = [];
-
-    this.isNumericToCategoricalPerform = false;
+  clearNumericalToCategoricalState = () => {
     this.isNumricalToCategoricalStarted = false;
     this.isNumricalToCategoricalConversionDone = false;
+    this.newCategoricalColumnsList = [];
+    this.newNumericalColumnsList = [];
+    this.clearBasicNullImputingState();
 
-
-    //Null Basic Imputing Controls
+    //Reset next state flag
     this.isBasicNullPerform = false;
+    this.isBasicNullImputingDone = false;
     this.isBasicNullImputingStarted = false;
     this.isBasicNullImputingDone = false;
-    this.allColumnWithCheckedStatusFromBasicNullOps = [];
-    this.basicNullValueImputingList = []
+    this.basicNullValueImputingList = [];
+  }
 
-    //Null Basic Imputing Controls
-    this.isAutomatedClusterPerform = false;
+  clearBasicNullImputingState = () => {
+    this.isBasicNullImputingDone = false;
+    this.isBasicNullImputingStarted = false;
+    this.clearClusteredImputingState();
+
+    //Reset next state flag
     this.isAutomatedClusterStarted = false;
     this.isAutomatedClusterDone = false;
+    this.isAutomatedClusterStarted = false;
+    this.isAutomatedClusterDone = false;
+    this.numericalPendingSelection = Object.create(null);
+    this.categoricalPendingSelection = Object.create(null);
+    this.selectedColsForClusterImputing = [];
 
-    //Null Basic Imputing Controls
+  }
+
+  clearClusteredImputingState = () => {
+    this.isAutomatedClusterStarted = false;
+    this.isAutomatedClusterDone = false;
+    this.clearOutlierState();
+
+    //Reset next state flag
     this.isOutlierHandingPerform = false;
+    this.isOutlierHandingDone = false;
+    this.flows = [];
+  }
+
+  clearOutlierState = () => {
     this.isOutlierHandingStarted = false;
     this.isOutlierHandingDone = false;
-
-    //final
     this.flows = [];
+
+    this.clearManualDataTransformState();
+    this.manualDataTransformDecision = false;
+    this.manualDataTransformDecisionInString = "";
+
+    this.clearBuildModelState();
+    this.finalBuildModelStart = false;
+    this.finalBuildModelDone = false;
+    this.modelresult = [];
+  }
+
+  clearManualDataTransformState = () => {
+    this.manualDataTransformDecisionInString = "";
+    this.clearBuildModelState();
+
+    //Reset next state flag
+    this.finalBuildModelStart = false;
+    this.finalBuildModelDone = false;
+    this.modelresult = [];
+  }
+
+  clearBuildModelState = () => {
+    this.finalBuildModelStart = false;
+    this.finalBuildModelDone = false;
+    this.modelresult = [];
   }
 
   //Clear the State
@@ -1215,51 +1292,22 @@ export class DataPreperationComponent
     this.selectedDb = '';
     this.selectedtable = '';
     this.selectedColumn = '';
-
+    this.baseTable = "";
+    this.dependentCol = "";
     this.tables = ['Select Table'];
     this.columns = ['Select Column'];
     this.columnsWTDependentCol = [];
-
     this.inprogress = false;
     this.loading = false;
     this.isFileUploadFailed = false;
     this.questions = questions;
-    this.isColumnSelectToDrop = false;
-    this.dropCols = [];
-    this.remainingCols = [];
-    this.isFeatureContinue = false;
-    this.isUnivariateStatisticsRunning = false;
-    this.isUnivariateStatisticsResultAvailable = false;
-
-    this.univariateStatisticsResult = [];
-    this.univariateStatisticsResultAttr = [];
-    this.baseTable = "";
-    this.dependentCol = "";
-    this.remainingNcols = [];
-    this.remainingCCols = [];
-
-    //Manual DT
-    this.manualDataTransformationMessage = "";
-    this.manualDataTransformDecision = false;
-    this.isManualDT = false;
-    this.manualDataTransformDecisionInString = "";
-
-    //Automated DT
-    this.isAutomatedDT = false;
-    this.allAutomatedDTSteps = [];
-
-    this.clearADT();
-
+    this.clearDataAttributeSelectionState();
   };
 
-  //Restart of Model Build
-  restartProcess = () => {
-    this.clear();
-    this.initRunMessage = '';
-  };
 
   //Error Handling
   handleError = (error: any) => {
+    window.scrollTo(0, 0);
     if (error.error_code) {
       switch (error.error_code) {
         case GlobalConstants.No_Config_File:

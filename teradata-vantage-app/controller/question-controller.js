@@ -5,11 +5,10 @@ var sanitize = require("mongo-sanitize");
 var Error = require("../common/app.err.messages");
 var { getConnection, closeConnection } = require("../teradata-connection");
 var DAO = require("../dao/teradata-dao");
-var { anIgnoreError, getConfig, formatUnivariateStatsData } = require("../common/util");
+var { getConfig, formatUnivariateStatsData, getValueFromConfig } = require("../common/util");
 var QB = require("./question-bank");
 var Errorcode = require("../common/error-code");
 var createError = require("http-errors");
-var sample = require("../common/sample")
 
 exports.getQuestion = (req, res, next) => {
   let questionID = req.params.id;
@@ -376,8 +375,7 @@ exports.univariate = (req, res, next) => {
             },
             basetable: basetable
           };
-
-          console.log("Final Result ", result)
+          //console.log("Final Result ", result)
           res.status(200).send({ success: true, message: result });
         }
       }
@@ -634,12 +632,9 @@ exports.basicNullValueImputing = (req, res, next) => {
 }
 
 exports.clusterNullValueImputing = (req, res, next) => {
-
-
   try {
     let requestBody = sanitize(req.body);
-
-    console.log("requestBody ", requestBody);
+    //console.log("requestBody ", requestBody);
     let config = getConfig(req);
     let db = requestBody.db;
     let basetable = requestBody.basetable;
@@ -691,28 +686,866 @@ exports.clusterNullValueImputing = (req, res, next) => {
       return;
     }
 
+
     availableOptions = ["Y", "N"];
     let question = {
       name: QB.performOutlier,
       options: availableOptions
     }
-    res.status(200).send({
-      Success: true,
-      message: { question }
-    });
+
+    if (!_.isEmpty(columnPairs)) {
+      async.each(columnPairs, (pair, callback) => {
+        //console.log("pair ", pair);
+        if (!_.isEmpty(pair)) {
+          let col1 = pair[0];
+          let col2 = pair[1];
+          let query = `select trim(cast(${col1} as varchar(1000))), trim(median(${col2})) from ${db}.${basetable} group by cast(${col1} as varchar(1000))`;
+          winston.info(query.substring(0, 50));
+          //console.log(query);
+          async.waterfall([
+            //Find Median
+            waterfall_cb => {
+              DAO.fetchResult(connection, query, (err, data) => {
+                //console.log(data);
+                waterfall_cb(null, data);
+              })
+            },
+
+            //Update DB
+            (data, waterfall_cb) => {
+              if (!data) {
+                waterfall_cb(true, null)
+                return;
+              }
+
+              async.each(data, (record, innerAsyncEach) => {
+                let filterValue = record[0];
+                let assignmentValue = record[1];
+
+                if (_.isNull(filterValue) || _.isNull(assignmentValue)) {
+                  innerAsyncEach(null);
+                }
+                else {
+                  let updateQuery = `UPDATE ${db}.${basetable} SET ${col2}= ${assignmentValue} where ${col2} IS NULL and ${col1}='${filterValue}'`;
+                  winston.info(updateQuery.substring(0, 50));
+                  //console.log(updateQuery);
+                  DAO.executeQuery(connection, updateQuery, (err, executionDone) => {
+                    if (executionDone) {
+                      innerAsyncEach(null);
+                    } else {
+                      innerAsyncEach(true);
+                    }
+                  });
+                }
+              }, e => {
+                if (e) {
+                  waterfall_cb(true, null)
+                } else {
+                  waterfall_cb(null, null)
+                }
+              }) //end of Inner Asynch each
+            } //End of second waterfall function
+          ], (error, result) => {
+            if (error) {
+              callback(error)
+            } else {
+              callback(null)
+            }
+          })
+        } else {
+          callback(null);
+        }
+      }, (error) => {
+        if (error) {
+          winston.error('Error ' + error);
+          res
+            .status(500)
+            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        }
+        else {
+          res.status(200).send({
+            Success: true,
+            message: { question }
+          });
+        }
+      })
+
+    } else {
+      res.status(200).send({
+        Success: true,
+        message: { question }
+      });
+    }
 
   } catch (error) {
     return next(createError(500));
   }
 }
 
+//Outlier Handling
 exports.outlierHandling = (req, res, next) => {
-  availableOptions = ["Y", "N"];
-  let flows = this.getFlow();
-  res.status(200).send({
-    Success: true,
-    message: { flows }
-  });
+  try {
+    let requestBody = sanitize(req.body);
+    //console.log("requestBody ", requestBody);
+    let config = getConfig(req);
+    let db = requestBody.db;
+    let originalbasetable = requestBody.selectedtable;
+    let basetable = requestBody.basetable;
+    let numericCols = requestBody.numericCols;
+
+    if (!config) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+    if (!db) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    if (!basetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+
+    if (!originalbasetable) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    if (!numericCols) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.Missing_Required_Input,
+        message: Error.MISSING_REQUIRED_INPUT,
+      });
+      return;
+    }
+
+    numericCols = numericCols.split(",");
+    let nColsSingleQuoted = numericCols.map(col => `'${col}'`);
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+    /**
+     * Delete the Of table
+     * Read Config file
+     * Run Outlier Function
+     * 
+     */
+    async.waterfall(
+      [
+        //Look for Config File
+        (callback) => {
+          //Config Parameters
+          //Value will be read from the config file
+          let OutlierMethod = null;
+          let PercentileThreshold = null;
+          let RemoveTail = null;
+          let ReplacementValue = null;
+
+          try {
+            OutlierMethod = getValueFromConfig("OutlierMethod", res);
+            PercentileThreshold = getValueFromConfig("PercentileThreshold", res);
+            RemoveTail = getValueFromConfig("RemoveTail", res);
+            ReplacementValue = getValueFromConfig("ReplacementValue", res);
+            callback(null, { OutlierMethod, PercentileThreshold, RemoveTail, ReplacementValue });
+          } catch (error) {
+            winston.error(error);
+            callback(true, null);
+          }
+
+        },
+        //Drop Table
+        (config, callback) => {
+          if (!config) {
+            callback(true, null);
+          }
+
+          let query = `DROP TABLE ${db}.of_${originalbasetable}`;
+          winston.info(query.substring(0, 50));
+          //console.log(query);
+
+          DAO.dropTable(connection, query, (error, isDrop) => {
+            if (isDrop) {
+              callback(null, config);
+            } else {
+              //Just ignore the error if occured during table deletion
+              callback(null, config);
+            }
+          })
+        },
+        //Outlier Method
+        (config, callback) => {
+          winston.info(config);
+          let query = `SELECT * FROM OutlierFilter (
+            ON ${db}.${basetable} AS InputTable
+            OUT TABLE OutputTable (${db}.of_${originalbasetable})
+            USING
+            TargetColumns (${nColsSingleQuoted})
+            OutlierMethod (${config.OutlierMethod})
+            PercentileThreshold (${config.PercentileThreshold})
+            RemoveTail (${config.RemoveTail})
+            ReplacementValue (${config.ReplacementValue})
+            ) AS dt`;
+
+          winston.info(query.substring(0, 50));
+
+          DAO.executeQuery(connection, query, (err, executionDone) => {
+            if (executionDone) {
+              callback(null, null);
+            } else {
+              callback(true, null);
+            }
+          });
+        }
+      ], (error, data) => {
+        if (error) {
+          winston.error('Error ' + error);
+          res
+            .status(500)
+            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        } else {
+          availableOptions = ["Y", "N"];
+          let flows = this.getFlow();
+          res.status(200).send({
+            Success: true,
+            message: { flows }
+          });
+        }
+      });
+  } catch (error) {
+    return next(createError(500));
+  }
+}
+
+exports.buildModel = (req, res, next) => {
+  try {
+    let requestBody = sanitize(req.body);
+    console.log("requestBody ", requestBody);
+
+    let config = getConfig(req);
+    let DB = requestBody.DB;
+    let BASE_TABLE = requestBody.BASE_TABLE;
+    let train_size = requestBody.train_size
+    let test_size = requestBody.test_size;
+    let selectCols = requestBody.selectCols;
+    let DEP_COL = requestBody.DEP_COL;
+    let numericColsfull = requestBody.numericColsfull;
+    let categColsfull = requestBody.categColsfull;
+
+
+    if (!config) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!DB) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!BASE_TABLE) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!train_size) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!test_size) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!selectCols) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!DEP_COL) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!numericColsfull) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    if (!categColsfull) {
+      res.status(503).send({
+        Success: false,
+        error_code: Errorcode.No_database_Session,
+        message: Error.ERR_NO_AUTH,
+      });
+      return;
+    }
+
+
+    selectCols = selectCols.split(",");
+    //selectCols = selectCols.map(col => `'${col}'`);
+    numericColsfull = numericColsfull.split(",");
+    numericColsfull = numericColsfull.map(col => `'${col}'`);
+    categColsfull = categColsfull.split(",");
+    categColsfull = categColsfull.map(col => `'${col}'`);
+
+    let connection = getConnection(config);
+    if (!connection) {
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      return;
+    }
+
+    winston.info("Model build started");
+    async.waterfall([
+      //Read config file
+      callback => {
+        winston.info("Fetching Config Paramaters ")
+        //Config Parameters
+        //Value will be read from the config file
+        let MaxDepth = null;
+        let MinNodeSize = null;
+        let NumTrees = null;
+        let Variance = null;
+        let Mtry = null;
+        let MtrySeed = null;
+        let Seed = null;
+        let IDColumn = null;
+        let Detailed = null;
+
+        try {
+          MaxDepth = getValueFromConfig("MaxDepth", res);
+          MinNodeSize = getValueFromConfig("MinNodeSize", res);
+          NumTrees = getValueFromConfig("NumTrees", res);
+          Variance = getValueFromConfig("Variance", res);
+          Mtry = getValueFromConfig("Mtry", res);
+          MtrySeed = getValueFromConfig("MtrySeed", res);
+          Seed = getValueFromConfig("Seed", res);
+          IDColumn = getValueFromConfig("IDColumn", res);
+          Detailed = getValueFromConfig("Detailed", res);
+
+          winston.info("Fetching Config done")
+          callback(null, { MaxDepth, MinNodeSize, NumTrees, Variance, Mtry, MtrySeed, Seed, IDColumn, Detailed });
+
+        } catch (error) {
+          winston.error(error);
+          winston.error("Error - Fetching Config Paramaters");
+          callback(true, null);
+        }
+      }, //Read config End
+
+      //Create train, test Table
+      (config, callback) => {
+        winston.info("Train, Test table module started");
+        winston.info(config);
+        async.waterfall([
+          //Drop Train_Test_Split, Train, Test table
+          tt_w_cb => {
+            async.parallel([
+              //Drop Train_Test_Split Table
+              tt_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_train_test_split`;
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  tt_p_cb(null);
+                })
+              },//Drop Train_Test_Split Table End
+
+              //Drop Train Table
+              tt_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_train`;
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  tt_p_cb(null);
+                })
+              },//Drop Train Table End
+
+              //Drop Test Table
+              tt_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_test`;
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  tt_p_cb(null);
+                })
+              }//Drop Test Table End
+            ], tt_p_err => {
+              if (tt_p_err) {
+                winston.error("Error - Drop Train_Test_Split, Train, Test table")
+                tt_w_cb(true);
+              } else {
+                tt_w_cb(null);
+              }
+            })
+          },//Drop Train_Test_Split, Train, Test table End
+
+          //Create Train_Test_Split
+          tt_w_cb => {
+            let query = `
+            create multiset table ${DB}.of_${BASE_TABLE}_train_test_split as (
+              SELECT * FROM RandomSample(
+              ON ${DB}.of_${BASE_TABLE} AS InputTable
+              USING
+              SamplingMode ('basic')
+              NumSample(${train_size},${test_size})
+              ) AS dt
+              ) with data`;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                tt_w_cb(null);
+              }
+              else {
+                tt_w_cb(true);
+              }
+            })
+
+          },//Create Train_Test_Split End
+
+          //Create Train, _Test Table
+          tt_w_cb => {
+            async.parallel([
+              //Create Train Table
+              tt_p_cb => {
+                let query = `create multiset table ${DB}.of_${BASE_TABLE}_train as (
+                  select * from ${DB}.of_${BASE_TABLE}_train_test_split
+                  where set_id=0
+                  )
+                  with data
+                  no primary index`;
+                winston.info(query.substring(0, 50));
+                DAO.executeQuery(connection, query, (d, isDone) => {
+                  if (isDone) {
+                    tt_p_cb(null);
+                  }
+                  else {
+                    tt_p_cb(null);
+                  }
+                })
+
+              },//Create Train Table End 
+
+              //Create Test Table
+              tt_p_cb => {
+                let query = `create multiset table ${DB}.of_${BASE_TABLE}_test as (
+                  select sum(1) over(rows unbounded preceding) as sn,${selectCols} from ${DB}.of_${BASE_TABLE}_train_test_split
+                  where set_id=1
+                  )
+                  with data
+                  no primary index`;
+                winston.info(query.substring(0, 50));
+                DAO.executeQuery(connection, query, (d, isDone) => {
+                  if (isDone) {
+                    tt_p_cb(null);
+                  }
+                  else {
+                    tt_p_cb(null);
+                  }
+                })
+              }//Create Test Table End               
+            ], tt_p_err => {
+              if (tt_p_err) {
+                winston.error("Error - Create Train, Test Table")
+                tt_w_cb(true);
+              } else {
+                tt_w_cb(null);
+              }
+            })
+          },//Create Train, _Test Table End
+
+          //Drop Set ID from Train table
+          tt_w_cb => {
+            let query = `alter table ${DB}.of_${BASE_TABLE}_train drop set_id`;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                tt_w_cb(null);
+              }
+              else {
+                tt_w_cb(true);
+              }
+            })
+
+          }//Drop Set ID from Train End
+
+
+        ], (w_error) => {
+          if (w_error) {
+            winston.error("Error - Train, Test table module")
+            callback(true, null);
+          } else {
+            winston.info("Train, Test table module Finished")
+            callback(null, config);
+          }
+        })
+
+      },//Create train, test Table End    
+
+      //DecisionForest
+      (config, callback) => {
+        winston.info("Decision Forest module Started")
+        async.waterfall([
+          df_w_cb => {
+            //Drop _model and _monitor Table
+            async.parallel([
+              //Drop _model table
+              df_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_model`
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  df_p_cb(null);
+                })
+              },
+              //Drop _monitor Table
+              df_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_monitorTable`
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  df_p_cb(null);
+                })
+              }
+            ], df_p_err => {
+              if (df_p_err) {
+                winston.error("Error - Drop _model and _monitor Table | Decision Forest ");
+                df_w_cb(true);
+              } else {
+                df_w_cb(null);
+              }
+            });
+          },
+          //DecisionForest
+          df_w_cb => {
+            let query = `SELECT * FROM DecisionForest (
+              ON ${DB}.of_${BASE_TABLE}_train AS InputTable
+              OUT TABLE OutputTable (${DB}.of_${BASE_TABLE}_model)
+              OUT TABLE OutputMessageTable (${DB}.of_${BASE_TABLE}_monitorTable)
+              USING
+              TreeType ('classification')
+              ResponseColumn ('${DEP_COL}')
+              NumericInputs(${numericColsfull})
+              CategoricalInputs(${categColsfull})
+              MaxDepth (${config.MaxDepth})
+              MinNodeSize (${config.MinNodeSize})
+              NumTrees (${config.NumTrees})
+              Variance (${config.Variance})
+              Mtry (${config.Mtry})
+              MtrySeed (${config.MtrySeed})
+              Seed (${config.Seed})
+              ) AS dt`;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                df_w_cb(null);
+              }
+              else {
+                df_w_cb(true);
+              }
+            })
+          }
+
+        ], (df_err) => {
+          if (df_err) {
+            winston.error("Error - Decision Forest Module");
+            callback(true, null);
+          } else {
+            winston.info("Decision Forest Module Completed");
+            callback(null, config);
+          }
+
+        })
+      }, //DecisionForest End
+
+      //Predict Module
+      (config, callback) => {
+        winston.info("Predict Module Started")
+        async.waterfall([
+          //Drop Predict Table
+          p_w_cb => {
+            let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_predict`;
+            winston.info(query.substring(0, 50));
+            DAO.dropTable(connection, query, (d, isDrop) => {
+              p_w_cb(null);
+            })
+          },//Drop Predict Table End
+
+          //Create Predict Table
+          p_w_cb => {
+            let query = `CREATE MULTISET TABLE ${DB}.of_${BASE_TABLE}_predict AS (
+              SELECT * FROM DecisionForestPredict_MLE (
+              ON ${DB}.of_${BASE_TABLE}_test PARTITION BY ANY
+              ON ${DB}.of_${BASE_TABLE}_model AS Model DIMENSION
+              USING
+              NumericInputs(${numericColsfull})
+              CategoricalInputs(${categColsfull})
+              IDColumn ('${config.IDColumn}')
+              Accumulate ('${DEP_COL}')
+              Detailed ('${config.Detailed}')
+              ) AS dt
+              ) WITH DATA`;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                p_w_cb(null);
+              }
+              else {
+                p_w_cb(true);
+              }
+            })
+          } //Create Predict Table End
+
+        ], p_error => {
+          if (p_error) {
+            winston.error("Error - Predict Module");
+            callback(true, null)
+          } else {
+            winston.info("Predict Module Finished")
+            callback(null, config);
+          }
+        })
+
+      },//Predict Module End
+
+      //Scoring Module
+      (config, callback) => {
+        winston.info("Scoring Module Started")
+        async.waterfall([
+          //Drop Scoring Table
+          s_w_cb => {
+            let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_scoring`;
+            winston.info(query.substring(0, 50));
+            DAO.dropTable(connection, query, (d, isDrop) => {
+              s_w_cb(null);
+            })
+          },//Drop Scoring Table End
+
+          //Create Scoring Table
+          s_w_cb => {
+            let query = `CREATE TABLE ${DB}.of_${BASE_TABLE}_scoring AS (
+              SELECT sn,${DEP_COL} as original,null as predicted FROM ${DB}.of_${BASE_TABLE}_test
+              ) WITH DATA             
+             `;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                s_w_cb(null);
+              }
+              else {
+                s_w_cb(true);
+              }
+            })
+          }, //Create Scoring Table End
+
+          //Update Score Table
+          s_w_cb => {
+            let query = `UPDATE ${DB}.of_${BASE_TABLE}_scoring 
+            FROM  ${DB}.of_${BASE_TABLE}_predict SRC
+            SET predicted = SRC.prediction
+            WHERE ${DB}.of_${BASE_TABLE}_scoring.sn = SRC.sn`;
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                s_w_cb(null);
+              }
+              else {
+                s_w_cb(true);
+              }
+            })
+
+          } //Update Score Table End
+
+
+
+        ], s_error => {
+          if (s_error) {
+            winston.error("Error - Scoring Module");
+            callback(true, null)
+          } else {
+            winston.info("Scoring Module Finished")
+            callback(null, config);
+          }
+        })
+
+      },//Scoring Module End
+
+      //Confusion Matrix Module
+      (config, callback) => {
+        winston.info("Confusion Matrix Module Started")
+        async.waterfall([
+          //Drop confusionMatrix table
+          cm_w_cb => {
+            async.parallel([
+              //Drop confusionMatrix Count Table
+              cm_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_confusionMatrix_count_output`
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  cm_p_cb(null);
+                })
+
+              },//Drop confusionMatrix Count Table End
+
+              //Drop confusionMatrix Stat Table
+              cm_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_confusionMatrix_stat_output`
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  cm_p_cb(null);
+                })
+              },//Drop confusionMatrix Stat Table End
+
+              //Drop confusionMatrix Acc Table
+              cm_p_cb => {
+                let query = `DROP TABLE ${DB}.of_${BASE_TABLE}_confusionMatrix_acc_output`
+                winston.info(query.substring(0, 50));
+                DAO.dropTable(connection, query, (d, isDrop) => {
+                  cm_p_cb(null);
+                })
+              }//Drop confusionMatrix Acc Table End
+
+            ], cm_p_err => {
+              cm_w_cb(null)
+            })
+
+          },//Drop confusionMatrix table End
+
+          //Create confusionMatrix
+          cm_w_cb => {
+
+            let query = `SELECT * FROM ConfusionMatrix(
+              ON ${DB}.of_${BASE_TABLE}_scoring PARTITION BY 1
+              OUT TABLE CountTable(${DB}.of_${BASE_TABLE}_confusionMatrix_count_output)
+              OUT TABLE StatTable(${DB}.of_${BASE_TABLE}_confusionMatrix_stat_output)
+              OUT TABLE AccuracyTable(${DB}.of_${BASE_TABLE}_confusionMatrix_acc_output)
+              USING
+              ObservationColumn('original')
+              PredictColumn('predicted')
+              ) AS dt`
+            winston.info(query.substring(0, 50));
+            DAO.executeQuery(connection, query, (d, isDone) => {
+              if (isDone) {
+                cm_w_cb(null)
+              }
+              else {
+                cm_w_cb(true)
+              }
+            })
+          }, //Create confusionMatrix End
+
+          //Fetch confusionMatrix Data
+          cm_w_cb => {
+            console.log("Hello")
+            let query = `select trim("key"), trim("value") from ${DB}.of_${BASE_TABLE}_confusionMatrix_stat_output
+                          union all
+                        select trim(measure), trim("1") from ${DB}.of_${BASE_TABLE}_confusionMatrix_acc_output`;
+            winston.info(query.substring(0, 50));
+            DAO.fetchResult(connection, query, (e, data) => {
+              if (data) {
+                cm_w_cb(null, data)
+              } else {
+                cm_w_cb(true, null)
+              }
+
+            });
+
+
+          }//Fetch confusionMatrix Data End
+
+        ], (cm_error, data) => {
+          if (cm_error) {
+            winston.error("Error - Confusion Matrix Module");
+            callback(true, null)
+          } else {
+            winston.info("Confusion Matrix Module Finished")
+            callback(null, data);
+          }
+        })
+      },//Confusion Matrix Module End
+    ], (error, data) => {
+      closeConnection(connection);
+      if (error) {
+        winston.error('Error - Model build Finished with Error');
+        res
+          .status(500)
+          .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+      }
+      else {
+        winston.info("Model build Finished");
+        res.status(200).send({
+          Success: true,
+          message: _.sortBy(this.formatModelOutput(data), o => o.name)
+        });
+      }
+    })
+
+
+  } catch (error) {
+    return next(createError(500));
+  }
 }
 
 exports.getAllAutomatedDTSteps = (req, res, next) => {
@@ -746,6 +1579,21 @@ exports.getFlow = () => {
     "3) Prediction on unknown test dataset usinng the Classification ML model using Vantage MLE function 'DecisionForestPredict_MLE'",
     "4) Work table created for model scoring by placing the original values adjacent to the predicted values",
     "5) Final scoring metrics generated on the DecisionForest model using Vantage MLE function 'ConfusionMatrix'",
-    "Please wait for the model scores...."
   ]
 }
+
+exports.formatModelOutput = (data) => {
+  let output = [];
+  if (!data) {
+    return [];
+  }
+  _.forEach(data, arr => {
+    let temp = {}
+    temp.name = arr[0];
+    temp.value = arr[1];
+    output.push(temp);
+  })
+  return output;
+}
+
+

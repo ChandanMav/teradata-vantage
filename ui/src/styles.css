@@ -30,7 +30,9 @@ border-color: #a055f5 !important;
 }
 
 option {
-  font-size: 13px;
+  /* font-size: 13px; */
+  font-size: 12px;
+    letter-spacing: 1px;
 }
 
 select{

@@ -9,6 +9,7 @@ module.exports = (app) => {
     app.post("/api/vantage/basicnullvalue", questionController.basicNullValueImputing);
     app.get("/api/vantage/automateddt/steps", questionController.getAllAutomatedDTSteps);
     app.get("/api/vantage/flows", questionController.getModelBuildFlow);
+    app.post("/api/vantage/buildmodel", questionController.buildModel);
     
     
   };

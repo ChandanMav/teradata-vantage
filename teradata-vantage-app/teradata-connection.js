@@ -34,7 +34,7 @@ closeConnection = (conn) => {
     if (conn) {
       conn.close();
     }
-    winston.info("************Teradata Connection closed successfully!")
+    winston.info("Teradata Connection closed successfully!")
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {
       winston.error("Teradata Connection failed! " + error.message)

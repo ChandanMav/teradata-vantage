@@ -8,7 +8,7 @@ import { VantageHomeComponent } from './vantage-home/vantage-home.component';
 const routes: Routes = [
   {path: '', component: AppHomeComponent, pathMatch: 'full'},
   {path: 'connection', component: ConnectionComponent},
-  {path:'dataprep', component: DataPreperationComponent}
+  {path:'mdlbuild', component: DataPreperationComponent}
 ];
 
 @NgModule({

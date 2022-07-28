@@ -1,21 +1,22 @@
 <div class="container-fluid data-page">
-  <div class="form-pane">
-    <div class="row">
+  <div class="form-pane float-start">
+    <div class="row" style="background-color: lavender;">
       <div class="col-12 card" class="config-form">
-        <p class="mt-1 upload-form-title">Upload Configuration File</p>
-        <p class="upload-msg" *ngIf="message !== ''" [ngClass]="!isFileUploadFailed ? 'text-success' : 'text-danger'">
+        <p class="upload-form-title">Upload Configuration File</p>
+        <p class="upload-msg" *ngIf="message !== ''" [ngClass]="!isFileUploadFailed ? 'text-success' : 'text-danger'"
+          [ngClass]="initRunMessage != '' ? 'text-muted' :''">
           {{message}}</p>
-        <div class="input-group card-body" style="padding-top: 6px;"
+        <div class="input-group card-body" style="padding-top: 0px;"
           [ngClass]="initRunMessage != '' ? 'form-disabled' :''">
           <div class="input-group-prepend">
             <span class="input-group-text">
               <button (click)="upload()" class="btn btn-success app-btn input-group-text"
-                style="font-size: 14px; width: 57px; margin-left: -12px;" [disabled]="filename === 'Choose file'">
+                style="width: 41px; margin-left: -16px;" [disabled]="filename === 'Choose file'">
                 <span class="fa fa-cloud-upload"></span>
               </button>
             </span>
           </div>
-          <div class="custom-file" style="left: -11px;">
+          <div class="custom-file" style="left: -16px;">
             <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onChange($event)" accept=".txt"
               required>
             <label class="custom-file-label text-start text-truncate" style="max-width: 188px;"
@@ -26,7 +27,7 @@
       <div class="col-12 dropdown-form">
         <form class="row g-1 align-middle vertical-center" (ngSubmit)="init()"
           [ngClass]="inprogress ? 'form-disabled' : ''">
-          <div class="form-group col-12 gx-4">
+          <div class="form-group col-11 gx-4">
             <label for="db" class="form-label">Select Database <span style="color: red;">*</span></label>
             <select class="form-control" id="db" name="db" (change)="changeDropdown($event.target, 'database')"
               autofocus [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
@@ -34,7 +35,7 @@
             </select>
           </div>
 
-          <div class="form-group col-12 gx-4">
+          <div class="form-group col-11 gx-4">
             <label for="basetable" class="form-label">Select Dataset <span style="color: red;">*</span></label>
             <select class="form-control" id="basetable" name="basetable"
               (change)="changeDropdown($event.target, 'table')"
@@ -43,21 +44,21 @@
             </select>
           </div>
 
-          <div class="form-group col-12 gx-4">
+          <div class="form-group col-11 gx-4">
             <label for="col" class="form-label">Select Dependent Column<span style="color: red;">*</span></label>
             <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
               [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
               <option *ngFor="let column of columns">{{column}}</option>
             </select>
           </div>
-          <div class="d-grid gap-2 col-12 gx-4 cont-btn" *ngIf="initRunMessage === ''">
-            <button class="btn btn-primary app-btn cont-btn-css" type="submit"
-              [disabled]="selectedColumn===''">Build</button>
+          <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage === ''">
+            <button class="btn btn-primary app-btn cont-btn-css" type="submit" [disabled]="selectedColumn===''">Create
+              Model</button>
           </div>
 
-          <div class="d-grid gap-2 col-12 gx-4 cont-btn" *ngIf="initRunMessage != ''">
-            <button class="btn btn-primary app-btn cont-btn-css" type="button"
-              (click)="restartProcess()">Re-Start</button>
+          <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage != ''">
+            <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="restartProcess()">Start New
+              Model</button>
           </div>
 
 
@@ -90,8 +91,8 @@
     <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
       {{initRunMessage}}</p> -->
 
-    <div *ngIf="initRunMessage != ''" class="pt-2" [ngClass]="errorMsg === '' ? 'pt-2' : 'pt-4'">
-      <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span>
+    <div *ngIf="initRunMessage != ''" class="pt-2">
+      <!-- <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span> -->
       <div class="accordion accordion-flush" id="accordionAccordian">
         <div class="accordion-item card container">
           <div class="accordion-header card-header" id="flush-headingOne-h">
@@ -157,12 +158,12 @@
           </div>
         </div> <!-- End of Basic Info -->
 
-        <!-- Start of Delete Column-->
+        <!-- Start of Data Attribute Selection -->
         <div class="accordion-item card container">
           <h2 class="accordion-header card-header" id="flush-headingTwo-h">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#flush-headingTwo" aria-expanded="false" aria-controls="flush-headingTwo">
-              Date Attribute Selection
+              Date Column Selection
             </button>
           </h2>
           <div id="flush-headingTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo-h"
@@ -170,17 +171,17 @@
             <div class="accordion-body  card-body accordion-body-c">
               <div class="row align-items-start question-section">
                 <div class="col-10 question-title">
-                  {{questions.q1.qname}}
+                  {{questions.q1.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                 </div>
                 <div class="col-2" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="Y"
-                      (click)="deleteColumn('Y')">
+                      (click)="deleteColumnDecision('Y')">
                     <label class="form-check-label" for="inlineRadio1">Yes</label>
                   </div> &nbsp;&nbsp;
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="N"
-                      (click)="deleteColumn('N')">
+                      (click)="deleteColumnDecision('N')">
                     <label class="form-check-label" for="inlineRadio2">No</label>
                   </div>
                 </div>
@@ -204,7 +205,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Column</th>
-                          <th scope="col">Action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -235,26 +236,26 @@
                 </div>
               </div>
               <hr *ngIf="isColumnSelectToDrop" />
-              <div class="row align-items-start" style="padding-top: 18px;">
-                <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
+              <div class="row align-items-start" style="padding-top: 12px; margin-bottom: 10px;">
+                <div class="col-3">
                   <button class="btn btn-primary app-btn cont-btn-css" type="button"
                     (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
                 </div>
-                <div class="col-7" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
-                  <label class="info label-l" style="font-size: 9px !important; "> Exploratory Data Analysis of Numeric
+                <div class="col-5 offset-1" *ngIf="isUnivariateStatisticsRunning">
+                  <label class="info label-l" style="font-size: 12px !important; "> Exploratory Data Analysis of Numeric
                     column
-                    started using Vantage MLE functions
-                    'UnivariateStatistics' and 'Unpivoting'</label>
+                    started </label>
                 </div>
-                <div class="col-2" style="margin-top: 6px;" *ngIf="isUnivariateStatisticsRunning">
-                  <div class="col-12">
-                    <div class="spinner-border text-primary spinner-border-sm float-left"
-                      style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                <div class="col-3" *ngIf="isUnivariateStatisticsRunning">
+                  <div class="row">
+                    <div class="spinner-border text-primary spinner-border-sm col-2" style="width: 2rem; height: 2rem;"
+                      role="status">
                     </div>
-                    <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                    <div class="wait col-10 approx-text">Please wait..(approx 1 min)</div>
                   </div>
+
                 </div>
-                <div class="col-9 text-center" style="margin-top: 7px;" *ngIf="isUnivariateStatisticsResultAvailable">
+                <div class="col-6 offset-1" *ngIf="isUnivariateStatisticsResultAvailable">
                   <label class="info label-l"> Below are the results of the Univariate Statistics on the numeric
                     columns &nbsp;&nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                 </div>
@@ -294,7 +295,7 @@
                 <div class="col-12">
                   <div class="row align-items-start next-action question-section">
                     <div class="col-10 question-title">
-                      {{questions.q2.qname}}
+                      {{questions.q2.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                     </div>
                     <div class="col-2" style="font-size: 13px;">
                       <div class="form-check form-check-inline">
@@ -375,7 +376,7 @@
             <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start question-section">
                 <div class="col-10 question-title">
-                  {{questions.q6.qname}}
+                  {{questions.q6.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                 </div>
                 <div class="col-2" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
@@ -420,14 +421,14 @@
                   </div>
                 </div>
                 <div class="col-4">
-                  <label for="form-floating" class="text-muted p-1 label-c">Selected Numerical Columns</label>
+                  <label for="form-floating" class="text-muted p-1 label-c" *ngIf="selectedNColumnsForConversionList.length != 0">Selected Numerical Columns</label>
                   <div class="table-responsive deleted-column scrollbar-primary">
                     <table class="table caption-top table-borderless table-sm table-c1"
                       *ngIf="selectedNColumnsForConversionList.length != 0">
                       <thead>
                         <tr>
                           <th scope="col">Column</th>
-                          <th scope="col">Action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -446,10 +447,10 @@
                       (click)="performNumericalToCategorical()">Continue</button>
                   </div>
 
-                  <div class="col-8" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
-                    <label class="info label-l" style="font-size: 10px !important;"> Conversion of continous/numerical
+                  <div class="col-6 offset-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                    <label class="info label-l" style="font-size: 12px !important;"> Conversion of continous/numerical
                       column to
-                      categorical started using Vantage MLE function 'ConvertToCategorical' </label>
+                      categorical started</label>
                   </div>
                   <div class="col-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
                     <div class="row">
@@ -461,7 +462,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-10 text-center" style="margin-top: 7px;"
+                  <div class="col-6 offset-2" style="margin-top: 7px;"
                     *ngIf="isNumricalToCategoricalConversionDone">
                     <label class="info label-l ">Conversion of continous/numerical column to categorical done.
                       &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down"
@@ -487,7 +488,7 @@
             <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start question-section">
                 <div class="col-10 question-title">
-                  {{questions.q7.qname}}
+                  {{questions.q7.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                   <!-- Question comes in the Previous step-->
                 </div>
                 <div class="col-2" style="font-size: 13px;">
@@ -532,14 +533,14 @@
                   </div>
                 </div>
                 <div class="col-4">
-                  <label for="form-floating" class="text-muted p-1 label-c">Selected Columns</label>
+                  <label for="form-floating" class="text-muted p-1 label-c" *ngIf="basicNullValueImputingList.length != 0">Selected Columns</label>
                   <div class="table-responsive deleted-column scrollbar-primary">
                     <table class="table caption-top table-borderless table-sm table-c1"
                       *ngIf="basicNullValueImputingList.length != 0">
                       <thead>
                         <tr>
                           <th scope="col">Column</th>
-                          <th scope="col">Action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -554,25 +555,25 @@
                 </div>
                 <hr />
 
-                <div class="row align-items-start" style="padding-top: 18px;">
-                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                <div class="row align-items-start" style="padding-top: 5px;">
+                  <div class="col-2" style="margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
                       (click)="performBasicNullImputing()" [disabled]="">Continue</button>
                   </div>
 
-                  <div class="col-8" style="margin-top: 6px;" *ngIf="isBasicNullImputingStarted">
+                  <div class="col-5 offset-2" *ngIf="isBasicNullImputingStarted">
                     <label class="info label-l" style="font-size: 9px;"> Basic Null value imputing using Median and Mode
                       started </label>
                   </div>
-                  <div class="col-2" style="margin-top: 6px;" *ngIf="isBasicNullImputingStarted">
+                  <div class="col-2 offset-1"  *ngIf="isBasicNullImputingStarted">
                     <div class="col-12">
                       <div class="spinner-border text-primary spinner-border-sm float-left"
                         style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
                       </div>
-                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                      <div class="wait" style="padding-top: 7px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isBasicNullImputingDone">
+                  <div class="col-7 offset-1 text-center"  *ngIf="isBasicNullImputingDone">
                     <label class="info label-l ">Basic null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
                         class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
@@ -634,19 +635,17 @@
               </div>
 
               <div class="row container" *ngIf="isAutomatedClusterPerform">
-
-                <!-- Start -->
                 <div class="dual-select col-8">
                   <div class="row">
                     <div class="col-12">
                       <div class="row">
-                        <div class="dual-select__left col-6">
-                          <label for="form-floating" class="text-muted p-1 label-c">Select columns(in pair)</label>
+                        <div class="dual-select__left col-5">
+                          <label for="form-floating" class="text-muted p-1 label-c">Select Categorical Column</label>
                           <div class="left-list scrollbar-primary">
                             <ul class="dual-select__items">
-                              <li *ngFor="let col of unselectedColsForClusterImputing"
-                                (click)="togglePendingSelection( col )" (dblclick)="addToSelectedCols( col )"
-                                class="dual-select__item" [class.dual-select__item__selected]="pendingSelection[col]">
+                              <li *ngFor="let col of newCategoricalColumnsList"
+                                (click)="toggleCategoricalPendingSelection( col )" class="dual-select__item"
+                                [class.dual-select__item__selected]="categoricalPendingSelection[col]">
                                 <div class="column">
                                   <div class="column__name">
                                     {{ col }}
@@ -655,32 +654,15 @@
                               </li>
                             </ul>
                           </div>
-                        </div>
-                        <div class="dual-select__controls col-1">
-                          <button (click)="addToSelectedCols()" class="dual-select__control">
-                            &#10503;
-                          </button>
-                          <button (click)="removeFromSelectedCols()" class="dual-select__control">
-                            &#10502;
-                          </button>
-
-                          <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="makePair()"
-                            style="width: 40px;" [disabled]="selectedColsForClusterImputing.length !== 2"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pair">
-                            <span class="fa fa-plug" style="color: white;"></span></button>
                         </div>
                         <div class="dual-select__right col-5">
-                          <label *ngIf="selectedColsForClusterImputing.length > 2; else normalLabel" for="form-floating"
-                            class="text-muted p-1 label-c">Single pair allowed. Remove Extra!</label>
-                          <ng-template #normalLabel>
-                            <label for="form-floating" class="text-muted p-1 label-c">Selected Column</label>
-                          </ng-template>
-                          <div class="right-list scrollbar-primary" droppable (onDrop)="onItemDrop($event)">
+                          <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column</label>
+                          <div class="right-list scrollbar-primary">
                             <ul class="dual-select__items">
-                              <li draggable *ngFor="let col of selectedColsForClusterImputing" [dragData]="col"
-                                (click)="togglePendingSelection( col )" (dblclick)="removeFromSelectedCols( col )"
+                              <li draggable *ngFor="let col of newNumericalColumnsList"
+                                (click)="toggleNumericalPendingSelection( col )"
                                 class="dual-select__item dual-select__item_new"
-                                [class.dual-select__item__selected]="pendingSelection[ col ]">
+                                [class.dual-select__item__selected]="numericalPendingSelection[ col ]">
                                 <div class="column">
                                   <div class="column__name">
                                     {{ col }}
@@ -689,13 +671,21 @@
                               </li>
                             </ul>
                           </div>
+                        </div>
+
+                        <div class="dual-select__controls col-1">
+                          <button class="btn" type="button" (click)="makePair()"
+                            style="width: 42px; background-color: #7500c0;" [disabled]="selectedColsForClusterImputing.length !== 2"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pair"
+                            [disabled]="!isPairAvailableToAdd()">
+                            <span class="fa fa-plug" style="color: white;"></span>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="pairs.length > 0">
-                  <!--Test Start-->
                   <label for="form-floating" class="text-muted p-1 label-c">Selected pair(s)</label>
                   <div class="toast-section scrollbar-primary">
                     <div class="toast-container">
@@ -715,25 +705,24 @@
                     </div>
                   </div>
                 </div>
-                <!-- End -->
-                <div class="row align-items-start" style="padding-top: 0px;">
-                  <div class="col-2" style="margin-top: 2px; margin-bottom: 6px;">
+                <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 6px;">
+                  <div class="col-2">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
                       (click)="performClusterNullValueImputing()" [disabled]="">Continue</button>
                   </div>
 
-                  <div class="col-8" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
+                  <div class="col-4 offset-1" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
                     <label class="info label-l" style="font-size: 9px;"> Clustered null value imputing started </label>
                   </div>
-                  <div class="col-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
-                    <div class="col-12">
-                      <div class="spinner-border text-primary spinner-border-sm float-left"
-                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                  <div class="col-3 offset-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
+                    <div class="row">
+                      <div class="spinner-border text-primary spinner-border-sm offset-3 col-1"
+                        style="width: 2rem; height: 2rem;" role="status">
                       </div>
-                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                      <div class="wait col-8" style="padding-top: 8px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isAutomatedClusterDone">
+                  <div class="col-8 offset-1 text-center" *ngIf="isAutomatedClusterDone">
                     <label class="info label-l ">Clustered null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
                         class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
@@ -757,7 +746,7 @@
             <div class="accordion-body card-body accordion-body-c">
               <div class="row align-items-start question-section">
                 <div class="col-10 question-title">
-                  {{questions.q9.qname}}
+                  {{questions.q9.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                 </div>
                 <div class="col-2" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
@@ -783,11 +772,11 @@
                       (click)="performOutlierHandling()" [disabled]="">Continue</button>
                   </div>
 
-                  <div class="col-8" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
+                  <div class="col-5 offset-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
                     <label class="info label-l" style="font-size: 9px;"> Outlier Handling started using Vantage MLE
                       function 'OutlierFilter'</label>
                   </div>
-                  <div class="col-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
+                  <div class="col-2 offset-1" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
                     <div class="col-12">
                       <div class="spinner-border text-primary spinner-border-sm float-left"
                         style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
@@ -795,7 +784,7 @@
                       <div class="wait" style="padding-top: 8px;">Please wait!</div>
                     </div>
                   </div>
-                  <div class="col-10 text-center" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
+                  <div class="col-7 offset-1 text-center" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
                     <label class="info label-l ">Outlier handling done!&nbsp;&nbsp; Next &nbsp; <span
                         class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
                   </div>
@@ -820,7 +809,7 @@
 
               <div class="row align-items-start question-section">
                 <div class="col-10 question-title">
-                  {{questions.q4.qname}}
+                  {{questions.q4.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                 </div>
                 <div class="col-2" style="font-size: 13px;">
                   <div class="form-check form-check-inline">
@@ -865,30 +854,73 @@
                 <div class="col-12" *ngFor="let step of flows">
                   <label class="info label-l" style="font-size: 9px;"> {{step}}</label>
                 </div>
-                <label class="info label-l" style="font-size: 9px;"> Model Scores are as below &nbsp; &nbsp;<span
-                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                <div class="offset-3 col-6" style="margin-top: 10px;" *ngIf="modelresult.length !== 0">
+                  <label class="info label-l" style="font-size: 9px;text-decoration: underline;color: #7500c0;"> Model
+                    Scores are as below</label>
+                </div>
+                <div class="col-12" *ngIf="modelresult.length === 0">
+                  <div class="row align-items-start" style="padding-top: 18px;">
+                    <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="buildModel()">Build
+                        Model</button>
+                    </div>
 
-                <div class="row align-items-start" style="padding-top: 18px;">
-                  <div class="col-3" style="margin-top: 6px; margin-bottom: 6px;">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="restartProcess()"
-                      [disabled]="">Try Another Model Build</button>
+                    <div class="offset-2 col-3" style="margin-bottom: 6px;" *ngIf="finalBuildModelStart">
+                      <label class="info label-l" style="font-size: 9px;"> Final Model Creation Started </label>
+                    </div>
+
+                    <div class="col-5" *ngIf="finalBuildModelStart">
+                      <div class="row">
+                        <div class="col-1 offset-3">
+                          <div class="spinner-border text-primary spinner-border-sm" style="width: 2rem; height: 2rem;"
+                            role="status"></div>
+                        </div>
+                        <div class="col-8">
+                          <span class="final-model-wait">Please wait for the model scores.. (approx 2 min)</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div class="col-12" *ngIf="modelresult.length > 0">
+                  <table class="table table-striped table-dark table-hover table-bordered build-result-tbl">
+                    <tbody>
+                      <tr *ngFor="let line of modelresult">
+                        <td>{{line.name}}</td>
+                        <td>{{line.value}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-6 offset-1 mb-2" *ngIf="modelresult.length > 0">
+                  <div class="row">
+                    <div class="d-grid gap-2 col-5 offset-2" style="font-size: 13px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="submit"> <span
+                          class="fa fa-cloud-download"></span>&nbsp;Report</button>
+                    </div>
+
+                    <div class="d-grid gap-2 col-5" style="font-size: 13px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="submit">Start New Model</button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- End of Model Creation Started-->
       </div>
-    </div>
-    <div class="change-copy" *ngIf="initRunMessage === ''">
-      <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
-      <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
-          src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
-      <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
-      <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
-      <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
-      <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
-        success we share and we refresh the familiar.</p>
+      <!-- End of Model Creation Started-->
     </div>
   </div>
+  <div class="change-copy" *ngIf="initRunMessage === ''">
+    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
+    <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
+        src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
+    <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
+    <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
+    <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
+    <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
+      success we share and we refresh the familiar.</p>
+  </div>
+</div>

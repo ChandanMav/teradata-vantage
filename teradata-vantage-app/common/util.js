@@ -1,6 +1,11 @@
 var TeradataExceptions = require("teradata-nodejs-driver/teradata-exceptions");
 var sanitize = require("mongo-sanitize");
 var _ = require("lodash");
+var appRoot = require('app-root-path');
+var Errorcode = require("../common/error-code");
+var Error = require("../common/app.err.messages");
+var fs = require("fs");
+var winston = require("./../config/winston");
 
 exports.getTimeStamp = () => {
   const dateObject = new Date();
@@ -109,7 +114,7 @@ exports.formatUnivariateStatsData = (data) => {
   }
 
   let fdata = [];
-    for(let d = 0; d<data.length; d++){
+  for (let d = 0; d < data.length; d++) {
 
     let obj = {};
     let item = data[d];
@@ -126,7 +131,49 @@ exports.formatUnivariateStatsData = (data) => {
     obj.Maximum = Number(item[9]).toFixed(2);
 
     fdata.push(obj);
-  
-    }
+
+  }
   return fdata;
+}
+
+exports.getValueFromConfig = (key, res) => {
+  let path = `${appRoot}/${process.env.SETTING_FILE_LOCATION}/config.txt`;
+  let line = null;
+  let value = 0;
+
+  try {
+
+    if (!fs.existsSync(path)) {
+      winston.error(Error.CONFIG_FILE_MISSING);
+      res
+        .status(500)
+        .send({ Success: false, error_code: Errorcode.No_Config_File, message: Error.CONFIG_FILE_MISSING });
+      return;
+    }
+
+    const data = fs.readFileSync(path, "utf8");
+    data.split(/\r?\n/).forEach(l => {
+      // if (l.startsWith(key)) {
+      //   line = l;        
+      // }
+     let templ = l.split("=");
+     let k = templ[0].trim();
+     if(k === key){
+       line = templ;
+     }
+    });
+
+    if (!line) {
+      throw new Error("Split percentage data is not found in the configuration file. Please check and re-upload")
+    }
+    value = line[1];
+    return value;
+
+  } catch (err) {
+    winston.error(err);
+    res
+      .status(500)
+      .send({ Success: false, error_code: Errorcode.Config_File_Incorrect_Format, message: Error.CONFIG_FILE_FORMAT_ERROR });
+    return;
+  }
 }

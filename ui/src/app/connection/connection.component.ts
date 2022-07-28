@@ -69,7 +69,7 @@ export class ConnectionComponent implements OnInit, AfterViewInit, OnDestroy {
           this.message = response.message;
           this.interval = setInterval(() => {
             if (this.countdown === 0) {
-              this.router.navigate(['/dataprep'], {
+              this.router.navigate(['/mdlbuild'], {
                 relativeTo: this.activatedRoute,
                 state: value
               });
