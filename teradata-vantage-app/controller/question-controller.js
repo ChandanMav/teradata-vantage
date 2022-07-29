@@ -11,13 +11,13 @@ var Errorcode = require("../common/error-code");
 var createError = require("http-errors");
 
 exports.getQuestion = (req, res, next) => {
+
   let questionID = req.params.id;
   let question;
   let availableOptions;
+
   if (!questionID) {
-    res
-      .status(500)
-      .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
+    next({ status: 400, Success: false, message: Error.MISSING_REQUIRED_INPUT });
     return;
   }
   switch (parseInt(questionID)) {
@@ -32,6 +32,15 @@ exports.getQuestion = (req, res, next) => {
 
     case 2:
       question = QB.convertNumericalToCategorical;
+      availableOptions = ["Y", "N"];
+      res.status(200).send({
+        Success: true,
+        message: { question, option: availableOptions },
+      });
+      break;
+
+    case 3:
+      question = QB.performAutomatedDataTransformation;
       availableOptions = ["Y", "N"];
       res.status(200).send({
         Success: true,
@@ -76,9 +85,7 @@ exports.getQuestion = (req, res, next) => {
       break;
 
     default:
-      res
-        .status(500)
-        .send({ Success: false, message: Error.MISSING_REQUIRED_INPUT });
+      next({ status: 400, Success: false, message: Error.MISSING_REQUIRED_INPUT });
       return;
   }
 };
@@ -97,69 +104,74 @@ exports.univariate = (req, res, next) => {
     let remainingCols = requestBody.remainingCols; //contains remianing column including the dependent one
 
     if (!config) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
+        error_code: Errorcode.No_database_Session,
       });
       return;
     }
 
     if (!db) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
+        error_code: Errorcode.Missing_Required_Input,
       });
       return;
     }
 
     if (!basetable) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
+        error_code: Errorcode.Missing_Required_Input,
       });
       return;
     }
 
     if (!dep_col) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
+        error_code: Errorcode.Missing_Required_Input,
       });
       return;
     }
 
-
     if (!allCols) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
+        message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.NO_SESSION,
       });
       return;
     }
     allCols = allCols.split(",");
 
-
     if (!nCols) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
+        message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.NO_SESSION,
       });
       return;
     }
     nCols = nCols.split(",");
-    let nColsSingleQuoted = nCols.map(col => `'${col}'`);
+    let nColsSingleQuoted = nCols.map((col) => `'${col}'`);
 
     if (!remainingCols) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
+        message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.NO_SESSION,
       });
       return;
     }
@@ -167,27 +179,32 @@ exports.univariate = (req, res, next) => {
 
     let connection = getConnection(config);
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
+      next({
+        status: 400,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });
       return;
     }
 
     if (!key) {
-      res.status(503).send({
+      next({
+        status: 400,
         Success: false,
+        message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.NO_SESSION,
       });
       return;
     }
+
 
     async.waterfall(
       [
         (callback) => {
           //Drop the existing base table (_work suffix)              
           let query = `DROP TABLE ${db}.${basetable}_work`;
-          winston.info(query);
+          winston.info(query.substring(0, 50));
           DAO.dropTable(connection, query, (err, isDeleted) => {
             if (isDeleted) {
               callback(null, null);
@@ -201,14 +218,16 @@ exports.univariate = (req, res, next) => {
         //Create new Work Table
         (data, callback) => {
           if (key === 'Y') {
+            winston.info(`Creating ${db}.${basetable}_work table`);
             let query = `create table ${db}.${basetable}_work as ( SELECT ${remainingCols} from ${db}.${basetable} ) WITH DATA`;
-            winston.info(query)
+            winston.info(query.substring(0, 50));
             DAO.createTable(connection, query, (err, isCreated) => {
               if (isCreated) {
+                winston.info(`Work Table ${db}.${basetable}_work created successfully`);
                 basetable = `${basetable}_work`;
                 callback(null, null);
               } else {
-                winston.info(`Working Table is not created. Hence Exiting!`)
+                winston.info(`Working Table is not created. Hence Exiting...`)
                 callback(true, null);
               }
             });
@@ -225,7 +244,7 @@ exports.univariate = (req, res, next) => {
             //DROP moments_ table if any
             innerCB => {
               let query = `DROP TABLE ${db}.moments_${basetable}`;
-              winston.info(query);
+              winston.info(query.substring(0, 50));
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
                   innerCB(null, null);
@@ -239,7 +258,7 @@ exports.univariate = (req, res, next) => {
             //DROP basic_ table if any
             (result, innerCB) => {
               let query = `DROP TABLE ${db}.basic_${basetable}`;
-              winston.info(query);
+              winston.info(query.substring(0, 50));
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
                   innerCB(null, null);
@@ -252,13 +271,11 @@ exports.univariate = (req, res, next) => {
             //DROP quantiles_ table if any
             (result, innerCB) => {
               let query = `DROP TABLE ${db}.quantiles_${basetable}`;
-              winston.info(query);
+              winston.info(query.substring(0, 50));
               DAO.dropTable(connection, query, (err, isDropped) => {
                 if (isDropped) {
                   innerCB(null, null);
                 } else {
-                  winston.error(err);
-                  //Just ignore the error if occured during table deletion
                   innerCB(null, null);
                 }
               });
@@ -361,21 +378,15 @@ exports.univariate = (req, res, next) => {
       (error, data) => {
         closeConnection(connection);
         if (error) {
-          winston.error(error);
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+          next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
+          return;
         } else {
 
           let result = {
             output: data,
-            question: {
-              name: QB.performAutomatedDataTransformation,
-              options: ["Y", "N"]
-            },
             basetable: basetable
           };
-          //console.log("Final Result ", result)
+          winston.info("Exploratory Data Analysis using Vantage MLE functions is completed")
           res.status(200).send({ success: true, message: result });
         }
       }
@@ -386,8 +397,6 @@ exports.univariate = (req, res, next) => {
 };
 
 exports.numericToCategoricalConversion = (req, res, next) => {
-
-
   try {
     let requestBody = sanitize(req.body);
     let config = getConfig(req);

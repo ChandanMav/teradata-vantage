@@ -362,14 +362,11 @@ export class DataPreperationComponent
     let key: string = this.dropCols.length === 0 ? "N" : "Y";
     let temp = this.remainingCols;
     temp.push(this.dependentCol)
-
     // console.log("All Column List", this.columns)
     // console.log("Drop Column List", this.dropCols);
     // console.log("All remaining Column List", this.remainingCols);
     // console.log("Remaining Numerical Column List", this.remainingNcols);
     // console.log("Remaining Categorical Column List", this.remainingCCols);
-
-
       this.vantageService
       .performUnivariateStatistics(
         this.config,
@@ -388,7 +385,6 @@ export class DataPreperationComponent
 
           let {
             output,
-            question,
             basetable
           } = response.message;
 
@@ -403,10 +399,6 @@ export class DataPreperationComponent
 
           this.univariateStatisticsResultAttr = Object.keys(firstRecord);
 
-          this.questions.q2 = {
-            qname: question.name,
-            options: question.options
-          }
         },
         error: (error) => {
           this.isUnivariateStatisticsRunning = false;
@@ -417,25 +409,56 @@ export class DataPreperationComponent
 
   }; //End Data Attribute Selection
 
+//openAutomatedDTDialogue
+openAutomatedDTDialogue = () => {
+  this.isAutomatedDT = false;
+  this.vantageService.getQuestion(3).subscribe({
+    next: response => {
+      let { question, option } = response.message;
+      this.questions.q2 = {
+        qname: question,
+        options: option
+      }
+      this.vantageService.getAllAutomatedDTSteps().subscribe({
+        next: response => {
+          this.allAutomatedDTSteps = response.message.questions;
+          this.isAutomatedDT = true;
+        },
+        error: error => {
+          this.handleError(error);
+          this.isAutomatedDT = false;
+          this.clearAutomatedDataTransferState();
+        }
+      });
+    },
+    error: error => {
+      this.handleError(error);
+      this.isAutomatedDT = false;
+      this.clearAutomatedDataTransferState();
+    }
+  });
+}
 
-  //Perform Automated Data Transformation
-  performAutomatedDT = (val: String) => {
-    this.clearAutomatedDataTransferState();
-    this.isAutomatedDT = false;
+  //Data Transformation Decision
+  dataTransformationDecision= (val: String) => {
+    this.clearAutomatedDataInfoState();
+    this.isAutomatedProceed = false;
     this.isManualDT = false;
     switch (val) {
       case 'Y':
-        this.vantageService.getAllAutomatedDTSteps().subscribe({
+        this.isManualDT = false;
+        this.vantageService.getQuestion(2).subscribe({
           next: response => {
-            //console.log(response);
-            this.allAutomatedDTSteps = response.message.questions;
-            this.isAutomatedDT = true;
-            this.isManualDT = false;
+            let { question, option } = response.message;
+            this.questions.q6 = {
+              qname: question,
+              options: option
+            }
+            this.isAutomatedProceed = true;
           },
           error: error => {
             this.handleError(error);
-            this.isAutomatedDT = true;
-            this.isManualDT = false;
+            this.isAutomatedProceed = false;
           }
         });
         break;
@@ -447,39 +470,20 @@ export class DataPreperationComponent
               qname: question,
               options: option
             }
-            this.isAutomatedDT = false;
-            this.clearAutomatedDataTransferState();
+            this.isAutomatedProceed = false;
+            this.clearAutomatedDataInfoState();
             this.isManualDT = true;
 
           },
           error: error => {
             this.handleError(error);
-            this.isAutomatedDT = false;
-            this.clearAutomatedDataTransferState();
-            this.isManualDT = true;
+            this.isAutomatedProceed = false;
+            this.clearAutomatedDataInfoState();
+            this.isManualDT = false;
           }
         });
         break;
     }
-  }
-
-  automatedDTProceed = () => {
-    this.clearAutomatedDataInfoState();
-    this.isAutomatedProceed = false;
-    this.vantageService.getQuestion(2).subscribe({
-      next: response => {
-        let { question, option } = response.message;
-        this.questions.q6 = {
-          qname: question,
-          options: option
-        }
-        this.isAutomatedProceed = true;
-      },
-      error: error => {
-        this.handleError(error);
-        this.isAutomatedProceed = true;
-      }
-    });
   }
 
   /*
@@ -928,7 +932,7 @@ export class DataPreperationComponent
         return false;
       });
     }
-    return selectionFromCollection;
+    return [selectionFromCollection[0]];
   }
 
 

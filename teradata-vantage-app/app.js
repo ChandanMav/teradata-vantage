@@ -104,18 +104,18 @@ app.use(function (err, req, res, next) {
 
   //this line to include winston logging
   winston.error(
-    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method
-    } - ${req.ip}`
+    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`
   );
 
   // render the error page
   res.status(err.status || 500);
-  if (!err.status || err.status === 500) {
+
+  if (!err.status && err.status === 500) {
     return res.send({ status: 500, message: Error.ERR_500 });
   } else if (err.status === 404) {
     return res.send({ status: err.status, message: Error.ERR_NOT_FOUND });
   } else {
-    return res.send({ status: err.status, message: err.message });
+    return res.send(err);
   }
 });
 

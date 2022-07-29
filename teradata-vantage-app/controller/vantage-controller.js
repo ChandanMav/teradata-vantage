@@ -40,6 +40,9 @@ exports.testConnection = (req, res, next) => {
 exports.getDatabases = (req, res, next) => {
 
   winston.info("Fetching list of Database");
+  console.log(req.originalUrl);
+  console.log(req.headers.origin);
+  
   let config = getConfig(req);
   if (!config) {
     res.status(503).send({ Success: false, error_code: Errorcode.No_db_Session, message: Error.ERR_NO_AUTH });

@@ -1,11 +1,12 @@
 var appRoot = require("app-root-path");
 var winston = require("winston");
 const { timestamp, combine, json } = winston.format;
-// define the custom settings for each transport (file, console)
+
 var options = {
   file: {
-    level: "error",
-    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/error.log`,
+    level: "info",
+    name: "info-file",
+    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/all-logs.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
@@ -13,13 +14,23 @@ var options = {
     colorize: false,
   },
   console: {
-    level: "info",
-    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/all.log`,
+    level: "error",
+    name: "error-file",
+    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/error-logs.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
     maxFiles: 5,
-    colorize: true,
+    colorize: false,
+  },
+  request: {
+    name: "request-file",
+    level: "request",
+    filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/requests.log`,
+    json: true,
+    maxsize: 5242880, //5MB
+    maxFiles: 5,
+    colorize: false
   },
 };
 // instantiate a new Winston Logger with the settings defined above
@@ -30,21 +41,27 @@ var logger = winston.createLogger({
     }),
     json()
   ),
+  exceptionHandlers: [
+    new winston.transports.File({
+      filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/exceptions.log`,
+    }),
+  ],
+  rejectionHandlers: [
+    new winston.transports.File({
+      filename: `${appRoot}/${process.env.LOG_FILE_LOCATION}/rejections.log`,
+    }),
+  ],
   transports: [
     new winston.transports.File(options.file),
-    new winston.transports.Console(options.Console),
-    new winston.transports.Http({
-      level: "warn",
-      format: winston.format.json(),
-    })
+    new winston.transports.File(options.console),
+    new winston.transports.File(options.request)
   ],
   exitOnError: false, // do not exit on handled exceptions
 });
 
 // create a stream object with a 'write' function that will be used by `morgan`
 logger.stream = {
-  write: function (message, encoding) {
-    // use the 'info' log level so the output will be picked up by both transports (file and console)
+  write: function (message, encoding) {  
     logger.info(message);
   },
 };
