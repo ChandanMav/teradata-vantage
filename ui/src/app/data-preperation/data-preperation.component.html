@@ -634,7 +634,7 @@
                 </div>
               </div>
 
-              <div class="row container" *ngIf="isAutomatedClusterPerform">
+              <div class="row" *ngIf="isAutomatedClusterPerform">
                 <div class="dual-select col-8">
                   <div class="row">
                     <div class="col-12">
@@ -705,21 +705,21 @@
                     </div>
                   </div>
                 </div>
-                <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 6px;">
+                <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 9px;">
                   <div class="col-2">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
                       (click)="performClusterNullValueImputing()" [disabled]="">Continue</button>
                   </div>
 
-                  <div class="col-4 offset-1" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
-                    <label class="info label-l" style="font-size: 9px;"> Clustered null value imputing started </label>
+                  <div class="col-4 offset-1" style="margin-top: 6px;padding-left: 105px;" *ngIf="isAutomatedClusterStarted">
+                    <label class="info label-l"> Clustered null value imputing started </label>
                   </div>
                   <div class="col-3 offset-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
-                    <div class="row">
-                      <div class="spinner-border text-primary spinner-border-sm offset-3 col-1"
+                    <div class="row justify-content-end">
+                      <div class="spinner-border text-primary spinner-border-sm offset-4 col-1"
                         style="width: 2rem; height: 2rem;" role="status">
                       </div>
-                      <div class="wait col-8" style="padding-top: 8px;">Please wait!</div>
+                      <div class="wait col-6" style="padding-top: 6px;">Please wait!</div>
                     </div>
                   </div>
                   <div class="col-8 offset-1 text-center" *ngIf="isAutomatedClusterDone">

@@ -94,14 +94,14 @@ export class DataPreperationComponent
   //Null Basic Imputing Controls
   isBasicNullPerform: boolean = false;
   isBasicNullImputingStarted: boolean = false;
-  isBasicNullImputingDone: boolean = false;
+  isBasicNullImputingDone: boolean = false; //Change to false
   allColumnWithCheckedStatusFromBasicNullOps: any[] = [];
   basicNullValueImputingList: string[] = []
 
 
   //Automated Cluster Controls
-  isAutomatedClusterPerform: boolean = false;
-  isAutomatedClusterStarted: boolean = false;
+  isAutomatedClusterPerform: boolean = false; //Change to false
+  isAutomatedClusterStarted: boolean = false;//Change to false
   isAutomatedClusterDone: boolean = false;
   numericalPendingSelection: PendingNumSelection = Object.create(null);
   categoricalPendingSelection: PendingCatSelection = Object.create(null);
