@@ -156,7 +156,7 @@ export class DataPreperationComponent
         //this.database_bkp = response.database
       },
       error: (error) => {
-        if (error.error_code === GlobalConstants.No_db_Session) {
+        if (error.error_code === GlobalConstants.No_db_Session || error.error_code === GlobalConstants.Missing_Required_Input) {
           this.clear();
           this.isTeradataConnectionAlive = false;
           this.errorMsg = 'Please connect to Server!';
@@ -300,6 +300,7 @@ export class DataPreperationComponent
 
   //Remove Column from Model Decision
   deleteColumnDecision = (val: String) => {
+    this.isColumnSelectToDrop = false;
     this.clearDataAttributeSelectionState();
     this.isFeatureContinue = true;
     switch (val) {
@@ -571,8 +572,6 @@ openAutomatedDTDialogue = () => {
     this.toggleCheckedStatus(val, isChecked);
   }
 
-
-
   toggleCheckedStatus = (val: any, isChecked: boolean) => {
     for (let i = 0; i < this.tempRemainingNcols.length; i++) {
       let { name, checked } = this.tempRemainingNcols[i]
@@ -651,7 +650,7 @@ openAutomatedDTDialogue = () => {
         },
         error: (error) => {
           this.isNumricalToCategoricalStarted = false;
-          this.isNumricalToCategoricalConversionDone = true;
+          this.isNumricalToCategoricalConversionDone = false;
           this.newCategoricalColumnsList = [...this.remainingCCols];
           this.newNumericalColumnsList = [...this.remainingNcols];
           this.handleError(error);
@@ -825,7 +824,7 @@ openAutomatedDTDialogue = () => {
         },
         error: (error) => {
           this.isBasicNullImputingStarted = false;
-          this.isBasicNullImputingDone = true;
+          this.isBasicNullImputingDone = false;
           this.numericalPendingSelection = Object.create(null);
           this.categoricalPendingSelection = Object.create(null);
           this.selectedColsForClusterImputing = [];
@@ -873,8 +872,7 @@ openAutomatedDTDialogue = () => {
     this.clearClusteredImputingState();
     this.isAutomatedClusterStarted = true;
     this.isAutomatedClusterDone = false;
-    //TBD
-    //this.newBaseTable = "cellphone_work";
+
     this.vantageService
       .performClusterNullValueImputingSrvc(
         this.config,
@@ -898,7 +896,7 @@ openAutomatedDTDialogue = () => {
         },
         error: (error) => {
           this.isAutomatedClusterStarted = false;
-          this.isAutomatedClusterDone = true;
+          this.isAutomatedClusterDone = false;
           this.handleError(error);
         },
       });
@@ -1037,7 +1035,7 @@ openAutomatedDTDialogue = () => {
         },
         error: (error) => {
           this.isOutlierHandingStarted = false;
-          this.isOutlierHandingDone = true;
+          this.isOutlierHandingDone = false;
           this.handleError(error);
         },
       });
@@ -1067,17 +1065,17 @@ openAutomatedDTDialogue = () => {
               this.flows = response.message.flows;
             },
             error: error => {
-              this.manualDataTransformDecisionInString = "N";
+              this.manualDataTransformDecisionInString = "";
               this.handleError(error);
             }
           });
         break;
     }
-    setTimeout(() => {
-      this.router.navigate(['/'], {
-        relativeTo: this.activatedRoute,
-      });
-    }, 4000);
+    // setTimeout(() => {
+    //   this.router.navigate(['/'], {
+    //     relativeTo: this.activatedRoute,
+    //   });
+    // }, 4000);
   }
 
   //Model Build
@@ -1108,7 +1106,7 @@ openAutomatedDTDialogue = () => {
         error: (error) => {
           this.modelresult = [];
           this.finalBuildModelStart = false;
-          this.finalBuildModelDone = true;
+          this.finalBuildModelDone = false;
           this.handleError(error);
         },
       });
@@ -1305,6 +1303,8 @@ openAutomatedDTDialogue = () => {
     this.loading = false;
     this.isFileUploadFailed = false;
     this.questions = questions;
+    this.dropCols = [];
+    this.isColumnSelectToDrop = false;
     this.clearDataAttributeSelectionState();
   };
 

@@ -294,9 +294,10 @@
                 </div>
 
                 <!--Change-->
-                <div class="col-12">
-                  <div class="row align-items-start" style="padding-top: 3px;">
-                    <div class="col-12" style="margin-top: 14px; margin-bottom: 6px;">
+                <div class="col-12" style="padding-top: 15px;">
+                  <hr/>
+                  <div class="row align-items-start" style="padding-top: 10px;">
+                    <div class="col-12" style="margin-bottom: 9px;">
                       <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="openAutomatedDTDialogue()"
                         >Continue For Data Transformation</button>
                     </div>
@@ -449,7 +450,7 @@
                 <div class="row align-items-start" style="padding-top: 3px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performNumericalToCategorical()">Continue</button>
+                      (click)="performNumericalToCategorical()" [disabled]="selectedNColumnsForConversionList.length === 0">Continue</button>
                   </div>
 
                   <div class="col-6 offset-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
@@ -563,7 +564,7 @@
                 <div class="row align-items-start" style="padding-top: 5px;">
                   <div class="col-2" style="margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performBasicNullImputing()" [disabled]="">Continue</button>
+                      (click)="performBasicNullImputing()" [disabled]="basicNullValueImputingList.length === 0">Continue</button>
                   </div>
 
                   <div class="col-5 offset-2" *ngIf="isBasicNullImputingStarted">
@@ -711,9 +712,10 @@
                   </div>
                 </div>
                 <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 9px;">
+                  <div class="container" style="padding-bottom: 12px;"> <hr /> </div>
                   <div class="col-2">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performClusterNullValueImputing()" [disabled]="">Continue</button>
+                      (click)="performClusterNullValueImputing()" [disabled]="pairs.length === 0">Continue</button>
                   </div>
 
                   <div class="col-4 offset-1" style="margin-top: 6px;padding-left: 105px;" *ngIf="isAutomatedClusterStarted">
@@ -768,9 +770,7 @@
               </div>
 
               <div class="row" *ngIf="isOutlierHandingPerform">
-                <div class="col-7"></div>
-                <div class="col-5"></div>
-
+                <div class="container" style="padding-top: 14px;"> <hr /> </div>
                 <div class="row align-items-start" style="padding-top: 18px;">
                   <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
                     <button class="btn btn-primary app-btn cont-btn-css" type="button"
@@ -829,7 +829,7 @@
                   </div>
                 </div>
               </div>
-              <hr />
+              <div style="padding-top: 17px !important;"> <hr /></div>
               <div class="row">
                 <div class="col-12">
                   <div for="form-floating" class="p-4 text-center" style="color: #7500c0;">

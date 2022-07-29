@@ -17,8 +17,7 @@ exports.getQuestion = (req, res, next) => {
   let availableOptions;
 
   if (!questionID) {
-    next({ status: 400, Success: false, message: Error.MISSING_REQUIRED_INPUT });
-    return;
+    return next({ status: 400, Success: false, message: Error.MISSING_REQUIRED_INPUT });
   }
   switch (parseInt(questionID)) {
     case 1:
@@ -92,6 +91,7 @@ exports.getQuestion = (req, res, next) => {
 
 exports.univariate = (req, res, next) => {
   try {
+    winston.info("Exploratory Data Analysis started using Vantage MLE functions");
     let requestBody = sanitize(req.body);
     //console.log(requestBody);  
     let key = requestBody.key;
@@ -104,100 +104,37 @@ exports.univariate = (req, res, next) => {
     let remainingCols = requestBody.remainingCols; //contains remianing column including the dependent one
 
     if (!config) {
-      next({
+      return  next({
         status: 400,
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });
-      return;
+      });    
     }
 
-    if (!db) {
-      next({
+    if (!db || !basetable || !dep_col || !allCols || !nCols || !remainingCols || !key) {
+      return  next({
         status: 400,
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
+      });     
     }
-
-    if (!basetable) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
-
-    if (!dep_col) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
-
-    if (!allCols) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
-    allCols = allCols.split(",");
-
-    if (!nCols) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
+   
+    allCols = allCols.split(",");   
     nCols = nCols.split(",");
-    let nColsSingleQuoted = nCols.map((col) => `'${col}'`);
-
-    if (!remainingCols) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
+    let nColsSingleQuoted = nCols.map((col) => `'${col}'`);   
     remainingCols = remainingCols.split(",");
 
     let connection = getConnection(config);
     if (!connection) {
-      next({
+      return  next({
         status: 400,
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });
-      return;
+      });     
     }
-
-    if (!key) {
-      next({
-        status: 400,
-        Success: false,
-        message: Error.MISSING_REQUIRED_INPUT,
-        error_code: Errorcode.Missing_Required_Input,
-      });
-      return;
-    }
-
 
     async.waterfall(
       [
@@ -238,8 +175,7 @@ exports.univariate = (req, res, next) => {
         }, //End of droping work table
 
         //Run Univariate Result
-        (isWorkingTableCreated, callback) => {
-          winston.info("Exploratory Data Analysis started using Vantage MLE functions");
+        (isWorkingTableCreated, callback) => {          
           async.waterfall([
             //DROP moments_ table if any
             innerCB => {
@@ -378,15 +314,14 @@ exports.univariate = (req, res, next) => {
       (error, data) => {
         closeConnection(connection);
         if (error) {
-          next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
-          return;
+          return  next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
         } else {
 
           let result = {
             output: data,
             basetable: basetable
           };
-          winston.info("Exploratory Data Analysis using Vantage MLE functions is completed")
+          winston.info("Exploratory Data Analysis using Vantage MLE functions completed")
           res.status(200).send({ success: true, message: result });
         }
       }
@@ -398,6 +333,7 @@ exports.univariate = (req, res, next) => {
 
 exports.numericToCategoricalConversion = (req, res, next) => {
   try {
+    winston.info("Conversion of continous/numerical column to categorical started using Vantage MLE function 'ConvertToCategorical' ...")
     let requestBody = sanitize(req.body);
     let config = getConfig(req);
     let db = requestBody.db;
@@ -406,72 +342,45 @@ exports.numericToCategoricalConversion = (req, res, next) => {
     let cCols = requestBody.cCols; //New list of categorical columns
 
     if (!config) {
-      res.status(503).send({
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
-      });
-      return;
+        error_code: Errorcode.No_database_Session,
+      });      
     }
 
-    if (!db) {
-      res.status(503).send({
+    if (!db || !basetable || !new_basetable || !cCols) {
+      return next({
+        status: 400,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-    if (!basetable) {
-      res.status(503).send({
-        Success: false,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-
-    if (!new_basetable) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-
-    if (!cCols) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
+      });    
     }
 
     cCols = cCols.split(",");
 
     let connection = getConnection(config);
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-      return;
+      return  next({
+        status: 401,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });      
     }
 
     async.waterfall(
       [
         (callback) => {
           let query = `DROP TABLE ${db}.${new_basetable}`;
-          winston.info(query);
+          winston.info(query.substring(0, 50));
           DAO.dropTable(connection, query, (err, isDeleted) => {
             if (isDeleted) {
               callback(null, null);
             } else {
-              //Just ignore the error if occured during table deletion
+              //Ignore the error
               callback(null, null);
             }
           });
@@ -489,30 +398,28 @@ exports.numericToCategoricalConversion = (req, res, next) => {
               ) AS dt
               ) WITH DATA`;
 
-          winston.info(query)
+          winston.info(query.substring(0, 50));
           DAO.createTable(connection, query, (err, isCreated) => {
             if (isCreated) {
               callback(null, null);
             } else {
-              winston.info(`MULTISET Table is not created. Hence Exiting!`)
+              winston.error(`MULTISET Table is not created. Hence Exiting...`)
               callback(true, null);
             }
           });
-        } //End of droping work table
+        } //End
       ],
       (error, data) => {
         closeConnection(connection);
         if (error) {
-          winston.error(error);
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+          return next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error })
         } else {
           availableOptions = ["Y", "N"];
           let question = {
             name: QB.basicNull,
             options: availableOptions
           }
+          winston.info(`Conversion of numerical column to categorical completed`)
           res.status(200).send({
             Success: true,
             message: { question }
@@ -520,68 +427,45 @@ exports.numericToCategoricalConversion = (req, res, next) => {
         }
       }
     )
-
   } catch (error) {
     return next(createError(500));
   }
 }
 
-
 exports.basicNullValueImputing = (req, res, next) => {
-
   try {
     let requestBody = sanitize(req.body);
-
-    //console.log("requestBody ", requestBody);
     let config = getConfig(req);
     let db = requestBody.db;
     let basetable = requestBody.basetable;
     let basicnullcolval = requestBody.basicnullcolval;
 
-
     if (!config) {
-      res.status(503).send({
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
-      });
-      return;
+        error_code: Errorcode.No_database_Session,
+      });     
     }
 
-    if (!db) {
-      res.status(503).send({
+    if (!db || !basetable || !basicnullcolval) {
+      return  next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-    if (!basetable) {
-      res.status(503).send({
-        Success: false,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-
-    if (!basicnullcolval) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
+      });   
     }
 
     let connection = getConnection(config);
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-      return;
+      return next({
+        status: 500,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });     
     }
 
     async.waterfall(
@@ -594,13 +478,11 @@ exports.basicNullValueImputing = (req, res, next) => {
           }
           callback(null, queryList);
         },
-
-        //Update Basic Null
         (queryList, callback) => {
           if (queryList.length > 0) {
             for (let k = 0; k < queryList.length; k++) {
               let query = queryList[k];
-              winston.info("Query Execution : " + query);
+              winston.info(query.substring(0, 50));
               DAO.executeQuery(connection, query, (err, isDone) => {
                 if (!isDone) {
                   callback(true, null)
@@ -617,16 +499,19 @@ exports.basicNullValueImputing = (req, res, next) => {
       (error, data) => {
         closeConnection(connection);
         if (error) {
-          winston.error(error);
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+          return next({
+            status: 500,
+            Success: false,
+            message: error,
+            error_code: Errorcode.No_database_Session,
+          });
         } else {
           availableOptions = ["Y", "N"];
           let question = {
             name: QB.performAutomaticClustered,
             options: availableOptions
           }
+          winston.info("Basic null value imputing done");
           res.status(200).send({
             Success: true,
             message: { question }
@@ -634,7 +519,6 @@ exports.basicNullValueImputing = (req, res, next) => {
         }
       }
     )
-
   } catch (error) {
     return next(createError(500));
   }
@@ -642,6 +526,7 @@ exports.basicNullValueImputing = (req, res, next) => {
 
 exports.clusterNullValueImputing = (req, res, next) => {
   try {
+    winston.info("Clustered null value imputing started");
     let requestBody = sanitize(req.body);
     //console.log("requestBody ", requestBody);
     let config = getConfig(req);
@@ -651,50 +536,32 @@ exports.clusterNullValueImputing = (req, res, next) => {
 
 
     if (!config) {
-      res.status(503).send({
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
+        error_code: Errorcode.No_database_Session,
       });
-      return;
     }
 
-    if (!db) {
-      res.status(503).send({
+    if (!db || !basetable || !columnPairs) {
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-    if (!basetable) {
-      res.status(503).send({
-        Success: false,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-
-    if (!columnPairs) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
+      });     
     }
 
     let connection = getConnection(config);
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-      return;
+      return next({
+        status: 500,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });     
     }
-
 
     availableOptions = ["Y", "N"];
     let question = {
@@ -704,29 +571,28 @@ exports.clusterNullValueImputing = (req, res, next) => {
 
     if (!_.isEmpty(columnPairs)) {
       async.each(columnPairs, (pair, callback) => {
-        //console.log("pair ", pair);
         if (!_.isEmpty(pair)) {
           let col1 = pair[0];
           let col2 = pair[1];
           let query = `select trim(cast(${col1} as varchar(1000))), trim(median(${col2})) from ${db}.${basetable} group by cast(${col1} as varchar(1000))`;
           winston.info(query.substring(0, 50));
-          //console.log(query);
           async.waterfall([
             //Find Median
             waterfall_cb => {
               DAO.fetchResult(connection, query, (err, data) => {
-                //console.log(data);
-                waterfall_cb(null, data);
+                if (!data) {
+                  waterfall_cb(true, null);
+                  return;
+                } else {
+                  waterfall_cb(null, data);
+                }
               })
             },
-
-            //Update DB
             (data, waterfall_cb) => {
               if (!data) {
                 waterfall_cb(true, null)
                 return;
               }
-
               async.each(data, (record, innerAsyncEach) => {
                 let filterValue = record[0];
                 let assignmentValue = record[1];
@@ -737,7 +603,6 @@ exports.clusterNullValueImputing = (req, res, next) => {
                 else {
                   let updateQuery = `UPDATE ${db}.${basetable} SET ${col2}= ${assignmentValue} where ${col2} IS NULL and ${col1}='${filterValue}'`;
                   winston.info(updateQuery.substring(0, 50));
-                  //console.log(updateQuery);
                   DAO.executeQuery(connection, updateQuery, (err, executionDone) => {
                     if (executionDone) {
                       innerAsyncEach(null);
@@ -766,12 +631,15 @@ exports.clusterNullValueImputing = (req, res, next) => {
         }
       }, (error) => {
         if (error) {
-          winston.error('Error ' + error);
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+          return next({
+            status: 500,
+            Success: false,
+            message: error,
+            error_code: Errorcode.Error_500,
+          });
         }
         else {
+          winston.info("Clustered null value imputing done")
           res.status(200).send({
             Success: true,
             message: { question }
@@ -780,6 +648,7 @@ exports.clusterNullValueImputing = (req, res, next) => {
       })
 
     } else {
+      winston.info("Clustered null value imputing done")
       res.status(200).send({
         Success: true,
         message: { question }
@@ -794,8 +663,8 @@ exports.clusterNullValueImputing = (req, res, next) => {
 //Outlier Handling
 exports.outlierHandling = (req, res, next) => {
   try {
+    winston.info("Outlier Handling started using Vantage MLE function 'OutlierFilter' ...")
     let requestBody = sanitize(req.body);
-    //console.log("requestBody ", requestBody);
     let config = getConfig(req);
     let db = requestBody.db;
     let originalbasetable = requestBody.selectedtable;
@@ -803,73 +672,41 @@ exports.outlierHandling = (req, res, next) => {
     let numericCols = requestBody.numericCols;
 
     if (!config) {
-      res.status(503).send({
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
-      });
-      return;
+        error_code: Errorcode.No_database_Session,
+      });    
     }
 
-    if (!db) {
-      res.status(503).send({
+    if (!db || !basetable || !originalbasetable || !numericCols) {
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.Missing_Required_Input,
         message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-    if (!basetable) {
-      res.status(503).send({
-        Success: false,
         error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-
-    if (!originalbasetable) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
-    }
-
-    if (!numericCols) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.Missing_Required_Input,
-        message: Error.MISSING_REQUIRED_INPUT,
-      });
-      return;
+      });      
     }
 
     numericCols = numericCols.split(",");
     let nColsSingleQuoted = numericCols.map(col => `'${col}'`);
 
     let connection = getConnection(config);
+
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-      return;
+      return next({
+        status: 500,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });      
     }
-    /**
-     * Delete the Of table
-     * Read Config file
-     * Run Outlier Function
-     * 
-     */
+
     async.waterfall(
       [
-        //Look for Config File
         (callback) => {
-          //Config Parameters
-          //Value will be read from the config file
+          //Config Parameters - Value will be read from the config file
           let OutlierMethod = null;
           let PercentileThreshold = null;
           let RemoveTail = null;
@@ -882,6 +719,7 @@ exports.outlierHandling = (req, res, next) => {
             ReplacementValue = getValueFromConfig("ReplacementValue", res);
             callback(null, { OutlierMethod, PercentileThreshold, RemoveTail, ReplacementValue });
           } catch (error) {
+            winston.error("Error - Reading Config File");
             winston.error(error);
             callback(true, null);
           }
@@ -895,13 +733,12 @@ exports.outlierHandling = (req, res, next) => {
 
           let query = `DROP TABLE ${db}.of_${originalbasetable}`;
           winston.info(query.substring(0, 50));
-          //console.log(query);
 
           DAO.dropTable(connection, query, (error, isDrop) => {
             if (isDrop) {
               callback(null, config);
             } else {
-              //Just ignore the error if occured during table deletion
+              //Ignore the error
               callback(null, config);
             }
           })
@@ -932,11 +769,9 @@ exports.outlierHandling = (req, res, next) => {
         }
       ], (error, data) => {
         if (error) {
-          winston.error('Error ' + error);
-          res
-            .status(500)
-            .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+          return next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
         } else {
+          winston.info("Outlier Handling Completed")
           availableOptions = ["Y", "N"];
           let flows = this.getFlow();
           res.status(200).send({
@@ -952,9 +787,9 @@ exports.outlierHandling = (req, res, next) => {
 
 exports.buildModel = (req, res, next) => {
   try {
+    winston.info("Model build started");
     let requestBody = sanitize(req.body);
-    console.log("requestBody ", requestBody);
-
+    //console.log("requestBody ", requestBody);
     let config = getConfig(req);
     let DB = requestBody.DB;
     let BASE_TABLE = requestBody.BASE_TABLE;
@@ -965,96 +800,24 @@ exports.buildModel = (req, res, next) => {
     let numericColsfull = requestBody.numericColsfull;
     let categColsfull = requestBody.categColsfull;
 
-
     if (!config) {
-      res.status(503).send({
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
         message: Error.ERR_NO_AUTH,
-      });
-      return;
+        error_code: Errorcode.No_database_Session,
+      });     
     }
 
 
-    if (!DB) {
-      res.status(503).send({
+    if (!DB || !BASE_TABLE || !train_size || !test_size || !selectCols || !DEP_COL || !numericColsfull || !categColsfull) {
+      return next({
+        status: 401,
         Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
+        message: Error.MISSING_REQUIRED_INPUT,
+        error_code: Errorcode.Missing_Required_Input,
+      });     
     }
-
-
-    if (!BASE_TABLE) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!train_size) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!test_size) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!selectCols) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!DEP_COL) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!numericColsfull) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
-
-    if (!categColsfull) {
-      res.status(503).send({
-        Success: false,
-        error_code: Errorcode.No_database_Session,
-        message: Error.ERR_NO_AUTH,
-      });
-      return;
-    }
-
 
     selectCols = selectCols.split(",");
     //selectCols = selectCols.map(col => `'${col}'`);
@@ -1065,17 +828,18 @@ exports.buildModel = (req, res, next) => {
 
     let connection = getConnection(config);
     if (!connection) {
-      res
-        .status(500)
-        .send({ Success: false, error_code: Errorcode.No_database_Session, message: `Teradata Connnection failed!` });
-      return;
+      return next({
+        status: 500,
+        Success: false,
+        message: Error.TERADATA_CONNECTION_ERROR_MSG,
+        error_code: Errorcode.No_database_Session,
+      });     
     }
 
-    winston.info("Model build started");
     async.waterfall([
       //Read config file
       callback => {
-        winston.info("Fetching Config Paramaters ")
+        winston.info("Fetching Config Paramaters")
         //Config Parameters
         //Value will be read from the config file
         let MaxDepth = null;
@@ -1103,8 +867,8 @@ exports.buildModel = (req, res, next) => {
           callback(null, { MaxDepth, MinNodeSize, NumTrees, Variance, Mtry, MtrySeed, Seed, IDColumn, Detailed });
 
         } catch (error) {
-          winston.error(error);
           winston.error("Error - Fetching Config Paramaters");
+          winston.error(error);
           callback(true, null);
         }
       }, //Read config End
@@ -1507,7 +1271,7 @@ exports.buildModel = (req, res, next) => {
 
           //Fetch confusionMatrix Data
           cm_w_cb => {
-            console.log("Hello")
+            //console.log("Hello")
             let query = `select trim("key"), trim("value") from ${DB}.of_${BASE_TABLE}_confusionMatrix_stat_output
                           union all
                         select trim(measure), trim("1") from ${DB}.of_${BASE_TABLE}_confusionMatrix_acc_output`;
@@ -1538,9 +1302,12 @@ exports.buildModel = (req, res, next) => {
       closeConnection(connection);
       if (error) {
         winston.error('Error - Model build Finished with Error');
-        res
-          .status(500)
-          .send({ Success: false, error_code: Errorcode.Error_500, message: error });
+        return next({
+          status: 500,
+          Success: false,
+          message: error,
+          error_code: Errorcode.No_database_Session,
+        });
       }
       else {
         winston.info("Model build Finished");
@@ -1550,15 +1317,13 @@ exports.buildModel = (req, res, next) => {
         });
       }
     })
-
-
   } catch (error) {
     return next(createError(500));
   }
 }
 
 exports.getAllAutomatedDTSteps = (req, res, next) => {
-
+  winston.info("Data Transformation Steps")
   let questions = [
     { name: "Conversion any Numeric Column to Categorical", fn: "ConvertToCategorical" },
     { name: "Basic null value imputing using Median for Numeric columns and Mode for Categorical Columns", fn: "MedianMode" },
@@ -1573,6 +1338,7 @@ exports.getAllAutomatedDTSteps = (req, res, next) => {
 }
 
 exports.getModelBuildFlow = (req, res, next) => {
+  winston.info("Model Flow")
   let flows = this.getFlow();
   res.status(200).send({
     Success: true,

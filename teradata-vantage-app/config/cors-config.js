@@ -1,5 +1,6 @@
 const _ = require('lodash');
 var ERRORS = require('../common/app.err.messages');
+var winston = require("./../config/winston");
 
 var whitelist = []
 
@@ -17,6 +18,7 @@ exports.corsOptions = {
         if (whitelist.indexOf(origin) !== -1 || !origin) {
             callback(null, true)
         } else {
+            winston.error(ERRORS.CORS_ERROR_MSG)
             callback(new Error(ERRORS.CORS_ERROR_MSG))
         }
     },

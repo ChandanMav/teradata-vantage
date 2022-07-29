@@ -18,7 +18,7 @@ getConnection = (config) => {
     winston.info("Teradata Connection Successful!")
   } catch (error) {
     if (error instanceof TeradataExceptions.OperationalError) {
-      winston.error("Teradata Connection failed! " + error.message)
+      winston.error("Teradata Connection failed " + error.message)
       return null;
     } else {
       winston.error("Teradata Connection failed! " + error)

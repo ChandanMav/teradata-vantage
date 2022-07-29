@@ -1,10 +1,10 @@
 const multer = require("multer")
 const path = require("path")
 var appRoot = require('app-root-path');
+var winston = require("./../config/winston");
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // app-setting is the upload folder name
         cb(null, `${appRoot}/${process.env.SETTING_FILE_LOCATION}`)
     },
     filename: function (req, file, cb) {
@@ -26,6 +26,7 @@ exports.upload = multer({
         if (extname) {
             return cb(null, true);
         }
+        winston.error(`Error: File upload only supports the following filetypes - ${filetypes}`)
         cb("Error: File upload only supports the "
             + "following filetypes - " + filetypes);
     }
