@@ -883,3 +883,4 @@
 {"level":"info","message":"::1 - - [29/Jul/2022:18:52:03 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:22:03"}
 {"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 00:26:38"}
 {"level":"info","message":"::1 - - [29/Jul/2022:18:56:38 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:26:38"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Sat, 30 Jul 2022 00:33:30"}
