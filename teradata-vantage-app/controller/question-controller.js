@@ -810,7 +810,7 @@ exports.buildModel = (req, res, next) => {
     }
 
 
-    if (!DB || !BASE_TABLE || !train_size || !test_size || !selectCols || !DEP_COL || !numericColsfull || !categColsfull) {
+    if (!DB || !BASE_TABLE || !train_size || !test_size || !selectCols || !DEP_COL) {
       return next({
         status: 401,
         Success: false,
@@ -820,11 +820,14 @@ exports.buildModel = (req, res, next) => {
     }
 
     selectCols = selectCols.split(",");
+    console.log("selectCols ", selectCols)
     //selectCols = selectCols.map(col => `'${col}'`);
     numericColsfull = numericColsfull.split(",");
     numericColsfull = numericColsfull.map(col => `'${col}'`);
+    console.log("numericColsfull ", numericColsfull)
     categColsfull = categColsfull.split(",");
     categColsfull = categColsfull.map(col => `'${col}'`);
+    console.log("categColsfull ", categColsfull)
 
     let connection = getConnection(config);
     if (!connection) {
@@ -1070,6 +1073,7 @@ exports.buildModel = (req, res, next) => {
               MtrySeed (${config.MtrySeed})
               Seed (${config.Seed})
               ) AS dt`;
+              console.log(query);
             winston.info(query.substring(0, 50));
             DAO.executeQuery(connection, query, (d, isDone) => {
               if (isDone) {

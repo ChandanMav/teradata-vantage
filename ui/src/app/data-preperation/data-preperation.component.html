@@ -238,7 +238,7 @@
               <hr *ngIf="isColumnSelectToDrop" />
               <div class="row align-items-start" style="padding-top: 12px; margin-bottom: 10px;">
                 <div class="col-3">
-                  <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                  <button class="btn btn-primary app-btn cont-btn-css" type="button" [disabled]="!isColumnDeleteRadioClick"
                     (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
                 </div>
                 <div class="col-5 offset-1" *ngIf="isUnivariateStatisticsRunning">
@@ -832,7 +832,7 @@
               <div style="padding-top: 17px !important;"> <hr /></div>
               <div class="row">
                 <div class="col-12">
-                  <div for="form-floating" class="p-4 text-center" style="color: #7500c0;">
+                  <div for="form-floating" class="p-2 text-center manual-text" style="color: #7500c0;">
                     {{manualDataTransformationMessage}} &nbsp;&nbsp;<span
                       *ngIf="manualDataTransformDecisionInString === 'N'" class="fa f-lg fa-level-down"
                       style="font-size: 20px;"></span></div>

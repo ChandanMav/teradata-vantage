@@ -62,6 +62,7 @@ export class DataPreperationComponent
   remainingCCols: string[] = [];
 
   isFeatureContinue: boolean = false;
+  isColumnDeleteRadioClick:boolean = false;
   isUnivariateStatisticsRunning: boolean = false;
   isUnivariateStatisticsResultAvailable: boolean = false;
   isAutomatedDT: boolean = false;
@@ -300,6 +301,7 @@ export class DataPreperationComponent
 
   //Remove Column from Model Decision
   deleteColumnDecision = (val: String) => {
+    this.isColumnDeleteRadioClick = true;
     this.isColumnSelectToDrop = false;
     this.clearDataAttributeSelectionState();
     this.isFeatureContinue = true;
@@ -464,6 +466,9 @@ openAutomatedDTDialogue = () => {
         });
         break;
       case 'N':
+        //This is required to Model Build
+        this.newNumericalColumnsList = [...this.remainingNcols];
+        this.newCategoricalColumnsList = [...this.remainingCCols];
         this.vantageService.getQuestion(4).subscribe({
           next: response => {
             let { question, option } = response.message;
@@ -1056,7 +1061,7 @@ openAutomatedDTDialogue = () => {
         break;
       case 'N':
         this.manualDataTransformDecision = false;
-        this.manualDataTransformationMessage = "Below is Final Model"
+        this.manualDataTransformationMessage = "Go ahead with Model Build"
         this.vantageService
           .getModelBuildFlow()
           .subscribe({
@@ -1091,8 +1096,8 @@ openAutomatedDTDialogue = () => {
         this.trainsetsize,
         this.testsetsize,
         this.selectedColumn,
-        this.newNumericalColumnsList,
-        this.newCategoricalColumnsList,
+        this.newNumericalColumnsList.length === 0 ? this.remainingNcols: this.newNumericalColumnsList,
+        this.newCategoricalColumnsList.length === 0 ? this.remainingCCols: this.newCategoricalColumnsList,
         this.remainingCols
       )
       .subscribe({
@@ -1305,6 +1310,7 @@ openAutomatedDTDialogue = () => {
     this.questions = questions;
     this.dropCols = [];
     this.isColumnSelectToDrop = false;
+    this.isColumnDeleteRadioClick = false;
     this.clearDataAttributeSelectionState();
   };
 

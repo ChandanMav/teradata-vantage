@@ -498,3 +498,11 @@ td {
 .approx-text{
 	  padding-top: 7px;
 }
+
+.manual-text{
+  color: #7500c0;
+  font-weight: 600;
+  font-family: "Graphik Web", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0px;
+}

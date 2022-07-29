@@ -884,3 +884,336 @@
 {"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 00:26:38"}
 {"level":"info","message":"::1 - - [29/Jul/2022:18:56:38 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:26:38"}
 {"level":"info","message":"Server listening on port 3000","timestamp":"Sat, 30 Jul 2022 00:33:30"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Sat, 30 Jul 2022 00:35:19"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:35:27"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:35:27"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Sat, 30 Jul 2022 00:35:27"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:05:27 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:35:27"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 00:35:29"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:35:32"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Sat, 30 Jul 2022 00:35:32"}
+{"level":"info","message":"Query Execution done","timestamp":"Sat, 30 Jul 2022 00:35:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:35:34"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Sat, 30 Jul 2022 00:35:34"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:05:34 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:35:34"}
+{"level":"info","message":"Fetching Tables","timestamp":"Sat, 30 Jul 2022 00:35:37"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:35:41"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Sat, 30 Jul 2022 00:35:41"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:35:42"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Sat, 30 Jul 2022 00:35:42"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:05:42 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:35:42"}
+{"level":"info","message":"Fetching Columns","timestamp":"Sat, 30 Jul 2022 00:35:44"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:35:47"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Sat, 30 Jul 2022 00:35:47"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:35:48"}
+{"level":"info","message":"Fetching Completed","timestamp":"Sat, 30 Jul 2022 00:35:48"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:05:48 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:35:48"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Sat, 30 Jul 2022 00:35:50"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:35:53"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Sat, 30 Jul 2022 00:35:53"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Sat, 30 Jul 2022 00:35:54"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Sat, 30 Jul 2022 00:35:54"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Sat, 30 Jul 2022 00:35:54"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:35:55"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Sat, 30 Jul 2022 00:35:55"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:05:55 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:35:55"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Sat, 30 Jul 2022 00:36:32"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 00:36:35"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Sat, 30 Jul 2022 00:36:35"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"Table Created successfully","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Sat, 30 Jul 2022 00:36:36"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Sat, 30 Jul 2022 00:36:37"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 00:37:12"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Sat, 30 Jul 2022 00:37:12"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 00:37:41"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Sat, 30 Jul 2022 00:37:41"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Sat, 30 Jul 2022 00:37:56"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 00:37:56"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Sat, 30 Jul 2022 00:37:56"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:07:56 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:37:56"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:08:35 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:38:35"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Sat, 30 Jul 2022 00:38:35"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:08:35 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:38:35"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:08:42 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:38:42"}
+{"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 00:43:34"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:13:34 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:43:34"}
+{"level":"info","message":"Model build started","timestamp":"Sat, 30 Jul 2022 00:46:26"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/vantage/buildmodel - POST - ::1","timestamp":"Sat, 30 Jul 2022 00:46:26"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:16:26 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 00:46:26"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 01:01:49"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 01:01:49"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:31:49 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:01:49"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Sat, 30 Jul 2022 01:02:05"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:02:08"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:02:09"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Sat, 30 Jul 2022 01:02:09"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:32:09 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:02:09"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 01:02:11"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:02:14"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Sat, 30 Jul 2022 01:02:14"}
+{"level":"info","message":"Query Execution done","timestamp":"Sat, 30 Jul 2022 01:02:14"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:02:15"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Sat, 30 Jul 2022 01:02:15"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:32:15 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:02:15"}
+{"level":"info","message":"Fetching Tables","timestamp":"Sat, 30 Jul 2022 01:02:22"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:02:25"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Sat, 30 Jul 2022 01:02:25"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:02:26"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Sat, 30 Jul 2022 01:02:26"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:32:26 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:02:26"}
+{"level":"info","message":"Fetching Columns","timestamp":"Sat, 30 Jul 2022 01:02:30"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:02:33"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Sat, 30 Jul 2022 01:02:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:02:34"}
+{"level":"info","message":"Fetching Completed","timestamp":"Sat, 30 Jul 2022 01:02:34"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:32:34 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:02:34"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Sat, 30 Jul 2022 01:03:32"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:03:35"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Sat, 30 Jul 2022 01:03:35"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Sat, 30 Jul 2022 01:03:36"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Sat, 30 Jul 2022 01:03:36"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Sat, 30 Jul 2022 01:03:37"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:03:37"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Sat, 30 Jul 2022 01:03:37"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:33:37 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:03:37"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Sat, 30 Jul 2022 01:03:43"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:03:46"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Sat, 30 Jul 2022 01:03:46"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"Table Created successfully","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:03:47"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Sat, 30 Jul 2022 01:03:48"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:04:30"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Sat, 30 Jul 2022 01:04:30"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:04:58"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Sat, 30 Jul 2022 01:04:58"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Sat, 30 Jul 2022 01:05:11"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:05:12"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Sat, 30 Jul 2022 01:05:12"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:12 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1654 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:12"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:16 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:16"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Sat, 30 Jul 2022 01:05:16"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:16 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:16"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:25 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:25"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Sat, 30 Jul 2022 01:05:25"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:25 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:25"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:35 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:35"}
+{"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 01:05:42"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:42 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:42"}
+{"level":"info","message":"Model build started","timestamp":"Sat, 30 Jul 2022 01:05:50"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/vantage/buildmodel - POST - ::1","timestamp":"Sat, 30 Jul 2022 01:05:50"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:35:50 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:05:50"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Sat, 30 Jul 2022 01:22:43"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 01:23:16"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 01:23:16"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:53:16 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:23:16"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Sat, 30 Jul 2022 01:23:27"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:23:34"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:23:34"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Sat, 30 Jul 2022 01:23:34"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:53:34 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:23:34"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 01:23:36"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:23:39"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Sat, 30 Jul 2022 01:23:39"}
+{"level":"info","message":"Query Execution done","timestamp":"Sat, 30 Jul 2022 01:23:39"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:23:40"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Sat, 30 Jul 2022 01:23:40"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:53:40 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:23:40"}
+{"level":"info","message":"Fetching Tables","timestamp":"Sat, 30 Jul 2022 01:24:22"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:24:25"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Sat, 30 Jul 2022 01:24:25"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:24:26"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Sat, 30 Jul 2022 01:24:26"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:54:26 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:24:26"}
+{"level":"info","message":"Fetching Columns","timestamp":"Sat, 30 Jul 2022 01:24:34"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:24:36"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Sat, 30 Jul 2022 01:24:37"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:24:37"}
+{"level":"info","message":"Fetching Completed","timestamp":"Sat, 30 Jul 2022 01:24:37"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:54:37 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:24:37"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Sat, 30 Jul 2022 01:24:39"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:24:42"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Sat, 30 Jul 2022 01:24:42"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Sat, 30 Jul 2022 01:24:42"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Sat, 30 Jul 2022 01:24:43"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Sat, 30 Jul 2022 01:24:43"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:24:44"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Sat, 30 Jul 2022 01:24:44"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:54:44 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:24:44"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Sat, 30 Jul 2022 01:25:08"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:25:11"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Sat, 30 Jul 2022 01:25:11"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"Table Created successfully","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:25:12"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:25:13"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:25:13"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:25:13"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Sat, 30 Jul 2022 01:25:13"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:25:48"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Sat, 30 Jul 2022 01:25:48"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:26:16"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Sat, 30 Jul 2022 01:26:16"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Sat, 30 Jul 2022 01:26:29"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:26:29"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Sat, 30 Jul 2022 01:26:29"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:56:29 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:26:29"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:57:09 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:27:09"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Sat, 30 Jul 2022 01:27:09"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:57:09 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:27:09"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:57:16 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:27:16"}
+{"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 01:27:19"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:57:19 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:27:19"}
+{"level":"info","message":"Model build started","timestamp":"Sat, 30 Jul 2022 01:27:27"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":"Fetching Config Paramaters","timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":"Fetching Config done","timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":"Train, Test table module started","timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":{"Detailed":"false","IDColumn":"sn","MaxDepth":"9","MinNodeSize":"1","Mtry":"3","MtrySeed":"100","NumTrees":"30","Seed":"100","Variance":"'0.0'"},"timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train_test_split","timestamp":"Sat, 30 Jul 2022 01:27:30"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_test","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"\n            create multiset table TDMLE.of_cellph","timestamp":"Sat, 30 Jul 2022 01:27:31"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:27:54"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_train as ","timestamp":"Sat, 30 Jul 2022 01:27:54"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:27:54"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_test as (","timestamp":"Sat, 30 Jul 2022 01:27:54"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:27:55"}
+{"level":"info","message":"alter table TDMLE.of_cellphone_train drop set_id","timestamp":"Sat, 30 Jul 2022 01:27:55"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"Train, Test table module Finished","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"Decision Forest module Started","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_model","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_monitorTable","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"info","message":"SELECT * FROM DecisionForest (\n              ON TD","timestamp":"Sat, 30 Jul 2022 01:27:56"}
+{"level":"error","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"error","message":"Error - Decision Forest Module","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"error","message":"Error - Model build Finished with Error","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"error","message":"500 - true - /api/vantage/buildmodel - POST - ::1","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"info","message":"::1 - - [29/Jul/2022:19:58:16 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 500 84 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:28:16"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Sat, 30 Jul 2022 01:35:30"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Sat, 30 Jul 2022 01:35:52"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:35:59"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:35:59"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Sat, 30 Jul 2022 01:35:59"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:05:59 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:36:00"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 01:36:02"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:36:04"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Sat, 30 Jul 2022 01:36:04"}
+{"level":"info","message":"Query Execution done","timestamp":"Sat, 30 Jul 2022 01:36:05"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:36:06"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Sat, 30 Jul 2022 01:36:06"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:06:06 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:36:06"}
+{"level":"info","message":"Fetching Tables","timestamp":"Sat, 30 Jul 2022 01:36:15"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:36:18"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Sat, 30 Jul 2022 01:36:18"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:36:19"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Sat, 30 Jul 2022 01:36:19"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:06:19 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 808 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:36:19"}
+{"level":"info","message":"Fetching Columns","timestamp":"Sat, 30 Jul 2022 01:36:21"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:36:24"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Sat, 30 Jul 2022 01:36:24"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:36:25"}
+{"level":"info","message":"Fetching Completed","timestamp":"Sat, 30 Jul 2022 01:36:25"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:06:25 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:36:25"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Sat, 30 Jul 2022 01:36:28"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:36:31"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Sat, 30 Jul 2022 01:36:31"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Sat, 30 Jul 2022 01:36:32"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Sat, 30 Jul 2022 01:36:32"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Sat, 30 Jul 2022 01:36:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:36:33"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Sat, 30 Jul 2022 01:36:33"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:06:33 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:36:33"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Sat, 30 Jul 2022 01:36:45"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:36:48"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Sat, 30 Jul 2022 01:36:48"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:36:48"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Sat, 30 Jul 2022 01:36:48"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Sat, 30 Jul 2022 01:36:48"}
+{"level":"info","message":"Table Created successfully","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Sat, 30 Jul 2022 01:36:49"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:36:50"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Sat, 30 Jul 2022 01:36:50"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:37:25"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Sat, 30 Jul 2022 01:37:25"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:37:55"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Sat, 30 Jul 2022 01:37:55"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Sat, 30 Jul 2022 01:38:09"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:38:09"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Sat, 30 Jul 2022 01:38:09"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:08:09 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:38:09"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:08:27 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:38:27"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Sat, 30 Jul 2022 01:38:27"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:08:27 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:38:27"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:08:36 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:38:36"}
+{"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 01:38:39"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:08:39 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:38:39"}
+{"level":"info","message":"Model build started","timestamp":"Sat, 30 Jul 2022 01:38:41"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":"Fetching Config Paramaters","timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":"Fetching Config done","timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":"Train, Test table module started","timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":{"Detailed":"false","IDColumn":"sn","MaxDepth":"9","MinNodeSize":"1","Mtry":"3","MtrySeed":"100","NumTrees":"30","Seed":"100","Variance":"'0.0'"},"timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train_test_split","timestamp":"Sat, 30 Jul 2022 01:38:44"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_test","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"\n            create multiset table TDMLE.of_cellph","timestamp":"Sat, 30 Jul 2022 01:38:45"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:39:07"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_train as ","timestamp":"Sat, 30 Jul 2022 01:39:07"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:39:07"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_test as (","timestamp":"Sat, 30 Jul 2022 01:39:07"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:39:08"}
+{"level":"info","message":"alter table TDMLE.of_cellphone_train drop set_id","timestamp":"Sat, 30 Jul 2022 01:39:08"}
+{"level":"info","message":"Query Execution Done","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"info","message":"Train, Test table module Finished","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"info","message":"Decision Forest module Started","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_model","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_monitorTable","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"info","message":"SELECT * FROM DecisionForest (\n              ON TD","timestamp":"Sat, 30 Jul 2022 01:39:09"}
+{"level":"error","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"error","message":"Query Execution Failed","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"error","message":"Error - Decision Forest Module","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"error","message":"Error - Model build Finished with Error","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"error","message":"500 - true - /api/vantage/buildmodel - POST - ::1","timestamp":"Sat, 30 Jul 2022 01:39:27"}
+{"level":"info","message":"::1 - - [29/Jul/2022:20:09:27 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 500 84 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 01:39:27"}
