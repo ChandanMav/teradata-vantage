@@ -200,8 +200,10 @@ exports.init = (req, res, next) => {
     winston.info("Fetching Basic Information")
     let splitpct = 0;
     try {
+      winston.info("Fetching Split Percentage from atuml config file")
       splitpct = getValueFromConfig("splitpct", res);
       splitpct = Number(splitpct);
+      winston.info("Split Percentage " + splitpct);
       if (!(typeof splitpct === 'number' && !Number.isNaN(splitpct))) {
         return next({
           status: 500,
@@ -444,7 +446,7 @@ exports.init = (req, res, next) => {
 exports.uploadConfig = (req, res, next) => {
   try {
     winston.info("File uploading Started")
-    upload.single("config")(req, res, function (err) {
+    upload.single("automl-config")(req, res, function (err) {
       if (err) {
         // ERROR occurred (here it can be occurred due
         // to uploading file of size greater than

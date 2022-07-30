@@ -137,7 +137,7 @@ exports.formatUnivariateStatsData = (data) => {
 }
 
 exports.getValueFromConfig = (key, res) => {
-  let path = `${appRoot}/${process.env.SETTING_FILE_LOCATION}/config.txt`;
+  let path = `${appRoot}/${process.env.SETTING_FILE_LOCATION}/automl-config.txt`;
   let line = null;
   let value = 0;
 

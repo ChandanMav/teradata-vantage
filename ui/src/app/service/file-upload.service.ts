@@ -14,7 +14,7 @@ export class FileUploadService {
     // Create form data
     const formData = new FormData();
     // Store form name as "file" with file data
-    formData.append("config", file);
+    formData.append("automl-config", file);
 
     return this.http.post(this.appService.rootURL + "/api/uploadappconfig", formData)
       .pipe(catchError((error) => this.appService.handleError(error))

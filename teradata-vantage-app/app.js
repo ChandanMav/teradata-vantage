@@ -13,7 +13,8 @@ var mongoSanitize = require("express-mongo-sanitize");
 var helmet = require("helmet");
 var xssClean = require("xss-clean");
 
-dotenv.config();
+//dotenv.config();
+dotenv.config({ path: '../config/app.env' });
 
 var winston = require("./config/winston");
 var Error = require("./common/app.err.messages");
