@@ -15,3 +15,5 @@
 {"level":"error","message":"400 - Could not connect to the Teradata. - /api/vantage/univariate - POST - ::1","timestamp":"Sat, 30 Jul 2022 22:44:07"}
 {"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 22:46:13"}
 {"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 22:53:37"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 22:53:37"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 22:57:11"}

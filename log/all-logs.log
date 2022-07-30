@@ -336,3 +336,9 @@
 {"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Sat, 30 Jul 2022 22:55:02"}
 {"level":"info","message":"Model build Finished","timestamp":"Sat, 30 Jul 2022 22:55:02"}
 {"level":"info","message":"::1 - - [30/Jul/2022:17:25:02 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 200 622 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 22:55:02"}
+{"level":"info","message":"::1 - - [30/Jul/2022:17:26:05 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 22:56:05"}
+{"level":"info","message":"Model Flow","timestamp":"Sat, 30 Jul 2022 22:56:10"}
+{"level":"info","message":"::1 - - [30/Jul/2022:17:26:10 +0000] \"GET /api/vantage/flows HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 22:56:10"}
+{"level":"info","message":"Fetching Databases","timestamp":"Sat, 30 Jul 2022 22:57:11"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 22:57:11"}
+{"level":"info","message":"::1 - - [30/Jul/2022:17:27:11 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Sat, 30 Jul 2022 22:57:11"}
