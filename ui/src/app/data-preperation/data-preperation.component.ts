@@ -5,10 +5,9 @@ import { AppService } from '../service/common/app.service';
 import { FileUploadService } from '../service/file-upload.service';
 import { VantageService } from '../service/vantage.service';
 import { Connection } from '../shared/connection';
-import { questions } from '../shared/question'
-declare var $: any;
+import { questions } from '../shared/question';
 
-interface PendingCatSelection {
+interface PendingCategSelection {
   [key: string]: boolean;
 }
 
@@ -22,7 +21,8 @@ interface PendingNumSelection {
   styleUrls: ['./data-preperation.component.css'],
 })
 export class DataPreperationComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   config: Connection;
   databases: string[] = ['Select Database'];
   tables: string[] = ['Select Table'];
@@ -33,8 +33,8 @@ export class DataPreperationComponent
   selectedtable: string = ''; //Table Name from left side dropdown
   selectedColumn: string = ''; //Depenedent Column Name from left side dropdown
 
-  baseTable: string = "";
-  dependentCol: string = "";
+  baseTable: string = '';
+  dependentCol: string = '';
 
   inprogress: boolean = false;
   loading: boolean = false;
@@ -62,7 +62,7 @@ export class DataPreperationComponent
   remainingCCols: string[] = [];
 
   isFeatureContinue: boolean = false;
-  isColumnDeleteRadioClick:boolean = false;
+  isColumnDeleteRadioClick: boolean = false;
   isUnivariateStatisticsRunning: boolean = false;
   isUnivariateStatisticsResultAvailable: boolean = false;
   isAutomatedDT: boolean = false;
@@ -70,16 +70,14 @@ export class DataPreperationComponent
   univariateStatisticsResult = [];
   univariateStatisticsResultAttr: string[] = [];
 
-
-
   //Automated DT Control
   allAutomatedDTSteps: any[] = [];
   isAutomatedProceed: boolean = false;
 
   //Manual DT
-  manualDataTransformationMessage = "";
+  manualDataTransformationMessage = '';
   manualDataTransformDecision: boolean = false;
-  manualDataTransformDecisionInString: string = "";
+  manualDataTransformDecisionInString: string = '';
 
   //Numerical To Categorical Controls
   selectedNColumnsForConversionList: string[] = [];
@@ -89,25 +87,23 @@ export class DataPreperationComponent
   isNumricalToCategoricalConversionDone: boolean = false;
   newCategoricalColumnsList: string[] = [];
   newNumericalColumnsList: string[] = [];
-  newBaseTable: string = "";
-
+  newBaseTable: string = '';
 
   //Null Basic Imputing Controls
   isBasicNullPerform: boolean = false;
   isBasicNullImputingStarted: boolean = false;
   isBasicNullImputingDone: boolean = false; //Change to false
   allColumnWithCheckedStatusFromBasicNullOps: any[] = [];
-  basicNullValueImputingList: string[] = []
-
+  basicNullValueImputingList: string[] = [];
 
   //Automated Cluster Controls
   isAutomatedClusterPerform: boolean = false; //Change to false
-  isAutomatedClusterStarted: boolean = false;//Change to false
+  isAutomatedClusterStarted: boolean = false; //Change to false
   isAutomatedClusterDone: boolean = false;
   numericalPendingSelection: PendingNumSelection = Object.create(null);
-  categoricalPendingSelection: PendingCatSelection = Object.create(null);
+  categoricalPendingSelection: PendingCategSelection = Object.create(null);
   selectedColsForClusterImputing: string[] = [];
-  pairs: any[] = []
+  pairs: any[] = [];
 
   //Outlier Controls
   isOutlierHandingPerform: boolean = false;
@@ -120,6 +116,8 @@ export class DataPreperationComponent
   finalBuildModelDone: boolean = false;
   modelresult: any[] = [];
 
+  //Report
+  report: any[] = [];
 
   constructor(
     private router: Router,
@@ -127,7 +125,7 @@ export class DataPreperationComponent
     private vantageService: VantageService,
     private appService: AppService,
     private fileUploadService: FileUploadService
-  ) { }
+  ) {}
 
   ngAfterViewInit(): void {
     this.appService.dataprepPage.next(true);
@@ -157,7 +155,10 @@ export class DataPreperationComponent
         //this.database_bkp = response.database
       },
       error: (error) => {
-        if (error.error_code === GlobalConstants.No_db_Session || error.error_code === GlobalConstants.Missing_Required_Input) {
+        if (
+          error.error_code === GlobalConstants.No_db_Session ||
+          error.error_code === GlobalConstants.Missing_Required_Input
+        ) {
           this.clear();
           this.isTeradataConnectionAlive = false;
           this.errorMsg = 'Please connect to Server!';
@@ -273,7 +274,6 @@ export class DataPreperationComponent
           this.top5data = top5data;
           this.displayCols = Object.keys(top5data[0]);
 
-
           this.ncols = ncols;
           this.ccols = ccols;
           this.trainsetsize = trainsetsize;
@@ -283,8 +283,8 @@ export class DataPreperationComponent
 
           this.questions.q1 = {
             qname: question.name,
-            options: question.options
-          }
+            options: question.options,
+          };
 
           //TBD
           // this.newCategoricalColumnsList = ['dataplan', 'ContractRenewal'];
@@ -295,9 +295,7 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
-
   };
-
 
   //Remove Column from Model Decision
   deleteColumnDecision = (val: String) => {
@@ -347,9 +345,9 @@ export class DataPreperationComponent
   };
 
   addRemainingItem = () => {
-    this.remainingCols = this.getRemainingCols("All");
-    this.remainingNcols = this.getRemainingCols("Num");
-    this.remainingCCols = this.getRemainingCols("Cat");
+    this.remainingCols = this.getRemainingCols('All');
+    this.remainingNcols = this.getRemainingCols('Num');
+    this.remainingCCols = this.getRemainingCols('Cat');
   };
 
   /*
@@ -362,15 +360,15 @@ export class DataPreperationComponent
     this.clearDataAttributeSelectionState();
     this.isUnivariateStatisticsRunning = true;
     this.isUnivariateStatisticsResultAvailable = false;
-    let key: string = this.dropCols.length === 0 ? "N" : "Y";
+    let key: string = this.dropCols.length === 0 ? 'N' : 'Y';
     let temp = this.remainingCols;
-    temp.push(this.dependentCol)
+    temp.push(this.dependentCol);
     // console.log("All Column List", this.columns)
     // console.log("Drop Column List", this.dropCols);
     // console.log("All remaining Column List", this.remainingCols);
     // console.log("Remaining Numerical Column List", this.remainingNcols);
     // console.log("Remaining Categorical Column List", this.remainingCCols);
-      this.vantageService
+    this.vantageService
       .performUnivariateStatistics(
         this.config,
         this.selectedDb,
@@ -386,10 +384,7 @@ export class DataPreperationComponent
           this.isUnivariateStatisticsRunning = false;
           this.isUnivariateStatisticsResultAvailable = true;
 
-          let {
-            output,
-            basetable
-          } = response.message;
+          let { output, basetable } = response.message;
 
           this.baseTable = basetable;
           this.univariateStatisticsResult = output;
@@ -401,7 +396,6 @@ export class DataPreperationComponent
           }
 
           this.univariateStatisticsResultAttr = Object.keys(firstRecord);
-
         },
         error: (error) => {
           this.isUnivariateStatisticsRunning = false;
@@ -409,41 +403,40 @@ export class DataPreperationComponent
           this.handleError(error);
         },
       });
-
   }; //End Data Attribute Selection
 
-//openAutomatedDTDialogue
-openAutomatedDTDialogue = () => {
-  this.isAutomatedDT = false;
-  this.vantageService.getQuestion(3).subscribe({
-    next: response => {
-      let { question, option } = response.message;
-      this.questions.q2 = {
-        qname: question,
-        options: option
-      }
-      this.vantageService.getAllAutomatedDTSteps().subscribe({
-        next: response => {
-          this.allAutomatedDTSteps = response.message.questions;
-          this.isAutomatedDT = true;
-        },
-        error: error => {
-          this.handleError(error);
-          this.isAutomatedDT = false;
-          this.clearAutomatedDataTransferState();
-        }
-      });
-    },
-    error: error => {
-      this.handleError(error);
-      this.isAutomatedDT = false;
-      this.clearAutomatedDataTransferState();
-    }
-  });
-}
+  //openAutomatedDTDialogue
+  openAutomatedDTDialogue = () => {
+    this.isAutomatedDT = false;
+    this.vantageService.getQuestion(3).subscribe({
+      next: (response) => {
+        let { question, option } = response.message;
+        this.questions.q2 = {
+          qname: question,
+          options: option,
+        };
+        this.vantageService.getAllAutomatedDTSteps().subscribe({
+          next: (response) => {
+            this.allAutomatedDTSteps = response.message.questions;
+            this.isAutomatedDT = true;
+          },
+          error: (error) => {
+            this.handleError(error);
+            this.isAutomatedDT = false;
+            this.clearAutomatedDataTransferState();
+          },
+        });
+      },
+      error: (error) => {
+        this.handleError(error);
+        this.isAutomatedDT = false;
+        this.clearAutomatedDataTransferState();
+      },
+    });
+  };
 
   //Data Transformation Decision
-  dataTransformationDecision= (val: String) => {
+  dataTransformationDecision = (val: String) => {
     this.clearAutomatedDataInfoState();
     this.isAutomatedProceed = false;
     this.isManualDT = false;
@@ -451,18 +444,18 @@ openAutomatedDTDialogue = () => {
       case 'Y':
         this.isManualDT = false;
         this.vantageService.getQuestion(2).subscribe({
-          next: response => {
+          next: (response) => {
             let { question, option } = response.message;
             this.questions.q6 = {
               qname: question,
-              options: option
-            }
+              options: option,
+            };
             this.isAutomatedProceed = true;
           },
-          error: error => {
+          error: (error) => {
             this.handleError(error);
             this.isAutomatedProceed = false;
-          }
+          },
         });
         break;
       case 'N':
@@ -470,27 +463,26 @@ openAutomatedDTDialogue = () => {
         this.newNumericalColumnsList = [...this.remainingNcols];
         this.newCategoricalColumnsList = [...this.remainingCCols];
         this.vantageService.getQuestion(4).subscribe({
-          next: response => {
+          next: (response) => {
             let { question, option } = response.message;
             this.questions.q4 = {
               qname: question,
-              options: option
-            }
+              options: option,
+            };
             this.isAutomatedProceed = false;
             this.clearAutomatedDataInfoState();
             this.isManualDT = true;
-
           },
-          error: error => {
+          error: (error) => {
             this.handleError(error);
             this.isAutomatedProceed = false;
             this.clearAutomatedDataInfoState();
             this.isManualDT = false;
-          }
+          },
         });
         break;
     }
-  }
+  };
 
   /*
    1. Create _categ Table
@@ -503,7 +495,7 @@ openAutomatedDTDialogue = () => {
     //Prepare for checkbox two data modeling
     let d = [];
     for (let n = 0; n < this.remainingNcols.length; n++) {
-      let obj = { name: this.remainingNcols[n], checked: false }
+      let obj = { name: this.remainingNcols[n], checked: false };
       d.push(obj);
     }
     this.tempRemainingNcols = d;
@@ -513,36 +505,34 @@ openAutomatedDTDialogue = () => {
         this.isNumericToCategoricalPerform = true;
         this.isNumricalToCategoricalConversionDone = false;
         //Chnage the base table name
-        this.newBaseTable = this.selectedtable + "_categ";
+        this.newBaseTable = this.selectedtable + '_categ';
         break;
       case 'N':
         this.newBaseTable = this.baseTable;
-        this.vantageService
-          .getQuestion(7)
-          .subscribe({
-            next: response => {
-              this.isNumericToCategoricalPerform = false;
-              this.isNumricalToCategoricalConversionDone = true;
-              let { question, option } = response.message;
+        this.vantageService.getQuestion(7).subscribe({
+          next: (response) => {
+            this.isNumericToCategoricalPerform = false;
+            this.isNumricalToCategoricalConversionDone = true;
+            let { question, option } = response.message;
 
-              this.questions.q7 = {
-                qname: question,
-                options: option
-              }
-            },
-            error: error => {
-              this.isNumericToCategoricalPerform = false;
-              this.isNumricalToCategoricalConversionDone = true;
-              this.handleError(error);
-            }
-          });
+            this.questions.q7 = {
+              qname: question,
+              options: option,
+            };
+          },
+          error: (error) => {
+            this.isNumericToCategoricalPerform = false;
+            this.isNumricalToCategoricalConversionDone = true;
+            this.handleError(error);
+          },
+        });
 
         this.selectedNColumnsForConversionList = [];
         this.newCategoricalColumnsList = [...this.remainingCCols];
         this.newNumericalColumnsList = [...this.remainingNcols];
         break;
     }
-  }
+  };
 
   //Select Numerical Column that you would like to convert into Categorical
   selectNColumnToCConversion = (x: any) => {
@@ -565,8 +555,7 @@ openAutomatedDTDialogue = () => {
       }
     }
     this.toggleCheckedStatus(item, false);
-
-  }
+  };
   onNumericalCheckBoxSelect = (val: string, target: any) => {
     let isChecked: boolean = target.checked;
     if (isChecked) {
@@ -575,19 +564,20 @@ openAutomatedDTDialogue = () => {
       this.removeNSelectedItem(val);
     }
     this.toggleCheckedStatus(val, isChecked);
-  }
+  };
 
   toggleCheckedStatus = (val: any, isChecked: boolean) => {
     for (let i = 0; i < this.tempRemainingNcols.length; i++) {
-      let { name, checked } = this.tempRemainingNcols[i]
+      let { name, checked } = this.tempRemainingNcols[i];
       if (name === val) {
         this.tempRemainingNcols[i].checked = isChecked;
         break;
       }
     }
-  }
+  };
 
-  performNumericalToCategorical = () => { //Set Question 7
+  performNumericalToCategorical = () => {
+    //Set Question 7
     this.clearNumericalToCategoricalState();
     this.isNumricalToCategoricalStarted = true;
     this.isNumricalToCategoricalConversionDone = false;
@@ -612,23 +602,38 @@ openAutomatedDTDialogue = () => {
           //Add to categorical list
           //console.log("this.selectedNColumnsForConversionList ", this.selectedNColumnsForConversionList)
           //console.log("newCategoricalColumnsList ", newCategoricalColumnsList)
-          for (let e = 0; e < this.selectedNColumnsForConversionList.length; e++) {
+          for (
+            let e = 0;
+            e < this.selectedNColumnsForConversionList.length;
+            e++
+          ) {
             let matchFound = false;
             for (let t = 0; t < newCategoricalColumnsList.length; t++) {
-              if (newCategoricalColumnsList[t] === this.selectedNColumnsForConversionList[e]) {
+              if (
+                newCategoricalColumnsList[t] ===
+                this.selectedNColumnsForConversionList[e]
+              ) {
                 matchFound = true;
                 break;
               }
             }
             if (!matchFound) {
               //console.log("Inside Match Found");
-              newCategoricalColumnsList.push(this.selectedNColumnsForConversionList[e]);
+              newCategoricalColumnsList.push(
+                this.selectedNColumnsForConversionList[e]
+              );
             }
           }
 
           //Remove From Numerical list
-          for (let i = 0; i < this.selectedNColumnsForConversionList.length; i++) {
-            let index = newNumericalColumnsList.indexOf(this.selectedNColumnsForConversionList[i]);
+          for (
+            let i = 0;
+            i < this.selectedNColumnsForConversionList.length;
+            i++
+          ) {
+            let index = newNumericalColumnsList.indexOf(
+              this.selectedNColumnsForConversionList[i]
+            );
             if (index !== -1) {
               newNumericalColumnsList.splice(index, 1);
             }
@@ -641,17 +646,14 @@ openAutomatedDTDialogue = () => {
           //console.log(this.newCategoricalColumnsList);
           //console.log(this.newNumericalColumnsList);
 
-          let {
-            output,
-            question
-          } = response.message;
+          let { output, question } = response.message;
 
           console.log(question);
 
           this.questions.q7 = {
             qname: question.name,
-            options: question.options
-          }
+            options: question.options,
+          };
         },
         error: (error) => {
           this.isNumricalToCategoricalStarted = false;
@@ -661,11 +663,7 @@ openAutomatedDTDialogue = () => {
           this.handleError(error);
         },
       });
-
-  }
-
-
-
+  };
 
   //Perform Basic Null Value Imputing - Html 7
   performBasicNullDecision = (val: string) => {
@@ -675,11 +673,11 @@ openAutomatedDTDialogue = () => {
 
     let d = [];
     for (let n = 0; n < this.remainingNcols.length; n++) {
-      let obj = { name: this.remainingNcols[n], checked: false }
+      let obj = { name: this.remainingNcols[n], checked: false };
       d.push(obj);
     }
     for (let n = 0; n < this.remainingCCols.length; n++) {
-      let obj = { name: this.remainingCCols[n], checked: false }
+      let obj = { name: this.remainingCCols[n], checked: false };
       d.push(obj);
     }
 
@@ -691,32 +689,30 @@ openAutomatedDTDialogue = () => {
         this.isBasicNullImputingDone = false;
         break;
       case 'N':
-        this.vantageService
-          .getQuestion(8)
-          .subscribe({
-            next: response => {
-              this.isBasicNullPerform = false;
-              this.isBasicNullImputingDone = true;
-              let { question, option } = response.message;
+        this.vantageService.getQuestion(8).subscribe({
+          next: (response) => {
+            this.isBasicNullPerform = false;
+            this.isBasicNullImputingDone = true;
+            let { question, option } = response.message;
 
-              this.questions.q8 = {
-                qname: question,
-                options: option
-              }
-            },
-            error: error => {
-              this.isBasicNullPerform = false;
-              this.isBasicNullImputingDone = true;
-              this.handleError(error);
-            }
-          });
+            this.questions.q8 = {
+              qname: question,
+              options: option,
+            };
+          },
+          error: (error) => {
+            this.isBasicNullPerform = false;
+            this.isBasicNullImputingDone = true;
+            this.handleError(error);
+          },
+        });
         this.basicNullValueImputingList = [];
         this.numericalPendingSelection = Object.create(null);
         this.categoricalPendingSelection = Object.create(null);
         this.selectedColsForClusterImputing = [];
         break;
     }
-  }
+  };
 
   onBasicNullCheckBoxSelect = (val: string, target: any) => {
     let isChecked: boolean = target.checked;
@@ -726,7 +722,7 @@ openAutomatedDTDialogue = () => {
       this.removeToBasicNullValueImputingList(val);
     }
     this.toggleBasicNullCheckedStatus(val, isChecked);
-  }
+  };
 
   addToBasicNullValueImputingList = (item: string) => {
     let isMatchFound = false;
@@ -739,7 +735,7 @@ openAutomatedDTDialogue = () => {
     if (!isMatchFound) {
       this.basicNullValueImputingList.push(item);
     }
-  }
+  };
 
   removeToBasicNullValueImputingList = (item: string) => {
     for (let i = 0; i < this.basicNullValueImputingList.length; i++) {
@@ -749,17 +745,22 @@ openAutomatedDTDialogue = () => {
       }
     }
     this.toggleBasicNullCheckedStatus(item, false);
-  }
+  };
 
   toggleBasicNullCheckedStatus = (val: string, isChecked: boolean) => {
-    for (let i = 0; i < this.allColumnWithCheckedStatusFromBasicNullOps.length; i++) {
-      let { name, checked } = this.allColumnWithCheckedStatusFromBasicNullOps[i]
+    for (
+      let i = 0;
+      i < this.allColumnWithCheckedStatusFromBasicNullOps.length;
+      i++
+    ) {
+      let { name, checked } =
+        this.allColumnWithCheckedStatusFromBasicNullOps[i];
       if (name === val) {
         this.allColumnWithCheckedStatusFromBasicNullOps[i].checked = isChecked;
         break;
       }
     }
-  }
+  };
 
   onBasicNullValueCheckBoxSelect = (val: string, target: any) => {
     let isChecked: boolean = target.checked;
@@ -769,7 +770,7 @@ openAutomatedDTDialogue = () => {
       this.removeToBasicNullValueImputingList(val);
     }
     this.toggleBasicNullCheckedStatus(val, isChecked);
-  }
+  };
 
   performBasicNullImputing = () => {
     this.clearBasicNullImputingState();
@@ -779,10 +780,17 @@ openAutomatedDTDialogue = () => {
     let d = [];
     for (let i = 0; i < this.basicNullValueImputingList.length; i++) {
       let item: any = {};
-      if (this.newNumericalColumnsList.includes(this.basicNullValueImputingList[i])) {
+      if (
+        this.newNumericalColumnsList.includes(
+          this.basicNullValueImputingList[i]
+        )
+      ) {
         for (let u = 0; u < this.univariateStatisticsResult.length; u++) {
           let obj: any = this.univariateStatisticsResult[u];
-          if ((obj['Attribute']).toUpperCase() === this.basicNullValueImputingList[i].toUpperCase()) {
+          if (
+            obj['Attribute'].toUpperCase() ===
+            this.basicNullValueImputingList[i].toUpperCase()
+          ) {
             item.name = this.basicNullValueImputingList[i].toLowerCase();
             item.value = obj['Median'];
             break;
@@ -791,7 +799,10 @@ openAutomatedDTDialogue = () => {
       } else {
         for (let u = 0; u < this.univariateStatisticsResult.length; u++) {
           let obj: any = this.univariateStatisticsResult[u];
-          if ((obj['Attribute']).toUpperCase() === this.basicNullValueImputingList[i].toUpperCase()) {
+          if (
+            obj['Attribute'].toUpperCase() ===
+            this.basicNullValueImputingList[i].toUpperCase()
+          ) {
             item.name = this.basicNullValueImputingList[i].toLowerCase();
             item.value = obj['Mode'];
             break;
@@ -813,15 +824,12 @@ openAutomatedDTDialogue = () => {
           this.isBasicNullImputingStarted = false;
           this.isBasicNullImputingDone = true;
 
-          let {
-            output,
-            question
-          } = response.message;
+          let { output, question } = response.message;
 
           this.questions.q8 = {
             qname: question.name,
-            options: question.options
-          }
+            options: question.options,
+          };
 
           this.numericalPendingSelection = Object.create(null);
           this.categoricalPendingSelection = Object.create(null);
@@ -836,7 +844,7 @@ openAutomatedDTDialogue = () => {
           this.handleError(error);
         },
       });
-  }
+  };
 
   //Perform Cluster Null Value Imputing //Question 8 -- Set Question 9
   performClusterNullValueImputingDecision = (val: string) => {
@@ -850,28 +858,26 @@ openAutomatedDTDialogue = () => {
         this.isAutomatedClusterDone = false;
         break;
       case 'N':
-        this.vantageService
-          .getQuestion(9)
-          .subscribe({
-            next: response => {
-              this.isAutomatedClusterPerform = false;
-              this.isAutomatedClusterDone = true;
-              let { question, option } = response.message;
+        this.vantageService.getQuestion(9).subscribe({
+          next: (response) => {
+            this.isAutomatedClusterPerform = false;
+            this.isAutomatedClusterDone = true;
+            let { question, option } = response.message;
 
-              this.questions.q9 = {
-                qname: question,
-                options: option
-              }
-            },
-            error: error => {
-              this.isAutomatedClusterPerform = false;
-              this.isAutomatedClusterDone = true;
-              this.handleError(error);
-            }
-          });
+            this.questions.q9 = {
+              qname: question,
+              options: option,
+            };
+          },
+          error: (error) => {
+            this.isAutomatedClusterPerform = false;
+            this.isAutomatedClusterDone = true;
+            this.handleError(error);
+          },
+        });
         break;
     }
-  }
+  };
 
   performClusterNullValueImputing = () => {
     this.clearClusteredImputingState();
@@ -889,15 +895,12 @@ openAutomatedDTDialogue = () => {
         next: (response) => {
           this.isAutomatedClusterStarted = false;
           this.isAutomatedClusterDone = true;
-          let {
-            output,
-            question
-          } = response.message;
+          let { output, question } = response.message;
 
           this.questions.q9 = {
             qname: question.name,
-            options: question.options
-          }
+            options: question.options,
+          };
         },
         error: (error) => {
           this.isAutomatedClusterStarted = false;
@@ -905,8 +908,7 @@ openAutomatedDTDialogue = () => {
           this.handleError(error);
         },
       });
-  }
-
+  };
 
   // Toggle the pending selection for the given numerical column.
   public toggleNumericalPendingSelection(col: string): void {
@@ -915,20 +917,24 @@ openAutomatedDTDialogue = () => {
 
   // Toggle the pending selection for the given categorical column.
   public toggleCategoricalPendingSelection(col: string): void {
-    this.categoricalPendingSelection[col] = !this.categoricalPendingSelection[col];
+    this.categoricalPendingSelection[col] =
+      !this.categoricalPendingSelection[col];
   }
 
-  private getSelectionFromCollection(collection: string[], category: string): string[] {
+  private getSelectionFromCollection(
+    collection: string[],
+    category: string
+  ): string[] {
     let selectionFromCollection: string[] = [];
-    if (category === "N") {
-      selectionFromCollection = collection.filter(col => {
+    if (category === 'N') {
+      selectionFromCollection = collection.filter((col) => {
         if (this.numericalPendingSelection[col]) {
           return true;
         }
         return false;
       });
     } else if (category === 'C') {
-      selectionFromCollection = collection.filter(col => {
+      selectionFromCollection = collection.filter((col) => {
         if (this.categoricalPendingSelection[col]) {
           return true;
         }
@@ -938,10 +944,15 @@ openAutomatedDTDialogue = () => {
     return [selectionFromCollection[0]];
   }
 
-
   makePair = () => {
-    let numericalList = this.getSelectionFromCollection(this.newNumericalColumnsList, "N");
-    let categoricalList = this.getSelectionFromCollection(this.newCategoricalColumnsList, "C");
+    let numericalList = this.getSelectionFromCollection(
+      this.newNumericalColumnsList,
+      'N'
+    );
+    let categoricalList = this.getSelectionFromCollection(
+      this.newCategoricalColumnsList,
+      'C'
+    );
 
     this.numericalPendingSelection = Object.create(null);
     this.categoricalPendingSelection = Object.create(null);
@@ -951,8 +962,7 @@ openAutomatedDTDialogue = () => {
     if (!this.isPairAvailablePairlist(pair)) {
       this.pairs.push(pair);
     }
-
-  }
+  };
 
   updatePair = (ele1: any, ele2: any) => {
     let filteredPair = this.pairs.filter((pair: any[]) => {
@@ -960,20 +970,25 @@ openAutomatedDTDialogue = () => {
         return false;
       }
       return true;
-    })
+    });
     this.pairs = filteredPair;
-  }
+  };
 
   isPairAvailablePairlist = (pair: string[]) => {
-    return this.pairs.some(p => this.arraysEqual(p, pair));
-  }
+    return this.pairs.some((p) => this.arraysEqual(p, pair));
+  };
 
   isPairAvailableToAdd = (): boolean => {
-    let numericalList = this.getSelectionFromCollection(this.newNumericalColumnsList, "N");
-    let categoricalList = this.getSelectionFromCollection(this.newCategoricalColumnsList, "C");
+    let numericalList = this.getSelectionFromCollection(
+      this.newNumericalColumnsList,
+      'N'
+    );
+    let categoricalList = this.getSelectionFromCollection(
+      this.newCategoricalColumnsList,
+      'C'
+    );
     return numericalList.length > 0 && categoricalList.length > 0;
-  }
-
+  };
 
   arraysEqual = (a: any[], b: any[]) => {
     if (a === b) return true;
@@ -984,9 +999,7 @@ openAutomatedDTDialogue = () => {
       if (a[i] !== b[i]) return false;
     }
     return true;
-  }
-
-
+  };
 
   //Perform Outlier Handling - //Question 9 -- Set Question 10
   performOutlierHandlingDecision = (val: string) => {
@@ -999,25 +1012,23 @@ openAutomatedDTDialogue = () => {
         this.isOutlierHandingDone = false;
         break;
       case 'N':
-        this.vantageService
-          .getModelBuildFlow()
-          .subscribe({
-            next: response => {
-              this.isOutlierHandingPerform = false;
-              this.isOutlierHandingDone = true;
-              //console.log(response.message);
-              this.flows = response.message.flows;
-            },
-            error: error => {
-              this.isOutlierHandingPerform = false;
-              this.isOutlierHandingDone = true;
-              this.handleError(error);
-            }
-          });
+        this.vantageService.getModelBuildFlow().subscribe({
+          next: (response) => {
+            this.isOutlierHandingPerform = false;
+            this.isOutlierHandingDone = true;
+            //console.log(response.message);
+            this.flows = response.message.flows;
+          },
+          error: (error) => {
+            this.isOutlierHandingPerform = false;
+            this.isOutlierHandingDone = true;
+            this.handleError(error);
+          },
+        });
 
         break;
     }
-  }
+  };
 
   performOutlierHandling = () => {
     this.clearOutlierState();
@@ -1044,36 +1055,33 @@ openAutomatedDTDialogue = () => {
           this.handleError(error);
         },
       });
-
-  }
-
+  };
 
   //Perform Manual Data Transform
   performManualDT = (val: String) => {
     this.clearManualDataTransformState();
     this.manualDataTransformDecision = false;
-    this.manualDataTransformDecisionInString = "";
+    this.manualDataTransformDecisionInString = '';
     switch (val) {
       case 'Y':
         this.manualDataTransformDecision = true;
-        this.manualDataTransformDecisionInString = "Y";
-        this.manualDataTransformationMessage = "Please re-run after manual Data Transformation, Thank You!"
+        this.manualDataTransformDecisionInString = 'Y';
+        this.manualDataTransformationMessage =
+          'Please re-run after manual Data Transformation, Thank You!';
         break;
       case 'N':
         this.manualDataTransformDecision = false;
-        this.manualDataTransformationMessage = "Go ahead with Model Build"
-        this.vantageService
-          .getModelBuildFlow()
-          .subscribe({
-            next: response => {
-              this.manualDataTransformDecisionInString = "N";
-              this.flows = response.message.flows;
-            },
-            error: error => {
-              this.manualDataTransformDecisionInString = "";
-              this.handleError(error);
-            }
-          });
+        this.manualDataTransformationMessage = 'Go ahead with Model Build';
+        this.vantageService.getModelBuildFlow().subscribe({
+          next: (response) => {
+            this.manualDataTransformDecisionInString = 'N';
+            this.flows = response.message.flows;
+          },
+          error: (error) => {
+            this.manualDataTransformDecisionInString = '';
+            this.handleError(error);
+          },
+        });
         break;
     }
     // setTimeout(() => {
@@ -1081,7 +1089,7 @@ openAutomatedDTDialogue = () => {
     //     relativeTo: this.activatedRoute,
     //   });
     // }, 4000);
-  }
+  };
 
   //Model Build
   buildModel = () => {
@@ -1096,13 +1104,16 @@ openAutomatedDTDialogue = () => {
         this.trainsetsize,
         this.testsetsize,
         this.selectedColumn,
-        this.newNumericalColumnsList.length === 0 ? this.remainingNcols: this.newNumericalColumnsList,
-        this.newCategoricalColumnsList.length === 0 ? this.remainingCCols: this.newCategoricalColumnsList,
+        this.newNumericalColumnsList.length === 0
+          ? this.remainingNcols
+          : this.newNumericalColumnsList,
+        this.newCategoricalColumnsList.length === 0
+          ? this.remainingCCols
+          : this.newCategoricalColumnsList,
         this.remainingCols
       )
       .subscribe({
         next: (response) => {
-
           this.modelresult = response.message;
           console.log(response.message);
           this.finalBuildModelStart = false;
@@ -1115,7 +1126,30 @@ openAutomatedDTDialogue = () => {
           this.handleError(error);
         },
       });
-  }
+  };
+
+  //Generate Report
+  generateReport = () => {};
+
+  //Update Basic Data
+
+  //Update Column List
+
+  //Update Univariate Stats
+
+  //Add Data Transformation Type
+
+  //Update Numerical and Categorical Column
+
+  //Update Basic Null Value Imputing
+
+  //Upadte Clustered Null Value Imputing
+
+  //Update Outlier Entry
+
+  //Update Manual Entry
+
+  //Update Final Model Result
 
   //Restart of Model Build
   restartProcess = () => {
@@ -1128,16 +1162,16 @@ openAutomatedDTDialogue = () => {
     let fullList = [];
     let remainingItemInList = [];
     switch (type) {
-      case "Num": {
+      case 'Num': {
         fullList = this.ncols;
         break;
       }
-      case "Cat": {
+      case 'Cat': {
         fullList = this.ccols;
         break;
       }
       default:
-        fullList = this.columnsWTDependentCol
+        fullList = this.columnsWTDependentCol;
     }
 
     for (let n = 0; n < fullList.length; n++) {
@@ -1149,12 +1183,12 @@ openAutomatedDTDialogue = () => {
         }
       }
       if (!matchFound) {
-        remainingItemInList.push(fullList[n])
+        remainingItemInList.push(fullList[n]);
       }
     }
 
     return remainingItemInList;
-  }
+  };
 
   // Configuration File upload
   onChange(event: any) {
@@ -1192,8 +1226,7 @@ openAutomatedDTDialogue = () => {
     //Reset decision flag
     this.isAutomatedDT = false;
     this.isManualDT = false;
-
-  }
+  };
 
   clearAutomatedDataTransferState = () => {
     this.allAutomatedDTSteps = [];
@@ -1203,8 +1236,7 @@ openAutomatedDTDialogue = () => {
 
     //Reset decision flag
     this.isAutomatedProceed = false;
-  }
-
+  };
 
   clearAutomatedDataInfoState = () => {
     this.isAutomatedProceed = false;
@@ -1218,8 +1250,7 @@ openAutomatedDTDialogue = () => {
     this.selectedNColumnsForConversionList = [];
     this.newCategoricalColumnsList = [];
     this.newNumericalColumnsList = [];
-
-  }
+  };
 
   clearNumericalToCategoricalState = () => {
     this.isNumricalToCategoricalStarted = false;
@@ -1234,7 +1265,7 @@ openAutomatedDTDialogue = () => {
     this.isBasicNullImputingStarted = false;
     this.isBasicNullImputingDone = false;
     this.basicNullValueImputingList = [];
-  }
+  };
 
   clearBasicNullImputingState = () => {
     this.isBasicNullImputingDone = false;
@@ -1249,8 +1280,7 @@ openAutomatedDTDialogue = () => {
     this.numericalPendingSelection = Object.create(null);
     this.categoricalPendingSelection = Object.create(null);
     this.selectedColsForClusterImputing = [];
-
-  }
+  };
 
   clearClusteredImputingState = () => {
     this.isAutomatedClusterStarted = false;
@@ -1261,7 +1291,7 @@ openAutomatedDTDialogue = () => {
     this.isOutlierHandingPerform = false;
     this.isOutlierHandingDone = false;
     this.flows = [];
-  }
+  };
 
   clearOutlierState = () => {
     this.isOutlierHandingStarted = false;
@@ -1270,37 +1300,37 @@ openAutomatedDTDialogue = () => {
 
     this.clearManualDataTransformState();
     this.manualDataTransformDecision = false;
-    this.manualDataTransformDecisionInString = "";
+    this.manualDataTransformDecisionInString = '';
 
     this.clearBuildModelState();
     this.finalBuildModelStart = false;
     this.finalBuildModelDone = false;
     this.modelresult = [];
-  }
+  };
 
   clearManualDataTransformState = () => {
-    this.manualDataTransformDecisionInString = "";
+    this.manualDataTransformDecisionInString = '';
     this.clearBuildModelState();
 
     //Reset next state flag
     this.finalBuildModelStart = false;
     this.finalBuildModelDone = false;
     this.modelresult = [];
-  }
+  };
 
   clearBuildModelState = () => {
     this.finalBuildModelStart = false;
     this.finalBuildModelDone = false;
     this.modelresult = [];
-  }
+  };
 
   //Clear the State
   clear = () => {
     this.selectedDb = '';
     this.selectedtable = '';
     this.selectedColumn = '';
-    this.baseTable = "";
-    this.dependentCol = "";
+    this.baseTable = '';
+    this.dependentCol = '';
     this.tables = ['Select Table'];
     this.columns = ['Select Column'];
     this.columnsWTDependentCol = [];
@@ -1314,7 +1344,6 @@ openAutomatedDTDialogue = () => {
     this.clearDataAttributeSelectionState();
   };
 
-
   //Error Handling
   handleError = (error: any) => {
     window.scrollTo(0, 0);
@@ -1324,10 +1353,12 @@ openAutomatedDTDialogue = () => {
           this.errorMsg = 'The configuration file is missing. Please upload!';
           break;
         case GlobalConstants.Config_File_Incorrect_Format:
-          this.errorMsg = 'The configuration file has incorrect format. Please uplaod correct one!';
+          this.errorMsg =
+            'The configuration file has incorrect format. Please uplaod correct one!';
           break;
         case GlobalConstants.Missing_Required_Input:
-          this.errorMsg = 'Some data are missing while requesting. Please contact with system administrator!';
+          this.errorMsg =
+            'Some data are missing while requesting. Please contact with system administrator!';
           break;
         case GlobalConstants.No_db_Session:
           this.errorMsg = 'Please connect to Server!';
@@ -1339,7 +1370,8 @@ openAutomatedDTDialogue = () => {
           }, 4000);
           break;
         case GlobalConstants.Error_500:
-          this.errorMsg = 'There is some server errors. Please try after sometime!';
+          this.errorMsg =
+            'There is some server errors. Please try after sometime!';
           break;
         default:
           this.errorMsg = 'Some error occured. Please start from begining!';
@@ -1353,7 +1385,4 @@ openAutomatedDTDialogue = () => {
       this.errorMsg = 'There is some server errors. Please try after sometime!';
     }
   };
-
-
 }
-

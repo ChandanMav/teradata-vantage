@@ -1,465 +1,798 @@
-<div class="container-fluid data-page">
-  <div class="form-pane float-start">
-    <div class="row" style="background-color: lavender;">
-      <div class="col-12 card" class="config-form">
-        <p class="upload-form-title">Upload Configuration File</p>
-        <p class="upload-msg" *ngIf="message !== ''" [ngClass]="!isFileUploadFailed ? 'text-success' : 'text-danger'"
-          [ngClass]="initRunMessage != '' ? 'text-muted' :''">
-          {{message}}</p>
-        <div class="input-group card-body" style="padding-top: 0px;"
-          [ngClass]="initRunMessage != '' ? 'form-disabled' :''">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <button (click)="upload()" class="btn btn-success app-btn input-group-text"
-                style="width: 41px; margin-left: -16px;" [disabled]="filename === 'Choose file'">
-                <span class="fa fa-cloud-upload"></span>
-              </button>
-            </span>
-          </div>
-          <div class="custom-file" style="left: -16px;">
-            <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onChange($event)" accept=".txt"
-              required>
-            <label class="custom-file-label text-start text-truncate" style="max-width: 188px;"
-              for="inputGroupFile01">{{filename}}</label>
+<section class="">
+  <div class="container-fluid data-page">
+    <div class="form-pane float-start">
+      <div class="row" style="background-color: lavender;">
+        <div class="col-12 card" class="config-form">
+          <p class="upload-form-title">Upload Configuration File</p>
+          <p class="upload-msg" *ngIf="message !== ''" [ngClass]="!isFileUploadFailed ? 'text-success' : 'text-danger'"
+            [ngClass]="initRunMessage != '' ? 'text-muted' :''">
+            {{message}}</p>
+          <div class="input-group card-body" style="padding-top: 0px;left: 15px;"
+            [ngClass]="initRunMessage != '' ? 'form-disabled' :''">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <button (click)="upload()" class="btn btn-success app-btn input-group-text"
+                  style="width: 41px; margin-left: -16px;" [disabled]="filename === 'Choose file'">
+                  <span class="fa fa-cloud-upload"></span>
+                </button>
+              </span>
+            </div>
+            <div class="custom-file" style="left: -16px;">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onChange($event)"
+                accept=".txt" required>
+              <label class="custom-file-label text-start text-truncate" style="max-width: 167px;padding-left: 42px;"
+                for="inputGroupFile01">{{filename}}</label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 dropdown-form">
-        <form class="row g-1 align-middle vertical-center" (ngSubmit)="init()"
-          [ngClass]="inprogress ? 'form-disabled' : ''">
-          <div class="form-group col-11 gx-4">
-            <label for="db" class="form-label">Select Database <span style="color: red;">*</span></label>
-            <select class="form-control" id="db" name="db" (change)="changeDropdown($event.target, 'database')"
-              autofocus [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
-              <option *ngFor="let database of databases">{{database}}</option>
-            </select>
-          </div>
-
-          <div class="form-group col-11 gx-4">
-            <label for="basetable" class="form-label">Select Dataset <span style="color: red;">*</span></label>
-            <select class="form-control" id="basetable" name="basetable"
-              (change)="changeDropdown($event.target, 'table')"
-              [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
-              <option *ngFor="let table of tables">{{table}}</option>
-            </select>
-          </div>
-
-          <div class="form-group col-11 gx-4">
-            <label for="col" class="form-label">Select Dependent Column<span style="color: red;">*</span></label>
-            <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
-              [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
-              <option *ngFor="let column of columns">{{column}}</option>
-            </select>
-          </div>
-          <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage === ''">
-            <button class="btn btn-primary app-btn cont-btn-css" type="submit" [disabled]="selectedColumn===''">Create
-              Model</button>
-          </div>
-
-          <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage != ''">
-            <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="restartProcess()">Start New
-              Model</button>
-          </div>
-
-
-        </form>
-
-        <div *ngIf="inprogress" class="d-flex justify-content-center text-center">
-          <div class="row">
-            <div class="col-12">
-              <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
-                role="status"></div>
+        <div class="col-12 dropdown-form">
+          <form class="row g-1 align-middle vertical-center" (ngSubmit)="init()"
+            [ngClass]="inprogress ? 'form-disabled' : ''">
+            <div class="form-group col-11 gx-4">
+              <label for="db" class="form-label">Select Database <span style="color: red;">*</span></label>
+              <select class="form-control" id="db" name="db" (change)="changeDropdown($event.target, 'database')"
+                autofocus [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
+                <option *ngFor="let database of databases">{{database}}</option>
+              </select>
             </div>
-            <div class="col-12">
-              <span class="wait">Please wait!</span>
+
+            <div class="form-group col-11 gx-4">
+              <label for="basetable" class="form-label">Select Dataset <span style="color: red;">*</span></label>
+              <select class="form-control" id="basetable" name="basetable"
+                (change)="changeDropdown($event.target, 'table')"
+                [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
+                <option *ngFor="let table of tables">{{table}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-11 gx-4">
+              <label for="col" class="form-label">Select Dependent Column<span style="color: red;">*</span></label>
+              <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
+                [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
+                <option *ngFor="let column of columns">{{column}}</option>
+              </select>
+            </div>
+            <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage === ''">
+              <button class="btn btn-primary app-btn cont-btn-css" type="submit" [disabled]="selectedColumn===''">Create
+                Model</button>
+            </div>
+
+            <div class="d-grid gap-2 col-11 gx-4 cont-btn" *ngIf="initRunMessage != ''">
+              <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="restartProcess()">Start New
+                Model</button>
+            </div>
+
+
+          </form>
+
+          <div *ngIf="inprogress" class="d-flex justify-content-center text-center">
+            <div class="row">
+              <div class="col-12">
+                <div class="spinner-border text-primary spinner-border-sm mt-4" style="width: 2rem; height: 2rem;"
+                  role="status"></div>
+              </div>
+              <div class="col-12">
+                <span class="wait">Please wait!</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="align-self-center q-section">
-  <div class="container">
-
-    <!--Download Report-->
-
-
-    <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger"><a routerLink="/connection"
-        style="color: darkred;">{{errorMsg}}</a></p>
-
-    <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
+  <div class="align-self-center q-section">
+    <div class="container pt-2">
+      <!-- <p *ngIf="initRunMessage != ''" class="d-flex status-msg justify-content-start text-success" style="left: 25%;">
       {{initRunMessage}}</p> -->
 
-    <div *ngIf="initRunMessage != ''" class="pt-2">
-      <!-- <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span> -->
-      <div class="accordion accordion-flush" id="accordionAccordian">
-        <div class="accordion-item card container">
-          <div class="accordion-header card-header" id="flush-headingOne-h">
-            <h5 class="mb-0">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-headingOne" aria-expanded="false" aria-controls="flush-headingOne">
-                Basic Findings
-              </button>
-            </h5>
-          </div>
-          <div id="flush-headingOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start">
-                <div class="col-2  result-header">Row Count</div>
-                <div class="col-9 result-data">{{rowCount}}</div>
-              </div>
-              <div class="row align-items-start">
-                <div class="col-2  result-header">Train Set Size</div>
-                <div class="col-9 result-data">{{trainsetsize}}</div>
-              </div>
+      <p *ngIf="errorMsg != ''" class="d-flex status-msg justify-content-center text-danger"><a routerLink="/connection"
+          style="color: darkred;">{{errorMsg}}</a></p>
 
-              <div class="row align-items-start">
-                <div class="col-2  result-header">Test Set Size</div>
-                <div class="col-9 result-data">{{testsetsize}}</div>
-              </div>
-
-              <div class="row align-items-start">
-                <div class="col-2 result-header">Numerical Columns</div>
-                <div *ngIf="ncols.length == 0; else ncolshowtemplate" class="col-9 result-data no-data">No Numerical
-                  Column in the initial dataset</div>
-                <ng-template #ncolshowtemplate>
-                  <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
-                </ng-template>
-
-              </div>
-              <div class="row align-items-start">
-                <div class="col-2 result-header">Categorical Columns</div>
-                <div *ngIf="ccols.length == 0; else ccolshowtemplate" class="col-9 result-data no-data">No Categorical
-                  Column in the initail dataset</div>
-                <ng-template #ccolshowtemplate>
-                  <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
-                </ng-template>
-              </div>
-              <div class="row align-items-start">
-                <div class="col-12 table-responsive table-responsive-lg">
-                  <table class="table table-sm table-bordered">
-                    <caption style="font-size: 13px; caption-side: top;">Sample Dataset</caption>
-                    <thead class="thead-dark">
-                      <tr class="result-header">
-                        <td *ngFor="let column of displayCols">{{column}}</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let d of top5data" class="result-data">
-                        <td *ngFor="let ele of d | jsonReader: displayCols"> {{ele}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+      <div *ngIf="initRunMessage != ''" class="mb-section">
+        <!-- <span class="fa fa-download fa-lg fa-style" data-tooltip="Download"></span> -->
+        <div class="accordion accordion-flush" id="accordionAccordian">
+          <div class="accordion-item card">
+            <div class="accordion-header card-header" id="flush-headingOne-h">
+              <h5 class="mb-0">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-headingOne" aria-expanded="false" aria-controls="flush-headingOne">
+                  Basic Findings
+                </button>
+              </h5>
             </div>
-          </div>
-        </div> <!-- End of Basic Info -->
+            <div id="flush-headingOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start">
+                  <div class="col-2  result-header">Row Count</div>
+                  <div class="col-9 result-data">{{rowCount}}</div>
+                </div>
+                <div class="row align-items-start">
+                  <div class="col-2  result-header">Train Set Size</div>
+                  <div class="col-9 result-data">{{trainsetsize}}</div>
+                </div>
 
-        <!-- Start of Data Attribute Selection -->
-        <div class="accordion-item card container">
-          <h2 class="accordion-header card-header" id="flush-headingTwo-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-headingTwo" aria-expanded="false" aria-controls="flush-headingTwo">
-              Date Column Selection
-            </button>
-          </h2>
-          <div id="flush-headingTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body  card-body accordion-body-c">
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q1.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                <div class="row align-items-start">
+                  <div class="col-2  result-header">Test Set Size</div>
+                  <div class="col-9 result-data">{{testsetsize}}</div>
                 </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="Y"
-                      (click)="deleteColumnDecision('Y')">
-                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="N"
-                      (click)="deleteColumnDecision('N')">
-                    <label class="form-check-label" for="inlineRadio2">No</label>
-                  </div>
+
+                <div class="row align-items-start">
+                  <div class="col-2 result-header">Numerical Columns</div>
+                  <div *ngIf="ncols.length == 0; else ncolshowtemplate" class="col-9 result-data no-data">No Numerical
+                    Column in the initial dataset</div>
+                  <ng-template #ncolshowtemplate>
+                    <div class="col-9 result-data">{{ncols | commaSeperated}}</div>
+                  </ng-template>
+
                 </div>
-              </div>
-              <hr *ngIf="isColumnSelectToDrop" />
-              <div class="row align-items-start" *ngIf="isColumnSelectToDrop">
-                <div class="col-3">
-                  <label for="form-floating" class="text-muted p-1 label-c">Select Column To Drop</label>
-                  <div class="scrollbar-primary select-column">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                      (change)="selectColumnToDrop($event.target)" size="8" style="color: black !important;">
-                      <option *ngFor="let column of columnsWTDependentCol " style="font-size: 12px !important;">
-                        {{column}}</option>
-                    </select>
-                  </div>
+                <div class="row align-items-start">
+                  <div class="col-2 result-header">Categorical Columns</div>
+                  <div *ngIf="ccols.length == 0; else ccolshowtemplate" class="col-9 result-data no-data">No Categorical
+                    Column in the initail dataset</div>
+                  <ng-template #ccolshowtemplate>
+                    <div class="col-9 result-data">{{ccols | commaSeperated}}</div>
+                  </ng-template>
                 </div>
-                <div class="col-3">
-                  <label for="form-floating" class="text-muted p-1 label-c">Drop Columns List</label>
-                  <div class="table-responsive deleted-column scrollbar-primary">
-                    <table class="table caption-top table-borderless table-sm table-c1" *ngIf="dropCols.length != 0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Column</th>
-                          <th scope="col"></th>
+                <div class="row align-items-start">
+                  <div class="col-12 table-responsive table-responsive-lg">
+                    <table class="table table-sm table-bordered">
+                      <caption style="font-size: 13px; caption-side: top;">Sample Dataset</caption>
+                      <thead class="thead-dark">
+                        <tr class="result-header">
+                          <td *ngFor="let column of displayCols">{{column}}</td>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let item of dropCols">
-                          <td>{{item}}</td>
-                          <span class="fa fa-close" style="color: red;" (click)="removeItem(item)"></span>
+                        <tr *ngFor="let d of top5data" class="result-data">
+                          <td *ngFor="let ele of d | jsonReader: displayCols"> {{ele}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="col-3">
-                  <label for="form-floating" class="text-muted p-1 label-c">Remaining Columns</label>
-                  <div class="rlist scrollbar-primary">
-                    <ul class="list-group list-group-flush" *ngFor="let remItem of remainingCols">
-                      <li class="list-group-item rem-item">{{remItem}}</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="col-3">
-                  <label for="form-floating" class="text-muted p-1 label-c">Remaining Numeric Columns</label>
-                  <div class="rlist scrollbar-primary">
-                    <ul class="list-group list-group-flush" *ngFor="let remNItem of remainingNcols">
-                      <li class="list-group-item rem-item">{{remNItem}}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <hr *ngIf="isColumnSelectToDrop" />
-              <div class="row align-items-start" style="padding-top: 12px; margin-bottom: 10px;">
-                <div class="col-3">
-                  <button class="btn btn-primary app-btn cont-btn-css" type="button" [disabled]="!isColumnDeleteRadioClick"
-                    (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
-                </div>
-                <div class="col-5 offset-1" *ngIf="isUnivariateStatisticsRunning">
-                  <label class="info label-l" style="font-size: 12px !important; "> Exploratory Data Analysis of Numeric
-                    column
-                    started </label>
-                </div>
-                <div class="col-3" *ngIf="isUnivariateStatisticsRunning">
-                  <div class="row">
-                    <div class="spinner-border text-primary spinner-border-sm col-2" style="width: 2rem; height: 2rem;"
-                      role="status">
-                    </div>
-                    <div class="wait col-10 approx-text">Please wait..(approx 1 min)</div>
-                  </div>
-
-                </div>
-                <div class="col-6 offset-1" *ngIf="isUnivariateStatisticsResultAvailable">
-                  <label class="info label-l"> Below are the results of the Univariate Statistics on the numeric
-                    columns &nbsp;&nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div> <!-- End of Feature Selection-->
-
-        <div class="accordion-item card container" *ngIf="isUnivariateStatisticsResultAvailable">
-          <h2 class="accordion-header card-header" id="flush-headingThree-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-headingThree" aria-expanded="false" aria-controls="flush-headingThree">
-              Univariate Statistics
-            </button>
-          </h2>
-          <div id="flush-headingThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start">
-                <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
-                  class="text-muted p-1 label-c">Exploratory Analysis</label>
-                <div class="col-12 table-responsive-lg fixTableHead ">
-                  <table class="table  table-sm table-bordered">
-                    <thead class="thead-dark">
-                      <tr class="result-header">
-                        <th *ngFor="let column of univariateStatisticsResultAttr">{{column }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let result of univariateStatisticsResult" class="result-data">
-                        <td *ngFor="let ele of result | jsonReader: univariateStatisticsResultAttr"> {{ele}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <!--Change-->
-                <div class="col-12" style="padding-top: 15px;">
-                  <hr/>
-                  <div class="row align-items-start" style="padding-top: 10px;">
-                    <div class="col-12" style="margin-bottom: 9px;">
-                      <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="openAutomatedDTDialogue()"
-                        >Continue For Data Transformation</button>
-                    </div>
-                  </div>
-                </div>
-                <!--Change-->
               </div>
             </div>
-          </div>
-        </div> <!-- End of Exploratory Analysis-->
+          </div> <!-- End of Basic Info -->
 
-        <!-- Start Of Automated Data Transfer -->
-        <div class="accordion-item card container" *ngIf="isAutomatedDT">
-          <h2 class="accordion-header card-header" id="flush-headingFour-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-headingFour" aria-expanded="false" aria-controls="flush-headingFour">
-              Data Transformation
-            </button>
-          </h2>
-          <div id="flush-headingFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-
-              <div class="col-12">
-                <div class="row align-items-start next-action question-section">
+          <!-- Start of Data Attribute Selection -->
+          <div class="accordion-item card">
+            <h2 class="accordion-header card-header" id="flush-headingTwo-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-headingTwo" aria-expanded="false" aria-controls="flush-headingTwo">
+                Date Column Selection
+              </button>
+            </h2>
+            <div id="flush-headingTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body  card-body accordion-body-c">
+                <div class="row align-items-start question-section">
                   <div class="col-10 question-title">
-                    {{questions.q2.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                    {{questions.q1.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                   </div>
                   <div class="col-2" style="font-size: 13px;">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3"
-                        value="Y" (click)="dataTransformationDecision('Y')">
-                      <label class="form-check-label" for="inlineRadio3">Yes</label>
-                    </div>
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1"
+                        value="Y" (click)="deleteColumnDecision('Y')">
+                      <label class="form-check-label" for="inlineRadio1">Yes</label>
+                    </div> &nbsp;&nbsp;
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
-                        value="N" (click)="dataTransformationDecision('N')">
-                      <label class="form-check-label" for="inlineRadio4">No</label>
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio2"
+                        value="N" (click)="deleteColumnDecision('N')">
+                      <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <hr/>
-
-              <div class="row align-items-start">
-                <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
-                  class="text-muted p-1 label-i">These are the automated data transformation would apply &nbsp; <span
-                    class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
-                <div class="col-12 table-responsive fixTableHead fixTableHead-v1">
-                  <table class="table table-sm table-bordered">
-                    <thead class="thead-dark">
-                      <tr class="result-header">
-                        <th>DT Name</th>
-                        <th>Vantage Function</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let step of allAutomatedDTSteps" class="result-data-v1">
-                        <td>{{step.name || "Unknown"}}</td>
-                        <td>{{step.fn || "Unknown"}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Of Automated Data Transfer -->
-
-        <!--Start of Numerical to Categorical Column-->
-        <div class="accordion-item card container" *ngIf="isAutomatedProceed">
-          <h2 class="accordion-header card-header" id="flush-heading6-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading6" aria-expanded="false" aria-controls="flush-heading6">
-              Numerical to Categorical Conversion
-            </button>
-          </h2>
-          <div id="flush-heading6" class="accordion-collapse collapse" aria-labelledby="flush-heading6-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q6.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
-                </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions6" id="inlineRadio5" value="Y"
-                      (click)="performNumericToColumn('Y')">
-                    <label class="form-check-label" for="inlineRadio5">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions6" id="inlineRadio6" value="N"
-                      (click)="performNumericToColumn('N')">
-                    <label class="form-check-label" for="inlineRadio6">No</label>
+                <hr *ngIf="isColumnSelectToDrop" />
+                <div class="row align-items-start" *ngIf="isColumnSelectToDrop">
+                  <div class="col-3">
+                    <label for="form-floating" class="text-muted p-1 label-c">Select Column To Drop</label>
+                    <div class="scrollbar-primary select-column">
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                        (change)="selectColumnToDrop($event.target)" size="8" style="color: black !important;">
+                        <option *ngFor="let column of columnsWTDependentCol " style="font-size: 12px !important;">
+                          {{column}}</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <hr *ngIf="isNumericToCategoricalPerform" />
-              <div class="row" *ngIf="isNumericToCategoricalPerform">
-                <div class="col-8">
-                  <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column For Categorical
-                    Conversion</label>
-                  <div class="">
-                    <div class="table-responsive fixTableHead ">
-                      <table class="table  table-sm table-bordered">
-                        <thead class="thead-dark">
-                          <tr class="result-header">
-                            <th>Numeric Column</th>
-                            <th>Distinct Value</th>
-                            <th style="width: 10vh;"></th>
+                  <div class="col-3">
+                    <label for="form-floating" class="text-muted p-1 label-c">Drop Columns List</label>
+                    <div class="table-responsive deleted-column scrollbar-primary">
+                      <table class="table caption-top table-borderless table-sm table-c1" *ngIf="dropCols.length != 0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Column</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let temp of tempRemainingNcols" class="result-data">
-                            <td> {{temp.name}}</td>
-                            <td> {{top5data | extactData : temp.name }} </td>
-                            <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
-                                id="checkboxNoLabel" (change)="onNumericalCheckBoxSelect(temp.name, $event.target)"
-                                [checked]="temp.checked">
-                            </td>
+                          <tr *ngFor="let item of dropCols">
+                            <td>{{item}}</td>
+                            <span class="fa fa-close" style="color: red;" (click)="removeItem(item)"></span>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
+                  <div class="col-3">
+                    <label for="form-floating" class="text-muted p-1 label-c">Remaining Columns</label>
+                    <div class="rlist scrollbar-primary">
+                      <ul class="list-group list-group-flush" *ngFor="let remItem of remainingCols">
+                        <li class="list-group-item rem-item">{{remItem}}</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <label for="form-floating" class="text-muted p-1 label-c">Remaining Numeric Columns</label>
+                    <div class="rlist scrollbar-primary">
+                      <ul class="list-group list-group-flush" *ngFor="let remNItem of remainingNcols">
+                        <li class="list-group-item rem-item">{{remNItem}}</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-4">
-                  <label for="form-floating" class="text-muted p-1 label-c" *ngIf="selectedNColumnsForConversionList.length != 0">Selected Numerical Columns</label>
-                  <div class="table-responsive deleted-column scrollbar-primary">
-                    <table class="table caption-top table-borderless table-sm table-c1"
-                      *ngIf="selectedNColumnsForConversionList.length != 0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Column</th>
-                          <th scope="col"></th>
+                <hr *ngIf="isColumnSelectToDrop" />
+                <div class="row align-items-start" style="padding-top: 12px; margin-bottom: 10px;">
+                  <div class="col-3">
+                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                      [disabled]="!isColumnDeleteRadioClick || isUnivariateStatisticsRunning"
+                      (click)="performUnivariateStatistics()">Continue For Univariate Statistics</button>
+                  </div>
+                  <div class="col-5 offset-1" *ngIf="isUnivariateStatisticsRunning">
+                    <label class="info label-l" style="font-size: 12px !important; "> Exploratory Data Analysis of
+                      Numeric
+                      column
+                      started </label>
+                  </div>
+                  <div class="col-3" *ngIf="isUnivariateStatisticsRunning">
+                    <div class="row">
+                      <div class="spinner-border text-primary spinner-border-sm col-2"
+                        style="width: 2rem; height: 2rem;" role="status">
+                      </div>
+                      <div class="wait col-10 approx-text">Please wait..(approx 1 min)</div>
+                    </div>
+
+                  </div>
+                  <div class="col-6 offset-1" *ngIf="isUnivariateStatisticsResultAvailable">
+                    <label class="info label-l"> Below are the results of the Univariate Statistics on the numeric
+                      columns &nbsp;&nbsp; <span class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div> <!-- End of Feature Selection-->
+
+          <div class="accordion-item card" *ngIf="isUnivariateStatisticsResultAvailable">
+            <h2 class="accordion-header card-header" id="flush-headingThree-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-headingThree" aria-expanded="false" aria-controls="flush-headingThree">
+                Univariate Statistics
+              </button>
+            </h2>
+            <div id="flush-headingThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start">
+                  <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
+                    class="text-muted p-1 label-c">Exploratory Analysis</label>
+                  <div class="col-12 table-responsive-lg fixTableHead ">
+                    <table class="table  table-sm table-bordered">
+                      <thead class="thead-dark">
+                        <tr class="result-header">
+                          <th *ngFor="let column of univariateStatisticsResultAttr">{{column }}</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let item of selectedNColumnsForConversionList">
-                          <td>{{item}}</td>
-                          <span class="fa fa-close" style="color: red;" (click)="removeNSelectedItem(item)"></span>
+                        <tr *ngFor="let result of univariateStatisticsResult" class="result-data">
+                          <td *ngFor="let ele of result | jsonReader: univariateStatisticsResultAttr"> {{ele}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!--Change-->
+                  <div class="col-12" style="padding-top: 15px;">
+                    <hr />
+                    <div class="row align-items-start" style="padding-top: 10px;">
+                      <div class="col-12" style="margin-bottom: 9px;">
+                        <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                          (click)="openAutomatedDTDialogue()">Continue For Data Transformation</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Change-->
+                </div>
+              </div>
+            </div>
+          </div> <!-- End of Exploratory Analysis-->
+
+          <!-- Start Of Automated Data Transfer -->
+          <div class="accordion-item card" *ngIf="isAutomatedDT">
+            <h2 class="accordion-header card-header" id="flush-headingFour-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-headingFour" aria-expanded="false" aria-controls="flush-headingFour">
+                Data Transformation
+              </button>
+            </h2>
+            <div id="flush-headingFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+
+                <div class="col-12">
+                  <div class="row align-items-start next-action question-section">
+                    <div class="col-10 question-title">
+                      {{questions.q2.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                    </div>
+                    <div class="col-2" style="font-size: 13px;">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3"
+                          value="Y" (click)="dataTransformationDecision('Y')">
+                        <label class="form-check-label" for="inlineRadio3">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
+                          value="N" (click)="dataTransformationDecision('N')">
+                        <label class="form-check-label" for="inlineRadio4">No</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div class="row align-items-start">
+                  <label style="font-size: 13px; caption-side: top; margin-left: 9px;"
+                    class="text-muted p-1 label-i">These are the automated data transformation would apply &nbsp; <span
+                      class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                  <div class="col-12 table-responsive fixTableHead fixTableHead-v1">
+                    <table class="table table-sm table-bordered">
+                      <thead class="thead-dark">
+                        <tr class="result-header">
+                          <th>DT Name</th>
+                          <th>Vantage Function</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let step of allAutomatedDTSteps" class="result-data-v1">
+                          <td>{{step.name || "Unknown"}}</td>
+                          <td>{{step.fn || "Unknown"}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <hr />
-                <div class="row align-items-start" style="padding-top: 3px;">
-                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performNumericalToCategorical()" [disabled]="selectedNColumnsForConversionList.length === 0">Continue</button>
-                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Of Automated Data Transfer -->
 
-                  <div class="col-6 offset-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
-                    <label class="info label-l" style="font-size: 12px !important;"> Conversion of continous/numerical
-                      column to
-                      categorical started</label>
+          <!--Start of Numerical to Categorical Column-->
+          <div class="accordion-item card" *ngIf="isAutomatedProceed">
+            <h2 class="accordion-header card-header" id="flush-heading6-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-heading6" aria-expanded="false" aria-controls="flush-heading6">
+                Numerical to Categorical Conversion
+              </button>
+            </h2>
+            <div id="flush-heading6" class="accordion-collapse collapse" aria-labelledby="flush-heading6-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start question-section">
+                  <div class="col-10 question-title">
+                    {{questions.q6.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                   </div>
-                  <div class="col-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                  <div class="col-2" style="font-size: 13px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions6" id="inlineRadio5"
+                        value="Y" (click)="performNumericToColumn('Y')">
+                      <label class="form-check-label" for="inlineRadio5">Yes</label>
+                    </div> &nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions6" id="inlineRadio6"
+                        value="N" (click)="performNumericToColumn('N')">
+                      <label class="form-check-label" for="inlineRadio6">No</label>
+                    </div>
+                  </div>
+                </div>
+                <hr *ngIf="isNumericToCategoricalPerform" />
+                <div class="row" *ngIf="isNumericToCategoricalPerform">
+                  <div class="col-8">
+                    <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column For Categorical
+                      Conversion</label>
+                    <div class="">
+                      <div class="table-responsive fixTableHead ">
+                        <table class="table  table-sm table-bordered">
+                          <thead class="thead-dark">
+                            <tr class="result-header">
+                              <th>Numeric Column</th>
+                              <th>Distinct Value</th>
+                              <th style="width: 10vh;"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let temp of tempRemainingNcols" class="result-data">
+                              <td> {{temp.name}}</td>
+                              <td> {{top5data | extactData : temp.name }} </td>
+                              <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
+                                  id="checkboxNoLabel" (change)="onNumericalCheckBoxSelect(temp.name, $event.target)"
+                                  [checked]="temp.checked">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="form-floating" class="text-muted p-1 label-c"
+                      *ngIf="selectedNColumnsForConversionList.length != 0">Selected Numerical Columns</label>
+                    <div class="table-responsive deleted-column scrollbar-primary">
+                      <table class="table caption-top table-borderless table-sm table-c1"
+                        *ngIf="selectedNColumnsForConversionList.length != 0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Column</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of selectedNColumnsForConversionList">
+                            <td>{{item}}</td>
+                            <span class="fa fa-close" style="color: red;" (click)="removeNSelectedItem(item)"></span>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row align-items-start" style="padding-top: 3px;">
+                    <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                        (click)="performNumericalToCategorical()"
+                        [disabled]="selectedNColumnsForConversionList.length === 0 || isNumricalToCategoricalStarted">Continue</button>
+                    </div>
+
+                    <div class="col-6 offset-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                      <label class="info label-l" style="font-size: 12px !important;"> Conversion of continous/numerical
+                        column to
+                        categorical started</label>
+                    </div>
+                    <div class="col-2" style="margin-top: 6px;" *ngIf="isNumricalToCategoricalStarted">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="spinner-border text-primary spinner-border-sm float-left"
+                            style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;"
+                            role="status">
+                          </div>
+                          <div class="wait" style="padding-top: 8px;">Please wait!</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 offset-2" style="margin-top: 7px;" *ngIf="isNumricalToCategoricalConversionDone">
+                      <label class="info label-l ">Conversion of continous/numerical column to categorical done.
+                        &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down"
+                          style="font-size: 20px;"></span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End of Numerical to Categorical Column-->
+
+          <!--Start of Basic Null Value Imputing-->
+          <div class="accordion-item card" *ngIf="isNumricalToCategoricalConversionDone">
+            <h2 class="accordion-header card-header" id="flush-heading7-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-heading7" aria-expanded="false" aria-controls="flush-heading7">
+                Basic Null Value Imputing
+              </button>
+            </h2>
+            <div id="flush-heading7" class="accordion-collapse collapse" aria-labelledby="flush-heading7-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start question-section">
+                  <div class="col-10 question-title">
+                    {{questions.q7.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                    <!-- Question comes in the Previous step-->
+                  </div>
+                  <div class="col-2" style="font-size: 13px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio7"
+                        value="Y" (click)="performBasicNullDecision('Y')">
+                      <label class="form-check-label" for="inlineRadio7">Yes</label>
+                    </div> &nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio8"
+                        value="N" (click)="performBasicNullDecision('N')">
+                      <label class="form-check-label" for="inlineRadio8">No</label>
+                    </div>
+                  </div>
+                </div>
+                <hr *ngIf="isBasicNullPerform" />
+                <div class="row" *ngIf="isBasicNullPerform">
+                  <div class="col-8">
+                    <label for="form-floating" class="text-muted p-1 label-c">Select column for basic null value
+                      imputing</label>
+                    <div class="">
+                      <div class="table-responsive fixTableHead ">
+                        <table class="table  table-sm table-bordered">
+                          <thead class="thead-dark">
+                            <tr class="result-header">
+                              <th>Column</th>
+                              <th style="width: 10vh;"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <tr *ngFor="let temp of allColumnWithCheckedStatusFromBasicNullOps" class="result-data">
+                              <td> {{temp.name}}</td>
+                              <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
+                                  id="checkboxNoLabel" (change)="onBasicNullCheckBoxSelect(temp.name, $event.target)"
+                                  [checked]="temp.checked">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <label for="form-floating" class="text-muted p-1 label-c"
+                      *ngIf="basicNullValueImputingList.length != 0">Selected Columns</label>
+                    <div class="table-responsive deleted-column scrollbar-primary">
+                      <table class="table caption-top table-borderless table-sm table-c1"
+                        *ngIf="basicNullValueImputingList.length != 0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Column</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of basicNullValueImputingList">
+                            <td>{{item}}</td>
+                            <span class="fa fa-close" style="color: red;"
+                              (click)="removeToBasicNullValueImputingList(item)"></span>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row align-items-start" style="padding-top: 5px;">
+                    <div class="col-2" style="margin-bottom: 6px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                        (click)="performBasicNullImputing()"
+                        [disabled]="basicNullValueImputingList.length === 0 || isBasicNullImputingStarted">Continue</button>
+                    </div>
+
+                    <div class="col-5 offset-2" *ngIf="isBasicNullImputingStarted">
+                      <label class="info label-l" style="font-size: 9px;"> Basic Null value imputing using Median and
+                        Mode
+                        started </label>
+                    </div>
+                    <div class="col-2 offset-1" *ngIf="isBasicNullImputingStarted">
+                      <div class="col-12">
+                        <div class="spinner-border text-primary spinner-border-sm float-left"
+                          style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                        </div>
+                        <div class="wait" style="padding-top: 7px;">Please wait!</div>
+                      </div>
+                    </div>
+                    <div class="col-7 offset-1 text-center" *ngIf="isBasicNullImputingDone">
+                      <label class="info label-l ">Basic null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
+                          class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End of Basic Null Value Imputing-->
+
+
+          <!--Start of Cluster null value imputing-->
+          <div class="accordion-item card" *ngIf="isBasicNullImputingDone">
+            <h2 class="accordion-header card-header" id="flush-heading8-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-heading8" aria-expanded="false" aria-controls="flush-heading8">
+                Clustered Null Value Imputing
+              </button>
+            </h2>
+            <div id="flush-heading8" class="accordion-collapse collapse" aria-labelledby="flush-heading8-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start question-section">
+                  <div class="col-10 question-title">
+                    {{questions.q8.qname}}
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight">
+                      <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                    </button>
+
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                      aria-labelledby="offcanvasRightLabel">
+                      <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Clustered Null Value Imputing</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                          aria-label="Close"></button>
+                      </div>
+                      <div class="offcanvas-body">
+                        <p>Select the column names in pair for clustered null value imputing</p>
+                        <p>If you want col2 to be imputed with its median value based on the groupings of col1 then
+                          enter
+                          as below: </p>
+                        <p>e.g. col1,col2</p>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-2" style="font-size: 13px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio9"
+                        value="Y" (click)="performClusterNullValueImputingDecision('Y')">
+                      <label class="form-check-label" for="inlineRadio9">Yes</label>
+                    </div> &nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio10"
+                        value="N" (click)="performClusterNullValueImputingDecision('N')">
+                      <label class="form-check-label" for="inlineRadio10">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="isAutomatedClusterPerform">
+                  <div class="dual-select col-7">
                     <div class="row">
+                      <div class="col-12">
+                        <div class="row">
+                          <div class="dual-select__left col-5">
+                            <label for="form-floating" class="text-muted p-1 label-c">Select Categorical Column</label>
+                            <div class="left-list scrollbar-primary">
+                              <ul class="dual-select__items">
+                                <li *ngFor="let col of newCategoricalColumnsList"
+                                  (click)="toggleCategoricalPendingSelection( col )" class="dual-select__item"
+                                  [class.dual-select__item__selected]="categoricalPendingSelection[col]">
+                                  <div class="column">
+                                    <div class="column__name">
+                                      {{ col }}
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="dual-select__right col-5">
+                            <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column</label>
+                            <div class="right-list scrollbar-primary">
+                              <ul class="dual-select__items">
+                                <li *ngFor="let col of newNumericalColumnsList"
+                                  (click)="toggleNumericalPendingSelection( col )"
+                                  class="dual-select__item dual-select__item_new"
+                                  [class.dual-select__item__selected]="numericalPendingSelection[ col ]">
+                                  <div class="column">
+                                    <div class="column__name">
+                                      {{ col }}
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div class="dual-select__controls col-1">
+                            <button class="btn" type="button" (click)="makePair()"
+                              style="width: 42px; background-color: #7500c0;"
+                              [disabled]="selectedColsForClusterImputing.length !== 2" data-bs-toggle="tooltip"
+                              data-bs-placement="bottom" title="Pair" [disabled]="!isPairAvailableToAdd()">
+                              <span class="fa fa-plug" style="color: white;"></span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" style="padding-left: 62px;" *ngIf="pairs.length > 0">
+                    <label for="form-floating" class="text-muted p-1 label-c">Selected pair(s)</label>
+                    <div class="toast-section scrollbar-primary">
+                      <div class="toast-container">
+                        <div *ngFor="let pair of pairs" class="toast-pairs">
+                          <div class="toast show align-items-center text-white bg-primary border-0" role="alert"
+                            aria-live="assertive" aria-atomic="true" data-bs-autohide="false"
+                            style="font-size: 12px !important;">
+                            <div class="d-flex">
+                              <div class="toast-body">
+                                {{pair[0]}}, {{pair[1]}}
+                              </div>
+                              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                                aria-label="Close" (click)="updatePair(pair[0], pair[1])"></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 9px;">
+                    <div class="container" style="padding-bottom: 12px;">
+                      <hr />
+                    </div>
+                    <div class="col-2">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                        (click)="performClusterNullValueImputing()"
+                        [disabled]="pairs.length === 0 || isAutomatedClusterStarted">Continue</button>
+                    </div>
+
+                    <div class="col-4 offset-1" style="margin-top: 6px;padding-left: 105px;"
+                      *ngIf="isAutomatedClusterStarted">
+                      <label class="info label-l"> Clustered null value imputing started </label>
+                    </div>
+                    <div class="col-3 offset-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
+                      <div class="row justify-content-end">
+                        <div class="spinner-border text-primary spinner-border-sm offset-4 col-1"
+                          style="width: 2rem; height: 2rem;" role="status">
+                        </div>
+                        <div class="wait col-6" style="padding-top: 6px;">Please wait!</div>
+                      </div>
+                    </div>
+                    <div class="col-8 offset-1 text-center" *ngIf="isAutomatedClusterDone">
+                      <label class="info label-l ">Clustered null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
+                          class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End of Cluster Null Value Imputing-->
+
+          <!--Start of Outlier Handling-->
+          <div class="accordion-item card" *ngIf="isAutomatedClusterDone">
+            <h2 class="accordion-header card-header" id="flush-heading9-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-heading9" aria-expanded="false" aria-controls="flush-heading9">
+                Outlier Handling
+              </button>
+            </h2>
+            <div id="flush-heading9" class="accordion-collapse collapse" aria-labelledby="flush-heading9-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row align-items-start question-section">
+                  <div class="col-10 question-title">
+                    {{questions.q9.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
+                  </div>
+                  <div class="col-2" style="font-size: 13px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio12"
+                        value="Y" (click)="performOutlierHandlingDecision('Y')">
+                      <label class="form-check-label" for="inlineRadio12">Yes</label>
+                    </div> &nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio13"
+                        value="N" (click)="performOutlierHandlingDecision('N')">
+                      <label class="form-check-label" for="inlineRadio13">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="isOutlierHandingPerform">
+                  <div class="container" style="padding-top: 14px;">
+                    <hr />
+                  </div>
+                  <div class="row align-items-start" style="padding-top: 18px;">
+                    <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                      <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                        (click)="performOutlierHandling()" [disabled]="isOutlierHandingStarted">Continue</button>
+                    </div>
+
+                    <div class="col-5 offset-1" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
+                      <label class="info label-l" style="font-size: 9px;"> Outlier Handling started using Vantage MLE
+                        function 'OutlierFilter'</label>
+                    </div>
+                    <div class="col-2 offset-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
                       <div class="col-12">
                         <div class="spinner-border text-primary spinner-border-sm float-left"
                           style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
@@ -467,465 +800,150 @@
                         <div class="wait" style="padding-top: 8px;">Please wait!</div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-6 offset-2" style="margin-top: 7px;"
-                    *ngIf="isNumricalToCategoricalConversionDone">
-                    <label class="info label-l ">Conversion of continous/numerical column to categorical done.
-                      &nbsp;&nbsp; Next &nbsp; <span class="fa f-lg fa-level-down"
-                        style="font-size: 20px;"></span></label>
+                    <div class="col-7 offset-1 text-center" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
+                      <label class="info label-l ">Outlier handling done!&nbsp;&nbsp; Next &nbsp; <span
+                          class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!--End of Numerical to Categorical Column-->
+          <!--End of Null Value Imputing-->
 
-        <!--Start of Basic Null Value Imputing-->
-        <div class="accordion-item card container" *ngIf="isNumricalToCategoricalConversionDone">
-          <h2 class="accordion-header card-header" id="flush-heading7-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading7" aria-expanded="false" aria-controls="flush-heading7">
-              Basic Null Value Imputing
-            </button>
-          </h2>
-          <div id="flush-heading7" class="accordion-collapse collapse" aria-labelledby="flush-heading7-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q7.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
-                  <!-- Question comes in the Previous step-->
-                </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio7" value="Y"
-                      (click)="performBasicNullDecision('Y')">
-                    <label class="form-check-label" for="inlineRadio7">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio8" value="N"
-                      (click)="performBasicNullDecision('N')">
-                    <label class="form-check-label" for="inlineRadio8">No</label>
+          <!-- Start of Manual Data Transform-->
+          <div class="accordion-item card" *ngIf="isManualDT">
+            <h2 class="accordion-header card-header" id="flush-collapse5-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+                Manual Data Transformation
+              </button>
+            </h2>
+            <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-collapse5-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+
+                <div class="row align-items-start question-section">
+                  <div class="col-10 question-title">
+                    {{questions.q4.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
                   </div>
-                </div>
-              </div>
-              <hr *ngIf="isBasicNullPerform" />
-              <div class="row" *ngIf="isBasicNullPerform">
-                <div class="col-8">
-                  <label for="form-floating" class="text-muted p-1 label-c">Select column for basic null value
-                    imputing</label>
-                  <div class="">
-                    <div class="table-responsive fixTableHead ">
-                      <table class="table  table-sm table-bordered">
-                        <thead class="thead-dark">
-                          <tr class="result-header">
-                            <th>Column</th>
-                            <th style="width: 10vh;"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                          <tr *ngFor="let temp of allColumnWithCheckedStatusFromBasicNullOps" class="result-data">
-                            <td> {{temp.name}}</td>
-                            <td style="padding-left: 22px;"><input class="form-check-input" type="checkbox"
-                                id="checkboxNoLabel" (change)="onBasicNullCheckBoxSelect(temp.name, $event.target)"
-                                [checked]="temp.checked">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                  <div class="col-2" style="font-size: 13px;">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio7"
+                        value="Y" (click)="performManualDT('Y')">
+                      <label class="form-check-label" for="inlineRadio7">Yes</label>
+                    </div> &nbsp;&nbsp;
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio8"
+                        value="N" (click)="performManualDT('N')">
+                      <label class="form-check-label" for="inlineRadio8">No</label>
                     </div>
                   </div>
                 </div>
-                <div class="col-4">
-                  <label for="form-floating" class="text-muted p-1 label-c" *ngIf="basicNullValueImputingList.length != 0">Selected Columns</label>
-                  <div class="table-responsive deleted-column scrollbar-primary">
-                    <table class="table caption-top table-borderless table-sm table-c1"
-                      *ngIf="basicNullValueImputingList.length != 0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Column</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
+                <div style="padding-top: 17px !important;">
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div for="form-floating" class="p-2 text-center manual-text" style="color: #7500c0;">
+                      {{manualDataTransformationMessage}} &nbsp;&nbsp;<span
+                        *ngIf="manualDataTransformDecisionInString === 'N'" class="fa f-lg fa-level-down"
+                        style="font-size: 20px;"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Manual DT -->
+
+          <!-- Start of Model Creation -->
+          <div class="accordion-item card" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
+            <h2 class="accordion-header card-header" id="flush-heading10-h">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-heading10" aria-expanded="false" aria-controls="flush-heading10">
+                Final Model
+              </button>
+            </h2>
+            <div id="flush-heading10" class="accordion-collapse collapse" aria-labelledby="flush-heading10-h"
+              data-bs-parent="#accordionAccordian">
+              <div class="accordion-body card-body accordion-body-c">
+                <div class="row container" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
+                  <div class="col-12" *ngFor="let step of flows">
+                    <label class="info label-l" style="font-size: 9px;"> {{step}}</label>
+                  </div>
+                  <div class="offset-3 col-6" style="margin-top: 10px;" *ngIf="modelresult.length !== 0">
+                    <label class="info label-l" style="font-size: 9px;text-decoration: underline;color: #7500c0;"> Model
+                      Scores are as below</label>
+                  </div>
+                  <div class="col-12" *ngIf="modelresult.length === 0">
+                    <div class="row align-items-start" style="padding-top: 18px;">
+                      <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
+                        <button class="btn btn-primary app-btn cont-btn-css" type="button"
+                          [disabled]="finalBuildModelStart" (click)="buildModel()">Build
+                          Model</button>
+                      </div>
+
+                      <div class="offset-2 col-3" style="margin-bottom: 6px;" *ngIf="finalBuildModelStart">
+                        <label class="info label-l" style="font-size: 9px;"> Final Model Creation Started </label>
+                      </div>
+
+                      <div class="col-5" *ngIf="finalBuildModelStart">
+                        <div class="row">
+                          <div class="col-1 offset-3">
+                            <div class="spinner-border text-primary spinner-border-sm"
+                              style="width: 2rem; height: 2rem;" role="status"></div>
+                          </div>
+                          <div class="col-8">
+                            <span class="final-model-wait">Please wait for the model scores.. (approx 2 min)</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12" *ngIf="modelresult.length > 0">
+                    <table class="table table-striped table-dark table-hover table-bordered build-result-tbl">
                       <tbody>
-                        <tr *ngFor="let item of basicNullValueImputingList">
-                          <td>{{item}}</td>
-                          <span class="fa fa-close" style="color: red;"
-                            (click)="removeToBasicNullValueImputingList(item)"></span>
+                        <tr *ngFor="let line of modelresult">
+                          <td>{{line.name}}</td>
+                          <td>{{line.value}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                </div>
-                <hr />
-
-                <div class="row align-items-start" style="padding-top: 5px;">
-                  <div class="col-2" style="margin-bottom: 6px;">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performBasicNullImputing()" [disabled]="basicNullValueImputingList.length === 0">Continue</button>
-                  </div>
-
-                  <div class="col-5 offset-2" *ngIf="isBasicNullImputingStarted">
-                    <label class="info label-l" style="font-size: 9px;"> Basic Null value imputing using Median and Mode
-                      started </label>
-                  </div>
-                  <div class="col-2 offset-1"  *ngIf="isBasicNullImputingStarted">
-                    <div class="col-12">
-                      <div class="spinner-border text-primary spinner-border-sm float-left"
-                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
+                  <div class="col-6 offset-1 mb-2" *ngIf="modelresult.length > 0">
+                    <div class="row">
+                      <div class="d-grid gap-2 col-5 offset-2" style="font-size: 13px;">
+                        <button class="btn btn-primary app-btn cont-btn-css" type="submit" (click)="generateReport()">
+                          <span class="fa fa-cloud-download"></span>&nbsp;Report</button>
                       </div>
-                      <div class="wait" style="padding-top: 7px;">Please wait!</div>
+
+                      <div class="d-grid gap-2 col-5" style="font-size: 13px;">
+                        <button class="btn btn-primary app-btn cont-btn-css" type="submit"
+                          (click)="restartProcess()">Start New Model</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-7 offset-1 text-center"  *ngIf="isBasicNullImputingDone">
-                    <label class="info label-l ">Basic null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
-                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--End of Basic Null Value Imputing-->
-
-
-        <!--Start of Cluster null value imputing-->
-        <div class="accordion-item card container" *ngIf="isBasicNullImputingDone">
-          <h2 class="accordion-header card-header" id="flush-heading8-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading8" aria-expanded="false" aria-controls="flush-heading8">
-              Clustered Null Value Imputing
-            </button>
-          </h2>
-          <div id="flush-heading8" class="accordion-collapse collapse" aria-labelledby="flush-heading8-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q8.qname}}
-                  <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">
-                    <span class="fa fa-info-circle" style="color: #7500c0"></span>
-                  </button>
-
-                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-                    aria-labelledby="offcanvasRightLabel">
-                    <div class="offcanvas-header">
-                      <h5 id="offcanvasRightLabel">Clustered Null Value Imputing</h5>
-                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                      <p>Select the column names in pair for clustered null value imputing</p>
-                      <p>If you want col2 to be imputed with its median value based on the groupings of col1 then enter
-                        as below: </p>
-                      <p>e.g. col1,col2</p>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio9" value="Y"
-                      (click)="performClusterNullValueImputingDecision('Y')">
-                    <label class="form-check-label" for="inlineRadio9">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio10" value="N"
-                      (click)="performClusterNullValueImputingDecision('N')">
-                    <label class="form-check-label" for="inlineRadio10">No</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row" *ngIf="isAutomatedClusterPerform">
-                <div class="dual-select col-8">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="dual-select__left col-5">
-                          <label for="form-floating" class="text-muted p-1 label-c">Select Categorical Column</label>
-                          <div class="left-list scrollbar-primary">
-                            <ul class="dual-select__items">
-                              <li *ngFor="let col of newCategoricalColumnsList"
-                                (click)="toggleCategoricalPendingSelection( col )" class="dual-select__item"
-                                [class.dual-select__item__selected]="categoricalPendingSelection[col]">
-                                <div class="column">
-                                  <div class="column__name">
-                                    {{ col }}
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="dual-select__right col-5">
-                          <label for="form-floating" class="text-muted p-1 label-c">Select Numerical Column</label>
-                          <div class="right-list scrollbar-primary">
-                            <ul class="dual-select__items">
-                              <li draggable *ngFor="let col of newNumericalColumnsList"
-                                (click)="toggleNumericalPendingSelection( col )"
-                                class="dual-select__item dual-select__item_new"
-                                [class.dual-select__item__selected]="numericalPendingSelection[ col ]">
-                                <div class="column">
-                                  <div class="column__name">
-                                    {{ col }}
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div class="dual-select__controls col-1">
-                          <button class="btn" type="button" (click)="makePair()"
-                            style="width: 42px; background-color: #7500c0;" [disabled]="selectedColsForClusterImputing.length !== 2"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pair"
-                            [disabled]="!isPairAvailableToAdd()">
-                            <span class="fa fa-plug" style="color: white;"></span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4" *ngIf="pairs.length > 0">
-                  <label for="form-floating" class="text-muted p-1 label-c">Selected pair(s)</label>
-                  <div class="toast-section scrollbar-primary">
-                    <div class="toast-container">
-                      <div *ngFor="let pair of pairs">
-                        <div class="toast show align-items-center text-white bg-primary border-0" role="alert"
-                          aria-live="assertive" aria-atomic="true" data-bs-autohide="false"
-                          style="font-size: 12px !important;">
-                          <div class="d-flex">
-                            <div class="toast-body">
-                              {{pair[0]}}, {{pair[1]}}
-                            </div>
-                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
-                              aria-label="Close" (click)="updatePair(pair[0], pair[1])"></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row align-items-start" style="padding-top: 0px; margin-bottom: 9px;">
-                  <div class="container" style="padding-bottom: 12px;"> <hr /> </div>
-                  <div class="col-2">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performClusterNullValueImputing()" [disabled]="pairs.length === 0">Continue</button>
-                  </div>
-
-                  <div class="col-4 offset-1" style="margin-top: 6px;padding-left: 105px;" *ngIf="isAutomatedClusterStarted">
-                    <label class="info label-l"> Clustered null value imputing started </label>
-                  </div>
-                  <div class="col-3 offset-2" style="margin-top: 6px;" *ngIf="isAutomatedClusterStarted">
-                    <div class="row justify-content-end">
-                      <div class="spinner-border text-primary spinner-border-sm offset-4 col-1"
-                        style="width: 2rem; height: 2rem;" role="status">
-                      </div>
-                      <div class="wait col-6" style="padding-top: 6px;">Please wait!</div>
-                    </div>
-                  </div>
-                  <div class="col-8 offset-1 text-center" *ngIf="isAutomatedClusterDone">
-                    <label class="info label-l ">Clustered null value imputing done! &nbsp;&nbsp; Next &nbsp; <span
-                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--End of Cluster Null Value Imputing-->
-
-        <!--Start of Outlier Handling-->
-        <div class="accordion-item card container" *ngIf="isAutomatedClusterDone">
-          <h2 class="accordion-header card-header" id="flush-heading9-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading9" aria-expanded="false" aria-controls="flush-heading9">
-              Outlier Handling
-            </button>
-          </h2>
-          <div id="flush-heading9" class="accordion-collapse collapse" aria-labelledby="flush-heading9-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q9.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
-                </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio12" value="Y"
-                      (click)="performOutlierHandlingDecision('Y')">
-                    <label class="form-check-label" for="inlineRadio12">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio13" value="N"
-                      (click)="performOutlierHandlingDecision('N')">
-                    <label class="form-check-label" for="inlineRadio13">No</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row" *ngIf="isOutlierHandingPerform">
-                <div class="container" style="padding-top: 14px;"> <hr /> </div>
-                <div class="row align-items-start" style="padding-top: 18px;">
-                  <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
-                    <button class="btn btn-primary app-btn cont-btn-css" type="button"
-                      (click)="performOutlierHandling()" [disabled]="">Continue</button>
-                  </div>
-
-                  <div class="col-5 offset-1" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
-                    <label class="info label-l" style="font-size: 9px;"> Outlier Handling started using Vantage MLE
-                      function 'OutlierFilter'</label>
-                  </div>
-                  <div class="col-2 offset-2" style="margin-top: 6px;" *ngIf="isOutlierHandingStarted">
-                    <div class="col-12">
-                      <div class="spinner-border text-primary spinner-border-sm float-left"
-                        style="width: 2rem; height: 2rem; margin-right: 15px !important; float: left;" role="status">
-                      </div>
-                      <div class="wait" style="padding-top: 8px;">Please wait!</div>
-                    </div>
-                  </div>
-                  <div class="col-7 offset-1 text-center" style="margin-top: 7px;" *ngIf="isOutlierHandingDone">
-                    <label class="info label-l ">Outlier handling done!&nbsp;&nbsp; Next &nbsp; <span
-                        class="fa f-lg fa-level-down" style="font-size: 20px;"></span></label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--End of Null Value Imputing-->
-
-        <!-- Start of Manual Data Transform-->
-        <div class="accordion-item card container" *ngIf="isManualDT">
-          <h2 class="accordion-header card-header" id="flush-collapse5-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
-              Manual Data Transformation
-            </button>
-          </h2>
-          <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-collapse5-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-
-              <div class="row align-items-start question-section">
-                <div class="col-10 question-title">
-                  {{questions.q4.qname}} &nbsp; <span class="fa fa-info-circle" style="color: #7500c0"></span>
-                </div>
-                <div class="col-2" style="font-size: 13px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio7" value="Y"
-                      (click)="performManualDT('Y')">
-                    <label class="form-check-label" for="inlineRadio7">Yes</label>
-                  </div> &nbsp;&nbsp;
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio8" value="N"
-                      (click)="performManualDT('N')">
-                    <label class="form-check-label" for="inlineRadio8">No</label>
-                  </div>
-                </div>
-              </div>
-              <div style="padding-top: 17px !important;"> <hr /></div>
-              <div class="row">
-                <div class="col-12">
-                  <div for="form-floating" class="p-2 text-center manual-text" style="color: #7500c0;">
-                    {{manualDataTransformationMessage}} &nbsp;&nbsp;<span
-                      *ngIf="manualDataTransformDecisionInString === 'N'" class="fa f-lg fa-level-down"
-                      style="font-size: 20px;"></span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End of Manual DT -->
-
-        <!-- Start of Model Creation -->
-        <div class="accordion-item card container"
-          *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
-          <h2 class="accordion-header card-header" id="flush-heading10-h">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#flush-heading10" aria-expanded="false" aria-controls="flush-heading10">
-              Final Model
-            </button>
-          </h2>
-          <div id="flush-heading10" class="accordion-collapse collapse" aria-labelledby="flush-heading10-h"
-            data-bs-parent="#accordionAccordian">
-            <div class="accordion-body card-body accordion-body-c">
-              <div class="row container" *ngIf="isOutlierHandingDone || manualDataTransformDecisionInString === 'N'">
-                <div class="col-12" *ngFor="let step of flows">
-                  <label class="info label-l" style="font-size: 9px;"> {{step}}</label>
-                </div>
-                <div class="offset-3 col-6" style="margin-top: 10px;" *ngIf="modelresult.length !== 0">
-                  <label class="info label-l" style="font-size: 9px;text-decoration: underline;color: #7500c0;"> Model
-                    Scores are as below</label>
-                </div>
-                <div class="col-12" *ngIf="modelresult.length === 0">
-                  <div class="row align-items-start" style="padding-top: 18px;">
-                    <div class="col-2" style="margin-top: 6px; margin-bottom: 6px;">
-                      <button class="btn btn-primary app-btn cont-btn-css" type="button" (click)="buildModel()">Build
-                        Model</button>
-                    </div>
-
-                    <div class="offset-2 col-3" style="margin-bottom: 6px;" *ngIf="finalBuildModelStart">
-                      <label class="info label-l" style="font-size: 9px;"> Final Model Creation Started </label>
-                    </div>
-
-                    <div class="col-5" *ngIf="finalBuildModelStart">
-                      <div class="row">
-                        <div class="col-1 offset-3">
-                          <div class="spinner-border text-primary spinner-border-sm" style="width: 2rem; height: 2rem;"
-                            role="status"></div>
-                        </div>
-                        <div class="col-8">
-                          <span class="final-model-wait">Please wait for the model scores.. (approx 2 min)</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12" *ngIf="modelresult.length > 0">
-                  <table class="table table-striped table-dark table-hover table-bordered build-result-tbl">
-                    <tbody>
-                      <tr *ngFor="let line of modelresult">
-                        <td>{{line.name}}</td>
-                        <td>{{line.value}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-6 offset-1 mb-2" *ngIf="modelresult.length > 0">
-                  <div class="row">
-                    <div class="d-grid gap-2 col-5 offset-2" style="font-size: 13px;">
-                      <button class="btn btn-primary app-btn cont-btn-css" type="submit"> <span
-                          class="fa fa-cloud-download"></span>&nbsp;Report</button>
-                    </div>
-
-                    <div class="d-grid gap-2 col-5" style="font-size: 13px;">
-                      <button class="btn btn-primary app-btn cont-btn-css" type="submit">Start New Model</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- End of Model Creation Started-->
       </div>
-      <!-- End of Model Creation Started-->
+
+      <div class="mb-filler" *ngIf="initRunMessage === ''">
+        <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
+        <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
+            src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
+        <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
+        <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
+        <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
+        <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create,
+          the
+          success we share and we refresh the familiar.</p>
+      </div>
     </div>
   </div>
-  <div class="change-copy" *ngIf="initRunMessage === ''">
-    <div class="the" aria-hidden="true"><span style="transform: translate(12px, 48px);">The</span> </div>
-    <div class="logo" aria-hidden="true"><img style="transform: translate(903px, 13px);"
-        src="../../assets/img/acclogo-white.png" width="100" height="100" /> </div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(277px, 27px);">change</span></div>
-    <div class="you" aria-hidden="true"><span style="transform: translate(541px, 234px);">you</span></div>
-    <div class="see" aria-hidden="true"><span style="transform: translate(722px, 116px);">see</span></div>
-    <p style="transform: translate(20px, 167px);">We celebrate progress, the change we bring, the value we create, the
-      success we share and we refresh the familiar.</p>
-  </div>
-</div>
+
+</section>

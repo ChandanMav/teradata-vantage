@@ -17,3 +17,8 @@
 {"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 22:53:37"}
 {"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Sat, 30 Jul 2022 22:53:37"}
 {"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Sat, 30 Jul 2022 22:57:11"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Mon, 01 Aug 2022 11:26:45"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Mon, 01 Aug 2022 11:26:47"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Mon, 01 Aug 2022 11:26:47"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Mon, 01 Aug 2022 11:29:22"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Mon, 01 Aug 2022 11:40:41"}

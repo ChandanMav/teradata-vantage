@@ -56,13 +56,13 @@ hr {
   font-size: 13px !important;
 }
 
-.change-copy {
+.mb-filler {
   opacity: 1;
   /* transform:
     translate(20px, 42px) scale(1.05, 1.05); */
 }
 
-.change-copy span {
+.mb-filler span {
   font-size: 20vh;
   font-weight: 700;
   font-family: "Graphik Web", Arial, sans-serif;
@@ -72,7 +72,7 @@ hr {
   line-height: 0.8;
 }
 
-.change-copy p {
+.mb-filler p {
   color: #fff;
   font-size: 2vw;
   width: 36vw;
@@ -458,7 +458,13 @@ td {
 }
 
 .toast-container {
-  padding-right: 4px !important;
+  /* padding-right: 4px !important; */
+}
+
+.toast-pairs{
+  width: 18vw !important;
+  padding: 2px !important;
+
 }
 
 .toast-section {
