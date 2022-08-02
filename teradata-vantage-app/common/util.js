@@ -133,7 +133,9 @@ exports.formatUnivariateStatsData = (data) => {
     fdata.push(obj);
 
   }
-  return fdata;
+  
+  return _.orderBy(fdata, ['Attribute'], ['asc']);
+ 
 }
 
 exports.getValueFromConfig = (key, res) => {

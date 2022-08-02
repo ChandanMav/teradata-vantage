@@ -46,7 +46,7 @@
             </div>
 
             <div class="form-group col-11 gx-4">
-              <label for="col" class="form-label">Select Dependent Column<span style="color: red;">*</span></label>
+              <label for="col" class="form-label">Select Target Column<span style="color: red;">*</span></label>
               <select class="form-control" id="col" name="col" (change)="changeDropdown($event.target, 'column')"
                 [attr.disabled]="initRunMessage != '' ? 'disabled' : null">
                 <option *ngFor="let column of columns">{{column}}</option>

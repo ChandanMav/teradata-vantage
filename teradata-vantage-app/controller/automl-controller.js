@@ -1,6 +1,6 @@
 var _ = require("lodash");
 var async = require("async");
-var winston = require("./../config/winston");
+var winston = require("../config/winston");
 var sanitize = require("mongo-sanitize");
 var Error = require("../common/app.err.messages");
 var { getConnection, closeConnection } = require("../teradata-connection");
@@ -104,36 +104,36 @@ exports.univariate = (req, res, next) => {
     let remainingCols = requestBody.remainingCols; //contains remianing column including the dependent one
 
     if (!config) {
-      return  next({
+      return next({
         status: 400,
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });    
+      });
     }
 
     if (!db || !basetable || !dep_col || !allCols || !nCols || !remainingCols || !key) {
-      return  next({
+      return next({
         status: 400,
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });     
+      });
     }
-   
-    allCols = allCols.split(",");   
+
+    allCols = allCols.split(",");
     nCols = nCols.split(",");
-    let nColsSingleQuoted = nCols.map((col) => `'${col}'`);   
+    let nColsSingleQuoted = nCols.map((col) => `'${col}'`);
     remainingCols = remainingCols.split(",");
 
     let connection = getConnection(config);
     if (!connection) {
-      return  next({
+      return next({
         status: 400,
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
     async.waterfall(
@@ -175,7 +175,7 @@ exports.univariate = (req, res, next) => {
         }, //End of droping work table
 
         //Run Univariate Result
-        (isWorkingTableCreated, callback) => {          
+        (isWorkingTableCreated, callback) => {
           async.waterfall([
             //DROP moments_ table if any
             innerCB => {
@@ -314,7 +314,7 @@ exports.univariate = (req, res, next) => {
       (error, data) => {
         closeConnection(connection);
         if (error) {
-          return  next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
+          return next({ status: 500, Success: false, error_code: Errorcode.Error_500, message: error });
         } else {
 
           let result = {
@@ -347,7 +347,7 @@ exports.numericToCategoricalConversion = (req, res, next) => {
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });      
+      });
     }
 
     if (!db || !basetable || !new_basetable || !cCols) {
@@ -356,19 +356,19 @@ exports.numericToCategoricalConversion = (req, res, next) => {
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });    
+      });
     }
 
     cCols = cCols.split(",");
 
     let connection = getConnection(config);
     if (!connection) {
-      return  next({
+      return next({
         status: 401,
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });      
+      });
     }
 
     async.waterfall(
@@ -446,16 +446,16 @@ exports.basicNullValueImputing = (req, res, next) => {
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
     if (!db || !basetable || !basicnullcolval) {
-      return  next({
+      return next({
         status: 401,
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });   
+      });
     }
 
     let connection = getConnection(config);
@@ -465,7 +465,7 @@ exports.basicNullValueImputing = (req, res, next) => {
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
     async.waterfall(
@@ -550,7 +550,7 @@ exports.clusterNullValueImputing = (req, res, next) => {
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });     
+      });
     }
 
     let connection = getConnection(config);
@@ -560,7 +560,7 @@ exports.clusterNullValueImputing = (req, res, next) => {
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
     availableOptions = ["Y", "N"];
@@ -677,7 +677,7 @@ exports.outlierHandling = (req, res, next) => {
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });    
+      });
     }
 
     if (!db || !basetable || !originalbasetable || !numericCols) {
@@ -686,7 +686,7 @@ exports.outlierHandling = (req, res, next) => {
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });      
+      });
     }
 
     numericCols = numericCols.split(",");
@@ -700,7 +700,7 @@ exports.outlierHandling = (req, res, next) => {
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });      
+      });
     }
 
     async.waterfall(
@@ -806,7 +806,7 @@ exports.buildModel = (req, res, next) => {
         Success: false,
         message: Error.ERR_NO_AUTH,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
 
@@ -816,7 +816,7 @@ exports.buildModel = (req, res, next) => {
         Success: false,
         message: Error.MISSING_REQUIRED_INPUT,
         error_code: Errorcode.Missing_Required_Input,
-      });     
+      });
     }
 
     selectCols = selectCols.split(",");
@@ -836,7 +836,7 @@ exports.buildModel = (req, res, next) => {
         Success: false,
         message: Error.TERADATA_CONNECTION_ERROR_MSG,
         error_code: Errorcode.No_database_Session,
-      });     
+      });
     }
 
     async.waterfall([
@@ -1073,7 +1073,7 @@ exports.buildModel = (req, res, next) => {
               MtrySeed (${config.MtrySeed})
               Seed (${config.Seed})
               ) AS dt`;
-              console.log(query);
+            console.log(query);
             winston.info(query.substring(0, 50));
             DAO.executeQuery(connection, query, (d, isDone) => {
               if (isDone) {

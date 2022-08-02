@@ -1322,3 +1322,715 @@
 {"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Mon, 01 Aug 2022 16:23:21"}
 {"level":"error","message":"500 - true - /api/vantage/univariate - POST - ::1","timestamp":"Mon, 01 Aug 2022 16:23:21"}
 {"level":"info","message":"::1 - - [01/Aug/2022:10:53:21 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 500 70 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Mon, 01 Aug 2022 16:23:21"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 13:02:51"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 13:04:01"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:04:06"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:04:07"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 13:04:07"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:07 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:07"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 13:04:09"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:04:12"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 13:04:12"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 13:04:12"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:04:13"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 13:04:13"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:13 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:13"}
+{"level":"info","message":"File uploading Started","timestamp":"Tue, 02 Aug 2022 13:04:18"}
+{"level":"info","message":"File uploading successfully","timestamp":"Tue, 02 Aug 2022 13:04:18"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:18 +0000] \"POST /api/uploadappconfig HTTP/1.1\" 200 54 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:18"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 13:04:25"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:04:28"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 13:04:28"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:04:29"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 13:04:29"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:29 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:29"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 13:04:30"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:04:33"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 13:04:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:04:34"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 13:04:34"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:34 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:34"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 13:04:52"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 13:04:52"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 13:04:52"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:04:55"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 13:04:55"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 13:04:55"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 13:04:56"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 13:04:56"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:04:57"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 13:04:57"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:34:57 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:04:57"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 13:05:58"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:06:01"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 13:06:01"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:06:01"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 13:06:01"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 13:06:01"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Tue, 02 Aug 2022 13:06:02"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:06:03"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Tue, 02 Aug 2022 13:06:03"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:06:43"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Tue, 02 Aug 2022 13:06:43"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:07:12"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Tue, 02 Aug 2022 13:07:12"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 13:07:26"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:07:27"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Tue, 02 Aug 2022 13:07:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:37:27 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1656 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:07:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:37:48 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:07:48"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Tue, 02 Aug 2022 13:07:48"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:37:48 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:07:48"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:37:54 +0000] \"GET /api/vantage/question/2 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:07:54"}
+{"level":"info","message":"Conversion of continous/numerical column to categorical started using Vantage MLE function 'ConvertToCategorical' ...","timestamp":"Tue, 02 Aug 2022 13:08:34"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:08:37"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_categ","timestamp":"Tue, 02 Aug 2022 13:08:37"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:08:37"}
+{"level":"info","message":"CREATE MULTISET TABLE TDMLE.cellphone_categ AS (\n ","timestamp":"Tue, 02 Aug 2022 13:08:37"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 13:08:51"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:08:51"}
+{"level":"info","message":"Conversion of numerical column to categorical completed","timestamp":"Tue, 02 Aug 2022 13:08:51"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:38:51 +0000] \"POST /api/vantage/numuric/conversion HTTP/1.1\" 200 142 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:08:51"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET averagefee=10.06 ","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET accountweeks=101 ","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET datausage=0 where","timestamp":"Tue, 02 Aug 2022 13:09:23"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:09:24"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET contractrenewal=1","timestamp":"Tue, 02 Aug 2022 13:09:24"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:09:24"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET dataplan=0 where ","timestamp":"Tue, 02 Aug 2022 13:09:24"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:09:24"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:09:25"}
+{"level":"info","message":"Basic null value imputing done","timestamp":"Tue, 02 Aug 2022 13:09:25"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:39:25 +0000] \"POST /api/vantage/basicnullvalue HTTP/1.1\" 200 124 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:09:25"}
+{"level":"info","message":"Clustered null value imputing started","timestamp":"Tue, 02 Aug 2022 13:12:35"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:12:38"}
+{"level":"info","message":"select trim(cast(ContractRenewal as varchar(1000))","timestamp":"Tue, 02 Aug 2022 13:12:38"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 13:12:38"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET AverageFee= 10.06","timestamp":"Tue, 02 Aug 2022 13:12:38"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:39"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET AverageFee= 10.06","timestamp":"Tue, 02 Aug 2022 13:12:39"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:39"}
+{"level":"info","message":"select trim(cast(DataPlan as varchar(1000))), trim","timestamp":"Tue, 02 Aug 2022 13:12:39"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET DayCalls= 101 whe","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET DayCalls= 101 whe","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"select trim(cast(DataPlan as varchar(1000))), trim","timestamp":"Tue, 02 Aug 2022 13:12:40"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 13:12:41"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET CustServCalls= 1 ","timestamp":"Tue, 02 Aug 2022 13:12:41"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:41"}
+{"level":"info","message":"UPDATE TDMLE.cellphone_categ SET CustServCalls= 1 ","timestamp":"Tue, 02 Aug 2022 13:12:41"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:12:42"}
+{"level":"info","message":"Clustered null value imputing done","timestamp":"Tue, 02 Aug 2022 13:12:42"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:42:42 +0000] \"POST /api/vantage/clusternullvalue HTTP/1.1\" 200 112 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:12:42"}
+{"level":"info","message":"Outlier Handling started using Vantage MLE function 'OutlierFilter' ...","timestamp":"Tue, 02 Aug 2022 13:13:07"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:13:10"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone","timestamp":"Tue, 02 Aug 2022 13:13:10"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:13:10"}
+{"level":"info","message":{"OutlierMethod":"'percentile'","PercentileThreshold":"1,90","RemoveTail":"'both'","ReplacementValue":"'median'"},"timestamp":"Tue, 02 Aug 2022 13:13:10"}
+{"level":"info","message":"SELECT * FROM OutlierFilter (\n            ON TDMLE","timestamp":"Tue, 02 Aug 2022 13:13:10"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:13:57"}
+{"level":"info","message":"Outlier Handling Completed","timestamp":"Tue, 02 Aug 2022 13:13:57"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:43:57 +0000] \"POST /api/vantage/outlier HTTP/1.1\" 200 579 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:13:57"}
+{"level":"info","message":"Model build started","timestamp":"Tue, 02 Aug 2022 13:14:48"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":"Fetching Config Paramaters","timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":"Fetching Config done","timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":"Train, Test table module started","timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":{"Detailed":"false","IDColumn":"sn","MaxDepth":"9","MinNodeSize":"1","Mtry":"3","MtrySeed":"100","NumTrees":"30","Seed":"100","Variance":"'0.0'"},"timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train_test_split","timestamp":"Tue, 02 Aug 2022 13:14:51"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_train","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_test","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"\n            create multiset table TDMLE.of_cellph","timestamp":"Tue, 02 Aug 2022 13:14:52"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:15:15"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_train as ","timestamp":"Tue, 02 Aug 2022 13:15:15"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:15:15"}
+{"level":"info","message":"create multiset table TDMLE.of_cellphone_test as (","timestamp":"Tue, 02 Aug 2022 13:15:15"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:15:16"}
+{"level":"info","message":"alter table TDMLE.of_cellphone_train drop set_id","timestamp":"Tue, 02 Aug 2022 13:15:16"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"Train, Test table module Finished","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"Decision Forest module Started","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_model","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_monitorTable","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"SELECT * FROM DecisionForest (\n              ON TD","timestamp":"Tue, 02 Aug 2022 13:15:17"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:15:54"}
+{"level":"info","message":"Decision Forest Module Completed","timestamp":"Tue, 02 Aug 2022 13:15:54"}
+{"level":"info","message":"Predict Module Started","timestamp":"Tue, 02 Aug 2022 13:15:54"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_predict","timestamp":"Tue, 02 Aug 2022 13:15:54"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:15:55"}
+{"level":"info","message":"CREATE MULTISET TABLE TDMLE.of_cellphone_predict A","timestamp":"Tue, 02 Aug 2022 13:15:55"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:16:17"}
+{"level":"info","message":"Predict Module Finished","timestamp":"Tue, 02 Aug 2022 13:16:17"}
+{"level":"info","message":"Scoring Module Started","timestamp":"Tue, 02 Aug 2022 13:16:17"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_scoring","timestamp":"Tue, 02 Aug 2022 13:16:17"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:16:18"}
+{"level":"info","message":"CREATE TABLE TDMLE.of_cellphone_scoring AS (\n     ","timestamp":"Tue, 02 Aug 2022 13:16:18"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:16:18"}
+{"level":"info","message":"UPDATE TDMLE.of_cellphone_scoring \n            FRO","timestamp":"Tue, 02 Aug 2022 13:16:18"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"Scoring Module Finished","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"Confusion Matrix Module Started","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_confusionMatrix_coun","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_confusionMatrix_stat","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"DROP TABLE TDMLE.of_cellphone_confusionMatrix_acc_","timestamp":"Tue, 02 Aug 2022 13:16:19"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 13:16:20"}
+{"level":"info","message":"SELECT * FROM ConfusionMatrix(\n              ON TD","timestamp":"Tue, 02 Aug 2022 13:16:20"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 13:16:41"}
+{"level":"info","message":"select trim(\"key\"), trim(\"value\") from TDMLE.of_ce","timestamp":"Tue, 02 Aug 2022 13:16:41"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 13:16:41"}
+{"level":"info","message":"Confusion Matrix Module Finished","timestamp":"Tue, 02 Aug 2022 13:16:41"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 13:16:42"}
+{"level":"info","message":"Model build Finished","timestamp":"Tue, 02 Aug 2022 13:16:42"}
+{"level":"info","message":"::1 - - [02/Aug/2022:07:46:42 +0000] \"POST /api/vantage/buildmodel HTTP/1.1\" 200 621 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 13:16:42"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:08:17"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:08:21"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:08:21"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:08:21"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:38:21 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:08:21"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:08:23"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:08:26"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:08:26"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:08:27"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:08:27"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:08:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:38:27 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:08:27"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:08:29"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:08:32"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:08:32"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:08:33"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:08:33"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:38:33 +0000] \"POST /api/databases/accenture/tables HTTP/1.1\" 200 134 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:08:33"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:08:33"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:08:36"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:08:36"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:08:37"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:08:37"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:38:37 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:08:37"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 21:08:39"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:08:42"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 21:08:42"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:08:43"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 21:08:43"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:38:43 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:08:43"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 21:12:27"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 21:12:27"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 21:12:27"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:12:30"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 21:12:30"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 21:12:30"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 21:12:31"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 21:12:31"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:12:32"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 21:12:32"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:42:32 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:12:32"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:13:20"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:13:23"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:13:23"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:13:23"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:43:23 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:13:23"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:13:26"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:13:28"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:13:28"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:13:29"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:13:29"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:13:29"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:43:29 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:13:29"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:17:53"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:17:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:47:53 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:17:53"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:18:25"}
+{"level":"error","message":"Teradata Connection failed [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.13\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.13:1025: i/o timeout","timestamp":"Tue, 02 Aug 2022 21:18:37"}
+{"level":"error","message":"500 - Could not connect to the Teradata. - /api/connection - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:18:37"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:48:37 +0000] \"POST /api/connection HTTP/1.1\" 500 116 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:18:37"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:18:37"}
+{"level":"error","message":"Teradata Connection failed [Version 42659830765e8ee7b720b821cd0b35677b82dbd5] [Session 0] [Teradata SQL Driver] Failed to connect to 153.64.73.13\n at gosqldriver/teradatasql.formatError ErrorUtil.go:88\n at gosqldriver/teradatasql.(*teradataConnection).makeDriverError ErrorUtil.go:179\n at gosqldriver/teradatasql.connectToHost LCC.go:288\n at gosqldriver/teradatasql.newTeradataConnection TeradataConnection.go:157\n at gosqldriver/teradatasql.(*teradataDriver).Open TeradataDriver.go:32\n at database/sql.dsnConnector.Connect sql.go:761\n at database/sql.(*DB).conn sql.go:1395\n at database/sql.(*DB).Conn sql.go:1928\n at main.goCreateConnection goside.go:289\n at main.jsgoCreateConnection goside.go:249\n at _cgoexp_7cdf4597d74c_jsgoCreateConnection _cgo_gotypes.go:224\n at runtime.cgocallbackg1 cgocall.go:314\n at runtime.cgocallbackg cgocall.go:233\n at runtime.cgocallback asm_amd64.s:971\n at runtime.goexit asm_amd64.s:1571\nCaused by dial tcp 153.64.73.13:1025: i/o timeout","timestamp":"Tue, 02 Aug 2022 21:18:48"}
+{"level":"error","message":"500 - Could not connect to the Teradata. - /api/connection - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:18:48"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:48:48 +0000] \"POST /api/connection HTTP/1.1\" 500 116 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:18:48"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:19:05"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:19:08"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:19:09"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:19:09"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:49:09 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:19:09"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:19:11"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:19:14"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:19:14"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:19:14"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:19:15"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:19:15"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:49:15 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:19:15"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:20:16"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:20:16"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:50:16 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:20:16"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:20:25"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:20:28"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:20:28"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:20:28"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:50:28 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:20:28"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:20:30"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:20:33"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:20:33"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:20:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:20:34"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:20:34"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:50:34 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:20:34"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:20:44"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:20:47"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:20:47"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:20:48"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:20:48"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:50:48 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:20:48"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:23:11"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:23:11"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:53:11 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:23:11"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:23:20"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:23:23"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:23:23"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:23:23"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:53:23 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:23:23"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:23:26"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:23:29"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:23:29"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:23:29"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:23:30"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:23:30"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:53:30 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:23:30"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:24:01"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:24:04"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:24:04"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:24:05"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:24:05"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:54:05 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:24:05"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 21:24:08"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:24:11"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 21:24:11"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:24:12"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 21:24:12"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:54:12 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:24:12"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 21:24:12"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:24:15"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 21:24:15"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:24:16"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 21:24:16"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:54:16 +0000] \"POST /api/databases/TDMLE/tables/Select%20Table/columns HTTP/1.1\" 200 13 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:24:16"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 21:24:16"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:24:19"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 21:24:19"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:24:20"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 21:24:20"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:54:20 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:24:20"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 21:24:35"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 21:24:35"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 21:24:35"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:24:38"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 21:24:38"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 21:24:38"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 21:24:39"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 21:24:39"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:24:40"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 21:24:40"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:54:40 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:24:40"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:25:30"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:25:33"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:25:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:25:34"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:25:34"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:55:34 +0000] \"POST /api/databases/Select%20Database/tables HTTP/1.1\" 200 13 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:25:34"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:25:42"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:25:45"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:25:45"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:25:47"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:25:47"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:55:47 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:25:47"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 21:26:01"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:26:04"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 21:26:04"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:26:05"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 21:26:05"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:56:05 +0000] \"POST /api/databases/TDMLE/tables/cellphone_categ/columns HTTP/1.1\" 200 132 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:26:05"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:27:49"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 21:27:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:15:57:49 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:27:49"}
+{"date":"Tue Aug 02 2022 21:29:09 GMT+0530 (India Standard Time)","error":{"code":"MODULE_NOT_FOUND","requireStack":["C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"]},"exception":true,"level":"error","message":"uncaughtException: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\nError: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:92:1)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)","os":{"loadavg":[0,0,0],"uptime":41615},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"],"cwd":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":68447,"external":713511,"heapTotal":31457280,"heapUsed":14580176,"rss":54841344},"pid":21148,"uid":null,"version":"v18.5.0"},"stack":"Error: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:92:1)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)","timestamp":"Tue, 02 Aug 2022 21:29:09","trace":[{"column":15,"file":"node:internal/modules/cjs/loader","function":"Module._resolveFilename","line":946,"method":"_resolveFilename","native":false},{"column":27,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":787,"method":"_load","native":false},{"column":19,"file":"node:internal/modules/cjs/loader","function":"Module.require","line":1012,"method":"require","native":false},{"column":18,"file":"node:internal/modules/cjs/helpers","function":"require","line":102,"method":null,"native":false},{"column":1,"file":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","function":null,"line":92,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1112,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Module._extensions..js","line":1166,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":988,"method":"load","native":false},{"column":12,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":834,"method":"_load","native":false},{"column":19,"file":"node:internal/modules/cjs/loader","function":"Module.require","line":1012,"method":"require","native":false}]}
+{"date":"Tue Aug 02 2022 21:29:46 GMT+0530 (India Standard Time)","error":{"code":"MODULE_NOT_FOUND","requireStack":["C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"]},"exception":true,"level":"error","message":"uncaughtException: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\nError: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:92:1)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)","os":{"loadavg":[0,0,0],"uptime":41651},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"],"cwd":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":68447,"external":713511,"heapTotal":31719424,"heapUsed":14503000,"rss":54976512},"pid":3616,"uid":null,"version":"v18.5.0"},"stack":"Error: Cannot find module './routes/vantage-route'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:92:1)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)","timestamp":"Tue, 02 Aug 2022 21:29:46","trace":[{"column":15,"file":"node:internal/modules/cjs/loader","function":"Module._resolveFilename","line":946,"method":"_resolveFilename","native":false},{"column":27,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":787,"method":"_load","native":false},{"column":19,"file":"node:internal/modules/cjs/loader","function":"Module.require","line":1012,"method":"require","native":false},{"column":18,"file":"node:internal/modules/cjs/helpers","function":"require","line":102,"method":null,"native":false},{"column":1,"file":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","function":null,"line":92,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1112,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Module._extensions..js","line":1166,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":988,"method":"load","native":false},{"column":12,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":834,"method":"_load","native":false},{"column":19,"file":"node:internal/modules/cjs/loader","function":"Module.require","line":1012,"method":"require","native":false}]}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 21:29:50"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 21:29:52"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 21:57:01"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 21:57:13"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:57:19"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:57:19"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 21:57:19"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:27:19 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:57:19"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 21:57:21"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:57:24"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 21:57:24"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 21:57:24"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:57:27"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 21:57:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:27:27 +0000] \"POST /api/databases HTTP/1.1\" 200 3260 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:57:27"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 21:57:47"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 21:57:49"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 21:57:49"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 21:57:51"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 21:57:51"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:27:51 +0000] \"POST /api/databases/CDMTDFMGR/tables HTTP/1.1\" 200 819 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 21:57:51"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 21:58:43"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 21:59:49"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 22:00:25"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:00:30"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 22:00:30"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:00:31"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 22:00:31"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:30:31 +0000] \"POST /api/databases/CDMTDFMGR/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:00:31"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 22:00:40"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 22:00:40"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 22:00:40"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:00:43"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 22:00:43"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 22:00:44"}
+{"level":"info","message":"SELECT trim(count(*)) from CDMTDFMGR.cellphone","timestamp":"Tue, 02 Aug 2022 22:00:44"}
+{"level":"info","message":"SELECT top 5 Churn,AccountWeeks,ContractRenewal,Da","timestamp":"Tue, 02 Aug 2022 22:00:44"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:00:45"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 22:00:45"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:30:45 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1304 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:00:45"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 22:04:27"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:04:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:34:27 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:04:27"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 22:04:49"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:04:53"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:04:53"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 22:04:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:34:53 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:04:53"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 22:04:55"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:04:58"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 22:04:58"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 22:04:58"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:05:03"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 22:05:03"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:35:03 +0000] \"POST /api/databases HTTP/1.1\" 200 3260 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:05:03"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 22:05:07"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:05:10"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 22:05:10"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:05:11"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 22:05:11"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:35:11 +0000] \"POST /api/databases/CDMTDFMGR/tables HTTP/1.1\" 200 819 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:05:11"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 22:05:16"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:05:19"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 22:05:19"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:05:20"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 22:05:20"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:35:20 +0000] \"POST /api/databases/CDMTDFMGR/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:05:20"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 22:05:25"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 22:05:25"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 22:05:25"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:05:28"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 22:05:28"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 22:05:28"}
+{"level":"info","message":"SELECT trim(count(*)) from CDMTDFMGR.cellphone","timestamp":"Tue, 02 Aug 2022 22:05:29"}
+{"level":"info","message":"SELECT top 5 Churn,AccountWeeks,ContractRenewal,Da","timestamp":"Tue, 02 Aug 2022 22:05:29"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:05:30"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 22:05:30"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:35:30 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1304 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:05:30"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 22:07:12"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:15"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:07:15"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 22:07:15"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:37:15 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:07:15"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 22:07:17"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:20"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 22:07:20"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 22:07:20"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:07:21"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 22:07:21"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:37:21 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:07:21"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 22:07:30"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:33"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 22:07:33"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:07:34"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 22:07:34"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:37:34 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 857 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:07:34"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 22:07:37"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:40"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 22:07:40"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:07:41"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 22:07:41"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:37:41 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:07:41"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 22:07:44"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 22:07:44"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 22:07:44"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:47"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 22:07:47"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 22:07:47"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 22:07:48"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 22:07:48"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:07:49"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 22:07:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:37:49 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:07:49"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 22:07:56"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:07:59"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 22:07:59"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 22:07:59"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 22:07:59"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Sele","timestamp":"Tue, 02 Aug 2022 22:07:59"}
+{"level":"error","message":"Table creation failed","timestamp":"Tue, 02 Aug 2022 22:08:00"}
+{"level":"info","message":"Working Table is not created. Hence Exiting...","timestamp":"Tue, 02 Aug 2022 22:08:00"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:08:00"}
+{"level":"error","message":"500 - true - /api/vantage/univariate - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:08:00"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:38:00 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 500 70 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:08:00"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 22:09:49"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:09:52"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 22:09:52"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Sele","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"error","message":"Table creation failed","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"Working Table is not created. Hence Exiting...","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"error","message":"500 - true - /api/vantage/univariate - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:39:53 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 500 70 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:09:53"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 22:16:22"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:16:22"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:46:22 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:16:22"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 22:16:34"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:16:37"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:16:38"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 22:16:38"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:46:38 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:16:38"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 22:16:40"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:16:43"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 22:16:43"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 22:16:43"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:16:44"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 22:16:44"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:46:44 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:16:44"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 22:16:58"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:17:01"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 22:17:01"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:17:02"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 22:17:02"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:47:02 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 840 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:17:02"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 22:17:06"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:17:09"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 22:17:09"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:17:10"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 22:17:10"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:47:10 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:17:10"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 22:17:12"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 22:17:12"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 22:17:12"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:17:15"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 22:17:15"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 22:17:15"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 22:17:16"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 22:17:16"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:17:17"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 22:17:17"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:47:17 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:17:17"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 22:17:40"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:17:43"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 22:17:43"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 02 Aug 2022 22:17:43"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 22:17:43"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 22:17:43"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 22:17:44"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Tue, 02 Aug 2022 22:17:44"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Tue, 02 Aug 2022 22:17:44"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 22:17:44"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Tue, 02 Aug 2022 22:17:44"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 22:17:45"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Tue, 02 Aug 2022 22:17:45"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 22:17:45"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Tue, 02 Aug 2022 22:17:45"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 22:18:21"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Tue, 02 Aug 2022 22:18:21"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 22:18:50"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Tue, 02 Aug 2022 22:18:50"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 22:19:04"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:19:04"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Tue, 02 Aug 2022 22:19:04"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:49:04 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:19:04"}
+{"date":"Tue Aug 02 2022 22:22:04 GMT+0530 (India Standard Time)","error":{"code":"MODULE_NOT_FOUND","requireStack":["C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"]},"exception":true,"level":"error","message":"uncaughtException: Cannot find module '../controller/question-controller'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\nError: Cannot find module '../controller/question-controller'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at module.exports (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js:2:32)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:93:35)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)","os":{"loadavg":[0,0,0],"uptime":44790},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www"],"cwd":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":49622,"external":20401885911,"heapTotal":16220160,"heapUsed":13129128,"rss":46166016},"pid":8204,"uid":null,"version":"v18.5.0"},"stack":"Error: Cannot find module '../controller/question-controller'\nRequire stack:\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js\n- C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\bin\\www\n    at Module._resolveFilename (node:internal/modules/cjs/loader:946:15)\n    at Module._load (node:internal/modules/cjs/loader:787:27)\n    at Module.require (node:internal/modules/cjs/loader:1012:19)\n    at require (node:internal/modules/cjs/helpers:102:18)\n    at module.exports (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js:2:32)\n    at Object.<anonymous> (C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js:93:35)\n    at Module._compile (node:internal/modules/cjs/loader:1112:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)\n    at Module.load (node:internal/modules/cjs/loader:988:32)\n    at Module._load (node:internal/modules/cjs/loader:834:12)","timestamp":"Tue, 02 Aug 2022 22:22:04","trace":[{"column":15,"file":"node:internal/modules/cjs/loader","function":"Module._resolveFilename","line":946,"method":"_resolveFilename","native":false},{"column":27,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":787,"method":"_load","native":false},{"column":19,"file":"node:internal/modules/cjs/loader","function":"Module.require","line":1012,"method":"require","native":false},{"column":18,"file":"node:internal/modules/cjs/helpers","function":"require","line":102,"method":null,"native":false},{"column":32,"file":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\routes\\ml-model-route.js","function":"module.exports","line":2,"method":"exports","native":false},{"column":35,"file":"C:\\Users\\chandan.w.kumar\\Documents\\Projects\\Intern\\Teradata Vantage Migration factory\\teradata-vantage\\teradata-vantage-app\\app.js","function":null,"line":93,"method":null,"native":false},{"column":14,"file":"node:internal/modules/cjs/loader","function":"Module._compile","line":1112,"method":"_compile","native":false},{"column":10,"file":"node:internal/modules/cjs/loader","function":"Module._extensions..js","line":1166,"method":".js","native":false},{"column":32,"file":"node:internal/modules/cjs/loader","function":"Module.load","line":988,"method":"load","native":false},{"column":12,"file":"node:internal/modules/cjs/loader","function":"Module._load","line":834,"method":"_load","native":false}]}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:27:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:57:43 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:27:43"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Tue, 02 Aug 2022 22:27:43"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:57:43 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:27:43"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 22:28:01"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"error","message":"Table creation failed","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"Working Table is not created. Hence Exiting...","timestamp":"Tue, 02 Aug 2022 22:28:09"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:28:10"}
+{"level":"error","message":"500 - true - /api/vantage/univariate - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:28:10"}
+{"level":"info","message":"::1 - - [02/Aug/2022:16:58:10 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 500 70 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:28:10"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:32:02"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:33:10"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:34:48"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:35:33"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:37:16"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:37:48"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:38:23"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 22:54:31"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 22:54:35"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 22:54:40"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 22:54:40"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 02 Aug 2022 22:54:40"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 22:54:40"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 22:54:40"}
+{"level":"error","message":"Table creation failed","timestamp":"Tue, 02 Aug 2022 22:54:41"}
+{"level":"info","message":"Working Table is not created. Hence Exiting...","timestamp":"Tue, 02 Aug 2022 22:54:41"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 22:54:41"}
+{"level":"error","message":"500 - true - /api/vantage/univariate - POST - ::1","timestamp":"Tue, 02 Aug 2022 22:54:41"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:24:41 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 500 70 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 22:54:41"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 23:02:49"}
+{"level":"error","message":"401 - Missing required fields in the request. - /api/databases - POST - ::1","timestamp":"Tue, 02 Aug 2022 23:02:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:32:49 +0000] \"POST /api/databases HTTP/1.1\" 401 120 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:02:49"}
+{"level":"info","message":"Checking Teradata Connection","timestamp":"Tue, 02 Aug 2022 23:03:11"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:03:14"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:03:15"}
+{"level":"info","message":"Teradata Connection Success ","timestamp":"Tue, 02 Aug 2022 23:03:15"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:33:15 +0000] \"POST /api/connection HTTP/1.1\" 200 52 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:03:15"}
+{"level":"info","message":"Fetching Databases","timestamp":"Tue, 02 Aug 2022 23:03:17"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:03:20"}
+{"level":"info","message":"SELECT distinct databasename from dbc.tablesv orde","timestamp":"Tue, 02 Aug 2022 23:03:20"}
+{"level":"info","message":"Query Execution done","timestamp":"Tue, 02 Aug 2022 23:03:20"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:03:21"}
+{"level":"info","message":"Fetching Databases Completed","timestamp":"Tue, 02 Aug 2022 23:03:21"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:33:21 +0000] \"POST /api/databases HTTP/1.1\" 200 405 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:03:21"}
+{"level":"info","message":"Fetching Tables","timestamp":"Tue, 02 Aug 2022 23:03:35"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:03:38"}
+{"level":"info","message":"SELECT distinct tablename from dbc.tablesv where d","timestamp":"Tue, 02 Aug 2022 23:03:38"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:03:39"}
+{"level":"info","message":"Fetching Tables Completed","timestamp":"Tue, 02 Aug 2022 23:03:39"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:33:39 +0000] \"POST /api/databases/TDMLE/tables HTTP/1.1\" 200 840 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:03:39"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 23:03:41"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:03:44"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 23:03:44"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:03:45"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 23:03:45"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:33:45 +0000] \"POST /api/databases/TDMLE/tables/cellphone_categ/columns HTTP/1.1\" 200 132 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:03:45"}
+{"level":"info","message":"Fetching Columns","timestamp":"Tue, 02 Aug 2022 23:03:45"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:03:48"}
+{"level":"info","message":"SELECT distinct columnname from dbc.columnsv where","timestamp":"Tue, 02 Aug 2022 23:03:48"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:03:49"}
+{"level":"info","message":"Fetching Completed","timestamp":"Tue, 02 Aug 2022 23:03:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:33:49 +0000] \"POST /api/databases/TDMLE/tables/cellphone/columns HTTP/1.1\" 200 153 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:03:49"}
+{"level":"info","message":"Fetching Basic Information","timestamp":"Tue, 02 Aug 2022 23:05:22"}
+{"level":"info","message":"Fetching Split Percentage from atuml config file","timestamp":"Tue, 02 Aug 2022 23:05:22"}
+{"level":"info","message":"Split Percentage 0.8","timestamp":"Tue, 02 Aug 2022 23:05:22"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:05:25"}
+{"level":"info","message":"SELECT trim(COLUMNNAME) from DBC.COLUMNSV where ta","timestamp":"Tue, 02 Aug 2022 23:05:25"}
+{"level":"info","message":"SELECT trim(COLUMNNAME)||'|'||trim(COLUMNTYPE) fro","timestamp":"Tue, 02 Aug 2022 23:05:26"}
+{"level":"info","message":"SELECT trim(count(*)) from TDMLE.cellphone","timestamp":"Tue, 02 Aug 2022 23:05:26"}
+{"level":"info","message":"SELECT top 5 CustServCalls,MonthlyCharge,AverageFe","timestamp":"Tue, 02 Aug 2022 23:05:27"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:05:27"}
+{"level":"info","message":"Fetching Basic Information Completed","timestamp":"Tue, 02 Aug 2022 23:05:27"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:35:27 +0000] \"POST /api/vantage/init HTTP/1.1\" 200 1301 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:05:27"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 23:05:47"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:05:49"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 23:05:49"}
+{"level":"error","message":"Table deletion failed, can be ignored!","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:05:50"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Tue, 02 Aug 2022 23:05:51"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 23:06:26"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Tue, 02 Aug 2022 23:06:26"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 23:06:55"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Tue, 02 Aug 2022 23:06:55"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 23:07:09"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:07:09"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Tue, 02 Aug 2022 23:07:09"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:37:09 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:07:09"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 23:08:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:38:55 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:08:55"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Tue, 02 Aug 2022 23:08:55"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:38:55 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:08:55"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:39:07 +0000] \"GET /api/vantage/question/2 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:09:07"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:39:09 +0000] \"GET /api/vantage/question/2 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:09:09"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:39:10 +0000] \"GET /api/vantage/question/4 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:09:10"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:39:21 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:09:21"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Tue, 02 Aug 2022 23:09:21"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:39:21 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:09:21"}
+{"level":"info","message":"Exploratory Data Analysis started using Vantage MLE functions","timestamp":"Tue, 02 Aug 2022 23:09:26"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:09:34"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_work","timestamp":"Tue, 02 Aug 2022 23:09:34"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:09:34"}
+{"level":"info","message":"Creating TDMLE.cellphone_work table","timestamp":"Tue, 02 Aug 2022 23:09:34"}
+{"level":"info","message":"create table TDMLE.cellphone_work as ( SELECT Acco","timestamp":"Tue, 02 Aug 2022 23:09:34"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"Work Table TDMLE.cellphone_work created successfully","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"DROP TABLE TDMLE.moments_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"DROP TABLE TDMLE.basic_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"DROP TABLE TDMLE.quantiles_cellphone_work","timestamp":"Tue, 02 Aug 2022 23:09:35"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:09:36"}
+{"level":"info","message":"SELECT * FROM UnivariateStatistics (\n             ","timestamp":"Tue, 02 Aug 2022 23:09:36"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 23:10:08"}
+{"level":"info","message":"create volatile table univariate_unpivot as (\n    ","timestamp":"Tue, 02 Aug 2022 23:10:08"}
+{"level":"info","message":"Query Execution Done","timestamp":"Tue, 02 Aug 2022 23:10:36"}
+{"level":"info","message":"select trim(attribute), trim(value_col_mean),trim(","timestamp":"Tue, 02 Aug 2022 23:10:36"}
+{"level":"info","message":"Data fetching is completed","timestamp":"Tue, 02 Aug 2022 23:10:49"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:10:49"}
+{"level":"info","message":"Exploratory Data Analysis using Vantage MLE functions completed","timestamp":"Tue, 02 Aug 2022 23:10:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:40:49 +0000] \"POST /api/vantage/univariate HTTP/1.1\" 200 1858 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:10:49"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:41:30 +0000] \"GET /api/vantage/question/3 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:11:30"}
+{"level":"info","message":"Data Transformation Steps","timestamp":"Tue, 02 Aug 2022 23:11:30"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:41:30 +0000] \"GET /api/vantage/automateddt/steps HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:11:30"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:41:34 +0000] \"GET /api/vantage/question/2 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:11:34"}
+{"level":"info","message":"Conversion of continous/numerical column to categorical started using Vantage MLE function 'ConvertToCategorical' ...","timestamp":"Tue, 02 Aug 2022 23:11:44"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:11:47"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_categ","timestamp":"Tue, 02 Aug 2022 23:11:47"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:11:47"}
+{"level":"info","message":"CREATE MULTISET TABLE TDMLE.cellphone_categ AS (\n ","timestamp":"Tue, 02 Aug 2022 23:11:47"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 23:12:01"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:12:01"}
+{"level":"info","message":"Conversion of numerical column to categorical completed","timestamp":"Tue, 02 Aug 2022 23:12:01"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:42:01 +0000] \"POST /api/vantage/numuric/conversion HTTP/1.1\" 200 142 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:12:01"}
+{"level":"info","message":"Conversion of continous/numerical column to categorical started using Vantage MLE function 'ConvertToCategorical' ...","timestamp":"Tue, 02 Aug 2022 23:12:05"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:12:09"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_categ","timestamp":"Tue, 02 Aug 2022 23:12:09"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:12:09"}
+{"level":"info","message":"CREATE MULTISET TABLE TDMLE.cellphone_categ AS (\n ","timestamp":"Tue, 02 Aug 2022 23:12:09"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 23:12:22"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:12:22"}
+{"level":"info","message":"Conversion of numerical column to categorical completed","timestamp":"Tue, 02 Aug 2022 23:12:22"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:42:22 +0000] \"POST /api/vantage/numuric/conversion HTTP/1.1\" 200 142 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:12:22"}
+{"level":"info","message":"Conversion of continous/numerical column to categorical started using Vantage MLE function 'ConvertToCategorical' ...","timestamp":"Tue, 02 Aug 2022 23:12:36"}
+{"level":"info","message":"Teradata Connection Successful!","timestamp":"Tue, 02 Aug 2022 23:12:39"}
+{"level":"info","message":"DROP TABLE TDMLE.cellphone_categ","timestamp":"Tue, 02 Aug 2022 23:12:39"}
+{"level":"info","message":"Table deleted successfully","timestamp":"Tue, 02 Aug 2022 23:12:39"}
+{"level":"info","message":"CREATE MULTISET TABLE TDMLE.cellphone_categ AS (\n ","timestamp":"Tue, 02 Aug 2022 23:12:39"}
+{"level":"info","message":"Table Created successfully","timestamp":"Tue, 02 Aug 2022 23:12:53"}
+{"level":"info","message":"Teradata Connection closed successfully!","timestamp":"Tue, 02 Aug 2022 23:12:53"}
+{"level":"info","message":"Conversion of numerical column to categorical completed","timestamp":"Tue, 02 Aug 2022 23:12:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:42:53 +0000] \"POST /api/vantage/numuric/conversion HTTP/1.1\" 200 142 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:12:53"}
+{"level":"info","message":"::1 - - [02/Aug/2022:17:42:59 +0000] \"GET /api/vantage/question/7 HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\"\n","timestamp":"Tue, 02 Aug 2022 23:12:59"}
+{"level":"info","message":"Server listening on port 3000","timestamp":"Tue, 02 Aug 2022 23:19:38"}

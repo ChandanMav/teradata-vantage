@@ -21,8 +21,7 @@ interface PendingNumSelection {
   styleUrls: ['./data-preperation.component.css'],
 })
 export class DataPreperationComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+  implements OnInit, AfterViewInit, OnDestroy {
   config: Connection;
   databases: string[] = ['Select Database'];
   tables: string[] = ['Select Table'];
@@ -125,7 +124,7 @@ export class DataPreperationComponent
     private vantageService: VantageService,
     private appService: AppService,
     private fileUploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     this.appService.dataprepPage.next(true);
@@ -272,7 +271,7 @@ export class DataPreperationComponent
           this.rowCount = rowCount;
           this.testsetsize = testsetsize;
           this.top5data = top5data;
-          this.displayCols = Object.keys(top5data[0]);
+          this.displayCols = Object.keys(top5data[0]).sort();
 
           this.ncols = ncols;
           this.ccols = ccols;
@@ -362,7 +361,17 @@ export class DataPreperationComponent
     this.isUnivariateStatisticsResultAvailable = false;
     let key: string = this.dropCols.length === 0 ? 'N' : 'Y';
     let temp = this.remainingCols;
-    temp.push(this.dependentCol);
+    let matchFound = false;
+    for (let t = 0; t < temp.length; t++) {
+      if (temp[t] === this.dependentCol) {
+        matchFound = true;
+        break;
+      }
+    }
+
+    if (!matchFound) {
+      temp.push(this.dependentCol);
+    }
     // console.log("All Column List", this.columns)
     // console.log("Drop Column List", this.dropCols);
     // console.log("All remaining Column List", this.remainingCols);
@@ -1129,7 +1138,7 @@ export class DataPreperationComponent
   };
 
   //Generate Report
-  generateReport = () => {};
+  generateReport = () => { };
 
   //Update Basic Data
 

@@ -1,9 +1,9 @@
 const multer = require("multer")
 const path = require("path")
-var appRoot = require('app-root-path');
-var winston = require("./../config/winston");
+const appRoot = require('app-root-path');
+const winston = require("./../config/winston");
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, `${appRoot}/${process.env.SETTING_FILE_LOCATION}`)
     },
@@ -14,12 +14,10 @@ var storage = multer.diskStorage({
 
 // Define the maximum size for uploading
 const maxSize = 1 * 1000 * 1000;
-
 exports.upload = multer({
     storage: storage,
     limits: { fileSize: maxSize },
     fileFilter: function (req, file, cb) {
-        // Set the filetypes
         var filetypes = /txt/;
         var extname = filetypes.test(path.extname(
             file.originalname).toLowerCase());

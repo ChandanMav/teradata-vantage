@@ -197,9 +197,10 @@ hr {
 .upload-form-title {
   font-size: 11px !important;
   font-family: "Graphik Web", Arial, sans-serif;
-  color: #7500c0 !important;
+  /* color: #7500c0 !important; */
   padding-left: 15px;
   padding-top: 9px !important;
+  font-weight: bold;
 }
 
 .upload-msg {

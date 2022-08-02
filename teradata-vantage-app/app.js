@@ -15,7 +15,6 @@ var xssClean = require("xss-clean");
 
 //dotenv.config();
 dotenv.config({ path: '../config/app.env' });
-
 var winston = require("./config/winston");
 var Error = require("./common/app.err.messages");
 
@@ -77,7 +76,6 @@ app.use(
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
 app.use(morgan("combined", { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -89,8 +87,8 @@ var indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
 //Various other Routes
-require("./routes/vantage-route")(app);
-require("./routes/question-route")(app);
+require("./routes/basic-route")(app);
+require("./routes/ml-model-route")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,9 +1,7 @@
 const _ = require('lodash');
-var ERRORS = require('../common/app.err.messages');
-var winston = require("./../config/winston");
-
-var whitelist = []
-
+const ERRORS = require('../common/app.err.messages');
+const winston = require("./../config/winston");
+let whitelist = []
 let urlList = process.env.PORTAL_URL;
 
 if (urlList) {
@@ -12,9 +10,7 @@ if (urlList) {
 }
 
 exports.corsOptions = {
-    origin: function (origin, callback) {
-        //console.log(origin);
-        //console.log("whitelist ", whitelist);
+    origin: function (origin, callback) {    
         if (whitelist.indexOf(origin) !== -1 || !origin) {
             callback(null, true)
         } else {

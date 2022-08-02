@@ -10,7 +10,7 @@ export class JsonReaderPipe implements PipeTransform {
       return [''];
     }
 
-    for (let key in keys) {
+    for (let key in keys.sort()) {
       d.push(value[keys[key]]);
     }
 

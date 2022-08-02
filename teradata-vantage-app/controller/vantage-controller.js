@@ -66,7 +66,7 @@ exports.getDatabases = (req, res, next) => {
         closeConnection(connection);
         if (data) {
           winston.info("Fetching Databases Completed");
-          res.status(200).send({ databases: data });
+          res.status(200).send({ databases:  data });
         } else {
           return next({
             status: 500,
@@ -195,7 +195,7 @@ exports.getColumns = (req, res, next) => {
 }
 
 //Init Methods
-exports.init = (req, res, next) => {
+exports.basicInfo = (req, res, next) => {
   try {
     winston.info("Fetching Basic Information")
     let splitpct = 0;

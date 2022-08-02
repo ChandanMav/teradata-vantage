@@ -25,7 +25,6 @@ getConnection = (config) => {
       return null;
     }
   }
-
   return teradataConnection;
 }
 
